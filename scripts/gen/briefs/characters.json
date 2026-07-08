@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "benjamin-benny",
+    "collection": "characters",
+    "name": "Benjamin",
+    "role": "Cleric",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A human holy warrior in his thirties with a roguish, gold-loving charm and a quick easy grin — sandy-blond tousled hair, a short blond goatee, warm tan skin, and bright watchful eyes. He wears gleaming white-and-gold plate armor with broad tusked gold pauldrons over a chain shirt and a gilded scale-mail skirt, a holy-symbol pendant at his chest and small gold trinkets pinned at his collar. He wields a tall ceremonial glaive-spear whose blade glows with blue lightning runes, and carries a round steel shield. A thief-turned-cleric: devout but light-fingered.",
+    "ref_images": ["refs/benjamin-benny/dm-ref.png"]
+  },
+  {
+    "slug": "berrian",
+    "collection": "characters",
+    "name": "Berrian",
+    "role": "Half-Elf Paladin",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A half-elf paladin with subtly pointed ears, lean and athletic, sun-tanned olive skin, a youthful sharp-jawed face, and tousled dark-blond curls swept back. He is clad head to toe in living nature-armor — overlapping plates of leaf, bark, and woven vine in greens, golds, and faint purples — with a great cape of layered feather-like leaves trailing behind. He raises a glowing greatsword (his absent father's blade) wreathed in soft divine light; small golden birds and glowing motes drift around him in a sun-dappled forest. Quiet noble resolve.",
+    "ref_images": ["refs/berrian/avatar.png", "refs/berrian/dm-ref.png"]
+  },
+  {
+    "slug": "cruucar",
+    "collection": "characters",
+    "name": "Cruucar",
+    "role": "Dragonborn Barbarian",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A towering, heavily muscled dragonborn barbarian with pale bone-white and weathered grey scales, a blunt draconic snout, a ridged brow, and small horns, his hide scarred from countless battles. Fierce yellow eyes and a mercenary's hard glare. He wears a battered sleeveless brown leather jerkin crossed with straps and buckles, a torn deep-blue tabard at the waist, and tall worn boots, and hefts an enormous single-bladed two-handed axe over one shoulder. A jeweled crown of dragon shapes sits on his brow, a cursed two-faced life-stealing dagger hangs at his belt, and skull trophies are slung at his side. Rugged mountain wilds behind him.",
+    "ref_images": ["refs/cruucar/dm-ref.png"]
+  },
+  {
+    "slug": "evac",
+    "collection": "characters",
+    "name": "Evac",
+    "role": "Vedalken Wizard",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A vedalken wizard-cleric with smooth deep-blue skin, a rounded hairless head set with a slim blue-and-gold circlet, pointed ears, calm scholarly features, and composed dark eyes. Slim and dignified. He wears a long dark green-black hooded robe with an upturned high golden collar, elaborate gold trim, and small glowing arcane runes, cinched with a green sash. He grips a tall golden crozier-staff topped with a coiled serpent's head, and a holy symbol rests on his chest. Set into his chest beneath the robe is a faintly glowing dark obsidian orb, half-merged into his flesh. Misty castle ruins behind him.",
+    "ref_images": ["refs/evac/avatar.png", "refs/evac/dm-ref.png"]
+  },
+  {
+    "slug": "noctis",
+    "collection": "characters",
+    "name": "Noctis",
+    "role": "Tabaxi Rogue/Monk",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A lithe, agile tabaxi rogue — a humanoid cat-person with sleek near-black charcoal fur, a feline muzzle, alert green eyes, twitching ears, and a long tail. Quick and built for stealth. He wears close-fitting dark leather skirmisher's gear with wrapped forearms and shins, a red sash at the waist, and a long tattered hooded shadow-cloak of deep grey-black that seems to drink the light. He holds a curved dagger in each hand; a slender enchanted bow and a quiver of arrows ride across his back. Shadows curl faintly at his clawed feet in a ruined stone hall.",
+    "ref_images": ["refs/noctis/dm-ref.png"]
+  },
+  {
+    "slug": "quinton",
+    "collection": "characters",
+    "name": "Quinton Shackleford",
+    "role": "Half-Elf Bard",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A half-elf man in his twenties with swept-back blond hair, pointed elven ears, fair skin, and a neat blond goatee and mustache. Mid-performance, expressive and charismatic. Wears a fitted blue performer's doublet with a golden-yellow cravat at the throat, brown leather trim, and a crimson-lined cape over one shoulder. A rapier at his hip; carries a lute.",
+    "ref_images": ["refs/quinton/avatar.png", "refs/quinton/heroforge.png"]
+  },
+  {
+    "slug": "torgoth",
+    "collection": "characters",
+    "name": "Torgoth",
+    "role": "Goliath Fighter/Cleric",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "An immense goliath standing eight and a half feet tall, with smooth grey stone-toned skin marked by faint tribal lines. Broad and powerfully built, with a heavy jaw and pronounced underbite, a long braided black beard, and dark hair pulled back in a ponytail. His armor is asymmetrical: thin plating on his right side, thick heavy plate over his legs and chest. He wields a long spear crackling with contained lightning and bears a holy symbol, divine light gathering at one open palm.",
+    "ref_images": []
+  },
+  {
+    "slug": "vane",
+    "collection": "characters",
+    "name": "Vane",
+    "role": "High Elf Sorcerer",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A tall, slim high elf with sharp aristocratic features, smooth pale skin, long pointed ears, and cool calculating eyes that hint at a trickster's wit. Sleek fine hair swept back. He wears elegant, slightly arcane traveling clothes in dark teal and silver with subtle shifting detail, suggesting a shapeshifter who never quite looks the same twice. Sparks of arcane fire dance at his fingertips and faint translucent dragon-like wings shimmer at his back. A slender wand is tucked at his belt.",
+    "ref_images": []
+  },
+  {
+    "slug": "zanim",
+    "collection": "characters",
+    "name": "Zanim",
+    "role": "Druid",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "An elf druid with weathered olive, faintly green-tinged skin, gaunt sharp features, pointed ears, dark hair swept back beneath a thin circlet, and a short dark beard. Lean and hardened from the wilds, with intense eyes. He wears a deep-green hooded cloak fastened with a leaf-shaped gold clasp over leaf-embossed leather-and-scale armor and a green tabard. He grips a tall leaf-bladed spear. One leg is an elaborate prosthetic of polished walnut with golden inlay, segmented like a spine. Standing among dim forest trees.",
+    "ref_images": ["refs/zanim/avatar.png", "refs/zanim/dm-ref.png"]
+  },
+  {
+    "slug": "zook",
+    "collection": "characters",
+    "name": "Zook",
+    "role": "Original party member",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A small, slight humanoid (gnome-like, or a youthful elf) and an original member of the shipwrecked party, with a stern furrowed brow, pale skin, pointed ears, and swept-back silver-white hair. He wears a dark teal-grey mage's robe with silver embroidered trim and a pale grey-white sash slung across the chest, a wide metal-banded belt, and dark boots. He grips a slender black staff of twisted, forked wrought iron. The wary, capable look of a young spellcaster — his race and class were never formally recorded, but this is his likeness.",
+    "ref_images": ["refs/zook/dm-ref.png"]
+  }
+]

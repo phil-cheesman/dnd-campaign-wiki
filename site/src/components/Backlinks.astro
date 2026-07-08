@@ -1,0 +1,68 @@
+---
+import { backlinksFor } from '../lib/backlinks';
+import { hrefFor } from '../lib/links';
+const { collection, slug } = Astro.props as { collection: string; slug: string };
+const links = backlinksFor(collection, slug);
+---
+
+{
+  links.length > 0 && (
+    <section class="backlinks" data-pagefind-ignore>
+      <h2>Mentioned in</h2>
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={hrefFor(l.collection, l.slug)}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  /* "Mentioned in" rows: a subtle gold-tinted highlight plus a codex diamond that
+     slides in from the gutter on hover (the wiki's recurring "you are here" mark).
+     Pointer-only; GPU transform/opacity. */
+  .backlinks ul {
+    list-style: none;
+  }
+  .backlinks li {
+    padding-left: 0.85rem;
+  }
+  .backlinks a {
+    position: relative;
+    display: inline-block;
+    margin-left: -0.35rem;
+    padding: 0.05rem 0.35rem;
+    border-radius: 5px;
+    transition:
+      background-color var(--dur-instant) var(--ease-out),
+      color var(--dur-instant) ease;
+  }
+  .backlinks a::before {
+    content: '';
+    position: absolute;
+    left: -0.55rem;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    transform: translateX(-4px) rotate(45deg);
+    opacity: 0;
+    transition:
+      opacity var(--dur-instant) var(--ease-out),
+      transform var(--dur-instant) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .backlinks a:hover {
+      background: color-mix(in srgb, var(--gold-soft) 16%, transparent);
+      color: var(--link-hover);
+      text-decoration: none;
+    }
+    .backlinks a:hover::before {
+      opacity: 1;
+      transform: translateX(0) rotate(45deg);
+    }
+  }
+</style>

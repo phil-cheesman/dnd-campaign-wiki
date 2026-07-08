@@ -1,0 +1,141 @@
+---
+// Image-forward card-grid body shared by Characters / NPCs / Items / Factions /
+// Worldbuilding / Kingdoms (and, for now, Locations until Phase 4's gazetteer).
+// Reuses the existing `.cardgrid--thumbs` look; the global view-toggle flips it
+// between Cards (54×54 thumbs) and a dense List via `html[data-density]`.
+import { colorFor } from '../graph/graph-meta';
+
+export interface Row {
+  href: string;
+  title: string;
+  meta?: string;
+  img?: string | null;
+  artType?: string;
+}
+export interface Group {
+  heading?: string;
+  rows: Row[];
+}
+
+const { collection, groups } = Astro.props as { collection: string; groups: Group[] };
+const tint = colorFor(collection);
+---
+
+{
+  groups.map((g) => (
+    <>
+      {g.heading && <h2>{g.heading}</h2>}
+      <ul class="cardgrid cardgrid--thumbs">
+        {g.rows.map((r) => (
+          <li>
+            <a href={r.href}>
+              {r.img ? (
+                <img
+                  class="card-thumb"
+                  src={r.img}
+                  alt=""
+                  width="54"
+                  height="54"
+                  loading="lazy"
+                  style={`object-position:${r.artType === 'portrait' ? 'center top' : 'center'}`}
+                />
+              ) : (
+                <span class="card-thumb card-thumb--ph" style={`background:${tint}1f;color:${tint}`}>
+                  {(r.title[0] ?? '?').toUpperCase()}
+                </span>
+              )}
+              <span class="card-text">
+                <span class="card-title">{r.title}</span>
+                {r.meta && <small>{r.meta}</small>}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))
+}
+
+<style>
+  /* ===== Cards density (default) — a codex crop / tinted monogram beside the
+     title, to make the index pages feel alive. (Moved from the old index page.) */
+  .cardgrid--thumbs a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+  }
+  /* Square frame flatters all three art shapes at thumbnail size: squares
+     (crests/objects) fit exactly, portraits crop to the face, landscapes center. */
+  .card-thumb {
+    flex: none;
+    width: 54px;
+    height: 54px;
+    border-radius: 6px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .card-thumb--ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+  .card-title {
+    line-height: 1.25;
+  }
+
+  /* ===== List density — dense single-column rows, smaller thumb, no card lift.
+     Driven by the global `wiki.density` attr the ViewToggle sets on <html>. */
+  :global(html[data-density='list']) .cardgrid--thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  :global(html[data-density='list']) .cardgrid--thumbs li {
+    border: 0;
+    border-bottom: 1px solid var(--hairline);
+    border-radius: 0;
+    padding: 0.4rem 0.1rem;
+    background: transparent;
+  }
+  :global(html[data-density='list']) .cardgrid--thumbs li:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--hairline);
+    border-bottom-color: var(--gold-soft);
+  }
+  :global(html[data-density='list']) .cardgrid--thumbs a {
+    gap: 0.6rem;
+  }
+  :global(html[data-density='list']) .card-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+  }
+  :global(html[data-density='list']) .card-thumb--ph {
+    font-size: 0.95rem;
+  }
+  /* Meta becomes an inline trailing note rather than a stacked sub-line. */
+  :global(html[data-density='list']) .card-text {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+  }
+  :global(html[data-density='list']) .card-text small {
+    margin-left: auto;
+    white-space: nowrap;
+  }
+</style>

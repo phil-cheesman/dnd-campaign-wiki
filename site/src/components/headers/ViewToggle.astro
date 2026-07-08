@@ -1,0 +1,115 @@
+---
+// Global density control (spec §3.2): Cards ⇄ List, one choice across the whole
+// wiki, persisted in localStorage `wiki.density`. The labels are props so a
+// bespoke page (Episodes, Locations) can relabel the same two states — e.g.
+// "Grouped ⇄ Flat" — while still flipping the one global `data-density` attr.
+// Active state is pure CSS keyed off `html[data-density]`; no JS for appearance.
+const { cardsLabel = 'Cards', listLabel = 'List' } = Astro.props as {
+  cardsLabel?: string;
+  listLabel?: string;
+};
+---
+
+<div class="view-toggle" role="group" aria-label="View density">
+  <button type="button" data-density-val="cards" title={`${cardsLabel} view`}>
+    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor" />
+    </svg>
+    <span>{cardsLabel}</span>
+  </button>
+  <button type="button" data-density-val="list" title={`${listLabel} view`}>
+    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="4" width="4" height="3" rx="1" fill="currentColor" />
+      <rect x="9" y="4.5" width="12" height="2" rx="1" fill="currentColor" />
+      <rect x="3" y="10.5" width="4" height="3" rx="1" fill="currentColor" />
+      <rect x="9" y="11" width="12" height="2" rx="1" fill="currentColor" />
+      <rect x="3" y="17" width="4" height="3" rx="1" fill="currentColor" />
+      <rect x="9" y="17.5" width="12" height="2" rx="1" fill="currentColor" />
+    </svg>
+    <span>{listLabel}</span>
+  </button>
+</div>
+
+<script is:inline>
+  // Resolve density before the body below paints (no flash) — mirrors the
+  // pre-paint theme resolver in BaseLayout. Runs synchronously where this
+  // component sits, which is above the per-collection body in the DOM.
+  (function () {
+    try {
+      var d = localStorage.getItem('wiki.density');
+      if (d !== 'list' && d !== 'cards') d = 'cards';
+      document.documentElement.dataset.density = d;
+    } catch (e) {}
+  })();
+</script>
+
+<script>
+  // Wire clicks: flip the global attr, persist, and sync aria-pressed. Appearance
+  // is CSS-driven, so this only updates state.
+  (function () {
+    var root = document.documentElement;
+    var btns = Array.prototype.slice.call(
+      document.querySelectorAll('.view-toggle [data-density-val]'),
+    );
+    function sync() {
+      btns.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-density-val') === root.dataset.density));
+      });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.dataset.density = b.getAttribute('data-density-val');
+        try {
+          localStorage.setItem('wiki.density', root.dataset.density);
+        } catch (e) {}
+        sync();
+      });
+    });
+    sync();
+  })();
+</script>
+
+<style>
+  /* Segmented control — matches the graph's `.gph-seg` idiom. */
+  .view-toggle {
+    display: inline-flex;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .view-toggle button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: 600 0.72rem 'Inter', sans-serif;
+    letter-spacing: 0.03em;
+    padding: 0.32rem 0.6rem;
+  }
+  .view-toggle button + button {
+    border-left: 1px solid var(--hairline);
+  }
+  .view-toggle button:hover {
+    color: var(--text);
+  }
+  .view-toggle svg {
+    flex: none;
+  }
+  /* Active option = the one matching the global density attr. */
+  :global(html[data-density='cards']) .view-toggle button[data-density-val='cards'],
+  :global(html[data-density='list']) .view-toggle button[data-density-val='list'] {
+    background: var(--gold);
+    color: #fff;
+  }
+
+  /* Phone: grow the two segments to a 44px tap target (mobile spec Phase 4). */
+  @media (max-width: 480px) {
+    .view-toggle button { min-height: 2.75rem; padding: 0.32rem 0.85rem; }
+  }
+</style>

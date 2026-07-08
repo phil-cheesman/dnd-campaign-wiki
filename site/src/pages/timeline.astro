@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getEntry } from 'astro:content';
+import { getPublic } from '../lib/collections';
+import { formatDate } from '../lib/format';
+
+// The timeline's prose lives in canon/timeline.md as `E<n> | date | title | gist`
+// lines plus a leading "World history" section. We parse it into a structured,
+// arc-bucketed view rather than rendering the raw run-on list.
+const entry = await getEntry('pages', 'timeline');
+const body = entry?.body ?? '';
+
+// Pre-campaign anchors: the `- **…**` bullets before the first `---` divider.
+const intro = body.slice(0, body.indexOf('\n---')).match(/^- .+$/gm) ?? [];
+const cleanBullet = (s: string) => s.replace(/^- /, '').replace(/\*\*/g, '');
+
+// Episode rows. Two session numbers repeat (E108/E126) — the 2nd gets the -dup2 slug.
+const epIds = new Set((await getPublic('episodes')).map((e: any) => e.id));
+const seen: Record<string, number> = {};
+type Row = { num: number; date: string; title: string; gist: string; href?: string };
+const rows: Row[] = [];
+for (const line of body.split('\n')) {
+  const m = line.match(/^E(\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*)$/);
+  if (!m) continue;
+  const num = parseInt(m[1], 10);
+  const pad = `e${String(num).padStart(3, '0')}`;
+  const n = (seen[pad] = (seen[pad] ?? 0) + 1);
+  const slug = n > 1 ? `${pad}-dup2` : pad;
+  rows.push({
+    num,
+    date: m[2] === '—' ? '' : formatDate(m[2]),
+    title: m[3] === '—' ? '' : m[3],
+    gist: m[4],
+    href: epIds.has(slug) ? `/episodes/${slug}` : undefined,
+  });
+}
+
+// Bucket rows into arcs by episode-number range (skip the overview pseudo-arc).
+const arcEntries = (await getPublic('arcs'))
+  .filter((a: any) => a.id !== '00-overview')
+  .sort((a: any, b: any) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+const arcs = arcEntries.map((a: any) => {
+  const r = (a.data.episodes ?? '').match(/E(\d+)\D+E(\d+)/);
+  const lo = r ? parseInt(r[1], 10) : 0;
+  const hi = r ? parseInt(r[2], 10) : 9999;
+  return {
+    id: a.id,
+    href: `/arcs/${a.id}`,
+    title: (a.data.title ?? a.id).replace(/^Arc \d+\s*—\s*/, '').replace(/\s*\(E\d+.*\)$/, ''),
+    range: a.data.episodes ?? '',
+    rows: rows.filter((row) => row.num >= lo && row.num <= hi),
+  };
+});
+---
+
+<BaseLayout title="Timeline" description="Every session of the Alambor campaign, arc by arc.">
+  <Breadcrumbs trail={[{ label: 'Wiki', href: '/' }, { label: 'Timeline' }]} />
+  <h1>Timeline</h1>
+  <p class="lede">
+    {rows.length} sessions across {arcs.length} arcs. Each row is one session — open an arc to scan it,
+    click a session to read the full recap.
+  </p>
+
+  {
+    intro.length > 0 && (
+      <details class="tl-intro">
+        <summary>Before the campaign — world history anchors</summary>
+        <ul>
+          {intro.map((b) => (
+            <li>{cleanBullet(b)}</li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
+
+  {
+    arcs.map((arc) => (
+      <details class="tl-arc" open>
+        <summary class="tl-arc-head">
+          <span class="tl-mark" aria-hidden="true" />
+          <a class="tl-arc-title" href={arc.href}>
+            {arc.title}
+          </a>
+          <span class="tl-arc-range">{arc.range}</span>
+        </summary>
+        <ol class="tl-list">
+          {arc.rows.map((row) => (
+            <li class="tl-row">
+              <span class="tl-ep">E{String(row.num).padStart(2, '0')}</span>
+              <div class="tl-main">
+                <div class="tl-titleline">
+                  {row.href ? (
+                    <a class="tl-name" href={row.href}>
+                      {row.title || 'Untitled session'}
+                    </a>
+                  ) : (
+                    <span class="tl-name is-empty">{row.title || 'No notes'}</span>
+                  )}
+                  {row.date && <span class="tl-date">{row.date}</span>}
+                </div>
+                <p class="tl-gist">{row.gist}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </details>
+    ))
+  }
+  <p class="tl-foot">
+    <a href="/arcs">Read the arcs as narrative →</a>
+  </p>
+</BaseLayout>
+
+<style>
+  .lede {
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+  .tl-intro {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 0.4rem 1rem;
+    margin: 1.5rem 0;
+  }
+  .tl-intro > summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gold);
+    padding: 0.4rem 0;
+    list-style: none;
+  }
+  .tl-intro > summary::-webkit-details-marker {
+    display: none;
+  }
+  .tl-intro > summary::before {
+    content: '▸ ';
+    color: var(--gold);
+  }
+  .tl-intro[open] > summary::before {
+    content: '▾ ';
+  }
+  .tl-intro ul {
+    margin: 0.3rem 0 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .tl-arc {
+    margin: 1.6rem 0;
+    border-left: 2px solid var(--hairline);
+    padding-left: 1.1rem;
+  }
+  .tl-arc-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    cursor: pointer;
+    list-style: none;
+    margin-left: -1.1rem;
+    padding-left: 1.1rem;
+  }
+  .tl-arc-head::-webkit-details-marker {
+    display: none;
+  }
+  .tl-mark {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 7px;
+    border-color: transparent transparent transparent var(--gold);
+    transition: transform 0.15s ease;
+    flex: none;
+    align-self: center;
+  }
+  .tl-arc[open] > .tl-arc-head .tl-mark {
+    transform: rotate(90deg);
+  }
+  .tl-arc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .tl-arc-title:hover {
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .tl-arc-range {
+    font-size: 0.78rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+  }
+
+  .tl-list {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+  }
+  .tl-row {
+    display: flex;
+    gap: 0.9rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .tl-row:first-child {
+    border-top: none;
+  }
+  .tl-ep {
+    flex: none;
+    width: 2.6rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--gold);
+    padding-top: 0.1rem;
+  }
+  .tl-main {
+    min-width: 0;
+  }
+  .tl-titleline {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .tl-name {
+    font-weight: 600;
+  }
+  .tl-name.is-empty {
+    color: var(--faint);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .tl-date {
+    font-size: 0.75rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .tl-gist {
+    margin: 0.15rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .tl-foot {
+    margin-top: 2rem;
+  }
+</style>

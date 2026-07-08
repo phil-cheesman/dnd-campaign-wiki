@@ -1,0 +1,67 @@
+---
+/**
+ * Inline monochrome line-icons (currentColor, 24-unit canvas) — matching the
+ * Sidebar/Topbar/ThemeToggle SVG idiom. Used to replace OS emoji so glyphs are
+ * styleable, theme-aware, and consistent with the codex look.
+ */
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+const { name, size = 16, class: klass } = Astro.props;
+
+// Inner SVG markup per icon. Wrapper supplies shared stroke/fill attributes.
+const ICONS: Record<string, string> = {
+  'map-pin':
+    '<path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  scale:
+    '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+  // — episode badges —
+  skull:
+    '<circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="m12.5 17-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/>',
+  swords:
+    '<polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" x2="9" y1="14" y2="18"/><line x1="7" x2="4" y1="17" y2="20"/><line x1="3" x2="5" y1="19" y2="21"/>',
+  trophy:
+    '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+  camera:
+    '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+  // — superlatives —
+  heart:
+    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  shield:
+    '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  dumbbell:
+    '<rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><rect x="5" y="10.5" width="2" height="3" rx="0.6"/><rect x="17" y="10.5" width="2" height="3" rx="0.6"/><path d="M7 12h10"/>',
+  message: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  'eye-off':
+    '<path d="M10.73 5.07A10.7 10.7 0 0 1 12 5c5 0 9.27 3.11 11 7.5a11.7 11.7 0 0 1-1.64 2.79"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M6.61 6.61A11.7 11.7 0 0 0 1 12.5c1.73 4.39 6 7.5 11 7.5a10.7 10.7 0 0 0 4.66-1.05"/><path d="m2 2 20 20"/>',
+  award:
+    '<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>',
+  magnet:
+    '<path d="m6 15-4-4 6.75-6.77a7.79 7.79 0 0 1 11 11L13 22l-4-4 6.39-6.36a2.14 2.14 0 0 0-3-3L6 15"/><path d="m5 8 4 4"/><path d="m12 15 4 4"/>',
+  'heart-crack':
+    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 6.5 10.5 11l3 1.4L11 17.5"/>',
+  feather:
+    '<path d="M12.67 19a2 2 0 0 0 1.42-.59l6.15-6.17a6 6 0 0 0-8.49-8.49L5.59 9.91A2 2 0 0 0 5 11.33V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/>',
+  spade:
+    '<path d="M12 2c1.5 3.5 5.5 5.7 7.4 8.5 1 1.4 1.6 3 1.6 4.5a4.5 4.5 0 0 1-7 3.6l1 3.4H9l1-3.4a4.5 4.5 0 0 1-7-3.6c0-1.5.6-3.1 1.6-4.5C6.5 7.7 10.5 5.5 12 2Z"/>',
+};
+
+const inner = ICONS[name] ?? '';
+---
+
+<svg
+  class={klass}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  set:html={inner}
+/>

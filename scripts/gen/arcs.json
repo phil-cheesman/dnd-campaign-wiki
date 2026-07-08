@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "01-arrival",
+    "title": "Arrival in Alambor",
+    "scene_title": "The Letter Reaches Its Man at the Last Drop",
+    "visual": "In the warm lantern-lit common room of a Sultray tavern, the weary travel-worn party gathers around a heavy wooden table where Maximilian Taldross, the red-lion knight, holds open a salt-stained sea-wrecked letter, his earnest face caught mid-revelation. Quinton the bard leans in lute on his back, Noctis the tabaxi rogue watches from the shadows, Zanim the elf druid stands braced on his walnut prosthetic leg, and Evac the blue-skinned vedalken studies the parchment with calm scholarly intensity. Tankards and a guttering candle sit between them. The mood is hushed, conspiratorial, fateful — strangers becoming sworn knights.",
+    "art_type": "scene",
+    "key_entities": [
+      "Maximilian \"Max\" Taldross",
+      "Quinton Shackleford",
+      "Noctis",
+      "Zanim",
+      "Evac"
+    ]
+  },
+  {
+    "slug": "02-beaubois",
+    "title": "The Beaubois Conspiracy",
+    "scene_title": "The Massacre at the Playhouse",
+    "visual": "On a grand candlelit theater stage hung with velvet drapes, worm-riddled undead — Spawn of Kyuss, their rotting flesh writhing with pale worms — lurch from the wings and tear apart the screaming lead actress before a packed house of richly dressed Sultray dignitaries recoiling in horror from their seats. In a private balcony box above, Pierre Beaubois, an elegant pale-faced elf in a dark green high-collared robe, leans on the rail laughing in cruel delight, a goblet of blood-red wine in hand. Below, the costumed party — Quinton with his lute, Berrian, Noctis — surge from the audience toward the stage. Panic, gilded opulence, creeping plague-dread.",
+    "art_type": "scene",
+    "key_entities": [
+      "Pierre Beaubois",
+      "Quinton Shackleford",
+      "Berrian",
+      "Noctis",
+      "Spawn of Kyuss",
+      "Sultray"
+    ]
+  },
+  {
+    "slug": "03-red-wedding",
+    "title": "The Road to the Red Wedding",
+    "scene_title": "The Best Man's Blade",
+    "visual": "At a grand cathedral altar hung with crimson-and-gold wedding banners, a black-cloaked assassin drives a dagger into the groom prince beside the bride, his raised fist clamping a glowing restricting band that snuffs the holy light around them. Behind him a ragged portal tears open, disgorging pale worm-creatures across the marble. The Alambor party lunges through scattering guests in panic — Noctis springing forward with twin daggers, Berrian's divine greatsword flaring, Cruucar roaring with axe high, Quinton recoiling, while Evac and Adune fail to hold their failing magic. Stained glass, toppled candelabra, blood on white stone. Horror, betrayal, catastrophe.",
+    "art_type": "scene",
+    "key_entities": [
+      "Noctis",
+      "Berrian",
+      "Cruucar",
+      "Quinton Shackleford",
+      "Evac",
+      "Adune (Morgenrath Gafar)"
+    ]
+  },
+  {
+    "slug": "04-goldcrest-heist",
+    "title": "Fugitives at Sea: The Goldcrest Heist",
+    "scene_title": "The Ledger and the Broken Glass",
+    "visual": "Inside Marquise Avesy's opulent vault, Noctis the charcoal-furred tabaxi rogue crouches over a cracked gem-lock, clutching a stolen leather ledger, treasures spilling from a shattered display case at his clawed feet. Behind him a towering, near-invulnerable stone golem grinds awake, fists raised. Across the chamber Quinton Shackleford, blond half-elf bard mid-leap, dives through a tall arched window toward open night, cape streaming, lute on his back. Moonlit Goldcrest rooftops gleam beyond the glass; gold coins and scattered shards catch the lamplight. A heart-pounding moment of triumph and blown stealth — the heist tipping into disaster.",
+    "art_type": "scene",
+    "key_entities": [
+      "Noctis",
+      "Quinton Shackleford",
+      "Marquise Avesy",
+      "Goldcrest"
+    ]
+  },
+  {
+    "slug": "05-evershire",
+    "title": "Evershire and the Black Dread",
+    "scene_title": "The Black Dread Unmasked",
+    "visual": "A grand candlelit manor dining hall. At the head of a long banquet table, Lord Blackwood rises — tall, gaunt, slicked-back dark hair, his pale features twisting reptilian as a dark dragon's shadow swells behind him, yellow-green eyes blazing. He lifts a goblet of blood-red wine in cold amusement. Down the table the cornered party stares in horror: Cruucar gripping his axe half-rising, Berrian's hand on his glowing greatsword, Vane's fingers sparking, Benjamin clutching his glaive. A platter bears a severed head; jars and toppled chairs litter the feast. Dread, betrayal, the moment all masks fall.",
+    "art_type": "scene",
+    "key_entities": [
+      "Lord Blackwood / Valadon the Black Dread",
+      "Cruucar",
+      "Berrian",
+      "Vane",
+      "Benjamin"
+    ]
+  },
+  {
+    "slug": "06-avernus",
+    "title": "The Fist, the Nightmare King, and Avernus",
+    "scene_title": "The Forge of Bell, and the Stolen Crystal",
+    "visual": "Inside a temple of blood in the burning clouds of Avernus, General Bell — a colossal thirty-five-foot pit fiend with vast bat wings, cracked crimson hide, and a flaming greatsword — rears up from a churning fountain of blood, roaring down at the tiny intruders. Cruucar plants himself, axe raised, while Berrian's blade flares with divine light and Vane hurls arcane fire toward a glowing teleportation circle on the temple floor. Quinton clutches a cluster of blue-white crystal blazing with otherworldly energy. A beheaded hireling lies broken at the fiend's feet. Lava fountains, bone urns, and infernal heat fill the cathedral of slaughter.",
+    "art_type": "scene",
+    "key_entities": [
+      "Cruucar",
+      "Berrian",
+      "Vane",
+      "Quinton Shackleford",
+      "Avernus",
+      "Bell's Forge"
+    ]
+  },
+  {
+    "slug": "07-vault-izdar",
+    "title": "The Vault of Izdar",
+    "scene_title": "The Unseen Unveiled",
+    "visual": "In the black inner sanctum of the Vault, a great beholder — Beltraz the Unseen — looms huge above the party, its torn black silk drape slithering off its bulbous body, central eye glaring and eyestalks writhing. Noctis, the charcoal-furred tabaxi rogue, sprints up the curved temple wall mid-leap, daggers flashing as he stuns the creature. Berrian, the leaf-and-vine-armored half-elf paladin, drives his glowing greatsword and a fist straight through its hide, divine light bursting from the wound. Obsidian deity-glyphs, scattered eyeball orbs, and ruined ancient stonework surround them in oppressive shadow. Desperate, triumphant violence.",
+    "art_type": "scene",
+    "key_entities": [
+      "Beltraz the Unseen",
+      "Noctis",
+      "Berrian",
+      "Vault of Izdar"
+    ]
+  },
+  {
+    "slug": "08-shadowfell-betrayal",
+    "title": "Tarlif, the Shadowfell, and the Great Betrayal",
+    "scene_title": "The Chancellor Unmasked",
+    "visual": "In a shattered royal war-council chamber, Adune the high chancellor sheds his courtly disguise — eyes blazing electric blue, ancient drow-lich power crackling around him as he draws a glowing Avernus power source into his upraised hand. King Felix the Cold lies dead and crowned upon the dais behind him. Pinned beyond a shimmering wall of force, the battered Alambor Six — Berrian, Cruucar, Torgoth, Noctis, Quinton, and Vane — recoil in horror, weapons raised but helpless, as Max Taldross falls shielding them. Smoke, scattered banners, and devastation fill the hall. Stunned, dawning betrayal on every face.",
+    "art_type": "scene",
+    "key_entities": [
+      "Adune (Morgenrath Gafar)",
+      "King Felix the Cold",
+      "Maximilian \"Max\" Taldross",
+      "Berrian",
+      "Cruucar",
+      "Torgoth",
+      "Noctis",
+      "Quinton Shackleford",
+      "Vane"
+    ]
+  },
+  {
+    "slug": "09-relic-hunt",
+    "title": "The Hunt for the Sixth Relic",
+    "scene_title": "Collaring the Kraken in the Bone Graveyard",
+    "visual": "Sixty thousand feet down in a lightless abyss, the party confronts a colossal Kraken coiled amid a graveyard of titanic whale and leviathan bones. The monster's vast bulbous head and writhing tentacles fill the murk as Noctis, the lithe charcoal-furred tabaxi, claws his way back up out of its gaping maw, dagger in hand, fur slicked flat. Mally Grisham, black-coated and grinning, braces against a tentacle with cutlass raised. Torgoth, immense and grey-skinned, channels lightning at his spear-tip, parting the crushing water around the beast. A heavy enchanted collar floats toward the Kraken's throat. Bioluminescent motes drift through bone arches; vast, claustrophobic, awe-struck dread.",
+    "art_type": "scene",
+    "key_entities": [
+      "Noctis",
+      "Mally \"Molly\" Grisham, the Sparrow",
+      "Torgoth",
+      "the Kraken"
+    ]
+  },
+  {
+    "slug": "party-hero",
+    "title": "The Alambor Six",
+    "scene_title": "The Alambor Six at rest — a tavern night",
+    "visual": "A warm, firelit tavern interior at night, a single group hero portrait of EXACTLY SIX adventurers — no more, no fewer — caught mid-revelry, staged like a band of heroes who clearly belong together. Composition reads left to right.\n\nAt the CENTER, elevated above the others: QUINTON, the blond half-elf bard in his blue performer's doublet and crimson-lined cape, standing up ON a sturdy oak tavern table mid-song — Doss Lute raised and strumming, mouth open belting a bawdy ballad, one boot planted on the table, the magnetic showman commanding the whole room. He is the focal point.\n\nFAR LEFT: VANE, the tall pale high-elf sorcerer in teal and silver, lounging back in a chair with an aloof amused smirk, idly conjuring a small curl of arcane flame at his fingertips to relight a candle, faint dragon-wing shimmer behind him.\n\nLEFT OF CENTER: CRUUCAR, the towering bone-white dragonborn barbarian, head thrown back roaring with laughter as he slams a giant frothing tankard down, his huge two-handed axe leaned against the table beside him.\n\nRIGHT OF CENTER: BERRIAN, the noble half-elf paladin in living leaf-and-vine armor with a soft divine glow, seated and raising a goblet toward Quinton with a wry, indulgent half-smile and the faintest amused eye-roll at the antics — the affectionate straight-man of the group.\n\nFAR RIGHT, in shadow: NOCTIS, the lithe charcoal-furred tabaxi rogue wrapped in his light-drinking hooded cloak, perched low on the back of a chair, tail curled, smirking as he quietly palms a coin lifted from a passing purse.\n\nBACK RIGHT, towering over everyone: TORGOTH, the immense 8.5-foot grey-skinned goliath cleric with his long braided black beard, wedged under a low ceiling beam, fast asleep and snoring in an oversized chair, a comically tiny mug in one enormous hand, his lightning spear propped behind him — utterly unbothered by the chaos around him.\n\nTankards, candlelight, scattered coins and a warm hearth. The overall feeling is heroic and grand like a classic adventuring-party poster, but with an affectionate comedic wink — these are real friends mid-celebration. Every face clearly distinct; match each figure faithfully to its reference image.",
+    "art_type": "scene",
+    "key_entities": [
+      "Vane",
+      "Cruucar",
+      "Quinton Shackleford",
+      "Berrian",
+      "Noctis",
+      "Torgoth"
+    ]
+  },
+  {
+    "slug": "00-overview",
+    "title": "Campaign Overview",
+    "scene_title": "The Arbor Alma — Tree of the Sundering",
+    "visual": "A reverent heraldic codex frontispiece, perfectly symmetrical and centered: the Arbor Alma, the great Tree of the Sundering, standing alone as the emblem of the whole world. A majestic ancient tree with luminous white-silver bark and a broad sweeping canopy of deep texair-purple leaves heavy with glowing violet fruit. Its roots spread wide and symmetrical, threading over a faint aged map of the realm of Alambor — suggestions of coastlines, kingdoms, and trade routes etched beneath. Soft golden light radiates from within the canopy and motes of magic drift upward like embers. No people. Iconographic, emblematic, and timeless — the source of all texair and the living wound left by the fallen gods.",
+    "art_type": "scene",
+    "key_entities": [
+      "Arbor Alma"
+    ]
+  },
+  {
+    "slug": "party-banner",
+    "title": "The Alambor Six (banner)",
+    "scene_title": "The Alambor Six — a tavern lineup",
+    "visual": "A WIDE HORIZONTAL BANNER composition: a group hero portrait of EXACTLY SIX adventurers — no more, no fewer — standing shoulder to shoulder in a SINGLE ROW across a warm firelit tavern, lined up like a band of heroes posing for a poster. Every figure framed from roughly mid-thigh up, all six faces sitting along one central horizontal band, with generous even headroom above and floor space below so the whole thing reads as a wide panoramic strip. The composition is broad and shallow, NOT tall. Read left to right.\n\nFAR LEFT: VANE, the tall pale high-elf sorcerer in teal and silver, arms loosely folded, an aloof amused smirk, a small curl of arcane flame flickering at one hand, faint dragon-wing shimmer behind him.\n\nNEXT: CRUUCAR, the towering bone-white dragonborn barbarian, head back roaring with laughter, hoisting a giant frothing tankard, his huge two-handed axe resting on one shoulder.\n\nDEAD CENTER, the frontman: QUINTON, the blond half-elf bard in his blue performer's doublet and crimson-lined cape, mid-song — Doss Lute raised and strumming, mouth open belting a bawdy ballad, stepping slightly forward. The focal point of the lineup.\n\nNEXT: BERRIAN, the noble half-elf paladin in living leaf-and-vine armor with a soft divine glow, both hands resting on the pommel of his glowing greatsword stood point-down before him, a wry indulgent half-smile and faint amused eye-roll at Quinton's antics.\n\nNEXT: NOCTIS, the lithe charcoal-furred tabaxi rogue in his light-drinking hooded cloak, leaning in low with a sly smirk, tail curled, quietly palming a lifted gold coin.\n\nFAR RIGHT: TORGOTH, the immense 8.5-foot grey-skinned goliath cleric with a long braided black beard, standing stoic and towering with his crackling lightning spear held upright, a comically tiny mug dwarfed in one enormous hand.\n\nWarm hearth glow, hanging lanterns, a haze of tavern smoke behind the row. Heroic and grand like a classic adventuring-party poster, with an affectionate comedic wink. Every face clearly distinct; match each figure faithfully to its reference image.",
+    "art_type": "scene",
+    "key_entities": [
+      "Vane",
+      "Cruucar",
+      "Quinton Shackleford",
+      "Berrian",
+      "Noctis",
+      "Torgoth"
+    ]
+  }
+]

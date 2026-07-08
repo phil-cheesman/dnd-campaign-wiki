@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GraphView from '../components/graph/GraphView.tsx';
+---
+
+<BaseLayout
+  title="Graph"
+  description="An interactive force-directed graph of the whole Alambor wiki — characters, NPCs, locations, factions and items and how they connect."
+  variant="full"
+>
+  <div class="graph-host">
+    <GraphView client:only="react" height="100%" />
+  </div>
+</BaseLayout>

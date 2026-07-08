@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mally "Molly" Grisham — The Cartographer's Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Special+Elite&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ece1c8;
+    --paper-edge: #d9c9a4;
+    --sea: #c8cdb4;
+    --ink: #41382a;
+    --ink-light: #7a6c52;
+    --route: #93402a;     /* the red dashed travel route */
+    --stamp: #5d6b52;     /* faded customs-stamp green */
+    --compass: #8a6d3b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'IM Fell DW Pica', serif;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(65,56,42,.045) 27px, rgba(65,56,42,.045) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, rgba(65,56,42,.045) 27px, rgba(65,56,42,.045) 28px),
+      radial-gradient(ellipse at 30% 20%, #f2e8d2, var(--paper) 55%, var(--paper-edge));
+    color: var(--ink);
+    font-size: 18.5px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--route); text-decoration: none; border-bottom: 1px dashed var(--route); }
+  a:hover { background: rgba(147,64,42,.08); }
+
+  /* ===== Header: chart title-cartouche ===== */
+  header { padding: 2rem 2rem 0; max-width: 1140px; margin: 0 auto; }
+  .cartouche {
+    border: 2px solid var(--ink);
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+    display: flex; align-items: center; gap: 1.6rem;
+    padding: 1rem 1.8rem;
+    background: rgba(242,232,210,.6);
+  }
+  .compass {
+    width: 64px; height: 64px; flex-shrink: 0;
+    border: 2px solid var(--compass);
+    border-radius: 50%;
+    position: relative;
+  }
+  .compass::before {
+    content: "N";
+    position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    font-size: .6rem; font-family: 'Cinzel', serif; color: var(--compass);
+    background: var(--paper); padding: 0 .2rem; top: -9px;
+  }
+  .compass::after {
+    content: "";
+    position: absolute; inset: 10px;
+    background:
+      conic-gradient(from 0deg, var(--route) 0 4deg, transparent 4deg 86deg, var(--ink) 86deg 94deg, transparent 94deg 176deg, var(--ink) 176deg 184deg, transparent 184deg 266deg, var(--ink) 266deg 274deg, transparent 274deg 356deg, var(--route) 356deg);
+    border-radius: 50%;
+  }
+  .cartouche h1 { font-family: 'Cinzel', serif; font-size: 1.7rem; letter-spacing: .1em; }
+  .cartouche .sub { font-style: italic; color: var(--ink-light); font-size: .95rem; }
+  .cartouche nav { margin-left: auto; text-align: right; font-size: .9rem; line-height: 1.9; }
+  .cartouche nav a { border: none; display: inline-block; margin-left: 1.2rem; color: var(--ink); }
+  .cartouche nav a::before { content: "⌖ "; color: var(--route); }
+  .cartouche nav a:hover { color: var(--route); background: none; }
+
+  /* ===== Route breadcrumb: a dashed travel line ===== */
+  .route-line {
+    max-width: 1140px; margin: 1.6rem auto 0; padding: 0 2rem;
+    display: flex; align-items: center; gap: .6rem;
+    font-family: 'Special Elite', monospace;
+    font-size: .78rem; color: var(--ink-light);
+  }
+  .route-line .leg { flex: 0 0 38px; border-top: 2px dashed var(--route); }
+  .route-line .pt::before { content: "○ "; color: var(--route); }
+  .route-line .here::before { content: "✕ "; color: var(--route); font-weight: bold; }
+  .route-line .here { color: var(--ink); }
+
+  /* ===== Sheet layout ===== */
+  .sheet {
+    max-width: 1140px; margin: 1.4rem auto 4rem; padding: 0 2rem;
+    display: grid; grid-template-columns: minmax(0,1fr) 330px; gap: 2.6rem;
+  }
+
+  /* Title as chart label */
+  .chart-label { margin-bottom: 1.6rem; }
+  .chart-label .coords { font-family: 'Special Elite', monospace; font-size: .75rem; color: var(--ink-light); letter-spacing: .1em; }
+  .chart-label h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    letter-spacing: .04em;
+    line-height: 1.1;
+    margin: .2rem 0;
+  }
+  .chart-label .epithet { font-style: italic; font-size: 1.2rem; color: var(--ink-light); }
+  .stamp {
+    display: inline-block;
+    font-family: 'Special Elite', monospace;
+    font-size: .7rem;
+    letter-spacing: .15em;
+    color: var(--stamp);
+    border: 2px solid var(--stamp);
+    border-radius: 4px;
+    padding: .25rem .7rem;
+    transform: rotate(-4deg);
+    opacity: .85;
+    margin-top: .7rem;
+    text-transform: uppercase;
+  }
+
+  /* Sections as numbered chart annotations */
+  article h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin: 2.2rem 0 .7rem;
+    letter-spacing: .06em;
+  }
+  article h3 .marker {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.7rem; height: 1.7rem;
+    border: 1.5px solid var(--route);
+    border-radius: 50%;
+    color: var(--route);
+    font-size: .85rem;
+    margin-right: .7rem;
+    background: rgba(242,232,210,.8);
+    vertical-align: -4px;
+  }
+  article p { margin-bottom: 1rem; }
+  article ul { margin: 0 0 1rem 1.5rem; }
+  article li { margin-bottom: .4rem; }
+  article li::marker { content: "⚓ "; font-size: .8rem; }
+
+  /* Open threads = "uncharted waters" */
+  .uncharted {
+    border: 1.5px dashed var(--ink-light);
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(65,56,42,.05) 7px, rgba(65,56,42,.05) 8px);
+    padding: .9rem 1.2rem;
+    margin: 1.2rem 0;
+    font-style: italic;
+  }
+  .uncharted .label {
+    font-family: 'Special Elite', monospace;
+    font-style: normal;
+    font-size: .68rem;
+    letter-spacing: .25em;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: .2rem;
+  }
+  .uncharted .label::before { content: "⚠ "; color: var(--route); }
+
+  /* Voyage log: episode appearances as a log table */
+  table.voyage {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+    margin-top: .6rem;
+  }
+  table.voyage th {
+    font-family: 'Special Elite', monospace;
+    font-size: .68rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--ink-light);
+    border-bottom: 2px solid var(--ink);
+    padding: .35rem .6rem;
+  }
+  table.voyage td { border-bottom: 1px solid rgba(65,56,42,.25); padding: .4rem .6rem; }
+  table.voyage td:first-child { font-family: 'Special Elite', monospace; font-size: .8rem; white-space: nowrap; }
+
+  /* ===== Legend (infobox) ===== */
+  .legend {
+    border: 2px solid var(--ink);
+    background: rgba(242,232,210,.65);
+    height: fit-content;
+    position: relative;
+  }
+  .legend::before {
+    content: "LEGEND";
+    position: absolute; top: -.7rem; left: 1rem;
+    font-family: 'Special Elite', monospace;
+    font-size: .72rem; letter-spacing: .3em;
+    background: var(--paper);
+    padding: 0 .6rem;
+    color: var(--ink);
+  }
+  .legend-inner { padding: 1.4rem 1.3rem 1.2rem; }
+  .legend .map-thumb {
+    aspect-ratio: 4/3;
+    border: 1px solid var(--ink);
+    margin-bottom: 1rem;
+    background:
+      radial-gradient(ellipse at 60% 40%, var(--sea) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 12px, rgba(65,56,42,.08) 12px, rgba(65,56,42,.08) 13px),
+      rgba(236,225,200,.8);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Special Elite', monospace; font-size: .72rem; color: var(--ink-light);
+    text-align: center;
+  }
+  .legend h4 {
+    font-family: 'Cinzel', serif;
+    font-size: .85rem;
+    letter-spacing: .15em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: .25rem;
+    margin: 1rem 0 .5rem;
+  }
+  .key-row { display: flex; gap: .7rem; padding: .25rem 0; font-size: .9rem; align-items: baseline; }
+  .key-row .glyph { flex: 0 0 1.4rem; text-align: center; color: var(--route); }
+  .key-row .k { color: var(--ink-light); flex: 0 0 32%; font-size: .82rem; font-family: 'Special Elite', monospace; }
+  .legend .scalebar {
+    margin-top: 1.1rem;
+    font-family: 'Special Elite', monospace;
+    font-size: .65rem;
+    color: var(--ink-light);
+    text-align: center;
+  }
+  .legend .scalebar .bar {
+    height: 7px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 25%, var(--paper) 0 50%);
+    border: 1px solid var(--ink);
+    margin-bottom: .25rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+    font-size: .72rem;
+    letter-spacing: .2em;
+    color: var(--ink-light);
+    padding: 0 2rem 2.6rem;
+  }
+
+  @media (max-width: 960px) { .sheet { grid-template-columns: 1fr; } .cartouche { flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="cartouche">
+    <div class="compass"></div>
+    <div>
+      <h1>The Cartographer’s Table</h1>
+      <div class="sub">Charts &amp; surveys of the Alambor campaign · drawn from the canon</div>
+    </div>
+    <nav>
+      <a href="#">World Chart</a><a href="#">Personages</a><a href="#">Ports</a><a href="#">Voyages</a><br>
+      <a href="#">Companies</a><a href="#">Cargo</a><a href="#">Search the charts</a>
+    </nav>
+  </div>
+</header>
+
+<div class="route-line">
+  <span class="pt">SURVEYS</span><span class="leg"></span>
+  <span class="pt">PERSONAGES</span><span class="leg"></span>
+  <span class="pt">PIRATES</span><span class="leg"></span>
+  <span class="here">MALLY GRISHAM — YOU ARE HERE</span>
+</div>
+
+<div class="sheet">
+
+  <article>
+    <div class="chart-label">
+      <div class="coords">SURVEY № 047 · LAT. UNKNOWN · LAST FIX: JAZACHA INTERIOR, FLOOR IV</div>
+      <h2>Mally “Molly” Grisham</h2>
+      <div class="epithet">the Sparrow · Master of Fortune’s Favor · Lord of Anchors Rest</div>
+      <div class="stamp">VERIFIED · TRANSCRIPT-ENRICHED</div>
+    </div>
+
+    <h3><span class="marker">1</span>Sighting reports</h3>
+    <p>Pirate captain of <a href="#">Fortune’s Favor</a> — sparrow flag, big poofy hat, short, very fast, with high cheekbones, piercing blue eyes, and a scar. Under Divine Sense he reads as inherently good but complicated, darkened by pressures. Confirmed the same man as “Shauwn O’Malley,” who delivered the royal wedding letter (<a href="#">E20</a>).</p>
+
+    <h3><span class="marker">2</span>Course of the stolen artifact</h3>
+    <p>His sparrow calling card was left where the final <a href="#">Zeben artifact</a> was stolen. Drunk Archivists tipped him to a relic beneath the seas; he navigated the fog-bound Veiled Ocean to the underwater Temple of Fenreal and retrieved it — then traded it away for something very important to him. Present position of the artifact: the <a href="#">Jazacha</a> jungles, held by the artifact-obsessed Yuan-Ti of Oojezz.</p>
+
+    <div class="uncharted">
+      <span class="label">UNCHARTED WATERS</span>
+      What did Mally trade the final artifact for? The survey leaves this blank.
+    </div>
+
+    <h3><span class="marker">3</span>The Kraken contract</h3>
+    <p>At the Crow’s Ledger in <a href="#">Anchors Rest</a> he set his price: capture the Kraken plaguing the Pirate Trinity. The party did; Mally controlled it with a scepter and chain, delivered it at Krakens Reef, and so leads the pirates of Anchors Rest.</p>
+
+    <h3><span class="marker">4</span>The Jazacha expedition</h3>
+    <p>He piloted the four-ship armada to Jazacha and guided the jungle expedition — five of his men died — and burned the Wish spell stored in his bracelet to wish <a href="#">Zuk’taal</a> away, leaving him dejected. He also leaked the party’s destination to the Trinity, and warned that <a href="#">Zax</a>, the Merchant, and possibly <a href="#">Sir Trent Hightower</a> had made contact.</p>
+
+    <div class="uncharted">
+      <span class="label">UNCHARTED WATERS</span>
+      How damaging is his information leak to the Pirate Trinity?
+    </div>
+
+    <h3><span class="marker">5</span>Crew &amp; connections</h3>
+    <ul>
+      <li>Active ally and guide as of E161; left the party on floor four — business back in Oojezz.</li>
+      <li>Old hand with <a href="#">Jameti Costco</a> as a jungle guide (“something went real wrong”).</li>
+      <li>Renee at Airsteach is an ex-employee.</li>
+    </ul>
+
+    <h3><span class="marker">6</span>Voyage log — appearances</h3>
+    <table class="voyage">
+      <tr><th>Entry</th><th>Where sighted</th><th>Note</th></tr>
+      <tr><td><a href="#">E20</a></td><td>—</td><td>As “Shauwn O’Malley,” delivers the royal wedding letter</td></tr>
+      <tr><td><a href="#">E143–E147</a></td><td>Anchors Rest</td><td>The Crow’s Ledger; the Kraken price is set</td></tr>
+      <tr><td><a href="#">E149–E153</a></td><td>Krakens Reef</td><td>Kraken delivered; takes leadership of Anchors Rest</td></tr>
+      <tr><td><a href="#">E155–E161</a></td><td>Jazacha</td><td>Armada and jungle expedition; the Wish is spent</td></tr>
+    </table>
+  </article>
+
+  <aside class="legend">
+    <div class="legend-inner">
+      <div class="map-thumb">PORTRAIT / LAST-KNOWN-POSITION<br>MAP INSET — awaiting Jon’s charts</div>
+
+      <h4>Subject Particulars</h4>
+      <div class="key-row"><span class="glyph">⚑</span><span class="k">STATION</span><span>Pirate Captain</span></div>
+      <div class="key-row"><span class="glyph">⛵</span><span class="k">VESSEL</span><span>Fortune’s Favor</span></div>
+      <div class="key-row"><span class="glyph">🐦</span><span class="k">SIGIL</span><span>The Sparrow</span></div>
+      <div class="key-row"><span class="glyph">☩</span><span class="k">READING</span><span>Good, complicated</span></div>
+      <div class="key-row"><span class="glyph">✕</span><span class="k">LAST FIX</span><span>Jazacha, floor IV (E161)</span></div>
+
+      <h4>Sails Under Many Names</h4>
+      <div class="key-row"><span class="glyph">~</span><span class="k">ALIASES</span><span>Shauwn O’Malley · Molly Grisham · O’Mally · Melly · “Captain maley grenshums” · +9 more</span></div>
+
+      <h4>Chart Key</h4>
+      <div class="key-row"><span class="glyph">○</span><span class="k">PORT</span><span>Visited location</span></div>
+      <div class="key-row"><span class="glyph">- -</span><span class="k">ROUTE</span><span>Party’s travel line</span></div>
+      <div class="key-row"><span class="glyph">⚠</span><span class="k">HATCHED</span><span>Uncharted / open thread</span></div>
+
+      <div class="scalebar">
+        <div class="bar"></div>
+        SCALE: 16 EPISODES ≈ ONE LEAGUE OF PLOT
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<footer>DRAWN &amp; MAINTAINED BY THE ALAMBOR SIX SURVEY · REGENERATED FROM CANON · HERE BE TYPOS</footer>
+
+</body>
+</html>

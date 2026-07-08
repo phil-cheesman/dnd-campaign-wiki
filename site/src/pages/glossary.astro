@@ -1,0 +1,440 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getEntry } from 'astro:content';
+import { getPublic } from '../lib/collections';
+import { ENTITY_TIERS } from '../lib/paths';
+
+// canon/glossary.md is a flat list of `- **Name** (status) — desc. Aliases: …. Episodes: …`
+// bullets under `## Section` headers. We parse it into a filterable, linked reference
+// instead of rendering the raw 800-line markdown dump.
+const entry = await getEntry('pages', 'glossary');
+const body = entry?.body ?? '';
+
+// Normalize a name the SAME way on both sides of the match: lowercase, drop
+// quotes, drop parentheticals, and collapse any other punctuation to spaces.
+// Without this, headwords like `Benjamin "Benny"` or `Viola, "the Mother"` never
+// line up with the dossier's name/aliases.
+const normalize = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/["“”'’]/g, '')
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+// Normalized name/alias → dossier href (deep-link) and → codex art (thumbnail),
+// so a glossary row can both jump to its wiki page and show its portrait.
+const hrefByName = new Map<string, string>();
+const artByName = new Map<string, { src: string; type?: string }>();
+for (const tier of ENTITY_TIERS) {
+  for (const e of await getPublic(tier as any)) {
+    const href = `/${tier}/${e.id}`;
+    const img: string | null = e.data.art?.image ?? null;
+    const type: string | undefined = e.data.art?.type;
+    const add = (s?: string) => {
+      if (!s) return;
+      const k = normalize(s);
+      if (!k) return;
+      hrefByName.set(k, href);
+      if (img) artByName.set(k, { src: img, type });
+    };
+    add(e.data.name);
+    (e.data.aliases ?? []).forEach(add);
+  }
+}
+
+// Map glossary section headers to a short tag shown on each row.
+const SECTION_TAG: Record<string, string> = {
+  'Player characters': 'PC',
+  NPCs: 'NPC',
+  Locations: 'Location',
+  Factions: 'Faction',
+  'Items & artifacts': 'Item',
+  Deities: 'Deity',
+  Ships: 'Ship',
+  Creatures: 'Creature',
+  Events: 'Event',
+  'Other (calendar, aliases, misc)': 'Misc',
+};
+
+type Term = {
+  name: string;
+  status?: string;
+  desc: string;
+  aliases: string[];
+  episodes: number;
+  href?: string;
+  img?: { src: string; type?: string };
+};
+type Section = { title: string; tag: string; id: string; terms: Term[] };
+
+const sections: Section[] = [];
+let current: Section | null = null;
+for (const raw of body.split('\n')) {
+  const head = raw.match(/^##\s+(.*)$/);
+  if (head) {
+    const title = head[1].trim();
+    current = {
+      title,
+      tag: SECTION_TAG[title] ?? title,
+      id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      terms: [],
+    };
+    sections.push(current);
+    continue;
+  }
+  const m = raw.match(/^-\s+\*\*(.+?)\*\*\s*(?:\(([^)]*)\))?\s*—\s*(.*)$/);
+  if (!m || !current) continue;
+  const name = m[1].trim();
+  const status = m[2]?.trim();
+  const rest = m[3];
+
+  const aliIdx = rest.search(/\bAliases:/);
+  const epIdx = rest.search(/\bEpisodes:/);
+  const descEnd = aliIdx >= 0 ? aliIdx : epIdx >= 0 ? epIdx : rest.length;
+  const desc = rest.slice(0, descEnd).trim().replace(/[.\s]+$/, '');
+  const aliasStr = aliIdx >= 0 ? rest.slice(aliIdx + 8, epIdx >= 0 ? epIdx : undefined) : '';
+  const epStr = epIdx >= 0 ? rest.slice(epIdx + 9) : '';
+  const aliases = aliasStr
+    .split(',')
+    .map((s) => s.trim().replace(/[.\s]+$/, ''))
+    .filter(Boolean);
+  const episodes = (epStr.match(/E\d+/g) ?? []).length;
+
+  current.terms.push({
+    name,
+    status,
+    desc,
+    aliases,
+    episodes,
+    href: hrefByName.get(normalize(name)),
+    img: artByName.get(normalize(name)),
+  });
+}
+
+const total = sections.reduce((n, s) => n + s.terms.length, 0);
+const searchKey = (t: Term) => [t.name, ...t.aliases, t.desc].join(' ').toLowerCase();
+---
+
+<BaseLayout title="Glossary" description="Searchable canonical names and known aliases across the Alambor campaign.">
+  <Breadcrumbs trail={[{ label: 'Wiki', href: '/' }, { label: 'Glossary' }]} />
+  <h1>Glossary</h1>
+  <p class="lede">
+    {total} canonical terms with every known alias and misspelling. Search to resolve a fuzzy name
+    from the notes back to its canonical entry, or open a section to browse.
+  </p>
+
+  <input
+    id="gl-search"
+    type="search"
+    class="gl-search"
+    placeholder="Search names, aliases, descriptions…"
+    autocomplete="off"
+    aria-label="Filter glossary"
+  />
+  <p id="gl-empty" class="gl-empty" hidden>No terms match that search.</p>
+
+  <nav class="gl-jump" aria-label="Jump to section">
+    {
+      sections.map((s) => (
+        <a href={`#${s.id}`} data-jump={s.id}>
+          {s.title} <span class="n">{s.terms.length}</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  {
+    sections.map((s) => (
+      <details class="gl-section" id={s.id} data-section>
+        <summary class="gl-sechead">
+          <span class="gl-mark" aria-hidden="true" />
+          <span class="gl-sectitle">{s.title}</span>
+          <span class="n">{s.terms.length}</span>
+        </summary>
+        <ul class="gl-list">
+          {s.terms.map((t) => (
+            <li class="gl-term" data-search={searchKey(t)}>
+              {t.img &&
+                (t.href ? (
+                  <a href={t.href} class="gl-thumb-link" tabindex="-1" aria-hidden="true">
+                    <img
+                      class="gl-thumb"
+                      src={t.img.src}
+                      alt=""
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      style={`object-position:${t.img.type === 'portrait' ? 'center top' : 'center'}`}
+                    />
+                  </a>
+                ) : (
+                  <img
+                    class="gl-thumb"
+                    src={t.img.src}
+                    alt=""
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    style={`object-position:${t.img.type === 'portrait' ? 'center top' : 'center'}`}
+                  />
+                ))}
+              <div class="gl-body">
+                <div class="gl-headline">
+                  {t.href ? (
+                    <a class="gl-name" href={t.href}>
+                      {t.name}
+                    </a>
+                  ) : (
+                    <span class="gl-name">{t.name}</span>
+                  )}
+                  {t.status && <span class="gl-status">{t.status}</span>}
+                  <span class="gl-tag">{s.tag}</span>
+                  {t.episodes > 0 && <span class="gl-eps">{t.episodes} ep</span>}
+                </div>
+                {t.desc && <p class="gl-desc">{t.desc}</p>}
+                {t.aliases.length > 0 && (
+                  <p class="gl-aliases">
+                    <span class="gl-aka">aka</span> {t.aliases.join(' · ')}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ))
+  }
+</BaseLayout>
+
+<script>
+  (function () {
+    var input = document.getElementById('gl-search') as HTMLInputElement | null;
+    var empty = document.getElementById('gl-empty');
+    if (!input) return;
+    var terms = Array.prototype.slice.call(document.querySelectorAll('.gl-term'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
+    var jumps = Array.prototype.slice.call(document.querySelectorAll('[data-jump]'));
+
+    function apply() {
+      var q = input!.value.trim().toLowerCase();
+      var anyVisible = false;
+      terms.forEach(function (el: HTMLElement) {
+        var hit = !q || (el.dataset.search || '').indexOf(q) !== -1;
+        el.hidden = !hit;
+        if (hit) anyVisible = true;
+      });
+      // Hide sections (and their jump links) with no match; while searching,
+      // auto-open the sections that do match and collapse them again when cleared.
+      sections.forEach(function (sec: HTMLDetailsElement) {
+        var visible = sec.querySelectorAll('.gl-term:not([hidden])').length;
+        sec.hidden = visible === 0;
+        if (q) sec.open = visible > 0;
+        else sec.open = false;
+        var jump = jumps.filter(function (j: HTMLElement) {
+          return j.dataset.jump === sec.id;
+        })[0];
+        if (jump) jump.hidden = visible === 0;
+      });
+      if (empty) empty.hidden = anyVisible;
+    }
+
+    input.addEventListener('input', apply);
+
+    // A jump-nav chip should open its (collapsed) section before scrolling to it.
+    jumps.forEach(function (j: HTMLAnchorElement) {
+      j.addEventListener('click', function () {
+        var sec = document.getElementById(j.dataset.jump || '') as HTMLDetailsElement | null;
+        if (sec) sec.open = true;
+      });
+    });
+  })();
+</script>
+
+<style>
+  .lede {
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+  .gl-search {
+    width: 100%;
+    max-width: 30rem;
+    padding: 0.6rem 0.9rem;
+    margin: 1rem 0 0.5rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--hairline);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .gl-search:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 25%, transparent);
+  }
+  .gl-empty {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .gl-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.7rem;
+    margin: 0.5rem 0 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .gl-jump a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    border: 1px solid var(--hairline);
+    border-radius: 20px;
+    padding: 0.18rem 0.7rem;
+  }
+  .gl-jump a:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    text-decoration: none;
+  }
+  .gl-jump .n {
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .gl-section {
+    scroll-margin-top: calc(var(--topbar-h) + 1rem);
+    border-top: 1px solid var(--hairline);
+  }
+  .gl-section:last-of-type {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .gl-sechead {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 0.85rem 0;
+  }
+  .gl-sechead::-webkit-details-marker {
+    display: none;
+  }
+  .gl-mark {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 6px;
+    border-color: transparent transparent transparent var(--gold);
+    transition: transform 0.15s ease;
+    flex: none;
+    align-self: center;
+  }
+  .gl-section[open] > .gl-sechead .gl-mark {
+    transform: rotate(90deg);
+  }
+  .gl-sectitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .gl-sechead:hover .gl-sectitle {
+    color: var(--gold);
+  }
+  .gl-sechead .n {
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+  }
+  .gl-list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+  .gl-term {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .gl-term:first-child {
+    border-top: none;
+  }
+  .gl-body {
+    min-width: 0;
+    flex: 1;
+  }
+  .gl-thumb-link {
+    flex: none;
+    align-self: flex-start;
+    line-height: 0;
+  }
+  .gl-thumb {
+    flex: none;
+    align-self: flex-start;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .gl-headline {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .gl-name {
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+  .gl-status,
+  .gl-tag,
+  .gl-eps {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.05rem 0.45rem;
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--hairline);
+  }
+  .gl-tag {
+    color: var(--gold);
+    border-color: color-mix(in srgb, var(--gold) 40%, var(--hairline));
+  }
+  .gl-eps {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    border: none;
+    background: none;
+    color: var(--faint);
+  }
+  .gl-desc {
+    margin: 0.3rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: var(--measure);
+  }
+  .gl-aliases {
+    margin: 0.3rem 0 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .gl-aka {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    margin-right: 0.3rem;
+  }
+</style>

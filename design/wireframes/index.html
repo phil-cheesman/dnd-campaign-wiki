@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alambor Wiki — Wireframe Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#15130f; --card:#1f1c16; --text:#e8e1d2; --dim:#9a917e; --gold:#c9a44a; --line:#332e24; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:3.5rem 2rem 4rem; }
+  .wrap { max-width:1080px; margin:0 auto; }
+  h1 { font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:700; }
+  h1 span { color:var(--gold); }
+  .sub { color:var(--dim); margin:.5rem 0 2.5rem; max-width:64ch; line-height:1.6; font-size:.95rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem; }
+  a.card { display:block; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.4rem 1.5rem; text-decoration:none; color:var(--text); transition:border-color .15s, transform .15s; }
+  a.card:hover { border-color:var(--gold); transform:translateY(-2px); }
+  .num { font-size:.7rem; letter-spacing:.25em; color:var(--gold); font-weight:600; }
+  .card h2 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; margin:.3rem 0 .5rem; }
+  .card p { font-size:.85rem; color:var(--dim); line-height:1.55; }
+  .tags { margin-top:.9rem; display:flex; gap:.4rem; flex-wrap:wrap; }
+  .tag { font-size:.65rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; border:1px solid var(--line); border-radius:99px; padding:.2rem .6rem; color:var(--dim); }
+  .swatches { display:flex; gap:.3rem; margin-top:.9rem; }
+  .sw { width:22px; height:22px; border-radius:50%; border:1px solid rgba(255,255,255,.15); }
+  footer { color:var(--dim); font-size:.8rem; margin-top:3rem; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Alambor Wiki — <span>Wireframe Gallery</span></h1>
+  <p class="sub">Eight design directions for an article page, all rendering the same content (the Mally Grisham dossier) so you're comparing pure aesthetics. Open each in a browser tab and flip between them. Concepts 06–08 are modern variants spun off the Modern Codex (02).</p>
+
+  <div class="grid">
+    <a class="card" href="01-illuminated-folio.html">
+      <div class="num">CONCEPT 01</div>
+      <h2>The Illuminated Folio</h2>
+      <p>A scribe's manuscript: parchment, blackletter masthead, red-ink rubrics, illuminated drop caps, double-ruled page frame, numbered chapters, wax seal.</p>
+      <div class="tags"><span class="tag">Ornate</span><span class="tag">Parchment</span><span class="tag">Blackletter</span></div>
+      <div class="swatches"><div class="sw" style="background:#f0e2c4"></div><div class="sw" style="background:#3a2c1a"></div><div class="sw" style="background:#8e2417"></div><div class="sw" style="background:#9c7a2e"></div></div>
+    </a>
+
+    <a class="card" href="02-modern-codex.html">
+      <div class="num">CONCEPT 02</div>
+      <h2>The Modern Codex</h2>
+      <p>Clean, contemporary docs-site feel (Notion/Stripe-adjacent) with quiet fantasy accents: warm off-white, garamond display type, gold hairlines, sticky sidebars, ⌘K search.</p>
+      <div class="tags"><span class="tag">Minimal</span><span class="tag">Modern</span><span class="tag">Light</span></div>
+      <div class="swatches"><div class="sw" style="background:#fcfbf8"></div><div class="sw" style="background:#23211c"></div><div class="sw" style="background:#a8842c"></div><div class="sw" style="background:#f4f1ea"></div></div>
+    </a>
+
+    <a class="card" href="03-torchlit-depths.html">
+      <div class="num">CONCEPT 03</div>
+      <h2>Torchlit Depths</h2>
+      <p>Dark-mode dungeon: carved-stone headers, amber torch-glow accents, a 5e-statblock-style infobox, quest-log open threads, "depth" breadcrumbs.</p>
+      <div class="tags"><span class="tag">Dark mode</span><span class="tag">Dungeon</span><span class="tag">Statblock</span></div>
+      <div class="swatches"><div class="sw" style="background:#0e0c09"></div><div class="sw" style="background:#d8cdb8"></div><div class="sw" style="background:#e8a33d"></div><div class="sw" style="background:#6fae8f"></div></div>
+    </a>
+
+    <a class="card" href="04-cartographers-table.html">
+      <div class="num">CONCEPT 04</div>
+      <h2>The Cartographer's Table</h2>
+      <p>A nautical chart: compass-rose cartouche, dashed-route breadcrumbs, numbered map markers as headings, a LEGEND infobox, voyage-log table, customs stamps.</p>
+      <div class="tags"><span class="tag">Map</span><span class="tag">Sepia</span><span class="tag">Typewriter</span></div>
+      <div class="swatches"><div class="sw" style="background:#ece1c8"></div><div class="sw" style="background:#41382a"></div><div class="sw" style="background:#93402a"></div><div class="sw" style="background:#5d6b52"></div></div>
+    </a>
+
+    <a class="card" href="05-rubricated-press.html">
+      <div class="num">CONCEPT 05</div>
+      <h2>The Rubricated Press</h2>
+      <p>Fine-press editorial: one big garamond column with scholarly marginalia, red rubrication (pilcrows, drop cap, pull quote), hairline rules — modern typographic, medieval ink.</p>
+      <div class="tags"><span class="tag">Editorial</span><span class="tag">Typographic</span><span class="tag">Marginalia</span></div>
+      <div class="swatches"><div class="sw" style="background:#faf7f0"></div><div class="sw" style="background:#1c1a16"></div><div class="sw" style="background:#b3261e"></div><div class="sw" style="background:#e6e0d3"></div></div>
+    </a>
+    <a class="card" href="06-midnight-codex.html">
+      <div class="num">CONCEPT 06</div>
+      <h2>The Midnight Codex</h2>
+      <p>The Modern Codex flipped to dark mode (Linear/Vercel-adjacent): warm near-black surfaces, the same garamond display and three-column shell, gold accents that now glow.</p>
+      <div class="tags"><span class="tag">Dark mode</span><span class="tag">Modern</span><span class="tag">Glow</span></div>
+      <div class="swatches"><div class="sw" style="background:#121110"></div><div class="sw" style="background:#e9e3d6"></div><div class="sw" style="background:#d4af5e"></div><div class="sw" style="background:#1a1816"></div></div>
+    </a>
+
+    <a class="card" href="07-swiss-chronicle.html">
+      <div class="num">CONCEPT 07</div>
+      <h2>The Swiss Chronicle</h2>
+      <p>International-style broadsheet: hard grid with visible rules, uppercase grotesque headline, mono small-cap labels, numbered sections, square corners, one red accent.</p>
+      <div class="tags"><span class="tag">Swiss</span><span class="tag">Grid</span><span class="tag">Mono</span></div>
+      <div class="swatches"><div class="sw" style="background:#ffffff"></div><div class="sw" style="background:#111111"></div><div class="sw" style="background:#d62411"></div><div class="sw" style="background:#f5f4f1"></div></div>
+    </a>
+
+    <a class="card" href="08-quiet-archive.html">
+      <div class="num">CONCEPT 08</div>
+      <h2>The Quiet Archive</h2>
+      <p>App-shaped (Notion-adjacent): workspace sidebar, breadcrumb chips, tabs with counts, a Properties panel as the infobox, soft-shadow section cards, sage-green accent.</p>
+      <div class="tags"><span class="tag">App-like</span><span class="tag">Cards</span><span class="tag">Properties</span></div>
+      <div class="swatches"><div class="sw" style="background:#f7f6f3"></div><div class="sw" style="background:#26241f"></div><div class="sw" style="background:#3b6e5f"></div><div class="sw" style="background:#ffffff"></div></div>
+    </a>
+
+    <a class="card" href="09-map-timeline.html">
+      <div class="num">CONCEPT 09 — INTERACTIVE</div>
+      <h2>The Journey (Map + Timeline)</h2>
+      <p>Phase 3 mockup in the Modern Codex skin: an SVG world map with the party's full route, a draggable E00–E161 scrubber with arc bands, planar insets for Avernus/Shadowfell, and a story card per stop. Real data from the canon timeline.</p>
+      <div class="tags"><span class="tag">Interactive</span><span class="tag">Map</span><span class="tag">Timeline</span></div>
+      <div class="swatches"><div class="sw" style="background:#fcfbf8"></div><div class="sw" style="background:#f4f1ea"></div><div class="sw" style="background:#a8842c"></div><div class="sw" style="background:#c9b06a"></div></div>
+    </a>
+  </div>
+
+  <footer>
+    Concepts 02 and 05 are the cleaner/modern takes; 01, 03, 04 lean fully into theme; 06–08 are modern variants of 02 (dark, Swiss, app-like); 09 is the interactive map+timeline mockup in the 02 skin.<br>
+    All pages are self-contained HTML+CSS (Google Fonts only) — meant for brainstorming, not production. The winner becomes the Astro theme in Phase 1.
+  </footer>
+</div>
+</body>
+</html>

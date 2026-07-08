@@ -1,0 +1,11 @@
+# DM map images are local-only by default (copyright + binaries-out policy).
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# EXCEPTION: the 2048px display images ARE committed so the deployed site renders the
+# world + regional maps (size is acceptable; each ~600 KB). Built by
+# scripts/maps/build_displays.py. The full-res sources stay ignored — local-only
+# deep-zoom reserves, not needed for deploy.
+!*-display.jpg

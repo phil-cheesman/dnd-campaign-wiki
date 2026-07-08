@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GraphView from '../components/graph/GraphView.tsx';
+import HomeStats from '../components/HomeStats.astro';
+import { getPublic } from '../lib/collections';
+import { episodeLabel } from '../lib/format';
+import { getRecent, relativeDate } from '../lib/recent';
+import { badge } from '../lib/changelog';
+
+const characters = (await getPublic('characters')).sort((a: any, b: any) =>
+  (a.data.name ?? '').localeCompare(b.data.name ?? ''),
+);
+const party = characters.filter((c: any) => c.data.status === 'active');
+
+const episodes = (await getPublic('episodes')).sort((a: any, b: any) =>
+  b.id.localeCompare(a.id, undefined, { numeric: true }),
+);
+const recentEpisodes = episodes.slice(0, 6);
+const recentlyUpdated = getRecent(8);
+---
+
+<BaseLayout title="Home" description="The Alambor Codex — a cross-linked, searchable wiki for a long-running D&D 5e campaign, generated from canon notes.">
+  {/* ===== Welcome banner ===== */}
+  <section class="welcome">
+    <div class="welcome-media">
+      <img src="/art/worldbuilding/the-sundering-and-the-gift.webp" alt="The Arbor Alma — the white-barked, purple-leaved tree of the Sundering" loading="eager" />
+    </div>
+    <div class="welcome-body">
+      <p class="kicker">The Alambor Campaign</p>
+      <h1>Alambor Codex</h1>
+      <p class="welcome-lede">
+        Five hundred years after the Sundering shattered the world and the gods fell silent, the
+        realm calls itself <strong>Alambor</strong> — and six wanderers have been hailed as its
+        saviors. This codex is the campaign's living memory: every character, place, faction, and
+        relic, every session recap and the story so far, cross-linked and searchable.
+      </p>
+      <p class="welcome-links">
+        <a href="#party">The Party</a>
+        <span class="dot">·</span>
+        <a href="/episodes">Episodes</a>
+        <span class="dot">·</span>
+        <a href="/map">World map</a>
+        <span class="dot">·</span>
+        <a href="/graph">Graph</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ===== By the numbers ===== */}
+  <HomeStats />
+
+  {/* ===== The party ===== */}
+  <div class="party-head">
+    <h2 id="party">The Party <span class="h2-sub">— the Alambor Six</span></h2>
+    <a class="party-compare" href="/characters#party-analysis">Party Analysis →</a>
+  </div>
+  <ul class="portraits">
+    {party.map((c: any) => (
+      <li>
+        <a href={`/characters/${c.id}`}>
+          <span class="portrait-img"><img src={`/art/characters/${c.id}.webp`} alt={c.data.name} loading="lazy" /></span>
+          <span class="portrait-name">{c.data.name.split(' ')[0]}</span>
+          {c.data.role && <span class="portrait-role">{c.data.role}</span>}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  {/* ===== Latest edits ===== */}
+  <h2>Latest edits</h2>
+  <ul class="feed">
+    {recentlyUpdated.map((r) => (
+      <li class:list={{ 'has-thumb': !!r.art }}>
+        {r.art && (
+          <a class="feed-thumb" href={r.href} aria-hidden="true" tabindex="-1">
+            <img src={r.art} alt="" loading="lazy" />
+          </a>
+        )}
+        <a href={r.href}>{r.name}</a>
+        <span class="feed-meta">{r.tierLabel} · {relativeDate(r.date)}</span>
+        <span class={`feed-tag ${badge(r.type).cls}`}>
+          {badge(r.type).icon ? `${badge(r.type).icon} ` : ''}{badge(r.type).label}
+        </span>
+      </li>
+    ))}
+  </ul>
+  <p class="feed-seeall"><a href="/changelog">See all →</a></p>
+
+  {/* ===== Recent episodes ===== */}
+  <h2>Recent episodes</h2>
+  <ul class="ep-cards">
+    {recentEpisodes.map((e: any) => (
+      <li>
+        <a href={`/episodes/${e.id}`}>
+          {e.data.art?.image && (
+            <span class="ep-card-thumb">
+              <img src={`/art/episodes/thumbs/${e.id}.webp`} alt="" loading="lazy" width="320" height="213" />
+            </span>
+          )}
+          <span class="ep-card-label">{episodeLabel(e.id, e.data.episode, e.data.title)}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p><a href="/episodes">All episodes →</a></p>
+
+  {/* ===== Graph ===== */}
+  <h2>Graph</h2>
+  <div class="graph-hero is-teaser">
+    <GraphView client:only="react" height="44vh" fullHref="/graph" />
+  </div>
+  <p class="hero-note">
+    Every dot is a wiki entry; every line a mention between them. Drag to explore, hover to trace
+    connections, click to open — or <a href="/graph">open the full graph →</a>
+  </p>
+</BaseLayout>
+
+<style>
+  /* Latest-edits feed: thumbnail only for art rows (new-art / art-redo), so a
+     landscape location art doesn't get squished into a tiny square on content
+     rows. Uniform cover-cropped square keeps mixed aspect ratios undistorted. */
+  .feed li.has-thumb {
+    align-items: center;
+  }
+  .feed-thumb {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .feed-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .feed-seeall {
+    margin: -1rem 0 1.6rem;
+    font-size: 0.85rem;
+  }
+  /* Recent-episodes thumbnail cards: scene plate on top, label beneath. */
+  .ep-cards {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+  }
+  .ep-cards a {
+    display: block;
+    color: var(--text);
+  }
+  .ep-cards a:hover {
+    text-decoration: none;
+  }
+  .ep-card-thumb {
+    display: block;
+    aspect-ratio: 3 / 2;
+    border-radius: 9px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    margin-bottom: 0.45rem;
+  }
+  .ep-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  .ep-cards a:hover .ep-card-thumb img {
+    transform: scale(1.05);
+  }
+  .ep-cards a:hover .ep-card-thumb {
+    border-color: var(--gold-soft);
+  }
+  .ep-card-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  /* Party heading + route into the comparison dashboard. */
+  .party-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+  }
+  .party-head h2 {
+    margin-bottom: 0;
+  }
+  .party-compare {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  /* Add whitespace between the party heading and the portrait grid. */
+  .party-head + .portraits {
+    margin-top: 1.5rem;
+  }
+</style>

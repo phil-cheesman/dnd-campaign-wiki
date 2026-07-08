@@ -1,0 +1,7 @@
+{
+  "_comment": "Newsletter poll config. PREFERRED: webapp_base = the Apps Script one-click web app (scripts/newsletter/poll-webapp/). The harness builds direct one-click links <webapp_base>?ep=<N>&vote=A|B|C&l=<label> and fetches <webapp_base>?mode=results&ep=<N-1> for the 'Last week's results' section. FALLBACK (if webapp_base is empty): the old reusable Google Form prefill links. Not secret.",
+  "webapp_base": "https://script.google.com/macros/s/AKfycbzU4nCP0xGozoxx3q8G5AGsQ6vPpQUlD6RZbIOxkErxZjj7ARr9UeqVe7FXLF8DDJbe/exec",
+  "form_base": "https://docs.google.com/forms/d/e/1FAIpQLScMd23FxUC4-cTy5P9c-dAciuR7aIfH0epHTXj-4rwqR7PjgQ/viewform",
+  "episode_entry": "entry.365029438",
+  "vote_entry": "entry.1392057320"
+}

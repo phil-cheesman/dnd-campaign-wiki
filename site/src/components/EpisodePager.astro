@@ -1,0 +1,207 @@
+---
+/**
+ * Sequential episode navigator for the bottom of an episode page — the classic
+ * prev/next pager, modernised: full-width prev/next cards plus a numbered strip of
+ * nearby episodes (current highlighted) with «/» jump-by-10 controls.
+ */
+export interface PagerLink {
+  href: string;
+  num: string; // short label, e.g. "E40" (·2 for a -dup2 session)
+  title?: string;
+  current?: boolean;
+}
+interface Props {
+  prev?: PagerLink | null;
+  next?: PagerLink | null;
+  jumpBack?: PagerLink | null; // ~10 earlier
+  jumpForward?: PagerLink | null; // ~10 later
+  window: PagerLink[]; // nearby episodes incl. the current one
+}
+const { prev, next, jumpBack, jumpForward, window } = Astro.props as Props;
+---
+
+<nav class="ep-pager" aria-label="Episode navigation" data-pagefind-ignore>
+  <div class="ep-steps">
+    {
+      prev ? (
+        <a class="ep-step ep-prev" href={prev.href} rel="prev">
+          <span class="ep-arrow" aria-hidden="true">←</span>
+          <span class="ep-step-text">
+            <span class="ep-kicker">Previous</span>
+            <span class="ep-step-title">
+              {prev.num}
+              {prev.title && <span class="ep-ttl"> · {prev.title}</span>}
+            </span>
+          </span>
+        </a>
+      ) : (
+        <span class="ep-step ep-prev is-disabled">
+          <span class="ep-arrow" aria-hidden="true">←</span>
+          <span class="ep-step-text">
+            <span class="ep-kicker">Previous</span>
+            <span class="ep-step-title">Start of campaign</span>
+          </span>
+        </span>
+      )
+    }
+    {
+      next ? (
+        <a class="ep-step ep-next" href={next.href} rel="next">
+          <span class="ep-step-text">
+            <span class="ep-kicker">Next</span>
+            <span class="ep-step-title">
+              {next.num}
+              {next.title && <span class="ep-ttl"> · {next.title}</span>}
+            </span>
+          </span>
+          <span class="ep-arrow" aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <span class="ep-step ep-next is-disabled">
+          <span class="ep-step-text">
+            <span class="ep-kicker">Next</span>
+            <span class="ep-step-title">Most recent</span>
+          </span>
+          <span class="ep-arrow" aria-hidden="true">→</span>
+        </span>
+      )
+    }
+  </div>
+
+  <div class="ep-pages">
+    {
+      jumpBack && (
+        <a class="ep-jump" href={jumpBack.href} aria-label={`Jump back to ${jumpBack.num}`} title={`Jump to ${jumpBack.num}`}>
+          «
+        </a>
+      )
+    }
+    {
+      window.map((w) =>
+        w.current ? (
+          <span class="ep-page is-current" aria-current="page">{w.num}</span>
+        ) : (
+          <a class="ep-page" href={w.href}>{w.num}</a>
+        ),
+      )
+    }
+    {
+      jumpForward && (
+        <a class="ep-jump" href={jumpForward.href} aria-label={`Jump forward to ${jumpForward.num}`} title={`Jump to ${jumpForward.num}`}>
+          »
+        </a>
+      )
+    }
+  </div>
+</nav>
+
+<style>
+  .ep-pager {
+    margin: 2.8rem 0 0.5rem;
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.4rem;
+  }
+
+  /* Prev / next cards — full-width split, each tappable. */
+  .ep-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .ep-step {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    transition:
+      transform var(--dur-state) var(--ease-out),
+      border-color var(--dur-state) var(--ease-out),
+      box-shadow var(--dur-state) var(--ease-out);
+  }
+  .ep-next { justify-content: flex-end; text-align: right; }
+  a.ep-step:hover {
+    text-decoration: none;
+    border-color: var(--gold-soft);
+    box-shadow: 0 8px 22px rgba(35, 33, 28, 0.1);
+  }
+  @media (hover: hover) {
+    a.ep-prev:hover { transform: translateX(-3px); }
+    a.ep-next:hover { transform: translateX(3px); }
+  }
+  .ep-step.is-disabled { opacity: 0.45; }
+
+  .ep-arrow {
+    flex: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .ep-step-text { display: flex; flex-direction: column; min-width: 0; }
+  .ep-kicker {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ep-step-title {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ep-ttl { font-weight: 500; color: var(--muted); }
+
+  /* Numbered strip — jump arrows + nearby episode pills. */
+  .ep-pages {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .ep-page,
+  .ep-jump {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.4rem;
+    height: 2.1rem;
+    padding: 0 0.55rem;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    transition:
+      color var(--dur-instant) ease,
+      border-color var(--dur-instant) ease,
+      background-color var(--dur-instant) ease;
+  }
+  .ep-jump { color: var(--gold); font-size: 1rem; }
+  .ep-page:hover,
+  .ep-jump:hover {
+    text-decoration: none;
+    border-color: var(--gold-soft);
+    color: var(--text);
+  }
+  .ep-page.is-current {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  :root[data-theme='dark'] .ep-page.is-current { color: #14161d; }
+
+  @media (max-width: 640px) {
+    .ep-steps { grid-template-columns: 1fr; }
+    .ep-next { justify-content: flex-start; text-align: left; flex-direction: row-reverse; }
+  }
+</style>

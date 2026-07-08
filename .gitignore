@@ -1,0 +1,107 @@
+# D&D second brain — keep binaries and raw recordings out of git (text conversions are committed)
+sources/**/*.docx
+sources/**/*.pdf
+sources/**/*.xlsx
+sources/**/*.doc
+sources/transcripts/
+# raw D&D Beyond API exports; derived data lives in canon frontmatter
+sources/character-sheets/**/ddb-*.json
+
+# Word lock/temp junk that rides along with DM doc exports
+~$*
+*.tmp
+
+# DM-doc images & maps stay OUT of git — review locally, host externally for the wiki.
+# Only the converted text markdown is committed.
+sources/dm-docs/_raw/
+sources/dm-docs/media/
+sources/dm-docs/maps/
+sources/**/*.jpg
+sources/**/*.jpeg
+sources/**/*.png
+sources/**/*.gif
+sources/**/*.webp
+
+# Spoilers: the DM's raw prep stays LOCAL-ONLY (never committed/published).
+# Claude reads these locally during Phase B; only triaged, player-safe canon/ is committed.
+sources/dm-docs/episode-prep/
+sources/dm-docs/sidequests/
+sources/dm-docs/worldbuilding/anthology-notes.md
+sources/dm-docs/worldbuilding/vault-of-izzdar-notes.md
+sources/dm-docs/worldbuilding/campaign-2-log-for-the-boys.md
+sources/dm-docs/_manifest.json
+# Phase B spoiler quarantine + the review packet handed to Jon (DM) — local-only.
+# Any extension (md, csv, …) so the spreadsheet export stays private too.
+canon/_dm-only/
+FOR-JOHN--*
+FOR-JON--*
+canon/_review-sheets/FOR-JOHN--*
+canon/_review-sheets/FOR-JON--*
+# The consolidated decision log references un-revealed entities + spoiler triage — local-only.
+canon/_review-sheets/jon-decisions.md
+
+# OS / editor cruft
+.DS_Store
+*.swp
+
+# Asset inventory: the full JSON lists spoiler-area (DM-only) image paths — local-only.
+# The redacted, committed-safe summary is assets/INVENTORY.md.
+assets/inventory.json
+
+# Reference images are local-only INPUTS (copyright safety on a public repo + binaries-out rule).
+# The generated wiki art is the published artifact. refs/README.md documents the convention.
+refs/*
+!refs/README.md
+
+# Image-gen harness: secrets + smoke-test experiments + venv stay local.
+# Approved/published art lives under site/public/art/ and IS committed.
+.env
+art-smoke/
+scripts/gen/.venv/
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Image masters: full-res gpt-image-2 PNGs kept locally (paid-for; enable re-derive
+# / external hosting later). Only the optimized WebP under site/public/art is committed.
+art-originals/
+site/public/art/**/*.png
+
+sources/photos_raw
+# transcription pipeline (recording-pipeline.md): raw audio + local tooling, never committed
+sources/recordings/
+scripts/transcribe/.venv/
+scripts/transcribe/cache/
+
+# Newsletter (draft-newsletter skill): the party distribution list holds real personal
+# emails — LOCAL-ONLY, never committed.
+config/newsletter-recipients.json
+# Newsletter prototypes: scratch HTML w/ uncensored in-jokes + embedded image blobs.
+newsletter-mockups/
+# draft-newsletter skill harness: venv, per-episode content (holds raw crude in-jokes —
+# stays out of the public repo, like canon sanitization), dry-run .eml previews, and the
+# self-contained iMessage spot-check copies (embedded image blobs + crude in-jokes).
+scripts/newsletter/.venv/
+scripts/newsletter/content/
+scripts/newsletter/*.eml
+scripts/newsletter/*-share.html
+scratchpad/alambor-sharing-explainer.html
+
+# ─── Public-release exclusions (added for the public dnd-campaign-wiki repo) ───
+# The entire raw source tree is LOCAL-ONLY. It holds the unsanitized adventure-log
+# (original crude/offensive episode titles, verbatim from the Google Doc) and the DM's
+# spoiler prep. Only the derived, sanitized canon/ + the site/ are published.
+sources/
+# Sanitization audit map: the durable record of original→rewritten strings. Local-only.
+scripts/sanitize/title-overrides.yaml
+# Transcribe track configs name real Discord handles; the audio they map is already ignored.
+scripts/transcribe/tracks.*.json
+# Internal release-ops doc — describes the sanitization strategy; local-only.
+public-release-plan.md
+# Build notes / design docs — personal working notes (content-sanitization, image-gen,
+# feature specs, roadmaps). Local-only. README screenshots under docs/readme/ are kept.
+docs/*
+!docs/readme/
+roadmap.md
+phase-1-mvp-spec.md
+phase-2-codex-spec.md

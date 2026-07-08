@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Journey — Alambor Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfbf8;
+    --surface: #f4f1ea;
+    --text: #23211c;
+    --muted: #75705f;
+    --hairline: #e3ddcf;
+    --gold: #a8842c;
+    --gold-soft: #c9b06a;
+    --link: #7a5410;
+    --sea: #f7f4ec;
+    --coast: #d8d0bd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  a { color: var(--link); text-decoration: none; }
+
+  /* ===== Top bar (Modern Codex) ===== */
+  .topbar {
+    display: flex; align-items: center; gap: 2rem;
+    padding: .8rem 2rem;
+    background: rgba(252,251,248,.92);
+    border-bottom: 1px solid var(--hairline);
+    flex-shrink: 0;
+  }
+  .wordmark { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem; display: flex; align-items: center; gap: .55rem; }
+  .wordmark .mark { width: 24px; height: 24px; border: 1.5px solid var(--gold); transform: rotate(45deg); display: flex; align-items: center; justify-content: center; font-size: .65rem; color: var(--gold); }
+  .wordmark .mark span { transform: rotate(-45deg); font-family: 'Inter'; font-weight: 600; }
+  .topnav { display: flex; gap: 1.5rem; font-size: .85rem; font-weight: 500; }
+  .topnav a { color: var(--muted); }
+  .topnav a.active { color: var(--text); }
+  .search { margin-left: auto; border: 1px solid var(--hairline); border-radius: 8px; padding: .4rem .9rem; font-size: .82rem; color: var(--muted); background: var(--surface); display: flex; gap: 2.2rem; align-items: center; }
+  .search kbd { font-size: .68rem; border: 1px solid var(--hairline); border-radius: 4px; padding: 0 .35rem; background: var(--bg); }
+
+  /* ===== Page head ===== */
+  .pagehead {
+    display: flex; align-items: baseline; gap: 1.4rem;
+    padding: 1.1rem 2rem .9rem;
+    flex-shrink: 0;
+  }
+  .pagehead h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.9rem; }
+  .pagehead .sub { color: var(--muted); font-size: .85rem; }
+  .controls { margin-left: auto; display: flex; gap: .5rem; align-items: center; }
+  .btn {
+    border: 1px solid var(--hairline); background: var(--bg); border-radius: 8px;
+    padding: .45rem .9rem; font-family: 'Inter'; font-size: .82rem; font-weight: 500;
+    color: var(--text); cursor: pointer; transition: border-color .15s;
+  }
+  .btn:hover { border-color: var(--gold-soft); }
+  .btn.play { background: var(--gold); border-color: var(--gold); color: #fff; min-width: 110px; }
+  .readout {
+    font-size: .8rem; color: var(--muted);
+    border: 1px solid var(--hairline); border-radius: 8px;
+    background: var(--surface); padding: .45rem .9rem;
+    min-width: 270px; text-align: center;
+  }
+  .readout b { color: var(--text); font-weight: 600; }
+
+  /* ===== Main: map + card ===== */
+  .main {
+    flex: 1; display: flex; gap: 0; min-height: 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .mapwrap { flex: 1; position: relative; background: var(--sea); min-width: 0; }
+  .mapwrap svg { width: 100%; height: 100%; display: block; }
+  .disclaimer {
+    position: absolute; top: .9rem; left: 1rem;
+    font-size: .68rem; font-weight: 500; color: var(--muted);
+    background: rgba(252,251,248,.9); border: 1px solid var(--hairline);
+    border-radius: 99px; padding: .3rem .8rem;
+  }
+  .disclaimer b { color: var(--gold); }
+  .maplegend {
+    position: absolute; bottom: .9rem; left: 1rem;
+    font-size: .7rem; color: var(--muted);
+    background: rgba(252,251,248,.9); border: 1px solid var(--hairline);
+    border-radius: 10px; padding: .55rem .85rem;
+    display: grid; gap: .3rem;
+  }
+  .maplegend .row { display: flex; align-items: center; gap: .55rem; }
+  .maplegend .swatch { width: 26px; flex-shrink: 0; }
+
+  /* SVG element styles */
+  .land { fill: var(--surface); stroke: var(--coast); stroke-width: 1.5; }
+  .rift { fill: none; stroke: var(--coast); stroke-width: 2; stroke-linecap: round; }
+  .inset-box { fill: rgba(252,251,248,.55); stroke: var(--gold-soft); stroke-width: 1; stroke-dasharray: 5 4; }
+  .inset-label { font-family: 'Inter'; font-size: 10px; font-weight: 600; letter-spacing: .18em; fill: var(--gold); }
+  .inset-sub { font-family: 'Inter'; font-size: 8.5px; fill: var(--muted); font-style: italic; }
+  .geo-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; fill: #b5ad9b; letter-spacing: .12em; }
+
+  .leg { stroke: var(--gold-soft); stroke-width: 1.6; stroke-dasharray: 1 6; stroke-linecap: round; opacity: .55; transition: all .4s; }
+  .leg.planar { stroke-dasharray: 1 8; opacity: .4; }
+  .leg.traveled { stroke: var(--gold); stroke-dasharray: none; stroke-width: 2; opacity: .9; }
+  .leg.traveled.planar { stroke-dasharray: 4 4; }
+
+  .loc-dot { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; cursor: pointer; transition: all .2s; }
+  .loc-dot:hover { stroke: var(--gold); stroke-width: 2.5; }
+  .loc-dot.visited { fill: var(--gold-soft); stroke: var(--gold); }
+  .loc-dot.current-loc { fill: var(--gold); stroke: var(--gold); }
+  .loc-label { font-family: 'Inter'; font-size: 10.5px; font-weight: 500; fill: var(--text); pointer-events: none; }
+  .loc-label.dim { fill: var(--muted); font-weight: 400; }
+
+  #party { transition: transform .7s cubic-bezier(.5,0,.3,1); }
+  #party .diamond { fill: var(--gold); stroke: #fff; stroke-width: 1.5; }
+  #party .pulse { fill: none; stroke: var(--gold); stroke-width: 1.5; opacity: .7; animation: pulse 2s ease-out infinite; }
+  @keyframes pulse { 0% { r: 7; opacity: .7; } 100% { r: 20; opacity: 0; } }
+
+  /* ===== Story card ===== */
+  .card {
+    width: 340px; flex-shrink: 0;
+    border-left: 1px solid var(--hairline);
+    background: var(--bg);
+    padding: 1.5rem 1.6rem;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+  }
+  .card .kicker { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+  .card h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.75rem; line-height: 1.12; margin-bottom: .7rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+  .chip { font-size: .7rem; font-weight: 600; border: 1px solid var(--hairline); border-radius: 99px; padding: .2rem .65rem; color: var(--muted); background: var(--surface); }
+  .chip.plane { border-color: var(--gold-soft); color: var(--link); }
+  .card .blurb { font-size: .92rem; line-height: 1.65; color: #46423a; margin-bottom: 1.1rem; }
+  .card h5 { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
+  .beats { list-style: none; margin-bottom: 1.2rem; }
+  .beats li { font-size: .85rem; line-height: 1.5; color: #46423a; padding-left: 1.05rem; position: relative; margin-bottom: .45rem; }
+  .beats li::before { content: ""; position: absolute; left: 0; top: .48em; width: 5px; height: 5px; background: var(--gold-soft); transform: rotate(45deg); }
+  .card .links { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--hairline); display: flex; gap: .6rem; flex-wrap: wrap; }
+  .card .links a { font-size: .78rem; font-weight: 500; border: 1px solid var(--hairline); border-radius: 8px; padding: .35rem .75rem; }
+  .card .links a:hover { border-color: var(--gold-soft); }
+  .stop-dots { display: flex; gap: .28rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .stop-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--hairline); cursor: pointer; transition: background .2s; }
+  .stop-dots span.done { background: var(--gold-soft); }
+  .stop-dots span.now { background: var(--gold); outline: 2px solid var(--gold-soft); outline-offset: 1.5px; }
+
+  /* ===== Timeline scrubber ===== */
+  .timeline {
+    flex-shrink: 0;
+    border-top: 1px solid var(--hairline);
+    background: var(--bg);
+    padding: 1rem 2rem 1.1rem;
+    user-select: none;
+  }
+  .tl-top { display: flex; justify-content: space-between; font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .55rem; }
+  .track { position: relative; height: 46px; cursor: pointer; touch-action: none; }
+  .arcs { position: absolute; left: 0; right: 0; top: 18px; height: 10px; display: flex; border-radius: 99px; overflow: hidden; }
+  .arcband { height: 100%; opacity: .35; transition: opacity .2s; }
+  .arcband:hover, .arcband.on { opacity: .8; }
+  .tick {
+    position: absolute; top: 16px; width: 9px; height: 9px;
+    background: var(--bg); border: 1.5px solid var(--muted);
+    transform: translateX(-50%) rotate(45deg); margin-top: 1.5px;
+    cursor: pointer; z-index: 2; transition: all .15s;
+  }
+  .tick:hover { border-color: var(--gold); background: var(--gold-soft); }
+  .tick.done { background: var(--gold-soft); border-color: var(--gold); }
+  .playhead {
+    position: absolute; top: 6px; z-index: 3; transform: translateX(-50%);
+    pointer-events: none; text-align: center; transition: left .15s linear;
+  }
+  .playhead .head { width: 15px; height: 15px; background: var(--gold); border: 2px solid #fff; box-shadow: 0 1px 5px rgba(35,33,28,.35); transform: rotate(45deg); margin: 0 auto; }
+  .playhead .stem { width: 1.5px; height: 14px; background: var(--gold); margin: -2px auto 0; }
+  .arc-labels { position: relative; height: 15px; margin-top: .35rem; font-size: .62rem; color: var(--muted); }
+  .arc-labels span { position: absolute; transform: translateX(-50%); white-space: nowrap; letter-spacing: .05em; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark"><div class="mark"><span>A</span></div>Alambor Codex</div>
+  <nav class="topnav">
+    <a href="#">Story so far</a>
+    <a href="#">Characters</a>
+    <a href="#">Locations</a>
+    <a href="#">Factions</a>
+    <a href="#">Episodes</a>
+    <a href="#" class="active">The Journey</a>
+  </nav>
+  <div class="search">Search the codex… <kbd>⌘K</kbd></div>
+</div>
+
+<div class="pagehead">
+  <h1>The Journey of the Alambor Six</h1>
+  <span class="sub">E00 – E161 · drag the timeline, or click any stop on the map</span>
+  <div class="controls">
+    <div class="readout" id="readout"></div>
+    <button class="btn" id="prev">← Prev</button>
+    <button class="btn" id="next">Next →</button>
+    <button class="btn play" id="play">▶ Play journey</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="mapwrap">
+    <svg viewBox="0 0 1000 600" id="map" preserveAspectRatio="xMidYMid meet">
+      <!-- ===== landmasses (speculative) ===== -->
+      <path class="land" d="M 235 85 C 320 60, 400 78, 432 128 C 472 108, 540 128, 572 178
+        C 642 198, 672 258, 652 318 C 682 358, 662 420, 622 452 C 642 500, 600 542, 540 532
+        C 480 562, 380 556, 330 522 C 250 542, 182 502, 172 442 C 112 412, 102 332, 132 292
+        C 92 232, 132 152, 192 132 C 197 102, 212 88, 235 85 Z" />
+      <path class="land" d="M 832 468 C 882 438, 952 458, 972 508 C 982 558, 932 592, 872 582 C 822 576, 802 518, 832 468 Z" />
+      <path class="land" d="M 745 348 C 765 338, 782 350, 778 368 C 774 384, 752 388, 742 376 C 734 366, 736 354, 745 348 Z" />
+      <path class="land" d="M 806 286 C 826 276, 844 288, 842 306 C 840 322, 818 328, 806 316 C 796 306, 797 292, 806 286 Z" />
+      <path class="land" d="M 700 200 C 712 194, 724 202, 721 213 C 718 223, 704 225, 698 217 C 693 210, 694 203, 700 200 Z" />
+
+      <!-- the Great Rift canyon -->
+      <path class="rift" d="M 522 332 C 540 360, 552 392, 572 414 C 582 426, 592 436, 602 444" />
+      <path class="rift" d="M 530 328 C 548 356, 560 388, 580 410 C 590 422, 600 432, 610 440" />
+
+      <!-- geography labels -->
+      <text class="geo-label" x="370" y="225">C A R A S I A</text>
+      <text class="geo-label" x="745" y="255">THE VEILED OCEAN</text>
+      <text class="geo-label" x="855" y="565">JAZACHA</text>
+      <text class="geo-label" x="468" y="372" font-size="11">the Great Rift</text>
+
+      <!-- ===== planar insets ===== -->
+      <g>
+        <rect class="inset-box" x="718" y="62" width="234" height="112" rx="10"/>
+        <text class="inset-label" x="736" y="86">AVERNUS</text>
+        <text class="inset-sub" x="736" y="100">first layer of the Nine Hells — not of this world</text>
+      </g>
+      <g>
+        <rect class="inset-box" x="62" y="58" width="200" height="104" rx="10"/>
+        <text class="inset-label" x="80" y="82">THE SHADOWFELL</text>
+        <text class="inset-sub" x="80" y="96">the sunless echo — via the Pool of Death</text>
+      </g>
+
+      <!-- route legs, location markers, party marker injected by JS -->
+      <g id="legs"></g>
+      <g id="locs"></g>
+      <g id="party">
+        <circle class="pulse" cx="0" cy="0" r="7"/>
+        <rect class="diamond" x="-6" y="-6" width="12" height="12" transform="rotate(45)"/>
+      </g>
+    </svg>
+
+    <div class="disclaimer"><b>Speculative geography</b> — placeholder until Jon's maps land (Phase 3 gate)</div>
+    <div class="maplegend">
+      <div class="row"><svg class="swatch" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="#a8842c" stroke-width="2"/></svg> travelled route</div>
+      <div class="row"><svg class="swatch" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="#c9b06a" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round"/></svg> the road ahead</div>
+      <div class="row"><svg class="swatch" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="#a8842c" stroke-width="2" stroke-dasharray="4 4"/></svg> planar crossing</div>
+    </div>
+  </div>
+
+  <aside class="card">
+    <div class="kicker" id="c-kicker"></div>
+    <h2 id="c-title"></h2>
+    <div class="chips" id="c-chips"></div>
+    <p class="blurb" id="c-blurb"></p>
+    <h5>Key beats</h5>
+    <ul class="beats" id="c-beats"></ul>
+    <h5>All stops</h5>
+    <div class="stop-dots" id="c-dots"></div>
+    <div class="links" id="c-links"></div>
+  </aside>
+</div>
+
+<div class="timeline">
+  <div class="tl-top"><span>E00</span><span>The Campaign · 9 arcs · 163 sessions</span><span>E161</span></div>
+  <div class="track" id="track">
+    <div class="arcs" id="arcbands"></div>
+    <div class="playhead" id="playhead"><div class="head"></div><div class="stem"></div></div>
+  </div>
+  <div class="arc-labels" id="arclabels"></div>
+</div>
+
+<script>
+const MAX_EP = 161;
+
+const ARCS = [
+  { n: '01', title: 'Arrival',          start: 0,   end: 8,   color: '#a8842c' },
+  { n: '02', title: 'Beaubois',         start: 9,   end: 24,  color: '#7d8a5c' },
+  { n: '03', title: 'Red Wedding',      start: 25,  end: 51,  color: '#a05a4a' },
+  { n: '04', title: 'Goldcrest',        start: 52,  end: 66,  color: '#5b7d8a' },
+  { n: '05', title: 'Evershire',        start: 67,  end: 90,  color: '#6b5d8a' },
+  { n: '06', title: 'Avernus',          start: 91,  end: 102, color: '#9a4f33' },
+  { n: '07', title: 'Vault of Izdar',   start: 103, end: 113, color: '#857437' },
+  { n: '08', title: 'Shadowfell',       start: 114, end: 136, color: '#4f5560' },
+  { n: '09', title: 'The Sixth Relic',  start: 137, end: 161, color: '#8a6a3b' },
+];
+
+// One entry per stop on the journey. ep = [first, last] episode of the stay.
+const STOPS = [
+  { ep:[0,2],     arc:0, title:'Shipwrecked',                loc:'The Carasian Coast', x:310, y:420, plane:'world',
+    blurb:'A boat from Kirkenwall to Sultray never arrives. The party washes up on the Carasian coast carrying a dying man’s letter for the Last Drop tavern.',
+    beats:['Chias of the Volstruckers entrusts a delivery and recognition phrases','Weatherface dies; his letter starts everything','Zanim loses a foot to hobgoblins'] },
+  { ep:[3,8],     arc:0, title:'Carstone & the Alambor Five', loc:'Carstone', x:352, y:380, plane:'world',
+    blurb:'Bandit jobs and viscount errands in Carstone, where Quinton’s song gives the party its name — and the first of them falls.',
+    beats:['The royal wedding is announced','Zook dies; Evac the Vedalken joins as his replacement','At the Last Drop, Max Taldross reveals the plot against Princess Anabel'] },
+  { ep:[9,24],    arc:1, title:'The Beaubois Conspiracy',     loc:'Sultray', x:420, y:330, plane:'world',
+    blurb:'Posing as the entertainers “The Magnificent Four,” the party infiltrates the Beaubois chalet and uncovers an Orcus-flavored zombie plague brewing under Sultray.',
+    beats:['Cruucar found imprisoned in Blackfinger’s tower — his first appearance','Spawn of Kyuss attack the theater; Pierre escapes with his plague “nearly ready”','The Shadowed Moon symbol surfaces; the party is granted the chalet’s 170 acres'] },
+  { ep:[25,32],   arc:2, title:'The King in the North',       loc:'Kirkenwall', x:300, y:130, plane:'world',
+    blurb:'A royal audience with King Felix — and the beginning of High Chancellor Adune’s patronage, which will cost them everything.',
+    beats:['Lorenzo the texair merchant is revealed as an Oni','Frame-job letters point to “Viper Viola”','Kirkenwall moves to a war footing'] },
+  { ep:[33,51],   arc:2, title:'The Red Wedding',             loc:'Vallon', x:140, y:270, plane:'world',
+    blurb:'Zinoff’s summit of the Trene becomes the campaign’s first catastrophe: Prince Thomas is assassinated at the royal wedding despite everything.',
+    beats:['“Eloise” is a succubus impostor; the real one died months ago','Zanim dies at the clock tower and is brought back','Queen Beatrice soft-banishes the party and declares war on Luzonovia on forged evidence'] },
+  { ep:[52,61],   arc:3, title:'Fugitives at Sea',            loc:'Goldcrest', x:290, y:480, plane:'world',
+    blurb:'Exiled, the party buys a ship and falls into a vault heist: Marquise Avesy’s ledger, stolen for 22,000 gold — and their faces on wanted posters.',
+    beats:['Gem traps, living statues, and a near-invulnerable golem','Payout collected under the alias “James Beach”','The ship is repainted and re-papered as Wrecked at the Reef'] },
+  { ep:[62,66],   arc:3, title:'Callum Heights',              loc:'Callum Heights', x:430, y:450, plane:'world',
+    blurb:'Odo’s lost-message job leads through harpies and a Chimera into the cave of the behir Dragoloth — which swallows Noctis whole.',
+    beats:['Seven harpies and the Chimera slain; Quinton nearly dies','The message canister is cut out of the monster’s stomach','18,000 northern troops mass outside town; Berrian arrives'] },
+  { ep:[67,90],   arc:4, title:'Evershire & the Black Dread', loc:'Evershire', x:500, y:250, plane:'world',
+    blurb:'The liberation of Evershire: a rebellion against “Lord Blackwood,” who is in truth the black dragon Valadon. The longest, costliest arc of the middle campaign.',
+    beats:['Evac dies at the bridge ambush; Zanim falls and departs','Viola — the Shadowed Mother — killed by Benjamin’s nat-20 javelin','Leon, thrown by the Bear, lances Valadon to death; the party are named Saviors of Evershire'] },
+  { ep:[91,99],   arc:5, title:'Into Avernus',                loc:'Avernus', x:835, y:130, plane:'avernus',
+    blurb:'Adune sends the party into the first layer of the Nine Hells to steal a crystal power source — the Potentium, the “Titan Killer” — from General Bell’s forge.',
+    beats:['The Gatekeeper’s toll: a soul for a soul','Bell rises from the blood pool and beheads Colossus','Vane dies and is revived; the crystal comes home; level 11'] },
+  { ep:[100,102], arc:5, title:'The Purple Party',            loc:'Kirkenwall', x:300, y:130, plane:'world',
+    blurb:'King Felix honors the party with titles and 12,000 platinum. Quinton returns — his family murdered by Aum Shai — and Valinor’s summons points south.',
+    beats:['Kavney’s ominous aside at the celebration','The Windvane identified at Arcane Infinity','The Jameti Costco lead surfaces'] },
+  { ep:[103,113], arc:6, title:'The Vault of Izdar',          loc:'The Great Rift', x:566, y:388, plane:'world',
+    blurb:'At the bottom of the Great Rift waits a dungeon of the betrayer gods — and Zeeven relics whose purpose no one yet understands.',
+    beats:['Ten eyes collected, opening the lair of Beltraz the Unseen — Berrian punches through the beholder','Benjamin dies in the fight','The haul includes the adamantium scepter and a pre-Sundering map'] },
+  { ep:[114,117], arc:7, title:'Tarleaf',                     loc:'Tarleaf', x:590, y:480, plane:'world',
+    blurb:'In the Tarleaf market the party meets Torgoth — and Jameti finally comes clean: the relics they carry are keys to planar gates.',
+    beats:['The Aum Shai conspiracy overheard: Nardif Darksi, the Arch Dragon','The Moonbright gateway to the Shadowfell revealed','Berrian’s sister Marora appears at the stream'] },
+  { ep:[118,131], arc:7, title:'The Sunless Echo',            loc:'The Shadowfell', x:162, y:112, plane:'shadowfell',
+    blurb:'Through the Pool of Death into the Shadowfell: the sleeping madness, the gangs of Gloomville, the Tower of Illmore — and two deaths in the dark.',
+    beats:['The madness fractures the party; Remove Curse is the cure','Vane dies and is revived by Torgoth','Berrian dies at the shimmering planar wall; sixty days are lost'] },
+  { ep:[132,134], arc:7, title:'The Shadowmoon Tower',        loc:'Tarleaf', x:590, y:480, plane:'world',
+    blurb:'Back in Tarleaf, the reunion — Ford, Leon, Max, Jameti — and the tower’s trial chambers, which name the wrong villain.',
+    beats:['Cruucar gives up his brothers’ axes to pass the trials','Nardif Darksi is the Nightmare King and Arch Dragon','Sir Trent Hightower is named the Shadowed Moon — falsely'] },
+  { ep:[135,136], arc:7, title:'The Great Betrayal',          loc:'Kirkenwall', x:300, y:130, plane:'world',
+    blurb:'The war-council infiltration is a trap. King Felix dies, the party is framed — and Adune unmasks as the Shadowed Moon: Morgenrath Gafar, a 1,200-year-old Zeeven lich.',
+    beats:['The Taldross family is burned','Max, Leon, and Shaahim die','Adune absorbs the Avernus power source; a two-month skip follows'] },
+  { ep:[137,143], arc:8, title:'The War-Torn Map',            loc:'Mag Stormeach', x:632, y:292, plane:'world',
+    blurb:'Two months later, Adune’s Gidia is conquering the map. An airship east, the Archivists’ confirmation, and a raid on Rasheed Soltar’s compound in the cliff city.',
+    beats:['Adune holds five of the six gate keys','Rasheed killed; Kieran located','Mally Grisham’s sparrow calling card identified'] },
+  { ep:[144,148], arc:8, title:'Escape from Mandalonia',      loc:'The Veiled Ocean', x:706, y:372, plane:'world',
+    blurb:'Kieran and thirty slaves are pulled out through the sewers and a harbor battle — then Zax’s Black Widow runs the stolen ship onto a reef.',
+    beats:['The sewer escape behind Mr. Goldstein the rat','The ship saved with Control Water (8 texair)','Kieran is recaptured'] },
+  { ep:[149,153], arc:8, title:'Anchors Rest',                loc:'Anchors Rest', x:822, y:300, plane:'world',
+    blurb:'Into the pirate haven, where Mally Grisham names his price for the artifact trail: capture the Kraken plaguing the Pirate Trinity.',
+    beats:['Port Airsteach and the giant clans','An enemy gunship taken by guile','Mally’s tale of the Temple of Fenreal artifact'] },
+  { ep:[154,155], arc:8, title:'The Kraken’s Lair',      loc:'Krakens Reef', x:790, y:440, plane:'world',
+    blurb:'A 60,000-foot descent to the lair. Noctis is swallowed mid-collaring and climbs out; the Kraken is delivered in chains.',
+    beats:['The collar, chain, and scepter explained','Mally takes leadership of Anchors Rest','The artifact is traced to the Yuan-Ti of Oojezz'] },
+  { ep:[156,161], arc:8, title:'Jazacha & Oojezz',            loc:'Jazacha', x:880, y:510, plane:'world',
+    blurb:'The four-ship armada goes up-river into the jungle. The party now stands inside the sacrifice pyramid of the three-ringed temple city — the sixth relic within reach.',
+    beats:['The rock titan Zuk’taal nearly wipes the party; Mally burns his stored Wish','Five of Mally’s men die in the jungle','Current session: disguised descent through the pyramid — Hydra and Yuan-Ti wizards'] },
+];
+
+// ---------- build map ----------
+const SVG = 'http://www.w3.org/2000/svg';
+const legsG = document.getElementById('legs');
+const locsG = document.getElementById('locs');
+const party = document.getElementById('party');
+
+const legs = [];
+for (let i = 1; i < STOPS.length; i++) {
+  const a = STOPS[i-1], b = STOPS[i];
+  const l = document.createElementNS(SVG, 'line');
+  l.setAttribute('x1', a.x); l.setAttribute('y1', a.y);
+  l.setAttribute('x2', b.x); l.setAttribute('y2', b.y);
+  l.setAttribute('class', 'leg' + ((a.plane !== 'world' || b.plane !== 'world') ? ' planar' : ''));
+  legsG.appendChild(l); legs.push(l);
+}
+
+// unique locations (several stops revisit the same place)
+const locIndex = new Map();
+STOPS.forEach((s, i) => {
+  if (!locIndex.has(s.loc)) locIndex.set(s.loc, { ...s, stops: [] });
+  locIndex.get(s.loc).stops.push(i);
+});
+const locDots = new Map();
+locIndex.forEach(loc => {
+  const g = document.createElementNS(SVG, 'g');
+  const c = document.createElementNS(SVG, 'circle');
+  c.setAttribute('cx', loc.x); c.setAttribute('cy', loc.y); c.setAttribute('r', 5);
+  c.setAttribute('class', 'loc-dot');
+  const t = document.createElementNS(SVG, 'text');
+  t.setAttribute('x', loc.x + 10); t.setAttribute('y', loc.y + 4);
+  t.setAttribute('class', 'loc-label dim');
+  t.textContent = loc.loc;
+  g.appendChild(c); g.appendChild(t);
+  g.addEventListener('click', () => {
+    const next = loc.stops.find(i => i > current) ?? loc.stops[0];
+    goToStop(next);
+  });
+  locsG.appendChild(g);
+  locDots.set(loc.loc, { c, t });
+});
+
+// ---------- build timeline ----------
+const track = document.getElementById('track');
+const bands = document.getElementById('arcbands');
+const labels = document.getElementById('arclabels');
+const playhead = document.getElementById('playhead');
+
+ARCS.forEach((a, i) => {
+  const w = (a.end - a.start + 1) / (MAX_EP + 1) * 100;
+  const div = document.createElement('div');
+  div.className = 'arcband'; div.style.width = w + '%'; div.style.background = a.color;
+  div.title = `Arc ${a.n} — ${a.title} (E${a.start}–E${a.end})`;
+  div.addEventListener('click', e => { e.stopPropagation(); setEp(a.start); });
+  bands.appendChild(div);
+  const lab = document.createElement('span');
+  lab.style.left = ((a.start + a.end) / 2 / MAX_EP * 100) + '%';
+  lab.textContent = a.title;
+  labels.appendChild(lab);
+});
+
+const ticks = STOPS.map((s, i) => {
+  const t = document.createElement('div');
+  t.className = 'tick';
+  t.style.left = (s.ep[0] / MAX_EP * 100) + '%';
+  t.title = `${s.title} (E${s.ep[0]})`;
+  t.addEventListener('click', e => { e.stopPropagation(); goToStop(i); });
+  track.appendChild(t);
+  return t;
+});
+
+// ---------- state ----------
+let ep = MAX_EP, current = STOPS.length - 1, playing = null;
+
+function stopForEp(e) {
+  let idx = 0;
+  STOPS.forEach((s, i) => { if (s.ep[0] <= e) idx = i; });
+  return idx;
+}
+
+function setEp(e, snap = true) {
+  ep = Math.max(0, Math.min(MAX_EP, Math.round(e)));
+  current = stopForEp(ep);
+  if (snap) ep = Math.max(ep, STOPS[current].ep[0]);
+  render();
+}
+function goToStop(i) {
+  current = Math.max(0, Math.min(STOPS.length - 1, i));
+  ep = STOPS[current].ep[0];
+  render();
+}
+
+function render() {
+  const s = STOPS[current];
+  const arc = ARCS[s.arc];
+
+  // party marker
+  party.style.transform = `translate(${s.x}px, ${s.y}px)`;
+
+  // legs + location dots
+  legs.forEach((l, i) => l.classList.toggle('traveled', i < current));
+  locIndex.forEach((loc, name) => {
+    const visited = loc.stops.some(i => i <= current);
+    const isHere = loc.stops.includes(current);
+    const d = locDots.get(name);
+    d.c.classList.toggle('visited', visited && !isHere);
+    d.c.classList.toggle('current-loc', isHere);
+    d.t.classList.toggle('dim', !isHere);
+  });
+
+  // timeline
+  playhead.style.left = (ep / MAX_EP * 100) + '%';
+  ticks.forEach((t, i) => t.classList.toggle('done', i <= current));
+  [...bands.children].forEach((b, i) => b.classList.toggle('on', i === s.arc));
+
+  // readout
+  document.getElementById('readout').innerHTML =
+    `<b>E${ep}</b> &nbsp;·&nbsp; Arc ${arc.n} — ${arc.title} &nbsp;·&nbsp; stop ${current + 1} of ${STOPS.length}`;
+
+  // card
+  document.getElementById('c-kicker').textContent = `Stop ${current + 1} of ${STOPS.length} · Arc ${arc.n} — ${arc.title}`;
+  document.getElementById('c-title').textContent = s.title;
+  const chips = [`E${s.ep[0]}–E${s.ep[1]}`, s.loc];
+  document.getElementById('c-chips').innerHTML =
+    chips.map(c => `<span class="chip">${c}</span>`).join('') +
+    (s.plane !== 'world' ? `<span class="chip plane">◆ another plane</span>` : '');
+  document.getElementById('c-blurb').textContent = s.blurb;
+  document.getElementById('c-beats').innerHTML = s.beats.map(b => `<li>${b}</li>`).join('');
+  document.getElementById('c-dots').innerHTML = STOPS.map((_, i) =>
+    `<span class="${i < current ? 'done' : i === current ? 'now' : ''}" data-i="${i}" title="${STOPS[i].title}"></span>`).join('');
+  document.querySelectorAll('#c-dots span').forEach(d =>
+    d.addEventListener('click', () => goToStop(+d.dataset.i)));
+  document.getElementById('c-links').innerHTML =
+    `<a href="#">Read Arc ${arc.n} →</a><a href="#">Episode E${s.ep[0]} →</a><a href="#">${s.loc} →</a>`;
+}
+
+// ---------- interactions ----------
+function trackEp(evt) {
+  const r = track.getBoundingClientRect();
+  return ((evt.clientX - r.left) / r.width) * MAX_EP;
+}
+let dragging = false;
+track.addEventListener('pointerdown', e => { dragging = true; track.setPointerCapture(e.pointerId); setEp(trackEp(e), false); });
+track.addEventListener('pointermove', e => { if (dragging) setEp(trackEp(e), false); });
+track.addEventListener('pointerup', () => { dragging = false; });
+
+document.getElementById('prev').addEventListener('click', () => goToStop(current - 1));
+document.getElementById('next').addEventListener('click', () => goToStop(current + 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') goToStop(current - 1);
+  if (e.key === 'ArrowRight') goToStop(current + 1);
+});
+
+const playBtn = document.getElementById('play');
+playBtn.addEventListener('click', () => {
+  if (playing) { clearInterval(playing); playing = null; playBtn.textContent = '▶ Play journey'; return; }
+  if (current >= STOPS.length - 1) goToStop(0);
+  playBtn.textContent = '⏸ Pause';
+  playing = setInterval(() => {
+    if (current >= STOPS.length - 1) { clearInterval(playing); playing = null; playBtn.textContent = '▶ Play journey'; return; }
+    goToStop(current + 1);
+  }, 2400);
+});
+
+// start at the current day
+goToStop(STOPS.length - 1);
+</script>
+
+</body>
+</html>

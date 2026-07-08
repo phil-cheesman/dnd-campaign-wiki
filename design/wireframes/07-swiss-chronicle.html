@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mally "Molly" Grisham — Alambor Chronicle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #111111;
+    --muted: #6b6b6b;
+    --rule: #111111;
+    --hairline: #dcdcdc;
+    --red: #d62411;
+    --paper: #f5f4f1;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Archivo', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  a { color: var(--text); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
+  a:hover { color: var(--red); }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 3px solid var(--rule);
+    display: flex; align-items: stretch;
+    padding: 0 2rem;
+  }
+  .wordmark {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    padding: .9rem 0;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .wordmark .sq { width: 14px; height: 14px; background: var(--red); }
+  .topnav {
+    display: flex; margin-left: 3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .08em;
+  }
+  .topnav a {
+    display: flex; align-items: center;
+    padding: 0 1.1rem;
+    text-decoration: none;
+    color: var(--muted);
+    border-left: 1px solid var(--hairline);
+  }
+  .topnav a:last-child { border-right: 1px solid var(--hairline); }
+  .topnav a.active { color: var(--text); background: var(--paper); box-shadow: inset 0 -3px 0 var(--red); }
+  .search {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 1.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem; color: var(--muted);
+    border-left: 1px solid var(--hairline);
+    padding-left: 1.4rem;
+  }
+  .search kbd { font-family: inherit; font-size: .66rem; border: 1px solid var(--hairline); padding: .05rem .35rem; }
+
+  /* ===== Layout ===== */
+  .shell {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr) 210px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .sidenav, .toc-col { border-right: 1px solid var(--hairline); }
+  .toc-col { border-right: none; border-left: 1px solid var(--hairline); }
+
+  .sidenav { font-size: .85rem; padding: 2.2rem 1.6rem 6rem 2rem; }
+  .sidenav h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--red);
+    margin: 1.6rem 0 .5rem;
+    padding-top: .6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .sidenav h5:first-child { margin-top: 0; }
+  .sidenav a { display: block; color: var(--muted); padding: .2rem 0; text-decoration: none; }
+  .sidenav a:hover { color: var(--text); }
+  .sidenav a.current { color: var(--text); font-weight: 700; }
+  .sidenav a.current::before { content: "→ "; color: var(--red); }
+
+  /* ===== Article ===== */
+  article { padding: 2.2rem 3rem 6rem; }
+  .crumb {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin-bottom: 2rem;
+  }
+  .crumb .sep { margin: 0 .45rem; color: var(--red); }
+
+  .title-block { border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 0; }
+  .badges { display: flex; gap: .5rem; margin-bottom: 1.1rem; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .64rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+    padding: .28rem .6rem;
+    border: 1px solid var(--rule);
+  }
+  .badge.alive { border-color: var(--red); color: var(--red); }
+  h1 {
+    font-weight: 800;
+    font-size: 3.6rem;
+    line-height: .98;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    max-width: 14ch;
+  }
+  .epithet {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: .9rem;
+    letter-spacing: .04em;
+  }
+  .lede {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 1.3rem;
+    max-width: 58ch;
+  }
+  .lede::first-letter { color: var(--red); }
+
+  /* Facts: a flush data table */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+  .fact { padding: 1rem 1rem 1rem 0; border-right: 1px solid var(--hairline); }
+  .fact:last-child { border-right: none; }
+  .fact + .fact { padding-left: 1rem; }
+  .fact .k { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+  .fact .v { font-size: .95rem; font-weight: 600; margin-top: .2rem; }
+
+  article h2 {
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: -.015em;
+    margin: 3rem 0 .9rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 5rem;
+    display: flex; align-items: baseline; gap: .9rem;
+  }
+  article h2 .no {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem; font-weight: 600; color: var(--red);
+    letter-spacing: .06em;
+  }
+  article p { margin-bottom: 1rem; max-width: 66ch; }
+  article ul { margin: 0 0 1rem 0; max-width: 64ch; list-style: none; }
+  article li { margin-bottom: .45rem; padding-left: 1.3rem; position: relative; }
+  article li::before { content: "—"; position: absolute; left: 0; color: var(--red); }
+
+  .portrait-row { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; margin: 0 0 1rem; align-items: start; }
+  .portrait {
+    aspect-ratio: 3/4;
+    border: 1px solid var(--rule);
+    background:
+      linear-gradient(to top right, transparent calc(50% - .5px), var(--hairline) 50%, transparent calc(50% + .5px)),
+      linear-gradient(to bottom right, transparent calc(50% - .5px), var(--hairline) 50%, transparent calc(50% + .5px)),
+      var(--paper);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em;
+    text-align: center; gap: .3rem;
+  }
+
+  .callout {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 1rem 1.3rem;
+    margin: 1.5rem 0;
+    max-width: 64ch;
+    font-size: .92rem;
+    position: relative;
+  }
+  .callout::before { content: ""; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; background: var(--red); }
+  .callout .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--red); display: block; margin-bottom: .3rem; padding-left: 1.2rem;
+  }
+
+  .ep-strip { display: flex; flex-wrap: wrap; margin: .6rem 0 1rem; border: 1px solid var(--hairline); border-right: none; max-width: 640px; }
+  .ep-strip a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem; font-weight: 500;
+    border-right: 1px solid var(--hairline);
+    padding: .3rem .6rem;
+    color: var(--muted);
+    text-decoration: none;
+    flex: 1 0 auto; text-align: center;
+  }
+  .ep-strip a:hover { background: var(--text); color: var(--bg); }
+
+  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 1rem; max-width: 720px; border: 1px solid var(--rule); }
+  .rel-card {
+    border-right: 1px solid var(--hairline);
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+  }
+  .rel-card:last-child { border-right: none; }
+  .rel-card:hover { background: var(--paper); }
+  .rel-card .t { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+  .rel-card .n { font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; color: var(--text); margin-top: .15rem; }
+  .rel-card .d { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
+
+  /* ===== Right TOC ===== */
+  .toc-col { padding: 2.2rem 2rem 0 1.6rem; }
+  .toc { position: sticky; top: 5.5rem; font-size: .8rem; }
+  .toc h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--text); margin-bottom: .7rem;
+    border-top: 1px solid var(--rule); padding-top: .6rem;
+  }
+  .toc a { display: flex; gap: .6rem; color: var(--muted); padding: .2rem 0; text-decoration: none; }
+  .toc a .no { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; color: var(--hairline); padding-top: .15rem; }
+  .toc a:hover { color: var(--text); }
+  .toc a.on { color: var(--text); font-weight: 600; }
+  .toc a.on .no { color: var(--red); }
+
+  footer {
+    border-top: 3px solid var(--rule);
+    padding: 1.3rem 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: .03em;
+  }
+
+  @media (max-width: 1080px) { .shell { grid-template-columns: 1fr; } .sidenav, .toc-col { display: none; } article { padding: 2rem 1.5rem 5rem; } }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wordmark"><div class="sq"></div>Alambor Chronicle</div>
+  <nav class="topnav">
+    <a href="#">Story so far</a>
+    <a href="#" class="active">Characters</a>
+    <a href="#">Locations</a>
+    <a href="#">Factions</a>
+    <a href="#">Episodes</a>
+    <a href="#">Timeline</a>
+  </nav>
+  <div class="search">Search the chronicle <kbd>⌘K</kbd></div>
+</div>
+
+<div class="shell">
+
+  <nav class="sidenav">
+    <h5>The Party</h5>
+    <a href="#">Berrian</a>
+    <a href="#">Cruucar</a>
+    <a href="#">Noctis</a>
+    <a href="#">Quinton Shackleford</a>
+    <a href="#">Torgoth</a>
+    <a href="#">Vane</a>
+    <h5>NPCs</h5>
+    <a href="#">Jameti Costco</a>
+    <a href="#" class="current">Mally Grisham</a>
+    <a href="#">Sir Trent Hightower</a>
+    <a href="#">Zax</a>
+    <h5>Fallen</h5>
+    <a href="#">Evac</a>
+    <a href="#">Zanim</a>
+    <a href="#">Zook</a>
+  </nav>
+
+  <article>
+    <div class="crumb">Chronicle <span class="sep">/</span> Characters <span class="sep">/</span> NPCs <span class="sep">/</span> Mally Grisham</div>
+
+    <div class="title-block">
+      <div class="badges"><span class="badge">NPC · Pirate Captain</span><span class="badge alive">Living · Ally</span></div>
+      <h1>Mally “Molly” Grisham</h1>
+      <div class="epithet">THE SPARROW — CAPTAIN OF FORTUNE’S FAVOR</div>
+      <p class="lede">Short, very fast, big poofy hat. Reads as inherently good but complicated under Divine Sense — and has already traded away the one artifact everyone is chasing.</p>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><div class="k">Vessel</div><div class="v">Fortune’s Favor</div></div>
+      <div class="fact"><div class="k">Sigil</div><div class="v">The Sparrow</div></div>
+      <div class="fact"><div class="k">First seen</div><div class="v">E20 (as “O’Malley”)</div></div>
+      <div class="fact"><div class="k">Last seen</div><div class="v">E161 · Jazacha</div></div>
+    </div>
+
+    <div class="portrait-row">
+      <div class="portrait">AI portrait<br>(Phase 2)</div>
+      <div>
+        <h2 id="overview" style="margin-top:0; border-top:none; padding-top:0"><span class="no">01</span>Overview</h2>
+        <p>Pirate captain of <a href="#">Fortune’s Favor</a> — sparrow flag, high cheekbones, piercing blue eyes, and a scar. Confirmed to be the same person as “Shauwn O’Malley,” who delivered the royal wedding letter in <a href="#">E20</a>. Now leads the pirates of <a href="#">Anchors Rest</a> after delivering a captured Kraken to Krakens Reef.</p>
+      </div>
+    </div>
+
+    <h2 id="artifact"><span class="no">02</span>The stolen Zeben artifact</h2>
+    <p>His sparrow calling card was left where the final <a href="#">Zeben artifact</a> was stolen. Drunk Archivists tipped him to a relic beneath the seas; he navigated the fog-bound Veiled Ocean to the underwater Temple of Fenreal and retrieved it — then traded it away for something very important to him. It now lies in the <a href="#">Jazacha</a> jungles with the artifact-obsessed Yuan-Ti of Oojezz.</p>
+    <div class="callout">
+      <span class="label">Open thread</span>
+      What did Mally trade the final artifact for? The notes leave it deliberately blank.
+    </div>
+
+    <h2 id="kraken"><span class="no">03</span>The Kraken’s price</h2>
+    <p>At the Crow’s Ledger in Anchors Rest he set his price for cooperation: capture the Kraken plaguing the Pirate Trinity. The party did. Mally controlled it with a scepter and chain, delivered it at Krakens Reef, and so claimed leadership of the pirates of Anchors Rest.</p>
+
+    <h2 id="jazacha"><span class="no">04</span>The Jazacha expedition</h2>
+    <p>He guided the four-ship armada to Jazacha and the jungle expedition — five of his men died — and burned the Wish spell stored in his bracelet to wish <a href="#">Zuk’taal</a> away, leaving him dejected. He also leaked the party’s destination to the Trinity, and warned that <a href="#">Zax</a>, the Merchant, and possibly <a href="#">Sir Trent Hightower</a> had contacted them.</p>
+    <div class="callout">
+      <span class="label">Open thread</span>
+      How damaging is his information leak to the Pirate Trinity?
+    </div>
+
+    <h2 id="relationships"><span class="no">05</span>Relationships &amp; whereabouts</h2>
+    <ul>
+      <li>Active ally and guide as of E161; left the party on floor four — business back in Oojezz.</li>
+      <li>Old hand with <a href="#">Jameti Costco</a> as a jungle guide (“something went real wrong”).</li>
+      <li>Renee at Airsteach is an ex-employee.</li>
+    </ul>
+
+    <h2 id="appearances"><span class="no">06</span>Appearances</h2>
+    <div class="ep-strip">
+      <a href="#">E20</a><a href="#">E143</a><a href="#">E144</a><a href="#">E147</a><a href="#">E149</a><a href="#">E150</a><a href="#">E151</a><a href="#">E152</a><a href="#">E153</a><a href="#">E155</a><a href="#">E156</a><a href="#">E157</a><a href="#">E158</a><a href="#">E159</a><a href="#">E160</a><a href="#">E161</a>
+    </div>
+
+    <h2 id="related"><span class="no">07</span>Related</h2>
+    <div class="related-grid">
+      <a class="rel-card" href="#"><div class="t">NPC</div><div class="n">Jameti Costco</div><div class="d">Jungle guide, old colleague</div></a>
+      <a class="rel-card" href="#"><div class="t">Location</div><div class="n">Jazacha</div><div class="d">Jungle expedition site</div></a>
+      <a class="rel-card" href="#"><div class="t">Faction</div><div class="n">Pirate Trinity</div><div class="d">Rival pirate powers</div></a>
+    </div>
+  </article>
+
+  <div class="toc-col">
+    <nav class="toc">
+      <h5>Index</h5>
+      <a href="#overview" class="on"><span class="no">01</span>Overview</a>
+      <a href="#artifact"><span class="no">02</span>The stolen Zeben artifact</a>
+      <a href="#kraken"><span class="no">03</span>The Kraken’s price</a>
+      <a href="#jazacha"><span class="no">04</span>The Jazacha expedition</a>
+      <a href="#relationships"><span class="no">05</span>Relationships</a>
+      <a href="#appearances"><span class="no">06</span>Appearances</a>
+      <a href="#related"><span class="no">07</span>Related</a>
+    </nav>
+  </div>
+
+</div>
+
+<footer>
+  <span>ALAMBOR CHRONICLE — REGENERATED FROM CANON</span>
+  <span>ALIASES: SHAUWN O’MALLEY · MOLLY GRISHAM · O’MALLY · “CAPTAIN MALEY GRENSHUMS” +9</span>
+</footer>
+
+</body>
+</html>

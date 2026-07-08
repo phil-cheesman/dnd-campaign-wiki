@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "adune",
+    "collection": "npcs",
+    "name": "Adune (Morgenrath Gafar)",
+    "role": "High Chancellor of Gidia / hidden drow lich",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A charismatic, handsome young man with refined courtly features, smooth pale skin, dark sleek hair, and a confident composed expression. He wears the rich layered robes of a high chancellor in deep court colors with gold trim, and a small coin-shaped pin badge of office at his collar. Beneath the youthful disguise a colder presence shows: his eyes glow faint electric blue, hinting at ancient power. Posture poised and commanding, hands folded, an aura of quiet menace behind the diplomat's smile.",
+    "ref_images": []
+  },
+  {
+    "slug": "baron-janis",
+    "collection": "npcs",
+    "name": "Baron Alexander Janis",
+    "role": "Baron of Evershire",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "An aging human nobleman, gaunt and sickly, with pallid drawn skin, thinning grey hair, and hollow weary eyes shadowed by grief. One arm bears a long old scar. He is seated at a great dark oak table, wrapped in heavy fur-trimmed robes of muted maroon and grey befitting a baron, a tarnished signet ring on a thin hand. His expression is haunted and frail, shoulders stooped, the look of a man broken by loss and slow illness. Candlelight catches the lines of a face once strong.",
+    "ref_images": []
+  },
+  {
+    "slug": "ford",
+    "collection": "npcs",
+    "name": "Ford (Fjord)",
+    "role": "Gunslinger",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A rugged human gunslinger, middle-aged with weathered tan skin, a strong jaw, and a wry confident expression. He wears a wide-brimmed hat with a tall feather plume, a purple cloak over a buttoned mustard-gold vest and high collar. Cross-body leather bandoliers and belts hold cartridges and gear. He levels an ornate flintlock pistol in one hand while a long-barreled rifle rests in the other. Roguish frontier swagger, dramatic stance, fingerless gloves, dust and grit suggesting a sharpshooter's hard road.",
+    "ref_images": ["refs/ford/avatar.png"]
+  },
+  {
+    "slug": "jameti-costco",
+    "collection": "npcs",
+    "name": "Jameti Costco",
+    "role": "Tomb-Robber Ranger",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A scruffy, lean, older-looking human man with sunken hollow eyes, gaunt weathered cheeks, and a single long braid in otherwise unkempt dark hair flecked with grey. Light stubble shadows a tired, secretive face. He wears travel-worn ranger's leathers and a faded hooded cloak in earthy browns and greens, with a bulging satchel of rolled scrolls and notebooks slung across his chest. The look of a planar-wandering tomb robber: wary, intelligent eyes, road dust, faint arcane glimmer about him.",
+    "ref_images": []
+  },
+  {
+    "slug": "king-felix",
+    "collection": "npcs",
+    "name": "King Felix the Cold",
+    "role": "King of Gidia",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A stern aging human king with a stately bearing, silver-streaked hair and a trimmed greying beard, pale skin, and cold piercing eyes carrying old grief. He wears a heavy bejeweled crown and a fur-lined royal robe over gilded ceremonial armor in Gidian blue and gold, a regal medallion at his chest. His expression is hard and distant, a ruler troubled by loss. Upright commanding posture on or before a throne, one gloved hand resting on a scepter, an air of austere authority.",
+    "ref_images": []
+  },
+  {
+    "slug": "leon-janice-lj",
+    "collection": "npcs",
+    "name": "Leon Janice \"LJ\"",
+    "role": "Regent of Evershire (in cursed bird form)",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "Leon Janice trapped in his cursed form — a small, wretched, flightless bird-creature polymorphed by the witch Viola. A hunched, scrawny body with mottled pinkish-grey wrinkled skin, sparse patches of ragged dark feathers over stunted useless wings, a thin avian neck, a small hooked beak, and big mournful dark eyes. Spindly clawed feet grip the bars and perch of a rusted iron domed birdcage in a gloomy chamber. Pitiful, foul-looking, and forlorn — the lost noble son before his curse was finally broken.",
+    "ref_images": ["refs/leon-janice-lj/dm-ref-bird.png"]
+  },
+  {
+    "slug": "leon-steadyfoot",
+    "collection": "npcs",
+    "name": "Leon Steadyfoot",
+    "role": "Carpenter / Ship's Bosun",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A massive goliath craftsman, nearly eight feet tall and powerfully built, with a shaved head, grey-stone skin covered in bold blue-grey swirling tribal tattoos across face, arms, and torso, a heavy brow, and pale glacial eyes. Weathered and stern, broad arms folded across his chest. He wears rugged sailor's-and-carpenter's workwear — an open vest, suspenders, rolled trousers — with a tool belt of chisels and a wood plane at his waist and a tooth-and-bone necklace. He stands on the deck of his riverboat workshop, the Dovetail, moored on a misty forest river.",
+    "ref_images": ["refs/leon-steadyfoot/avatar.png", "refs/leon-steadyfoot/dm-ref.png"]
+  },
+  {
+    "slug": "lord-blackwood-valadon",
+    "collection": "npcs",
+    "name": "Lord Blackwood / Valadon the Black Dread",
+    "role": "Black Dragon in human guise",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A tall imposing nobleman, 6 foot 6, with slicked-back dark hair, a gaunt sunken jawline, and a curved bony nose. His pale skin stretches over sharp features, and his piercing dark eyes carry a sinister yellow-green glint hinting at the black dragon within. He wears severe aristocratic finery in black and deep emerald with silver clasps, a long high-collared coat. His expression is cold, predatory, and superior, lips curled in faint cruel amusement. An aura of menace and concealed reptilian power surrounds him.",
+    "ref_images": []
+  },
+  {
+    "slug": "mally-grisham",
+    "collection": "npcs",
+    "name": "Mally \"Molly\" Grisham, the Sparrow",
+    "role": "Pirate Captain",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A dashing, roguish pirate captain with long wind-tossed black wavy hair, high cheekbones, piercing blue eyes, light stubble, and a faint scar. He wears an ornate black coat heavy with gold brocade and a red-lined collar over a white ruffled open shirt, a red sash, and a tangle of buckled belts; a cutlass rides at his hip. A small sparrow motif marks his gear. He stands braced on a ship's deck before rigging and a tattered skull-and-crossbones flag, an open sea and distant port behind him — salt-weathered, fast, and devil-may-care.",
+    "ref_images": ["refs/mally-grisham/avatar.png", "refs/mally-grisham/dm-ref.png"]
+  },
+  {
+    "slug": "max-taldross",
+    "collection": "npcs",
+    "name": "Maximilian \"Max\" Taldross",
+    "role": "Knight of Gidia",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A noble, weathered human knight with rugged handsome features, dark hair pulled back, a short dark beard, and earnest grey eyes carrying weariness and resolve. Broad-shouldered. Over a fine chainmail hauberk and a polished steel pauldron he wears a white surcoat emblazoned with Gidia's red rampant lion, a deep-red cloak sweeping from his shoulders, and a wide belt; his ancestral longsword is sheathed across his back. Faint battle scars mark his face. Behind him rise castle walls hung with red-lion banners — the steadfast bearing of a loyal Knight of Gidia.",
+    "ref_images": ["refs/max-taldross/dm-ref.png"]
+  },
+  {
+    "slug": "nardif-darksi",
+    "collection": "npcs",
+    "name": "Nardif Darksi, the Nightmare King",
+    "role": "Nightmare King",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A tall, dark, handsome fey drow with dusky charcoal-grey skin, sharp exaggerated angular features, and pale piercing eyes behind thin spectacles. A neatly curled black beard frames a sly, dangerous smile, and a richly wrapped turban crowns his head. He wears opulent dark robes with arcane embroidery and a scientist-spy's array of small instruments at his belt. An unsettling, theatrical menace surrounds him: long fingers, a knowing tilt of the head, faint planar shadows curling at his edges, the air of a brilliant interplanar villain.",
+    "ref_images": []
+  },
+  {
+    "slug": "pierre-beaubois",
+    "collection": "npcs",
+    "name": "Pierre Beaubois",
+    "role": "Beaubois Noble (villain)",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "An aristocratic, high-born elf of cold elegance — gaunt pale features, sharp cheekbones, thin lips, disdainful eyes, slicked-back dark hair, and subtly pointed ears. He wears an immaculate dark-green high-collared noble's robe with gold-thread trim and a heavy gold chain, and swirls a goblet of blood-red wine by candlelight in a shadowed manor. An ornate ceremonial dagger shaped like a flying dragon hangs at his belt. His expression is haughty, embittered, and quietly cruel — an air of refined, vampiric malice and grief-hardened contempt for the world.",
+    "ref_images": ["refs/pierre-beaubois/dm-ref.png"]
+  },
+  {
+    "slug": "princess-anabel",
+    "collection": "npcs",
+    "name": "Princess Anabel",
+    "role": "Princess of Gidia",
+    "type": "portrait",
+    "eligibility": "symbolic-only",
+    "visual": "A young human princess of Gidia in her late teens or early twenties, with a reserved, reclusive air and a guarded, demure expression. Fair smooth skin, softly waved chestnut hair pinned with a delicate jeweled circlet, and thoughtful eyes that avoid the viewer. She wears an elegant high-collared royal gown in Gidian blue and silver with fine embroidery and pearl detailing, a slender pendant at her throat. Poised but withdrawn posture, hands clasped, the quiet bearing of a sheltered noblewoman shadowed by duty and danger.",
+    "ref_images": []
+  },
+  {
+    "slug": "queen-beatrice",
+    "collection": "npcs",
+    "name": "Queen Beatrice",
+    "role": "Queen of Carasia",
+    "type": "portrait",
+    "eligibility": "symbolic-only",
+    "visual": "A regal, battle-hardened human queen called the Lion's Blood, middle-aged and commanding, with a fierce proud expression, sharp dark eyes, and dark hair streaked with grey swept beneath a golden crown. Strong handsome features and an upright martial bearing. She wears a magnificent royal gown layered over fine gilded breastplate armor in Carasian crimson and gold, a lion motif worked into the clasps and a fur-trimmed mantle. One hand rests on a sword hilt. The aura of a warrior-monarch who avenged her father in blood.",
+    "ref_images": []
+  },
+  {
+    "slug": "rasheed-soltar",
+    "collection": "npcs",
+    "name": "Rasheed Soltar",
+    "role": "Slave Smuggler / Dock Master",
+    "type": "portrait",
+    "eligibility": "symbolic-only",
+    "visual": "A hard, opportunistic human dock master and slave smuggler with swarthy weathered skin, a sharp hawkish face, a trimmed black beard, and cold calculating dark eyes. Lean and wiry, exuding cruelty and greed. He wears the layered robes and sash of an eastern port boss in deep crimson and black, with gold rings, a wide leather belt holding a curved dagger, and a heavy ledger or scroll tucked under one arm. His expression is sneering and merciless, the look of a man who trades in stolen lives along the docks.",
+    "ref_images": []
+  },
+  {
+    "slug": "trent-hightower",
+    "collection": "npcs",
+    "name": "Sir Trent Hightower",
+    "role": "Righteous Hand of Gidia (traitor)",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A tall, imposing human knight, a silver fox in his fifties, strikingly handsome with neatly swept silver-grey hair, a trimmed grey beard, and sharp steel-cold eyes. Towering and powerfully built. He wears gleaming ornate full plate armor in Gidian blue and silver with a flowing cape, one gauntleted hand resting on the pommel of a fine longsword. His expression is composed, righteous, and quietly treacherous. The commanding bearing of a master swordsman and secret traitor, polished armor catching cold light.",
+    "ref_images": []
+  },
+  {
+    "slug": "valinor",
+    "collection": "npcs",
+    "name": "Valinor",
+    "role": "Mysterious armored wanderer",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A tall, mysterious armored man with a noble weathered face, calm watchful eyes, and an otherworldly presence. He wears a long flowing green cloak that billows around polished travel-worn armor, the hood often drawn back to reveal stern handsome features and dark hair. He bears a sword or hunting spear and carries himself like a guardian-knight. A faint aura suggests his shapeshifting nature into a giant eagle: feather-like detailing at the cloak's edges, keen avian sharpness in his gaze, standing resolute before a brooding wilderness.",
+    "ref_images": []
+  },
+  {
+    "slug": "viola",
+    "collection": "npcs",
+    "name": "Viola, \"the Mother\"",
+    "role": "Swamp Witch",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A monstrous swamp hag — an ancient crone shrunken to gaunt, skeletal limbs and clawed, overlong bony fingers, her sunken hollow eyes and sharp-boned face half-hidden behind long, stringy grey-white hair. She huddles in a rough wooden rocking chair, draped in filthy ragged shrouds and shawls, in a candlelit marsh hovel hung with bunches of dried herbs, clay charms, and dusty jars. An eerie, deal-making menace radiates from her — 'the Mother', a sinister sage-woman who brews rare curses and potions in the fetid swamp.",
+    "ref_images": ["refs/viola/dm-ref.png"]
+  },
+  {
+    "slug": "yankee-williams",
+    "collection": "npcs",
+    "name": "Yankee Williams",
+    "role": "Ship's Captain",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "An old dwarf sea captain, stout and barrel-chested, with a long weather-grizzled grey beard, ruddy wind-burned skin, bushy brows, and shrewd kindly eyes crinkled from years at sea. He wears a worn captain's coat in navy and brass buttons over a salt-stained shirt, a wide belt, and a battered tricorn hat. A pipe or spyglass in one calloused hand. Ship rigging and open ocean behind him. The dependable, good-natured bearing of a seasoned merchant captain who has weathered many storms.",
+    "ref_images": []
+  },
+  {
+    "slug": "zax",
+    "collection": "npcs",
+    "name": "Zax (General Zax)",
+    "role": "Widowmaker General",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A huge, intimidating black dragonborn general, taller and broader than most warriors, with sleek obsidian-black scales, heavy ridged brow horns, and burning menacing eyes. Powerful muscular frame radiating brutality. He wears battered heavy war plate and spiked pauldrons over a mercenary's harness, marked with a woman's-face tattoo motif of the Widowmakers, and grips a massive cruel blade. Scars and notches mar his scaled hide. The fearsome commanding presence of a ruthless dragonborn warlord, jaws bared in a low snarl.",
+    "ref_images": []
+  },
+  {
+    "slug": "tristane",
+    "collection": "npcs",
+    "name": "Tristane",
+    "role": "Archivist informant of Surtree",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A refined elf herbalist of the Archivists, slim and elegant, with a youthful keen face, dark hair greying at the temples and swept back, and subtly pointed ears. He wears the order's deep-green hooded mantle over a cream-and-gold embroidered under-robe trimmed with leaf and vine patterns, and violet-stained gloves on his hands. He holds a leather-bound book in one hand and lifts a fresh green herb sprig in the other. He stands in a sunlit physic garden of flowers and herbs with crumbling stone arches and rolling hills beyond — a scholarly, soft-spoken keeper of texair lore.",
+    "ref_images": ["refs/tristane/dm-ref.png"]
+  },
+  {
+    "slug": "zeenoth",
+    "collection": "npcs",
+    "name": "Zeenoth the Righteous",
+    "role": "High Archivist of the Archevesian Order",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "The elderly High Architect of the Archivists: a dignified, gaunt elf with long flowing white hair and a long forked white beard, weathered noble features, and pointed ears. He wears the order's deep-green hooded mantle over green-and-gold robes bearing a gold emblem at the chest, his hands and forearms stained a deep texair-violet. He stands with hands clasped in a vaulted gothic library-cathedral, a tall arched window of light behind him and a purple-and-gold Archivist banner at his side — serene, ancient, and authoritative, the keeper of the Donum Vite.",
+    "ref_images": ["refs/zeenoth/dm-ref.png"]
+  },
+  {
+    "slug": "viscountess-avesia",
+    "collection": "npcs",
+    "name": "Avesia, Viscountess of Sutrey",
+    "role": "Viscountess of Surtree",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A shrewd high-elf noblewoman of cool, aristocratic beauty, with fair smooth skin, sharp appraising eyes, and pointed ears; her dark hair is pinned up in an elegant coil beneath a fine gold circlet. She wears a dark-green gown with delicate gold filigree at the collar and cuffs, a slender gold necklace, and a signet ring. She sits poised at a writing desk beside a tall leaded window overlooking a grey gothic river-city, one hand raised thoughtfully to her chin, a gold heraldic eagle crest on a dark banner behind her. Gracious but unmistakably hard to deceive.",
+    "ref_images": ["refs/viscountess-avesia/dm-ref.png"]
+  },
+  {
+    "slug": "rolin-blaze",
+    "collection": "npcs",
+    "name": "Rolin Blaze",
+    "role": "Halfling mage",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A short but powerfully-built halfling — improbably muscular and 'jacked' — with a broad ruddy weathered face, a wide easy grin, and a great bushy mane of ginger-red hair and a full braided red beard threaded with a small bead. His thick arms and torso are covered in dense dark swirling tattoos. He wears an open worn leather vest and rolled sailor's trousers, a belt strung with pouches, and goes barefoot on large hardy halfling feet. He stands on the timber deck of a riverboat amid coiled ropes and barrels, a forested river behind him — a hardy deckhand who is secretly a formidable mage.",
+    "ref_images": ["refs/rolin-blaze/dm-ref.png"]
+  },
+  {
+    "slug": "lorenzo-stansport",
+    "collection": "npcs",
+    "name": "Lorenzo Stansport",
+    "role": "Texair merchant (secretly an Oni)",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "A big, burly warrior in human guise — broad-shouldered and powerfully built, with dark tousled hair, heavy stubble, weathered tan skin, and a hard, scowling brow. He wears a tattered green hooded cloak over studded brown-leather armour crossed with straps and buckles, and plants a huge single-bladed battle-glaive head-down in the mud before him. He stands on a grim, rain-soaked battlefield strewn with ragged banners and shadowy soldiers. A menacing mercenary captain — and, beneath the disguise, a fiendish Oni.",
+    "ref_images": ["refs/lorenzo-stansport/dm-ref.png"]
+  },
+  {
+    "slug": "ooni",
+    "collection": "npcs",
+    "name": "The Oni (Lorenzo's true form)",
+    "role": "Oni — true form of Lorenzo Stansport",
+    "type": "portrait",
+    "eligibility": "ok",
+    "visual": "The Oni revealed beneath the man: a tall, looming ogre-mage fiend with gaunt blue-grey, dead-looking flesh, mottled and scarred, long stringy white hair, hollow glowing eyes, and sharp predatory features. It wears the same tattered hooded cloak and ragged leather over its lean monstrous frame and grips an enormous battle-axe. It stands amid a fog-bound battlefield of shambling, broken figures and torn banners — an eerie, undead-pale, otherworldly menace.",
+    "ref_images": ["refs/ooni/dm-ref.png"]
+  }
+]

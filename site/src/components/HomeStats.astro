@@ -1,0 +1,135 @@
+---
+import { getCampaignStats } from '../lib/stats';
+
+const s = await getCampaignStats();
+
+const since = s.firstDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+// Four headline stats, computed live from canon. `count` is the count-up target;
+// the rendered text is the real value, so it stays correct with JS off / reduced motion.
+const stats = [
+  { count: s.articles, display: s.articles.toLocaleString('en-US'), label: 'Wiki Articles', note: 'cross-linked & searchable' },
+  { count: s.words, display: s.words.toLocaleString('en-US'), label: 'words of lore', note: 'longer than The Hobbit' },
+  { count: s.sessions, display: s.sessions.toLocaleString('en-US'), label: 'sessions played', note: 'and still rolling' },
+  { count: null, display: s.yearsLabel, label: 'years at the table', note: `since ${since}` },
+];
+---
+
+<section class="codex-stats" aria-label="The Alambor campaign by the numbers">
+  <ul class="stat-row">
+    {stats.map((stat) => (
+      <li class="stat">
+        <span class="stat-num" data-count={stat.count ?? undefined}>{stat.display}</span>
+        <span class="stat-label">{stat.label}</span>
+        <span class="stat-note">{stat.note}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .codex-stats {
+    margin: 2.6rem 0 3rem;
+    padding: 1.9rem 0 1.6rem;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .stat-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    position: relative;
+    text-align: center;
+    padding: 0.3rem 1rem;
+  }
+  /* Hairline rule between adjacent stats — a colophon divider, not a card border. */
+  .stat + .stat::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 3.4rem;
+    background: var(--hairline);
+  }
+  .stat-num {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 5.2vw, 3.5rem);
+    line-height: 1;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .stat-note {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+  @media (max-width: 640px) {
+    .stat-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 0;
+    }
+    /* On the 2×2 grid the vertical rules misalign, so drop them and let gap breathe. */
+    .stat + .stat::before {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Count-up on scroll into view. The markup already holds the real values, so
+  // this only runs as an enhancement — and never under reduced-motion.
+  (() => {
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>('.codex-stats .stat-num[data-count]'),
+    );
+    if (!els.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const fmt = (n: number) => n.toLocaleString('en-US');
+    const animate = (el: HTMLElement) => {
+      const target = parseInt(el.dataset.count ?? '0', 10);
+      if (!Number.isFinite(target)) return;
+      const dur = 1200;
+      let start: number | undefined;
+      el.textContent = '0';
+      const step = (t: number) => {
+        if (start === undefined) start = t;
+        const p = Math.min((t - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        el.textContent = fmt(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            animate(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.4 },
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>

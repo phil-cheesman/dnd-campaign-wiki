@@ -1,0 +1,228 @@
+---
+// Wikipedia-style link previews for internal entity links (a.wikilink).
+// Data source is the existing /graph.json artifact (label/summary/image/href/
+// collection per entity) — lazily fetched on the first wikilink hover, so it
+// costs nothing on pages the reader never previews from.
+---
+
+<div id="hovercard" class="hovercard" role="tooltip" aria-hidden="true"></div>
+
+<style is:global>
+  .hovercard {
+    position: absolute;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 18rem;
+    max-width: calc(100vw - 1.5rem);
+    padding: 0.75rem 0.85rem 0.8rem;
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(35, 33, 28, 0.18), 0 0 1px rgba(35, 33, 28, 0.4);
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+    transform-origin: top center;
+    transition:
+      opacity var(--dur-state) var(--ease-out),
+      transform var(--dur-state) var(--ease-out);
+    pointer-events: none; /* a preview, not a target — click the link itself */
+  }
+  .hovercard.below { transform-origin: bottom center; transform: translateY(-4px) scale(0.98); }
+  .hovercard.is-open { opacity: 1; transform: none; }
+
+  .hovercard-head { display: flex; gap: 0.65rem; align-items: flex-start; }
+  .hovercard-thumb {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center top;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .hovercard-headtext { min-width: 0; }
+  .hovercard-kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: 600 0.62rem 'Inter', sans-serif;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+  }
+  .hovercard-kind .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .hovercard-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 1.12;
+    color: var(--text);
+  }
+  .hovercard-sum {
+    font: 400 0.78rem/1.45 'Inter', sans-serif;
+    color: var(--ink-soft);
+    margin: 0.5rem 0 0;
+  }
+
+  /* Touch devices have no hover — never show the preview there. */
+  @media (hover: none) { .hovercard { display: none !important; } }
+</style>
+
+<script>
+  import { TYPE_META } from './graph/graph-meta';
+
+  const DEFAULT_COLOR = '#9a9483';
+
+  // Hovercards are a hover-only affordance. On touch devices ((hover: none) /
+  // (pointer: coarse)) there is no hover to trigger them and a popover would only
+  // risk swallowing the first tap, so we never arm any listeners there — the
+  // wikilink stays a plain, navigable anchor. Full hover-peek is unchanged for
+  // (hover: hover) / (pointer: fine) devices.
+  const canHover =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const card = document.getElementById('hovercard');
+  if (card && canHover) {
+    let dataMap: Map<string, any> | null = null;
+    let loading: Promise<Map<string, any>> | null = null;
+    let activeLink: HTMLAnchorElement | null = null;
+    let showTimer = 0;
+    let hideTimer = 0;
+    let displayTimer = 0;
+
+    /** Fetch /graph.json once and index its nodes by href. */
+    function load(): Promise<Map<string, any>> {
+      if (dataMap) return Promise.resolve(dataMap);
+      if (!loading) {
+        loading = fetch('/graph.json')
+          .then((r) => r.json())
+          .then((d: { nodes: any[] }) => {
+            dataMap = new Map();
+            for (const n of d.nodes) dataMap.set(n.href, n);
+            return dataMap;
+          })
+          .catch(() => (dataMap = new Map()));
+      }
+      return loading;
+    }
+
+    function nodeFor(link: HTMLAnchorElement) {
+      if (!dataMap) return null;
+      const href = link.getAttribute('href') || '';
+      const clean = href.split('#')[0].split('?')[0].replace(/\/$/, '');
+      return dataMap.get(clean) || dataMap.get(href) || null;
+    }
+
+    function esc(s: string) {
+      const d = document.createElement('div');
+      d.textContent = s ?? '';
+      return d.innerHTML;
+    }
+
+    function render(node: any) {
+      const meta = TYPE_META[node.collection];
+      const color = meta?.color ?? DEFAULT_COLOR;
+      const kind = meta?.label ?? node.collection;
+      card!.innerHTML =
+        '<div class="hovercard-head">' +
+        (node.image ? `<img class="hovercard-thumb" src="${esc(node.image)}" alt="" loading="lazy">` : '') +
+        '<div class="hovercard-headtext">' +
+        `<div class="hovercard-kind"><span class="dot" style="background:${color}"></span>${esc(kind)}</div>` +
+        `<div class="hovercard-title">${esc(node.label)}</div>` +
+        '</div></div>' +
+        (node.summary ? `<p class="hovercard-sum">${esc(node.summary)}</p>` : '');
+    }
+
+    /** Anchor the card above the link, flipping below when there's no room. */
+    function position(link: HTMLAnchorElement) {
+      const r = link.getBoundingClientRect();
+      const gap = 8;
+      const margin = 8;
+      const cw = card!.offsetWidth;
+      const ch = card!.offsetHeight;
+      const vw = document.documentElement.clientWidth;
+
+      let left = r.left + window.scrollX;
+      left = Math.max(window.scrollX + margin, Math.min(left, window.scrollX + vw - cw - margin));
+
+      let top: number;
+      const below = r.top < ch + gap + 6;
+      if (below) top = r.bottom + window.scrollY + gap;
+      else top = r.top + window.scrollY - ch - gap;
+
+      card!.style.left = `${left}px`;
+      card!.style.top = `${top}px`;
+      card!.classList.toggle('below', below);
+    }
+
+    function open(link: HTMLAnchorElement) {
+      const node = nodeFor(link);
+      if (!node) return;
+      activeLink = link;
+      clearTimeout(displayTimer);
+      render(node);
+      card!.style.display = 'block';
+      card!.setAttribute('aria-hidden', 'false');
+      position(link); // measure with content + display:block
+      requestAnimationFrame(() => card!.classList.add('is-open'));
+    }
+
+    function scheduleShow(link: HTMLAnchorElement, delay = 300) {
+      clearTimeout(hideTimer);
+      if (activeLink === link && card!.classList.contains('is-open')) return;
+      clearTimeout(showTimer);
+      showTimer = window.setTimeout(() => {
+        load().then(() => {
+          // Cursor may have moved on during the fetch — only open if still intended.
+          if (link.matches(':hover') || link === document.activeElement) open(link);
+        });
+      }, delay);
+    }
+
+    function scheduleHide() {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(hideNow, 120);
+    }
+
+    function hideNow() {
+      clearTimeout(showTimer);
+      card!.classList.remove('is-open');
+      card!.setAttribute('aria-hidden', 'true');
+      activeLink = null;
+      displayTimer = window.setTimeout(() => {
+        if (!card!.classList.contains('is-open')) card!.style.display = 'none';
+      }, 220);
+    }
+
+    const closest = (t: EventTarget | null) =>
+      t instanceof Element ? (t.closest('a.wikilink') as HTMLAnchorElement | null) : null;
+
+    document.addEventListener('mouseover', (e) => {
+      const link = closest(e.target);
+      if (link) scheduleShow(link);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (closest(e.target)) scheduleHide();
+    });
+    // Keyboard parity: preview on focus, dismiss on blur / Escape.
+    document.addEventListener('focusin', (e) => {
+      const link = closest(e.target);
+      if (link) scheduleShow(link, 120);
+    });
+    document.addEventListener('focusout', (e) => {
+      if (closest(e.target)) scheduleHide();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && activeLink) hideNow();
+    });
+    // The card is positioned in document space — just dismiss it on scroll/resize.
+    window.addEventListener('scroll', hideNow, { passive: true });
+    window.addEventListener('resize', hideNow);
+  }
+</script>

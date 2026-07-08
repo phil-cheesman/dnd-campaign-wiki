@@ -1,0 +1,264 @@
+# The Journey of the Alambor Six — ordered stops driving the interactive map + timeline.
+#
+# A "stop" is a narrative chapter, not a single episode: it spans an episode RANGE
+# and pins to a place key in canon/map/places.yaml. Several stops revisit the same
+# place (Kierkenwall appears 4×) — that's expected.
+#
+# `arc`     → index into the arcs list below.
+# `place`   → key in canon/map/places.yaml (carries the coordinates + dossier link).
+# `episodes`→ [first, last] episode of the stay.
+# blurb/beats are authored summaries; the card also deep-links to the arc + first episode.
+
+max_episode: 161
+
+arcs:
+  - { n: "01", title: Arrival,           start: 0,   end: 8,   color: "#a8842c", dossier: 01-arrival }
+  - { n: "02", title: Beaubois,          start: 9,   end: 24,  color: "#7d8a5c", dossier: 02-beaubois }
+  - { n: "03", title: Red Wedding,       start: 25,  end: 51,  color: "#a05a4a", dossier: 03-red-wedding }
+  - { n: "04", title: Goldcrest,         start: 52,  end: 66,  color: "#5b7d8a", dossier: 04-goldcrest-heist }
+  - { n: "05", title: Evershire,         start: 67,  end: 90,  color: "#6b5d8a", dossier: 05-evershire }
+  - { n: "06", title: Avernus,           start: 91,  end: 102, color: "#9a4f33", dossier: 06-avernus }
+  - { n: "07", title: Vault of Izdar,    start: 103, end: 113, color: "#857437", dossier: 07-vault-izdar }
+  - { n: "08", title: Shadowfell,        start: 114, end: 136, color: "#4f5560", dossier: 08-shadowfell-betrayal }
+  - { n: "09", title: The Sixth Relic,   start: 137, end: 161, color: "#8a6a3b", dossier: 09-relic-hunt }
+
+stops:
+  - title: Shipwrecked
+    arc: 0
+    place: carasian-coast
+    episodes: [0, 2]
+    blurb: >-
+      A boat from Kirkenwall to Sultray never arrives. The party washes up on the
+      Carasian coast carrying a dying man's letter for the Last Drop tavern.
+    beats:
+      - Chias of the Volstruckers entrusts a delivery and recognition phrases
+      - Weatherface dies; his letter starts everything
+      - Zanim loses a foot to hobgoblins
+
+  - title: Carstone & the Alambor Five
+    arc: 0
+    place: carstone
+    episodes: [3, 8]
+    blurb: >-
+      Bandit jobs and viscount errands in Carstone, where Quinton's song gives the
+      party its name — and the first of them falls.
+    beats:
+      - The royal wedding is announced
+      - Zook dies; Evac the Vedalken joins as his replacement
+      - At the Last Drop, Max Taldross reveals the plot against Princess Anabel
+
+  - title: The Beaubois Conspiracy
+    arc: 1
+    place: sultray
+    episodes: [9, 24]
+    blurb: >-
+      Posing as the entertainers "The Magnificent Four," the party infiltrates the
+      Beaubois chalet and uncovers an Orcus-flavored zombie plague brewing under Sultray.
+    beats:
+      - Cruucar found imprisoned in Blackfinger's tower — his first appearance
+      - Spawn of Kyuss attack the theater; Pierre escapes with his plague "nearly ready"
+      - The Shadowed Moon symbol surfaces; the party is granted the chalet's 170 acres
+
+  - title: The King in the North
+    arc: 2
+    place: kierkenwall
+    episodes: [25, 32]
+    blurb: >-
+      A royal audience with King Felix — and the beginning of High Chancellor Adune's
+      patronage, which will cost them everything.
+    beats:
+      - Lorenzo the texair merchant is revealed as an Oni
+      - Frame-job letters point to "Viper Viola"
+      - Kirkenwall moves to a war footing
+
+  - title: The Red Wedding
+    arc: 2
+    place: vallon
+    episodes: [33, 51]
+    blurb: >-
+      Zeenoth's summit of the Trene becomes the campaign's first catastrophe: Prince
+      Thomas is assassinated at the royal wedding despite everything.
+    beats:
+      - '"Eloise" is a succubus impostor; the real one died months ago'
+      - Zanim dies at the clock tower and is brought back
+      - Queen Beatrice soft-banishes the party and declares war on Luzonovia on forged evidence
+
+  - title: Fugitives at Sea
+    arc: 3
+    place: goldcrest
+    episodes: [52, 61]
+    blurb: >-
+      Exiled, the party buys a ship and falls into a vault heist: Marquise Avesy's
+      ledger, stolen for 22,000 gold — and their faces on wanted posters.
+    beats:
+      - Gem traps, living statues, and a near-invulnerable golem
+      - Payout collected under the alias "James Beach"
+      - The ship is repainted and re-papered as Wrecked at the Reef
+
+  - title: Callum Heights
+    arc: 3
+    place: callum-heights
+    episodes: [62, 66]
+    blurb: >-
+      Odo's lost-message job leads through harpies and a Chimera into the cave of the
+      behir Dragoloth — which swallows Noctis whole.
+    beats:
+      - Seven harpies and the Chimera slain; Quinton nearly dies
+      - The message canister is cut out of the monster's stomach
+      - 18,000 northern troops mass outside town; Berrian arrives
+
+  - title: Evershire & the Black Dread
+    arc: 4
+    place: evershire
+    episodes: [67, 90]
+    blurb: >-
+      The liberation of Evershire: a rebellion against "Lord Blackwood," who is in truth
+      the black dragon Valadon. The longest, costliest arc of the middle campaign.
+    beats:
+      - Evac dies at the bridge ambush; Zanim falls and departs
+      - Viola — the Shadowed Mother — killed by Benjamin's nat-20 javelin
+      - Leon, thrown by the Bear, lances Valadon to death; the party are named Saviors of Evershire
+
+  - title: Into Avernus
+    arc: 5
+    place: avernus
+    episodes: [91, 99]
+    blurb: >-
+      Adune sends the party into the first layer of the Nine Hells to steal a crystal
+      power source — the Potentium, the "Titan Killer" — from General Bell's forge.
+    beats:
+      - "The Gatekeeper's toll: a soul for a soul"
+      - Bell rises from the blood pool and beheads Colossus
+      - Vane dies and is revived; the crystal comes home; level 11
+
+  - title: The Purple Party
+    arc: 5
+    place: kierkenwall
+    episodes: [100, 102]
+    blurb: >-
+      King Felix honors the party with titles and 12,000 platinum. Quinton returns —
+      his family murdered by Aum Shai — and Valinor's summons points south.
+    beats:
+      - Kavney's ominous aside at the celebration
+      - The Windvane identified at Arcane Infinity
+      - The Jameti Costco lead surfaces
+
+  - title: The Vault of Izdar
+    arc: 6
+    place: great-rift
+    episodes: [103, 113]
+    blurb: >-
+      At the bottom of the Great Rift waits a dungeon of the betrayer gods — and Zeeven
+      relics whose purpose no one yet understands.
+    beats:
+      - Ten eyes collected, opening the lair of Beltraz the Unseen — Berrian punches through the beholder
+      - Benjamin dies in the fight
+      - The haul includes the adamantium scepter and a pre-Sundering map
+
+  - title: Tarleaf
+    arc: 7
+    place: tarlif
+    episodes: [114, 117]
+    blurb: >-
+      In the Tarleaf market the party meets Torgoth — and Jameti finally comes clean:
+      the relics they carry are keys to planar gates.
+    beats:
+      - "The Aum Shai conspiracy overheard: Nardif Darksi, the Arch Dragon"
+      - The Moonbright gateway to the Shadowfell revealed
+      - Berrian's sister Marora appears at the stream
+
+  - title: The Sunless Echo
+    arc: 7
+    place: shadowfell
+    episodes: [118, 131]
+    blurb: >-
+      Through the Pool of Death into the Shadowfell: the sleeping madness, the gangs of
+      Gloomville, the Tower of Illmore — and two deaths in the dark.
+    beats:
+      - The madness fractures the party; Remove Curse is the cure
+      - Vane dies and is revived by Torgoth
+      - Berrian dies at the shimmering planar wall; sixty days are lost
+
+  - title: The Shadowmoon Tower
+    arc: 7
+    place: tarlif
+    episodes: [132, 134]
+    blurb: >-
+      Back in Tarleaf, the reunion — Ford, Leon, Max, Jameti — and the tower's trial
+      chambers, which name the wrong villain.
+    beats:
+      - Cruucar gives up his brothers' axes to pass the trials
+      - Nardif Darksi is the Nightmare King and Arch Dragon
+      - Sir Trent Hightower is named the Shadowed Moon — falsely
+
+  - title: The Great Betrayal
+    arc: 7
+    place: kierkenwall
+    episodes: [135, 136]
+    blurb: >-
+      The war-council infiltration is a trap. King Felix dies, the party is framed —
+      and Adune unmasks as the Shadowed Moon: Morgenrath Gafar, a 1,200-year-old Zeeven lich.
+    beats:
+      - The Taldross family is burned
+      - Max, Leon, and Shaahim die
+      - Adune absorbs the Avernus power source; a two-month skip follows
+
+  - title: The War-Torn Map
+    arc: 8
+    place: mag-stormeach
+    episodes: [137, 143]
+    blurb: >-
+      Two months later, Adune's Gidia is conquering the map. An airship east, the
+      Archivists' confirmation, and a raid on Rasheed Soltar's compound in the cliff city.
+    beats:
+      - Adune holds five of the six gate keys
+      - Rasheed killed; Kieran located
+      - Mallie Grisham's sparrow calling card identified
+
+  - title: Escape from Mandalonia
+    arc: 8
+    place: veiled-ocean
+    episodes: [144, 148]
+    blurb: >-
+      Kieran and thirty slaves are pulled out through the sewers and a harbor battle —
+      then Zax's Black Widow runs the stolen ship onto a reef.
+    beats:
+      - The sewer escape behind Mr. Whiskers the rat
+      - The ship saved with Control Water (8 texair)
+      - Kieran is recaptured
+
+  - title: Anchors Rest
+    arc: 8
+    place: anchors-rest
+    episodes: [149, 153]
+    blurb: >-
+      Into the pirate haven, where Mallie Grisham names his price for the artifact trail:
+      capture the Kraken plaguing the Pirate Trinity.
+    beats:
+      - Port Airsteach and the giant clans
+      - An enemy gunship taken by guile
+      - Mallie's tale of the Temple of Fenreal artifact
+
+  - title: The Kraken's Lair
+    arc: 8
+    place: krakens-reef
+    episodes: [154, 155]
+    blurb: >-
+      A 60,000-foot descent to the lair. Noctis is swallowed mid-collaring and climbs
+      out; the Kraken is delivered in chains.
+    beats:
+      - The collar, chain, and scepter explained
+      - Mallie takes leadership of Anchors Rest
+      - The artifact is traced to the Yuan-Ti of Oojezz
+
+  - title: Jazacha & Oojezz
+    arc: 8
+    place: jazacha
+    episodes: [156, 161]
+    blurb: >-
+      The four-ship armada goes up-river into the jungle. The party now stands inside the
+      sacrifice pyramid of the three-ringed temple city — the sixth relic within reach.
+    beats:
+      - The rock titan Zuk'taal nearly wipes the party; Mallie burns his stored Wish
+      - Five of Mallie's men die in the jungle
+      - "Current session: disguised descent through the pyramid — Hydra and Yuan-Ti wizards"

@@ -1,0 +1,166 @@
+---
+// Episodes filter bar (spec §3.4) — sits in HeaderChrome's `slicer` slot. Pure
+// markup + controls; the filtering logic lives in EpisodesBody's inline script,
+// which reads these by id/class (both render on the same page). Mirrors the
+// client-side filter mechanic of glossary.astro.
+import type { EpisodesPayload } from '../../lib/episodes';
+import Icon from '../Icon.astro';
+
+const { charOptions, locOptions, arcOptions } = Astro.props as Pick<
+  EpisodesPayload,
+  'charOptions' | 'locOptions' | 'arcOptions'
+>;
+
+// Badge slicers mirror the row badges (same icons + hues); OR within this group,
+// AND across groups.
+const BADGES = [
+  { key: 'combat', icon: 'swords', label: 'Combat' },
+  { key: 'death', icon: 'skull', label: 'Death' },
+  { key: 'milestone', icon: 'trophy', label: 'Milestone' },
+] as const;
+---
+
+<div class="ep-slicer" data-ep-slicer>
+  <input
+    id="ep-search"
+    type="search"
+    class="ep-search"
+    placeholder="Filter episodes…"
+    autocomplete="off"
+    aria-label="Filter episodes by title, location or character"
+  />
+
+  <div class="ep-badge-group" role="group" aria-label="Filter by badge">
+    {
+      BADGES.map((b) => (
+        <button type="button" class="ep-badge-btn" data-badge={b.key} aria-pressed="false">
+          <Icon name={b.icon} size={14} /> {b.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <select id="ep-char" class="ep-sel" aria-label="Filter by character appearance">
+    <option value="">Any character</option>
+    {charOptions.map((c) => <option value={c.slug}>{c.name}</option>)}
+  </select>
+
+  <select id="ep-loc" class="ep-sel" aria-label="Filter by location">
+    <option value="">Any location</option>
+    {locOptions.map((l) => <option value={l}>{l}</option>)}
+  </select>
+
+  <select id="ep-arc" class="ep-sel" aria-label="Filter by arc">
+    <option value="">Any arc</option>
+    {arcOptions.map((a) => <option value={a.slug}>{a.title}</option>)}
+  </select>
+
+  <button id="ep-clear" type="button" class="ep-clear" disabled>Clear</button>
+</div>
+
+<style>
+  .ep-slicer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+  }
+  .ep-search {
+    flex: 1 1 12rem;
+    min-width: 9rem;
+    max-width: 16rem;
+    padding: 0.32rem 0.6rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--hairline);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .ep-search:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 25%, transparent);
+  }
+
+  .ep-badge-group {
+    display: inline-flex;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ep-badge-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: 600 0.72rem 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.55rem;
+    white-space: nowrap;
+  }
+  .ep-badge-btn + .ep-badge-btn {
+    border-left: 1px solid var(--hairline);
+  }
+  .ep-badge-btn:hover {
+    color: var(--text);
+  }
+  /* Per-type icon hues match the row badges in EpisodesBody. */
+  .ep-badge-btn[data-badge='death'] svg {
+    color: #d05c54;
+  }
+  .ep-badge-btn[data-badge='combat'] svg {
+    color: #7f9cc6;
+  }
+  .ep-badge-btn[data-badge='milestone'] svg {
+    color: #cfa14b;
+  }
+  .ep-badge-btn[aria-pressed='true'] {
+    background: var(--gold);
+    color: #fff;
+  }
+  /* Active chip: solid gold fill, so the icon flips to white to stay legible. */
+  .ep-badge-btn[aria-pressed='true'] svg {
+    color: #fff;
+  }
+
+  .ep-sel {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.82rem;
+    max-width: 9.5rem;
+    border: 1px solid var(--hairline);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .ep-sel:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  /* Always present (so it never reflows the bar onto a new line); just disabled
+     and faded until at least one filter is active. */
+  .ep-clear {
+    /* Hug the right edge of whatever line it lands on, so when the bar wraps it
+       tucks under the last select instead of stranding at the left. */
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font: 600 0.78rem 'Inter', sans-serif;
+    padding: 0.3rem 0.4rem;
+    white-space: nowrap;
+  }
+  .ep-clear:hover:not(:disabled) {
+    text-decoration: underline;
+  }
+  .ep-clear:disabled {
+    color: var(--faint);
+    opacity: 0.5;
+    cursor: default;
+  }
+</style>

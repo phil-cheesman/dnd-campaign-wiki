@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mally "Molly" Grisham — The Alambor Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+SC&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0e0c09;
+    --stone: #1a1611;
+    --stone-2: #221d16;
+    --carve: #2f281e;
+    --text: #d8cdb8;
+    --dim: #8a7d65;
+    --torch: #e8a33d;
+    --torch-hot: #ffc466;
+    --ember: #b05c2a;
+    --rune: #6fae8f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Alegreya', serif;
+    background:
+      radial-gradient(ellipse 900px 520px at 50% -120px, rgba(232,163,61,.13), transparent 70%),
+      linear-gradient(180deg, var(--stone) 0%, var(--void) 100%);
+    color: var(--text);
+    font-size: 17.5px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  a { color: var(--torch); text-decoration: none; }
+  a:hover { color: var(--torch-hot); text-shadow: 0 0 12px rgba(232,163,61,.5); }
+
+  /* ===== Header: gate lintel ===== */
+  header {
+    border-bottom: 1px solid var(--carve);
+    box-shadow: 0 1px 0 rgba(232,163,61,.12);
+    background: rgba(14,12,9,.7);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .lintel {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2.2rem;
+    padding: 1rem 2rem;
+  }
+  .sigil {
+    display: flex; align-items: center; gap: .8rem;
+    font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.15rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--torch);
+  }
+  .sigil .flame {
+    width: 30px; height: 30px; border: 1px solid var(--torch);
+    display: flex; align-items: center; justify-content: center;
+    clip-path: polygon(50% 0%, 100% 28%, 100% 100%, 0 100%, 0 28%);
+    font-size: .85rem;
+    background: radial-gradient(circle at 50% 80%, rgba(232,163,61,.3), transparent 70%);
+  }
+  nav.depths { display: flex; gap: 1.6rem; font-family: 'Alegreya SC', serif; font-size: .92rem; letter-spacing: .06em; }
+  nav.depths a { color: var(--dim); }
+  nav.depths a.lit { color: var(--torch); text-shadow: 0 0 14px rgba(232,163,61,.55); }
+  .torch-search {
+    margin-left: auto;
+    border: 1px solid var(--carve);
+    background: var(--void);
+    color: var(--dim);
+    padding: .42rem 1rem;
+    font-size: .82rem;
+    font-family: 'Alegreya', serif;
+  }
+
+  /* ===== Layout ===== */
+  .hall {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.8rem 2rem 5rem;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 320px;
+    gap: 3rem;
+  }
+
+  .descent { font-family: 'Alegreya SC', serif; font-size: .85rem; color: var(--dim); margin-bottom: 1.8rem; letter-spacing: .05em; }
+  .descent .deep { color: var(--ember); }
+
+  /* ===== Title: carved into stone ===== */
+  .carved {
+    margin-bottom: 2.4rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--carve);
+    position: relative;
+  }
+  .carved::after {
+    content: "";
+    position: absolute; bottom: -1px; left: 0;
+    width: 130px; border-bottom: 2px solid var(--torch);
+    box-shadow: 0 0 16px rgba(232,163,61,.6);
+  }
+  .carved .kind {
+    font-family: 'Alegreya SC', serif;
+    color: var(--ember);
+    letter-spacing: .3em;
+    font-size: .82rem;
+  }
+  .carved h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2.9rem;
+    line-height: 1.1;
+    margin: .4rem 0 .3rem;
+    color: #ede2c8;
+    text-shadow: 0 2px 0 rgba(0,0,0,.8), 0 -1px 0 rgba(255,220,160,.12);
+  }
+  .carved .epithet { font-style: italic; font-size: 1.2rem; color: var(--dim); }
+
+  /* ===== Stat-block infobox (5e statblock homage) ===== */
+  .statblock {
+    background: linear-gradient(180deg, var(--stone-2), var(--stone));
+    border: 1px solid var(--carve);
+    border-top: 3px solid var(--torch);
+    box-shadow: 0 -1px 24px rgba(232,163,61,.12), 0 14px 30px rgba(0,0,0,.5);
+    padding: 1.3rem 1.4rem;
+    height: fit-content;
+    position: sticky; top: 5.2rem;
+  }
+  .statblock .portrait {
+    aspect-ratio: 4/3;
+    border: 1px solid var(--carve);
+    background:
+      radial-gradient(circle at 50% 45%, rgba(232,163,61,.1), transparent 65%),
+      var(--void);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--dim); font-style: italic; font-size: .85rem;
+    margin-bottom: 1.1rem;
+  }
+  .statblock h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--torch);
+    font-size: .95rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+  .statblock .divider {
+    height: 5px;
+    margin: .9rem 0;
+    background: linear-gradient(90deg, transparent, var(--ember), transparent);
+    clip-path: polygon(0 50%, 49% 0, 51% 0, 100% 50%, 51% 100%, 49% 100%);
+  }
+  .statrow { display: flex; justify-content: space-between; padding: .3rem 0; border-bottom: 1px dotted var(--carve); font-size: .92rem; }
+  .statrow .k { font-family: 'Alegreya SC', serif; color: var(--dim); }
+  .statrow .v { color: var(--text); text-align: right; }
+  .alias-cloud { font-size: .85rem; color: var(--dim); font-style: italic; line-height: 1.8; }
+  .ep-runes { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
+  .ep-runes a {
+    font-family: 'Cinzel', serif; font-size: .68rem;
+    border: 1px solid var(--carve); color: var(--dim);
+    padding: .12rem .42rem;
+    background: var(--void);
+  }
+  .ep-runes a:hover { border-color: var(--torch); color: var(--torch); text-shadow: none; }
+
+  /* ===== Article body ===== */
+  article h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.45rem;
+    color: var(--torch);
+    margin: 2.4rem 0 .8rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  article h2::before { content: "◆"; font-size: .7rem; color: var(--ember); }
+  article h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--carve); }
+  article p { margin-bottom: 1rem; color: var(--text); }
+  article ul { margin: 0 0 1rem 1.3rem; }
+  article li { margin-bottom: .45rem; }
+  article li::marker { color: var(--ember); content: "▸ "; }
+
+  /* Quest-log open threads */
+  .quest {
+    border: 1px solid var(--carve);
+    background: linear-gradient(180deg, rgba(111,174,143,.06), transparent);
+    border-left: 3px solid var(--rune);
+    padding: .9rem 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .quest .ql {
+    font-family: 'Alegreya SC', serif;
+    color: var(--rune);
+    font-size: .8rem;
+    letter-spacing: .2em;
+    display: block;
+    margin-bottom: .25rem;
+  }
+  .quest p { margin: 0; font-style: italic; color: var(--text); }
+
+  /* lore-toggle: spoiler-style reveal bar (wireframe only) */
+  .dm-only {
+    border: 1px dashed var(--ember);
+    color: var(--dim);
+    font-size: .85rem;
+    padding: .7rem 1.1rem;
+    margin: 1.2rem 0;
+    font-style: italic;
+    background: rgba(176,92,42,.05);
+  }
+
+  .related { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1rem; }
+  .door {
+    border: 1px solid var(--carve);
+    background: var(--stone-2);
+    padding: 1rem 1.1rem .9rem;
+    position: relative;
+    transition: all .2s;
+  }
+  .door:hover { border-color: var(--torch); box-shadow: 0 0 22px rgba(232,163,61,.18); }
+  .door .t { font-family: 'Alegreya SC', serif; font-size: .72rem; letter-spacing: .2em; color: var(--ember); display: block; }
+  .door .n { font-family: 'Cinzel', serif; font-size: 1.02rem; color: #ede2c8; }
+
+  footer {
+    border-top: 1px solid var(--carve);
+    padding: 1.6rem 2rem 2.2rem;
+    text-align: center;
+    color: var(--dim);
+    font-size: .85rem;
+    font-style: italic;
+  }
+  footer .torches {
+    color: var(--torch);
+    letter-spacing: 2.2em;
+    padding-left: 2.2em;
+    margin-bottom: .6rem;
+    text-shadow: 0 0 18px rgba(232,163,61,.8);
+  }
+
+  @media (max-width: 960px) {
+    .hall { grid-template-columns: 1fr; }
+    .statblock { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lintel">
+    <div class="sigil"><div class="flame">🜂</div>The Alambor Vault</div>
+    <nav class="depths">
+      <a href="#">The Tale</a>
+      <a href="#" class="lit">Souls</a>
+      <a href="#">Realms</a>
+      <a href="#">Orders</a>
+      <a href="#">Relics</a>
+      <a href="#">Bestiary</a>
+    </nav>
+    <input class="torch-search" placeholder="Speak, and the vault answers…">
+  </div>
+</header>
+
+<div class="hall">
+
+  <article>
+    <div class="descent">Surface › Souls › Pirates › <span class="deep">Mally Grisham</span> · depth 4</div>
+
+    <div class="carved">
+      <div class="kind">SOUL · PIRATE CAPTAIN · ALLY</div>
+      <h1>MALLY “MOLLY” GRISHAM</h1>
+      <div class="epithet">the Sparrow — Captain of Fortune’s Favor, Lord of Anchors Rest</div>
+    </div>
+
+    <h2>What the torchlight shows</h2>
+    <p>Pirate captain of <a href="#">Fortune’s Favor</a> — sparrow flag, big poofy hat, short, very fast, with high cheekbones, piercing blue eyes, and a scar. Under Divine Sense he reads as inherently good but complicated, darkened by pressures. Confirmed to be the same person as “Shauwn O’Malley,” who delivered the royal wedding letter (<a href="#">E20</a>).</p>
+
+    <h2>The stolen Zeben artifact</h2>
+    <p>His sparrow calling card was left where the final <a href="#">Zeben artifact</a> was stolen: drunk Archivists tipped him to a relic beneath the seas, and he navigated the fog-bound Veiled Ocean to the underwater Temple of Fenreal and retrieved it — then traded it away for something very important to him. It now lies in the <a href="#">Jazacha</a> jungles with the artifact-obsessed Yuan-Ti of Oojezz.</p>
+
+    <div class="quest">
+      <span class="ql">⟡ Open thread</span>
+      <p>What did Mally trade the final artifact for? The ledger leaves it blank.</p>
+    </div>
+
+    <h2>The Kraken’s price</h2>
+    <p>At the Crow’s Ledger in <a href="#">Anchors Rest</a> he set his price: capture the Kraken plaguing the Pirate Trinity. The party did; Mally controlled it with a scepter and chain, delivered it at Krakens Reef, and so leads the pirates of Anchors Rest.</p>
+
+    <h2>The Jazacha expedition</h2>
+    <p>He guided the four-ship armada to Jazacha and the jungle expedition — five of his men died — and burned the Wish spell stored in his bracelet to wish <a href="#">Zuk’taal</a> away, leaving him dejected. He also leaked the party’s destination to the Trinity, and warned that <a href="#">Zax</a>, the Merchant, and possibly <a href="#">Sir Trent Hightower</a> had contacted them.</p>
+
+    <div class="quest">
+      <span class="ql">⟡ Open thread</span>
+      <p>How damaging is his information leak to the Pirate Trinity?</p>
+    </div>
+
+    <h2>Bonds &amp; whereabouts</h2>
+    <ul>
+      <li>Active ally and guide as of E161, on the Jazacha expedition; left the party on floor four — business back in Oojezz.</li>
+      <li>Old hand with <a href="#">Jameti Costco</a> as a jungle guide (“something went real wrong”).</li>
+      <li>Renee at Airsteach is an ex-employee.</li>
+    </ul>
+
+    <div class="dm-only">⚠ DM’s eyes only — sealed section. (Wireframe note: spoiler-gated content could live behind a reveal like this.)</div>
+
+    <h2>Adjoining chambers</h2>
+    <div class="related">
+      <a class="door" href="#"><span class="t">SOUL</span><span class="n">Jameti Costco</span></a>
+      <a class="door" href="#"><span class="t">REALM</span><span class="n">Jazacha</span></a>
+      <a class="door" href="#"><span class="t">ORDER</span><span class="n">The Pirate Trinity</span></a>
+    </div>
+  </article>
+
+  <aside class="statblock">
+    <div class="portrait">portrait — lit by torchlight</div>
+    <h3>Mally Grisham</h3>
+    <div class="statrow"><span class="k">Station</span><span class="v">Pirate Captain</span></div>
+    <div class="statrow"><span class="k">Vessel</span><span class="v">Fortune’s Favor</span></div>
+    <div class="statrow"><span class="k">Sigil</span><span class="v">The Sparrow</span></div>
+    <div class="statrow"><span class="k">Alignment</span><span class="v">Good, complicated</span></div>
+    <div class="statrow"><span class="k">Status</span><span class="v">Living · Ally</span></div>
+    <div class="statrow"><span class="k">Seat</span><span class="v">Anchors Rest</span></div>
+    <div class="divider"></div>
+    <h3>Also Known As</h3>
+    <div class="alias-cloud">Shauwn O’Malley · Molly Grisham · Milly Grissom · O’Mally · Malley · Melly · “Captain maley grenshums” · +7 more</div>
+    <div class="divider"></div>
+    <h3>Appears In</h3>
+    <div class="ep-runes">
+      <a href="#">E20</a><a href="#">E143</a><a href="#">E144</a><a href="#">E147</a><a href="#">E149</a><a href="#">E150</a><a href="#">E151</a><a href="#">E152</a><a href="#">E153</a><a href="#">E155</a><a href="#">E156</a><a href="#">E157</a><a href="#">E158</a><a href="#">E159</a><a href="#">E160</a><a href="#">E161</a>
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  <div class="torches">🕯🕯🕯</div>
+  The Alambor Vault · carved from the canon · the torches never go out
+</footer>
+
+</body>
+</html>

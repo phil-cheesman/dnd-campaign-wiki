@@ -1,0 +1,68 @@
+---
+// Shared header-page chrome: title + optional intro blurb + a toolbar row
+// (slicer slot on the left, entry count + view-toggle slot on the right),
+// then the pluggable per-collection body via the default slot. Every header
+// page plugs into this so the collections feel like one family rather than a
+// set of bespoke snowflakes (spec §3.2).
+const { title, count, blurb, hideTitle } = Astro.props as {
+  title: string;
+  count: number;
+  blurb?: string;
+  hideTitle?: boolean;
+};
+---
+
+<header class="hp-head">
+  {!hideTitle && <h1>{title}</h1>}
+  {blurb && <p class="hp-blurb">{blurb}</p>}
+  <div class="hp-toolbar">
+    {/* Filter/slicer bar — empty seam for Episodes (Phase 3) & Items (Phase 5). */}
+    <div class="hp-slicer"><slot name="slicer" /></div>
+    <div class="hp-controls">
+      <span class="hp-count">{count} {count === 1 ? 'entry' : 'entries'}</span>
+      <slot name="toggle" />
+    </div>
+  </div>
+</header>
+<slot />
+
+<style>
+  .hp-head {
+    margin: 0 0 0.4rem;
+  }
+  .hp-blurb {
+    color: var(--muted);
+    max-width: var(--measure);
+    margin: 0.2rem 0 0;
+  }
+  .hp-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    margin: 0.6rem 0 1.4rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  /* Slicer bar grows to fill the left; the count + toggle hug the right. When
+     the slicer is empty the count/toggle still sit flush right (margin-left:auto). */
+  .hp-slicer {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .hp-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-left: auto;
+  }
+  .hp-count {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+</style>

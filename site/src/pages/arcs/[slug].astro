@@ -1,0 +1,57 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getPublic } from '../../lib/collections';
+
+export async function getStaticPaths() {
+  const entries = await getPublic('arcs');
+  return entries.map((entry: any) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as any;
+const { Content, headings } = await render(entry);
+const title = entry.data.title ?? entry.id;
+const art = entry.data.art;
+---
+
+<BaseLayout title={title} description="Story-so-far arc narrative." headings={headings}>
+  <Breadcrumbs trail={[{ label: 'Wiki', href: '/' }, { label: 'Arcs', href: '/arcs' }, { label: title }]} />
+  <p class="kicker">Story so far</p>
+  <h1>{title}</h1>
+
+  {
+    art?.image && (
+      <figure class="arc-hero" data-pagefind-ignore>
+        <img src={art.image} alt={art.scene_title ?? title} width={1024} height={683} loading="eager" />
+        {art.scene_title && <figcaption>{art.scene_title}</figcaption>}
+      </figure>
+    )
+  }
+
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  /* Arc scene plate — wide 3:2 reference/header art (Phase-2 AI codex art). */
+  .arc-hero {
+    margin: 0 0 1.5rem;
+  }
+  .arc-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border, rgba(0, 0, 0, 0.12));
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  }
+  .arc-hero figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    color: var(--muted, #6b6256);
+  }
+</style>

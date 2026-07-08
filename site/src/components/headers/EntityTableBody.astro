@@ -1,0 +1,419 @@
+---
+// Sortable TABLE view for the NPCs & Items header pages (spec §5). Sibling to
+// CardGridBody: the global `html[data-density]` attr shows exactly one of them
+// (cards → gallery, list → this table). Rows are rendered server-side already in
+// the default sort order (Last seen desc); a small vanilla `<script>` reorders the
+// <tr> nodes on a header click — same no-framework idiom as ViewToggle/glossary.
+import { colorFor } from '../graph/graph-meta';
+import type { ColumnDef, TableRow } from '../../lib/header-table';
+
+const { collection, columns, rows } = Astro.props as {
+  collection: string;
+  columns: ColumnDef[];
+  rows: TableRow[];
+};
+const tint = colorFor(collection);
+
+// Semantic allegiance order (spec §8 default: ally → neutral → enemy) and status
+// order — both encoded as numbers so the column sorts as `num`.
+const ALLEGIANCE_ORDER: Record<string, number> = { ally: 0, neutral: 1, enemy: 2 };
+const ALLEGIANCE_LABEL: Record<string, string> = { ally: 'Ally', enemy: 'Enemy', neutral: 'Neutral' };
+const isDeceased = (s?: string | null) => !!s && /(deceas|dead|fallen|killed)/i.test(s);
+
+/** The value the client sorter compares for a given row+column. '' = empty → sorts last. */
+function sortVal(r: TableRow, key: ColumnDef['key']): string {
+  switch (key) {
+    case 'name':
+      return r.title.toLowerCase();
+    case 'role':
+      return (r.role ?? '').toLowerCase();
+    case 'allegiance':
+      return r.allegiance != null ? String(ALLEGIANCE_ORDER[r.allegiance] ?? 9) : '';
+    case 'status':
+      return r.status != null ? String(isDeceased(r.status) ? 1 : 0) : '';
+    case 'debutArc':
+      return r.debutArc ? String(r.debutArc.order) : '';
+    case 'episodes':
+      return String(r.episodes);
+    case 'lastSeen':
+      return r.lastSeen != null ? String(r.lastSeen) : '';
+    case 'refs':
+      return String(r.refs);
+  }
+}
+
+const epHref = (n: number) => `/episodes/e${String(n).padStart(3, '0')}`;
+---
+
+<div class="entity-table-wrap">
+  <table class="entity-table" data-default-sort="lastSeen" data-default-dir="desc">
+    <thead>
+      <tr>
+        {
+          columns.map((c) => (
+            <th
+              scope="col"
+              data-col={c.key}
+              data-type={c.sort === 'text' ? 'text' : 'num'}
+              class:list={['et-th', { 'et-th--num': c.sort !== 'text', 'et-mobile-hide': c.mobileHide }]}
+              aria-sort="none"
+            >
+              <button type="button" class="et-sort">
+                <span>{c.label}</span>
+                <span class="et-caret" aria-hidden="true" />
+              </button>
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r) => (
+          <tr>
+            {columns.map((c) => {
+              const cls = ['et-td', c.sort !== 'text' ? 'et-td--num' : '', c.mobileHide ? 'et-mobile-hide' : '']
+                .filter(Boolean)
+                .join(' ');
+              const sv = sortVal(r, c.key);
+              if (c.key === 'name') {
+                return (
+                  <td class={`${cls} et-name`} data-s={sv}>
+                    <a href={r.href}>
+                      {r.img ? (
+                        <img
+                          class="et-avatar"
+                          src={r.img}
+                          alt=""
+                          width="40"
+                          height="40"
+                          loading="lazy"
+                          style={`object-position:${r.artType === 'portrait' ? 'center top' : 'center'}`}
+                        />
+                      ) : (
+                        <span class="et-avatar et-avatar--ph" style={`background:${tint}1f;color:${tint}`}>
+                          {(r.title[0] ?? '?').toUpperCase()}
+                        </span>
+                      )}
+                      <span class="et-name-text">{r.title}</span>
+                    </a>
+                  </td>
+                );
+              }
+              if (c.key === 'allegiance') {
+                return (
+                  <td class={cls} data-s={sv}>
+                    {r.allegiance ? (
+                      <span class={`et-chip et-chip--${r.allegiance}`}>{ALLEGIANCE_LABEL[r.allegiance]}</span>
+                    ) : (
+                      <span class="et-empty">—</span>
+                    )}
+                  </td>
+                );
+              }
+              if (c.key === 'status') {
+                return (
+                  <td class={cls} data-s={sv}>
+                    {r.status ? (
+                      <span class={`et-status${isDeceased(r.status) ? ' et-status--dead' : ''}`}>
+                        {isDeceased(r.status) ? 'Deceased' : 'Living'}
+                      </span>
+                    ) : (
+                      <span class="et-empty">—</span>
+                    )}
+                  </td>
+                );
+              }
+              if (c.key === 'debutArc') {
+                return (
+                  <td class={cls} data-s={sv}>
+                    {r.debutArc ? (
+                      <a href={`/arcs/${r.debutArc.slug}`}>{r.debutArc.title}</a>
+                    ) : (
+                      <span class="et-empty">—</span>
+                    )}
+                  </td>
+                );
+              }
+              if (c.key === 'lastSeen') {
+                return (
+                  <td class={cls} data-s={sv}>
+                    {r.lastSeen != null ? (
+                      <a href={epHref(r.lastSeen)}>E{r.lastSeen}</a>
+                    ) : (
+                      <span class="et-empty">—</span>
+                    )}
+                  </td>
+                );
+              }
+              if (c.key === 'role') {
+                return (
+                  <td class={cls} data-s={sv}>
+                    {r.role ? r.role : <span class="et-empty">—</span>}
+                  </td>
+                );
+              }
+              // episodes / refs — plain integers
+              return (
+                <td class={cls} data-s={sv}>
+                  {c.key === 'episodes' ? r.episodes : r.refs}
+                </td>
+              );
+            })}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Client-side sort: reorder <tr> on header click. No framework, no persistence
+  // (resets to default on reload) — mirrors the ViewToggle / glossary filtering idiom.
+  (function () {
+    var table = document.querySelector('.entity-table');
+    if (!table) return;
+    var tbody = table.querySelector('tbody');
+    if (!tbody) return;
+    var ths = Array.prototype.slice.call(table.querySelectorAll('th[data-col]')) as HTMLElement[];
+    var active = table.getAttribute('data-default-sort') || 'name';
+    var dir = table.getAttribute('data-default-dir') === 'asc' ? 1 : -1;
+
+    function valFor(tr: Element, col: string) {
+      var cell = tr.querySelector('[data-col-cell="' + col + '"]');
+      return cell ? cell.getAttribute('data-s') : '';
+    }
+
+    // Tag each cell with its column key so valFor can find it (cells are positional).
+    var cols = ths.map(function (th) {
+      return { key: th.getAttribute('data-col'), type: th.getAttribute('data-type') };
+    });
+    Array.prototype.forEach.call(tbody.querySelectorAll('tr'), function (tr: Element) {
+      Array.prototype.forEach.call(tr.children, function (td: Element, i: number) {
+        if (cols[i] && cols[i].key) td.setAttribute('data-col-cell', cols[i].key as string);
+      });
+    });
+
+    function typeOf(col: string) {
+      for (var i = 0; i < cols.length; i++) if (cols[i].key === col) return cols[i].type;
+      return 'text';
+    }
+
+    function apply() {
+      var type = typeOf(active);
+      var rows = Array.prototype.slice.call(tbody!.querySelectorAll('tr')) as HTMLElement[];
+      rows.sort(function (a, b) {
+        var va = valFor(a, active);
+        var vb = valFor(b, active);
+        // Empty cells sort last regardless of direction.
+        var ea = va === '' || va == null;
+        var eb = vb === '' || vb == null;
+        if (ea && eb) return 0;
+        if (ea) return 1;
+        if (eb) return -1;
+        var cmp;
+        if (type === 'num') cmp = parseFloat(va as string) - parseFloat(vb as string);
+        else cmp = (va as string) < (vb as string) ? -1 : (va as string) > (vb as string) ? 1 : 0;
+        return cmp * dir;
+      });
+      rows.forEach(function (tr) {
+        tbody!.appendChild(tr);
+      });
+      ths.forEach(function (th) {
+        var on = th.getAttribute('data-col') === active;
+        th.setAttribute('aria-sort', on ? (dir === 1 ? 'ascending' : 'descending') : 'none');
+        th.classList.toggle('et-th--active', on);
+        th.classList.toggle('et-th--asc', on && dir === 1);
+        th.classList.toggle('et-th--desc', on && dir === -1);
+      });
+    }
+
+    ths.forEach(function (th) {
+      var btn = th.querySelector('.et-sort');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var col = th.getAttribute('data-col');
+        if (!col) return;
+        if (col === active) {
+          dir = -dir;
+        } else {
+          active = col;
+          // Sensible first-click direction: numeric desc (big first), text asc.
+          dir = typeOf(col) === 'num' ? -1 : 1;
+        }
+        apply();
+      });
+    });
+
+    apply();
+  })();
+</script>
+
+<style>
+  /* Visible only in the `list` density (spec §5.4) — cards/table swap is pure CSS. */
+  .entity-table-wrap {
+    display: none;
+    overflow-x: auto; /* phone fallback: scroll rather than cram (spec §6) */
+  }
+  :global(html[data-density='list']) .entity-table-wrap {
+    display: block;
+  }
+  /* Conversely, hide the whole card view (headings + grid) when the table shows.
+     `.hp-cardview` is rendered by index.astro (a different scope), so the whole
+     selector must be :global to match it. It only exists on /npcs & /items. */
+  :global(html[data-density='list'] .hp-cardview) {
+    display: none;
+  }
+
+  .entity-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .et-th {
+    text-align: left;
+    border-bottom: 2px solid var(--hairline);
+    padding: 0;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .et-th--num {
+    text-align: right;
+  }
+  .et-sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+    font: 600 0.74rem 'Inter', sans-serif;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.6rem;
+  }
+  .et-th--num .et-sort {
+    justify-content: flex-end;
+  }
+  .et-sort:hover {
+    color: var(--text);
+  }
+  .et-th--active .et-sort {
+    color: var(--gold);
+  }
+  /* Caret reflects the active column + direction. */
+  .et-caret {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  .et-th--active .et-caret {
+    opacity: 1;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+  .et-th--active.et-th--asc .et-caret {
+    border-bottom: 5px solid currentColor;
+  }
+  .et-th--active.et-th--desc .et-caret {
+    border-top: 5px solid currentColor;
+  }
+
+  .et-td {
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: middle;
+  }
+  .et-td--num {
+    text-align: right;
+  }
+  .entity-table tbody tr:hover {
+    background: color-mix(in srgb, var(--gold) 6%, transparent);
+  }
+  .et-empty {
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  /* Name cell — avatar + link. */
+  .et-name a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 500;
+    min-width: 0;
+  }
+  .et-avatar {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .et-avatar--ph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .et-name-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Allegiance chip + status. */
+  .et-chip {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid transparent;
+  }
+  .et-chip--ally {
+    background: color-mix(in srgb, #2e7d4f 18%, transparent);
+    color: #2e7d4f;
+    border-color: color-mix(in srgb, #2e7d4f 35%, transparent);
+  }
+  .et-chip--enemy {
+    background: color-mix(in srgb, #b3261e 16%, transparent);
+    color: #b3261e;
+    border-color: color-mix(in srgb, #b3261e 35%, transparent);
+  }
+  .et-chip--neutral {
+    background: color-mix(in srgb, var(--muted) 16%, transparent);
+    color: var(--muted);
+    border-color: color-mix(in srgb, var(--muted) 35%, transparent);
+  }
+  .et-status--dead {
+    color: var(--muted);
+  }
+
+  /* Phone (≤480px): drop the two lowest-value columns, shrink the avatar, keep
+     headers tappable (44px). The wrap already allows horizontal scroll if needed. */
+  @media (max-width: 480px) {
+    .et-mobile-hide {
+      display: none;
+    }
+    .et-avatar {
+      width: 32px;
+      height: 32px;
+    }
+    .et-name-text {
+      max-width: 9rem;
+    }
+    .et-sort {
+      min-height: 2.75rem;
+    }
+  }
+</style>

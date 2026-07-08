@@ -1,0 +1,34 @@
+---
+/**
+ * Frontmatter-driven badge row: type · status · relation.
+ * All but the type badge are optional, so pages without the fields just show
+ * the tier type badge. Backfill `role`/`relation`/`status` incrementally.
+ */
+import { TIER_LABEL_SINGULAR } from '../lib/paths';
+
+const { tier, role, status, relation } = Astro.props as {
+  tier: string;
+  role?: string | null;
+  status?: string | null;
+  relation?: 'ally' | 'enemy' | 'neutral' | null;
+};
+
+const typeLabel = TIER_LABEL_SINGULAR[tier] ?? tier;
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+// Map a status string to a colour bucket.
+function statusClass(s: string): string {
+  const v = s.toLowerCase();
+  if (/(deceas|dead|fallen|killed)/.test(v)) return 's-deceased';
+  if (/(destroy|ruin|razed|lost|abandon)/.test(v)) return 's-destroyed';
+  if (/(active|alive|living|allied|operational)/.test(v)) return 's-active';
+  return 's-unknown';
+}
+const relLabel: Record<string, string> = { ally: 'Ally', enemy: 'Enemy', neutral: 'Neutral' };
+---
+
+<div class="badges">
+  <span class="badge type">{role ? `${typeLabel} · ${role}` : typeLabel}</span>
+  {status && <span class={`badge ${statusClass(status)}`}>{cap(status)}</span>}
+  {relation && <span class={`badge r-${relation}`}>{relLabel[relation]}</span>}
+</div>

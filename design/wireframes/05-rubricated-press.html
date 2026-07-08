@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mally "Molly" Grisham — Annals of Alambor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:wght@800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf7f0;
+    --ink: #1c1a16;
+    --grey: #8c867a;
+    --red: #b3261e;           /* rubrication red */
+    --red-soft: #d8b5b2;
+    --hair: #e6e0d3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--red); color: var(--paper); }
+  body {
+    font-family: 'EB Garamond', serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1.62;
+  }
+  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--red); }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    text-align: center;
+    padding: 3rem 1rem 1.6rem;
+  }
+  .masthead .title {
+    font-size: 1.05rem;
+    letter-spacing: .55em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .masthead .title .pilcrow { color: var(--red); }
+  .masthead .rule {
+    width: 64px; margin: 1.1rem auto 0;
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+  }
+  .masthead .rule::after {
+    content: "✠";
+    position: absolute; left: 50%; top: -0.62em; transform: translateX(-50%);
+    background: var(--paper); padding: 0 .5rem;
+    color: var(--red); font-size: .7rem;
+  }
+  .masthead nav { margin-top: 1.3rem; font-size: .85rem; letter-spacing: .18em; text-transform: uppercase; }
+  .masthead nav a { text-decoration: none; color: var(--grey); margin: 0 1rem; }
+  .masthead nav a:hover, .masthead nav a.here { color: var(--red); }
+
+  /* ===== Article column with marginalia ===== */
+  .page {
+    max-width: 1060px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem 6rem;
+    display: grid;
+    grid-template-columns: 168px minmax(0, 620px) 168px;
+    gap: 2.6rem;
+    justify-content: center;
+  }
+
+  .margin-l, .margin-r { font-size: .8rem; color: var(--grey); line-height: 1.55; }
+  .margin-l { text-align: right; }
+  .note { margin-bottom: 1.7rem; }
+  .note .no { color: var(--red); font-style: normal; }
+  .note em { font-style: italic; }
+  .margin-r .toc-block { position: sticky; top: 2rem; }
+  .margin-r .toc-block .h {
+    font-size: .68rem; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--red); margin-bottom: .7rem;
+  }
+  .margin-r .toc-block a {
+    display: block; text-decoration: none; color: var(--grey);
+    padding: .18rem 0; font-size: .82rem;
+  }
+  .margin-r .toc-block a:hover { color: var(--ink); }
+  .margin-r .toc-block a i { color: var(--red); font-style: normal; margin-right: .5rem; }
+
+  /* ===== Center column ===== */
+  .kind {
+    font-size: .75rem;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.1rem;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 3.6rem;
+    line-height: 1.04;
+    letter-spacing: -.01em;
+    margin-bottom: .5rem;
+  }
+  h1 .quo { color: var(--red); }
+  .epithet { font-style: italic; font-size: 1.4rem; color: var(--grey); margin-bottom: 2rem; }
+
+  /* facts as a single rubricated line, not a box */
+  .factline {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--hair);
+    padding: .8rem 0;
+    margin-bottom: 2.4rem;
+    font-size: .88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 0;
+  }
+  .factline span { white-space: nowrap; }
+  .factline .div { color: var(--red); margin: 0 .85rem; }
+  .factline b { font-weight: 600; }
+
+  .portrait {
+    aspect-ratio: 16/7;
+    border: 1px solid var(--hair);
+    background: linear-gradient(120deg, #f1ece1, #faf7f0);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--grey); font-style: italic; font-size: .9rem;
+    margin-bottom: .5rem;
+  }
+  .portrait + .credit { font-size: .75rem; color: var(--grey); text-align: right; margin-bottom: 2.4rem; }
+  .credit i { color: var(--red); font-style: normal; }
+
+  article h2 {
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    margin: 3rem 0 1.1rem;
+    color: var(--ink);
+  }
+  article h2::before { content: "¶ "; color: var(--red); letter-spacing: 0; }
+  article p { margin-bottom: 1.15rem; }
+
+  /* big rubricated drop cap, but printerly not illuminated */
+  .opener::first-letter {
+    float: left;
+    font-weight: 800;
+    font-size: 5.2rem;
+    line-height: .82;
+    padding: .4rem .85rem 0 0;
+    color: var(--red);
+  }
+
+  /* pull quote */
+  .pull {
+    margin: 2.4rem 0;
+    padding: 0 0 0 1.6rem;
+    border-left: 2px solid var(--red);
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .pull .attr { display: block; font-size: .85rem; font-style: normal; color: var(--grey); margin-top: .6rem; letter-spacing: .1em; text-transform: uppercase; }
+
+  article ul { list-style: none; margin-bottom: 1.15rem; }
+  article ul li { padding-left: 1.5rem; position: relative; margin-bottom: .55rem; }
+  article ul li::before { content: "·"; color: var(--red); font-weight: 800; position: absolute; left: .4rem; font-size: 1.4rem; line-height: 1.1; }
+
+  .openq { font-style: italic; }
+  .openq i { font-style: normal; color: var(--red); }
+
+  /* end matter */
+  .endmark { text-align: center; color: var(--red); font-size: 1.1rem; margin: 3rem 0 2.4rem; letter-spacing: 1.4em; padding-left: 1.4em; }
+  .see-also { border-top: 1px solid var(--ink); padding-top: 1.2rem; font-size: .92rem; }
+  .see-also .h { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--red); margin-bottom: .6rem; }
+  .see-also a { margin-right: 1.6rem; }
+
+  footer { text-align: center; font-size: .8rem; color: var(--grey); padding: 0 1rem 3.5rem; font-style: italic; }
+
+  @media (max-width: 1020px) {
+    .page { grid-template-columns: minmax(0,1fr); max-width: 680px; }
+    .margin-l, .margin-r { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="title">Annals <span class="pilcrow">¶</span> of <span class="pilcrow">¶</span> Alambor</div>
+  <div class="rule"></div>
+  <nav>
+    <a href="#">The Story</a>
+    <a href="#" class="here">Persons</a>
+    <a href="#">Places</a>
+    <a href="#">Factions</a>
+    <a href="#">Episodes</a>
+    <a href="#">Search</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <!-- left margin: scholarly notes -->
+  <aside class="margin-l">
+    <div class="note"><span class="no">a.</span> Diarization in the early transcripts renders him a dozen ways; the canon spelling was fixed by the glossary, 2026. <em>Fourteen aliases survive.</em></div>
+    <div class="note"><span class="no">b.</span> The wedding-letter courier of E20 and the pirate lord of E143+ were only confirmed to be the same man under Divine Sense.</div>
+    <div class="note"><span class="no">c.</span> The Wish was stored in a bracelet — its loss visibly cost him.</div>
+  </aside>
+
+  <!-- center column -->
+  <article>
+    <div class="kind">Persons · Pirates · № 47</div>
+    <h1>Mally <span class="quo">“</span>Molly<span class="quo">”</span> Grisham</h1>
+    <div class="epithet">the Sparrow — captain of Fortune’s Favor, lord of Anchors Rest</div>
+
+    <div class="factline">
+      <span><b>Status</b> living, ally</span><span class="div">¶</span>
+      <span><b>Vessel</b> Fortune’s Favor</span><span class="div">¶</span>
+      <span><b>Sigil</b> the sparrow</span><span class="div">¶</span>
+      <span><b>First</b> E20</span><span class="div">¶</span>
+      <span><b>Last</b> E161</span>
+    </div>
+
+    <div class="portrait">wide editorial portrait — engraving style</div>
+    <div class="credit"><i>fig. 1</i> — The Sparrow at the Crow’s Ledger</div>
+
+    <h2 id="person">Of the man himself</h2>
+    <p class="opener">Pirate captain of <a href="#">Fortune’s Favor</a> — sparrow flag, big poofy hat, short and very fast, with high cheekbones, piercing blue eyes, and a scar. Under Divine Sense he reads as inherently good but complicated, darkened by pressures. He is the same person as “Shauwn O’Malley,” who delivered the royal wedding letter in <a href="#">E20</a>.</p>
+
+    <h2 id="artifact">The artifact he gave away</h2>
+    <p>His sparrow calling card was left where the final <a href="#">Zeben artifact</a> was stolen: drunk Archivists tipped him to a relic beneath the seas, and he navigated the fog-bound Veiled Ocean to the underwater Temple of Fenreal and retrieved it — then traded it away for something very important to him. It now lies in the <a href="#">Jazacha</a> jungles with the artifact-obsessed Yuan-Ti of Oojezz.</p>
+
+    <div class="pull">
+      “Capture the Kraken plaguing the Pirate Trinity.”
+      <span class="attr">— his price, set at the Crow’s Ledger</span>
+    </div>
+
+    <h2 id="kraken">The Kraken &amp; the crown of Anchors Rest</h2>
+    <p>The party did capture it. Mally controlled the beast with a scepter and chain, delivered it at Krakens Reef, and so leads the pirates of <a href="#">Anchors Rest</a>.</p>
+
+    <h2 id="jazacha">Jazacha, and the cost of a Wish</h2>
+    <p>He guided the four-ship armada to Jazacha and the jungle expedition — five of his men died — and burned the Wish spell stored in his bracelet to wish <a href="#">Zuk’taal</a> away, leaving him dejected. He also leaked the party’s destination to the Trinity, and warned that <a href="#">Zax</a>, the Merchant, and possibly <a href="#">Sir Trent Hightower</a> had contacted them.</p>
+
+    <h2 id="bonds">Bonds &amp; whereabouts</h2>
+    <ul>
+      <li>Active ally and guide as of E161; left the party on floor four — business back in Oojezz.</li>
+      <li>Old hand with <a href="#">Jameti Costco</a> as a jungle guide (“something went real wrong”).</li>
+      <li>Renee at Airsteach is an ex-employee.</li>
+    </ul>
+
+    <h2 id="questions">Questions the annals leave open</h2>
+    <p class="openq"><i>i.</i> What did Mally trade the final artifact for?</p>
+    <p class="openq"><i>ii.</i> How damaging is his information leak to the Pirate Trinity?</p>
+
+    <div class="endmark">❦ ❦ ❦</div>
+
+    <div class="see-also">
+      <div class="h">See also</div>
+      <a href="#">Jameti Costco</a>
+      <a href="#">Jazacha</a>
+      <a href="#">The Pirate Trinity</a>
+      <a href="#">Fortune’s Favor</a>
+    </div>
+  </article>
+
+  <!-- right margin: contents + appearances -->
+  <aside class="margin-r">
+    <div class="toc-block">
+      <div class="h">Contents</div>
+      <a href="#person"><i>¶</i>Of the man himself</a>
+      <a href="#artifact"><i>¶</i>The artifact he gave away</a>
+      <a href="#kraken"><i>¶</i>The Kraken &amp; the crown</a>
+      <a href="#jazacha"><i>¶</i>Jazacha, and the Wish</a>
+      <a href="#bonds"><i>¶</i>Bonds &amp; whereabouts</a>
+      <a href="#questions"><i>¶</i>Open questions</a>
+      <div class="h" style="margin-top:1.8rem">Appears in</div>
+      <a href="#">E20 — the wedding letter</a>
+      <a href="#">E143–147 — Anchors Rest</a>
+      <a href="#">E149–153 — the Kraken</a>
+      <a href="#">E155–161 — Jazacha</a>
+    </div>
+  </aside>
+
+</div>
+
+<footer>Annals of Alambor · set from the canon, as the scribes recorded it · errors are the table’s own</footer>
+
+</body>
+</html>

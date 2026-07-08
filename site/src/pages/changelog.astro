@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { formatDate } from '../lib/format';
+import { allEvents, groupByDay, badge, tierLabel } from '../lib/changelog';
+
+const events = allEvents();
+const groups = groupByDay(events);
+
+// Filter chips — counts drive the labels; the filtering itself is client-side
+// (the data is fully rendered, static). "Art" covers new-art + art-redo.
+const count = (pred: (t: string) => boolean) => events.filter((e) => pred(e.type)).length;
+const filters = [
+  { key: 'all', label: 'All', n: events.length },
+  { key: 'new-article', label: 'New articles', n: count((t) => t === 'new-article') },
+  { key: 'art', label: 'New art', n: count((t) => t === 'new-art' || t === 'art-redo') },
+  { key: 'edit', label: 'Edits', n: count((t) => t === 'edit') },
+];
+
+// A row's filter bucket: art-redo folds under "art", everything else is its own type.
+const bucket = (type: string) => (type === 'art-redo' ? 'new-art' : type);
+---
+
+<BaseLayout title="Changelog" description="What's changed across the Alambor Codex — new articles, freshly generated art, and edits, newest first.">
+  <Breadcrumbs trail={[{ label: 'Wiki', href: '/' }, { label: 'Changelog' }]} />
+  <h1>Changelog</h1>
+  <p class="lede">
+    Everything that's changed across the codex — new dossiers, freshly illustrated
+    art, and edits — newest first. Bulk resyncs and sanitization passes are folded
+    into a single line so the real signal stays visible.
+  </p>
+
+  <div class="cl-filters" role="tablist" aria-label="Filter changes">
+    {
+      filters.map((f) => (
+        <button
+          type="button"
+          class:list={['cl-chip', { active: f.key === 'all' }]}
+          data-filter={f.key}
+          disabled={f.n === 0}
+        >
+          {f.label} <span class="cl-chip-n">{f.n}</span>
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="cl-stream" data-active-filter="all">
+    {
+      groups.map((g) => (
+        <section class="cl-day" data-day>
+          <h2 class="cl-date">{formatDate(g.date)}</h2>
+          <ul class="cl-list">
+            {g.events.map((e) =>
+              e.type === 'maintenance' ? (
+                <li class="cl-row is-maintenance" data-type="maintenance" data-bucket="maintenance">
+                  <span class="feed-tag is-maint">Maintenance</span>
+                  <span class="cl-maint-text">
+                    {e.summary}{' '}
+                    <span class="cl-maint-n">· {e.fileCount} {e.fileCount === 1 ? 'file' : 'files'}</span>
+                  </span>
+                </li>
+              ) : (
+                <li class="cl-row" data-type={e.type} data-bucket={bucket(e.type)}>
+                  {e.art && (
+                    <a class="cl-thumb" href={e.href} aria-hidden="true" tabindex="-1">
+                      <img src={e.art} alt="" loading="lazy" />
+                    </a>
+                  )}
+                  <span class="cl-body">
+                    <a class="cl-name" href={e.href}>
+                      {e.name}
+                    </a>
+                    <span class="cl-meta">
+                      <span class={`feed-tag ${badge(e.type).cls}`}>
+                        {badge(e.type).icon ? `${badge(e.type).icon} ` : ''}
+                        {badge(e.type).label}
+                      </span>
+                      <span class="cl-tier">{tierLabel(e.tier)}</span>
+                    </span>
+                  </span>
+                </li>
+              ),
+            )}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .lede {
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+
+  /* ── filter chips ── */
+  .cl-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.4rem 0 0.4rem;
+  }
+  .cl-chip {
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 99px;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: color var(--dur-state) var(--ease-out), border-color var(--dur-state) var(--ease-out);
+  }
+  .cl-chip:hover:not(:disabled) {
+    color: var(--text);
+    border-color: var(--gold-soft);
+  }
+  .cl-chip.active {
+    color: var(--gold);
+    border-color: var(--gold-soft);
+    background: color-mix(in srgb, var(--gold) 10%, var(--surface));
+  }
+  .cl-chip:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .cl-chip-n {
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    margin-left: 0.15rem;
+  }
+
+  /* ── day groups ── */
+  .cl-stream {
+    margin-top: 1.2rem;
+  }
+  .cl-day {
+    margin-bottom: 1.6rem;
+  }
+  .cl-date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 0.35rem;
+    margin: 0 0 0.5rem;
+  }
+  .cl-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* ── rows ── */
+  .cl-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .cl-row:last-child {
+    border-bottom: 0;
+  }
+
+  /* Uniform cover-cropped square thumbnail for art rows. object-fit:cover keeps
+     mixed aspect ratios (portrait PCs, landscape locations) from distorting — a
+     clean square grid, center-cropped. */
+  .cl-thumb {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .cl-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cl-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.7rem;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .cl-name {
+    font-weight: 500;
+  }
+  .cl-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    white-space: nowrap;
+  }
+  .cl-tier {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* maintenance — a single muted line */
+  .cl-row.is-maintenance {
+    gap: 0.6rem;
+  }
+  .cl-maint-text {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .cl-maint-n {
+    color: var(--faint);
+  }
+
+  /* ── client-side filtering ── */
+  .cl-stream[data-active-filter='new-article'] .cl-row:not([data-bucket='new-article']),
+  .cl-stream[data-active-filter='new-art'] .cl-row:not([data-bucket='new-art']),
+  .cl-stream[data-active-filter='edit'] .cl-row:not([data-bucket='edit']) {
+    display: none;
+  }
+  /* Hide a day group whose every row is filtered out. */
+  .cl-day.is-empty {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .cl-thumb {
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>
+
+<script>
+  // Filter chips: set the stream's active filter, then hide day groups that end
+  // up with no visible rows. Pure presentation over the fully-rendered list.
+  (function () {
+    const stream = document.querySelector<HTMLElement>('.cl-stream');
+    const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.cl-chip'));
+    if (!stream || !chips.length) return;
+
+    function apply(filter: string) {
+      stream!.dataset.activeFilter = filter;
+      stream!.querySelectorAll<HTMLElement>('.cl-day').forEach((day) => {
+        const rows = Array.from(day.querySelectorAll<HTMLElement>('.cl-row'));
+        const anyVisible = rows.some((r) => getComputedStyle(r).display !== 'none');
+        day.classList.toggle('is-empty', !anyVisible);
+      });
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        if (chip.disabled) return;
+        chips.forEach((c) => c.classList.toggle('active', c === chip));
+        apply(chip.dataset.filter || 'all');
+      });
+    });
+  })();
+</script>

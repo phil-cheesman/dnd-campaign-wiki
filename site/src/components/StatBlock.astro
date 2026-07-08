@@ -1,0 +1,104 @@
+---
+/**
+ * PC stat-block highlights — alignment, race/class/level, AC/HP/speed, the six
+ * ability scores, and a few signature features. Reads the `sheet` + `alignment`
+ * frontmatter; every field is optional, so it degrades to whatever is known.
+ */
+import { parseAlignment } from '../lib/alignment';
+import StatRadar from './StatRadar.astro';
+
+const { data, slug } = Astro.props as { data: any; slug?: string };
+const sheet = data.sheet ?? {};
+const align = parseAlignment(data.alignment);
+const inferred = data.alignment_inferred;
+
+const ABIL = [
+  ['STR', 'str'],
+  ['DEX', 'dex'],
+  ['CON', 'con'],
+  ['INT', 'int'],
+  ['WIS', 'wis'],
+  ['CHA', 'cha'],
+] as const;
+const ab = sheet.abilities;
+const mod = (n: number) => (n - 10 >= 0 ? `+${Math.floor((n - 10) / 2)}` : `${Math.floor((n - 10) / 2)}`);
+
+const stats = [
+  ab && sheet.ac != null ? ['AC', sheet.ac] : null,
+  sheet.hp != null ? ['HP', sheet.hp] : null,
+  sheet.speed != null ? ['Speed', `${sheet.speed} ft`] : null,
+].filter(Boolean) as [string, string | number][];
+
+const subline = [sheet.species, sheet.class].filter(Boolean).join(' · ');
+const signatures: string[] = Array.isArray(sheet.signatures) ? sheet.signatures : [];
+---
+
+<section class="statblock" data-pagefind-ignore>
+  {
+    align && (
+      <p class={`align-line a-${align.goodEvil} a-${align.lawChaos}`}>
+        <span class="align-dot">{align.abbr}</span>
+        <span class="align-label">
+          {align.label}
+          {inferred && <em class="inferred" title="Inferred from canon — not from a character sheet">inferred</em>}
+        </span>
+      </p>
+    )
+  }
+
+  {subline && <p class="subline">{subline}</p>}
+
+  {
+    stats.length > 0 && (
+      <ul class="combat">
+        {stats.map(([k, v]) => (
+          <li>
+            <span class="ck">{k}</span>
+            <span class="cv">{v}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    ab && (
+      <div class="ability-radar">
+        <StatRadar series={[{ name: data.name, slug: slug ?? '', abilities: ab }]} size={184} />
+      </div>
+    )
+  }
+
+  {
+    ab && (
+      <ul class="abilities">
+        {ABIL.map(([label, key]) => (
+          <li>
+            <span class="al">{label}</span>
+            <span class="as">{ab[key]}</span>
+            <span class="am">{mod(ab[key])}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    signatures.length > 0 && (
+      <div class="sig">
+        <dt>Signature</dt>
+        <ul>
+          {signatures.map((s) => (
+            <li>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .ability-radar {
+    margin: 0.3rem 0 0.7rem;
+  }
+</style>

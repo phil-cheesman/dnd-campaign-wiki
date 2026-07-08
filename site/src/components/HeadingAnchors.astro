@@ -1,0 +1,124 @@
+---
+// Reading-experience micro-interaction: on hover, each in-prose h2/h3 reveals a
+// faint gold "#" that deep-links to the heading and copies the canonical URL.
+// On copy it morphs to a gold checkmark (the shared §5d copy-confirmation). The
+// anchors are injected client-side from Astro's already-emitted heading ids, so
+// no markup/pipeline change is needed. Mounted once in BaseLayout.
+---
+
+<script is:inline>
+  (function () {
+    function init() {
+      var article = document.querySelector('main.article');
+      if (!article) return;
+      var heads = article.querySelectorAll('h2[id], h3[id]');
+      heads.forEach(function (h) {
+        if (h.querySelector('.heading-anchor')) return; // idempotent
+        var a = document.createElement('a');
+        a.className = 'heading-anchor';
+        a.href = '#' + h.id;
+        a.textContent = '#';
+        a.setAttribute('aria-label', 'Copy link to this section');
+        var resetTimer;
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          // Deep-link (updates the URL hash + scrolls via scroll-margin-top)…
+          history.pushState(null, '', '#' + h.id);
+          h.scrollIntoView();
+          // …and copy the full URL to the clipboard, then morph to a checkmark.
+          var url = location.href;
+          var done = function () {
+            a.classList.add('copied');
+            a.textContent = '✓';
+            window.clearTimeout(resetTimer);
+            resetTimer = window.setTimeout(function () {
+              a.classList.remove('copied');
+              a.textContent = '#';
+            }, 1100);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done).catch(done);
+          } else {
+            done();
+          }
+        });
+        h.appendChild(a);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style is:global>
+  /* The anchor floats in the left gutter of the heading; revealed on hover only
+     (pointer devices), or on keyboard focus. GPU-only (opacity/scale). */
+  .article h2,
+  .article h3 {
+    position: relative;
+  }
+  .heading-anchor {
+    position: absolute;
+    left: -1.05em;
+    top: 0;
+    width: 1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-soft);
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0;
+    transition:
+      opacity var(--dur-instant) var(--ease-out),
+      color var(--dur-instant) ease;
+  }
+  .heading-anchor:hover {
+    text-decoration: none;
+    color: var(--gold);
+  }
+  @media (hover: hover) {
+    .article h2:hover .heading-anchor,
+    .article h3:hover .heading-anchor {
+      opacity: 0.55;
+    }
+    .article h2:hover .heading-anchor:hover,
+    .article h3:hover .heading-anchor:hover {
+      opacity: 1;
+    }
+  }
+  .heading-anchor:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--gold-soft);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  /* Copy confirmation: the "#" becomes a gold "✓" that grows in (§5d). */
+  .heading-anchor.copied {
+    opacity: 1;
+    color: var(--gold);
+    animation: heading-anchor-pop var(--dur-state) var(--ease-out);
+  }
+  @keyframes heading-anchor-pop {
+    from {
+      scale: 0.4;
+      opacity: 0;
+    }
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+  /* On narrow screens the gutter collapses; tuck the anchor inline after the text. */
+  @media (max-width: 1080px) {
+    .heading-anchor {
+      position: static;
+      width: auto;
+      margin-left: 0.4em;
+      opacity: 0.4;
+    }
+  }
+</style>

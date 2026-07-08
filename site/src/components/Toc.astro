@@ -1,0 +1,53 @@
+---
+/**
+ * Right-rail "On this page" TOC, built from the rendered article's headings
+ * (Astro's `render(entry).headings`). Sticky, with a scroll-spy highlight.
+ * BaseLayout only mounts this when there are >= 3 h2/h3 headings.
+ */
+interface Heading { depth: number; slug: string; text: string }
+const { items } = Astro.props as { items: Heading[] };
+---
+
+<nav class="toc" aria-label="On this page">
+  <h5>On this page</h5>
+  {
+    items.map((h) => (
+      <a href={`#${h.slug}`} data-toc-link={h.slug} class={h.depth >= 3 ? 'sub' : ''}>
+        {h.text}
+      </a>
+    ))
+  }
+</nav>
+
+<script is:inline>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a[data-toc-link]'));
+    if (!links.length) return;
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute('data-toc-link')] = a; });
+    var targets = links
+      .map(function (a) { return document.getElementById(a.getAttribute('data-toc-link')); })
+      .filter(Boolean);
+    if (!targets.length) return;
+
+    var current = null;
+    function setActive(id) {
+      if (id === current) return;
+      current = id;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (byId[id]) byId[id].classList.add('on');
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Pick the topmost heading currently intersecting the upper band of the viewport.
+        var visible = entries
+          .filter(function (e) { return e.isIntersecting; })
+          .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+        if (visible.length) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+    );
+    targets.forEach(function (t) { observer.observe(t); });
+  })();
+</script>

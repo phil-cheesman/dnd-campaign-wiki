@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mally "Molly" Grisham — The Alambor Folio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f0e2c4;
+    --parchment-dark: #e2cfa3;
+    --ink: #3a2c1a;
+    --ink-faded: #6b5638;
+    --rubric: #8e2417;      /* medieval red-ink rubrication */
+    --gold: #9c7a2e;
+    --border-ink: #5a4426;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'IM Fell English', serif;
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,250,230,.55) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(120,85,30,.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, var(--parchment) 0%, var(--parchment-dark) 100%);
+    min-height: 100vh;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  /* ===== Top banner ===== */
+  .banner {
+    text-align: center;
+    padding: 2.2rem 1rem 1.4rem;
+    border-bottom: double 4px var(--border-ink);
+    background: linear-gradient(rgba(90,68,38,.06), transparent);
+  }
+  .banner h1 {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 3.4rem;
+    font-weight: 400;
+    letter-spacing: .02em;
+  }
+  .banner h1 .red { color: var(--rubric); }
+  .banner .motto {
+    font-style: italic;
+    color: var(--ink-faded);
+    font-size: 1rem;
+    margin-top: .2rem;
+  }
+  .banner-nav {
+    margin-top: 1rem;
+    font-family: 'Cinzel', serif;
+    font-size: .82rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+  }
+  .banner-nav a { color: var(--ink); text-decoration: none; padding: 0 1.1rem; }
+  .banner-nav a:hover { color: var(--rubric); }
+  .banner-nav .sep { color: var(--gold); }
+
+  /* ===== Page frame ===== */
+  .folio {
+    max-width: 1040px;
+    margin: 2.5rem auto 4rem;
+    padding: 2.8rem 3rem;
+    border: 1px solid var(--border-ink);
+    outline: 3px double var(--border-ink);
+    outline-offset: 7px;
+    position: relative;
+    background: rgba(255, 250, 235, .25);
+  }
+  .folio::before, .folio::after {
+    content: "❧";
+    position: absolute;
+    color: var(--gold);
+    font-size: 1.6rem;
+  }
+  .folio::before { top: -4px; left: 14px; }
+  .folio::after  { bottom: -4px; right: 14px; transform: rotate(180deg); }
+
+  .breadcrumb {
+    font-family: 'Cinzel', serif;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 1.6rem;
+  }
+  .breadcrumb a { color: var(--ink-faded); }
+
+  /* ===== Article head ===== */
+  .article-head { text-align: center; margin-bottom: 1rem; }
+  .article-head .kicker {
+    font-family: 'Cinzel', serif;
+    color: var(--rubric);
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    font-size: .8rem;
+  }
+  .article-head h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin: .35rem 0 .15rem;
+    line-height: 1.15;
+  }
+  .article-head .epithet {
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink-faded);
+  }
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: .8em;
+    margin: 1.1rem 0 1.8rem;
+  }
+
+  /* ===== Two-column body: article + infobox ===== */
+  .columns { display: grid; grid-template-columns: 1fr 290px; gap: 2.6rem; }
+
+  /* Infobox as a "plate" */
+  .plate {
+    border: 1px solid var(--border-ink);
+    padding: 1.1rem;
+    background: rgba(90,68,38,.05);
+    font-size: .95rem;
+    height: fit-content;
+  }
+  .plate .portrait {
+    aspect-ratio: 3/4;
+    border: 1px solid var(--border-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-faded);
+    font-style: italic;
+    background:
+      linear-gradient(45deg, transparent 49.6%, var(--border-ink) 49.6%, var(--border-ink) 50.4%, transparent 50.4%),
+      linear-gradient(-45deg, transparent 49.6%, var(--border-ink) 49.6%, var(--border-ink) 50.4%, transparent 50.4%);
+    margin-bottom: .4rem;
+  }
+  .plate .caption {
+    text-align: center;
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--ink-faded);
+    margin-bottom: 1rem;
+  }
+  .plate h4 {
+    font-family: 'Cinzel', serif;
+    font-size: .78rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--rubric);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: .25rem;
+    margin: 1rem 0 .5rem;
+  }
+  .plate dl { display: grid; grid-template-columns: auto 1fr; gap: .25rem .7rem; }
+  .plate dt { font-weight: bold; white-space: nowrap; }
+  .plate dd { color: var(--ink-faded); }
+  .plate .episodes { line-height: 1.9; }
+  .plate .ep {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    padding: 0 .35rem;
+    font-size: .75rem;
+    font-family: 'Cinzel', serif;
+    margin: 0 .15rem .15rem 0;
+  }
+
+  /* ===== Article text ===== */
+  article h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    color: var(--rubric);
+    margin: 2.2rem 0 .7rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+  }
+  article h3::after { content: ""; flex: 1; border-bottom: 1px solid var(--gold); }
+  article h3 .num { color: var(--gold); font-size: .9rem; }
+  article p { margin-bottom: 1rem; text-align: justify; }
+  article a { color: var(--rubric); text-decoration: none; border-bottom: 1px dotted var(--rubric); }
+
+  /* Illuminated drop cap */
+  .dropcap::first-letter {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 4.6rem;
+    float: left;
+    line-height: .78;
+    padding: .35rem .6rem .1rem 0;
+    color: var(--rubric);
+  }
+
+  /* TOC as a manuscript "table of contents" */
+  .toc {
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: .9rem 0;
+    margin-bottom: .5rem;
+    font-size: .95rem;
+  }
+  .toc strong { font-family: 'Cinzel', serif; letter-spacing: .15em; font-size: .8rem; color: var(--ink-faded); }
+  .toc ol { list-style: none; column-count: 2; margin-top: .4rem; }
+  .toc li { margin-bottom: .15rem; }
+  .toc li::before { content: "✦ "; color: var(--gold); font-size: .7rem; }
+
+  article ul { margin: 0 0 1rem 1.4rem; }
+  article li { margin-bottom: .45rem; }
+  article li::marker { content: "❦  "; color: var(--gold); }
+
+  .open-question {
+    font-style: italic;
+    border-left: 3px double var(--rubric);
+    padding-left: 1rem;
+    margin-bottom: .8rem;
+    color: var(--ink-faded);
+  }
+
+  /* Related = marginalia cards */
+  .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: .8rem; }
+  .related a {
+    border: 1px solid var(--border-ink);
+    padding: .7rem .9rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: rgba(255,250,235,.4);
+  }
+  .related a:hover { background: rgba(156,122,46,.12); }
+  .related .type { font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .25em; color: var(--rubric); text-transform: uppercase; display: block; }
+  .related .name { font-size: 1.05rem; }
+
+  footer {
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-faded);
+    padding: 0 1rem 3rem;
+    font-size: .9rem;
+  }
+  footer .seal {
+    width: 54px; height: 54px;
+    margin: 0 auto .6rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #b8412e, var(--rubric) 70%);
+    display: flex; align-items: center; justify-content: center;
+    color: #f0dcc0; font-family: 'Cinzel', serif; font-weight: 700;
+    box-shadow: 0 2px 6px rgba(58,44,26,.4);
+  }
+
+  @media (max-width: 880px) {
+    .columns { grid-template-columns: 1fr; }
+    .folio { margin: 1rem; padding: 1.4rem; }
+    .toc ol { column-count: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <h1><span class="red">T</span>he Alambor Folio</h1>
+  <div class="motto">Being a true &amp; complete chronicle of the Alambor Six</div>
+  <nav class="banner-nav">
+    <a href="#">Chronicle</a><span class="sep">✦</span>
+    <a href="#">Personages</a><span class="sep">✦</span>
+    <a href="#">Realms</a><span class="sep">✦</span>
+    <a href="#">Orders</a><span class="sep">✦</span>
+    <a href="#">Relics</a><span class="sep">✦</span>
+    <a href="#">Search the Archives</a>
+  </nav>
+</header>
+
+<main class="folio">
+  <div class="breadcrumb"><a href="#">Personages</a> · Pirates of the Trinity · Mally Grisham</div>
+
+  <div class="article-head">
+    <div class="kicker">Personage · Pirate Captain</div>
+    <h2>Mally “Molly” Grisham</h2>
+    <div class="epithet">called the Sparrow, Captain of Fortune’s Favor</div>
+  </div>
+
+  <div class="ornament">❦ ❦ ❦</div>
+
+  <div class="columns">
+    <article>
+      <div class="toc">
+        <strong>IN THIS ENTRY</strong>
+        <ol>
+          <li>Of His Person &amp; Nature</li>
+          <li>The Stolen Artifact</li>
+          <li>The Kraken's Price</li>
+          <li>The Jazacha Expedition</li>
+          <li>Companions &amp; Whereabouts</li>
+          <li>Questions Unanswered</li>
+        </ol>
+      </div>
+
+      <h3><span class="num">I.</span> Of His Person &amp; Nature</h3>
+      <p class="dropcap">Pirate captain of <a href="#">Fortune’s Favor</a> — sparrow flag, big poofy hat, short and very fast, with high cheekbones, piercing blue eyes, and a scar. Under Divine Sense he reads as inherently good but complicated, darkened by pressures. Confirmed to be the same person as “Shauwn O’Malley,” who delivered the royal wedding letter in the twentieth chronicle.</p>
+
+      <h3><span class="num">II.</span> The Stolen Artifact</h3>
+      <p>His sparrow calling card was left where the final <a href="#">Zeben artifact</a> was stolen: drunk Archivists tipped him to a relic beneath the seas, and he navigated the fog-bound Veiled Ocean to the underwater Temple of Fenreal and retrieved it — then traded it away for something very important to him. It now lies in the <a href="#">Jazacha</a> jungles with the artifact-obsessed Yuan-Ti of Oojezz.</p>
+
+      <h3><span class="num">III.</span> The Kraken's Price</h3>
+      <p>At the Crow’s Ledger in Anchors Rest he set his price: capture the Kraken plaguing the Pirate Trinity. The party did; Mally controlled it with a scepter and chain, delivered it at Krakens Reef, and so leads the pirates of Anchors Rest.</p>
+
+      <h3><span class="num">IV.</span> The Jazacha Expedition</h3>
+      <p>He guided the four-ship armada to Jazacha and the jungle expedition — five of his men died — and burned the Wish spell stored in his bracelet to wish <a href="#">Zuk’taal</a> away, leaving him dejected. He also leaked the party’s destination to the Trinity, and warned that <a href="#">Zax</a>, the Merchant, and possibly <a href="#">Sir Trent Hightower</a> had contacted them.</p>
+
+      <h3><span class="num">V.</span> Companions &amp; Whereabouts</h3>
+      <ul>
+        <li>Active ally and guide as of E161, on the Jazacha expedition; left the party on floor four with business back in Oojezz.</li>
+        <li>Old hand with <a href="#">Jameti Costco</a> as a jungle guide — “something went real wrong.”</li>
+        <li>Renee at Airsteach is an ex-employee.</li>
+      </ul>
+
+      <h3><span class="num">VI.</span> Questions Unanswered</h3>
+      <p class="open-question">What did Mally trade the final artifact for?</p>
+      <p class="open-question">How damaging is his information leak to the Pirate Trinity?</p>
+
+      <h3>See Also</h3>
+      <div class="related">
+        <a href="#"><span class="type">Personage</span><span class="name">Jameti Costco</span></a>
+        <a href="#"><span class="type">Realm</span><span class="name">Jazacha</span></a>
+        <a href="#"><span class="type">Order</span><span class="name">The Pirate Trinity</span></a>
+      </div>
+    </article>
+
+    <aside class="plate">
+      <div class="portrait">a portrait, plate XLVII</div>
+      <div class="caption">“The Sparrow,” as rendered by the court artist</div>
+
+      <h4>Particulars</h4>
+      <dl>
+        <dt>Station</dt><dd>Pirate Captain</dd>
+        <dt>Vessel</dt><dd>Fortune’s Favor</dd>
+        <dt>Sigil</dt><dd>The Sparrow</dd>
+        <dt>Disposition</dt><dd>Good, but complicated</dd>
+        <dt>Status</dt><dd>Living — ally</dd>
+        <dt>First seen</dt><dd>E20</dd>
+        <dt>Last seen</dt><dd>E161</dd>
+      </dl>
+
+      <h4>Known Aliases</h4>
+      <dl>
+        <dt>—</dt><dd>Shauwn O’Malley</dd>
+        <dt>—</dt><dd>Molly Grisham</dd>
+        <dt>—</dt><dd>O’Mally, Malley, Melly</dd>
+        <dt>—</dt><dd>“Captain maley grenshums”</dd>
+      </dl>
+
+      <h4>Appears In</h4>
+      <div class="episodes">
+        <span class="ep">E20</span><span class="ep">E143</span><span class="ep">E144</span><span class="ep">E147</span><span class="ep">E149</span><span class="ep">E150</span><span class="ep">E151</span><span class="ep">E152</span><span class="ep">E153</span><span class="ep">E155</span><span class="ep">E156</span><span class="ep">E157</span><span class="ep">E158</span><span class="ep">E159</span><span class="ep">E160</span><span class="ep">E161</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="seal">A6</div>
+  Set down by the scribes of the Alambor Six · This folio regenerates from the canon
+</footer>
+
+</body>
+</html>

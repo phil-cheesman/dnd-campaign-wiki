@@ -1,0 +1,295 @@
+---
+// 5e spell previews for the party dashboard's spell badge wall.
+//
+// Hovering a spell badge (in the Spells pane) for ~half a second pops a concise
+// card: level/school, range · casting time · duration, V/S/M components (+ the
+// material), concentration/ritual tags, a teaser description, and a link to the
+// full official entry. Data is the committed /spells.json artifact (built by
+// scripts/spells/build.mjs), lazily fetched on the first badge hover so it costs
+// nothing for readers who never linger on a spell.
+//
+// Unlike the wiki Hovercard this card is INTERACTIVE (pointer-events: auto) so
+// the "full entry" link is clickable — the hide logic keeps it open while the
+// cursor is over the card itself.
+---
+
+<div id="spellcard" class="spellcard" role="tooltip" aria-hidden="true"></div>
+
+<style is:global>
+  .spellcard {
+    position: absolute;
+    z-index: 60;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 20rem;
+    max-width: calc(100vw - 1.5rem);
+    padding: 0.8rem 0.9rem 0.85rem;
+    /* Opaque (not the translucent --panel-bg) so the dense badge wall behind
+       never bleeds through and muddies the text. */
+    background: var(--bg);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(35, 33, 28, 0.18), 0 0 1px rgba(35, 33, 28, 0.4);
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+    transform-origin: top center;
+    transition:
+      opacity var(--dur-state) var(--ease-out),
+      transform var(--dur-state) var(--ease-out);
+  }
+  .spellcard.below { transform-origin: bottom center; transform: translateY(-4px) scale(0.98); }
+  .spellcard.is-open { opacity: 1; transform: none; }
+
+  .spellcard-eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font: 600 0.62rem 'Inter', sans-serif;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.1rem;
+  }
+  .spellcard-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.32rem;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  /* range / casting time / duration */
+  .spellcard-stats {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.12rem 0.6rem;
+    font: 400 0.74rem/1.35 'Inter', sans-serif;
+    color: var(--ink-soft);
+    margin-bottom: 0.55rem;
+  }
+  .spellcard-stats dt { color: var(--muted); font-weight: 600; }
+  .spellcard-stats dd { margin: 0; color: var(--text); }
+
+  .spellcard-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.55rem; }
+  .spellcard-chip {
+    font: 700 0.64rem 'Inter', sans-serif;
+    letter-spacing: 0.03em;
+    padding: 0.12rem 0.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+  .spellcard-chip.is-comp { color: var(--text); }
+  .spellcard-chip.is-flag {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-color: color-mix(in oklab, var(--accent, #9a7b3f) 45%, transparent);
+    color: var(--accent, #9a7b3f);
+  }
+
+  .spellcard-material {
+    font: 400 0.7rem/1.4 'Inter', sans-serif;
+    color: var(--muted);
+    margin: -0.25rem 0 0.55rem;
+  }
+  .spellcard-sum {
+    font: 400 0.78rem/1.5 'Inter', sans-serif;
+    color: var(--ink-soft);
+    margin: 0 0 0.6rem;
+  }
+  .spellcard-note {
+    font: 400 0.74rem/1.45 'Inter', sans-serif;
+    color: var(--muted);
+    margin: 0 0 0.55rem;
+  }
+  .spellcard-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font: 600 0.72rem 'Inter', sans-serif;
+    color: var(--accent, #9a7b3f);
+    text-decoration: none;
+    border-top: 1px solid var(--hairline);
+    padding-top: 0.5rem;
+    width: 100%;
+  }
+  .spellcard-link:hover { text-decoration: underline; }
+  .spellcard-link .arr { font-size: 0.9em; }
+
+  /* Touch devices have no hover — never show the preview there. */
+  @media (hover: none) { .spellcard { display: none !important; } }
+</style>
+
+<script>
+  // Hover-only affordance: no listeners on touch / coarse-pointer devices.
+  const canHover =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const card = document.getElementById('spellcard');
+  if (card && canHover) {
+    const SHOW_DELAY = 500; // "hover for a bit" — a deliberate, non-twitchy delay
+    const COMP_LABEL: Record<string, string> = { V: 'Verbal', S: 'Somatic', M: 'Material' };
+
+    let dataMap: Record<string, any> | null = null;
+    let loading: Promise<Record<string, any>> | null = null;
+    let activeBadge: HTMLElement | null = null;
+    let showTimer = 0;
+    let hideTimer = 0;
+    let displayTimer = 0;
+
+    function load(): Promise<Record<string, any>> {
+      if (dataMap) return Promise.resolve(dataMap);
+      if (!loading) {
+        loading = fetch('/spells.json')
+          .then((r) => r.json())
+          .then((d) => (dataMap = d || {}))
+          .catch(() => (dataMap = {}));
+      }
+      return loading;
+    }
+
+    function recordFor(badge: HTMLElement) {
+      if (!dataMap) return null;
+      const key = badge.dataset.name || '';
+      return dataMap[key] || null;
+    }
+
+    function esc(s: string) {
+      const d = document.createElement('div');
+      d.textContent = s ?? '';
+      return d.innerHTML;
+    }
+
+    function levelLabel(level: number) {
+      return level === 0 ? 'Cantrip' : `Level ${level}`;
+    }
+
+    function render(s: any) {
+      const eyebrow = [levelLabel(s.level), s.school].filter(Boolean).join(' · ');
+      let html =
+        `<div class="spellcard-eyebrow">${esc(eyebrow)}</div>` +
+        `<div class="spellcard-title">${esc(s.name)}</div>`;
+
+      if (s.srd) {
+        const rows: [string, string][] = [
+          ['Casting', s.castingTime],
+          ['Range', s.range],
+          ['Duration', s.duration],
+        ];
+        html +=
+          '<dl class="spellcard-stats">' +
+          rows
+            .filter(([, v]) => v)
+            .map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`)
+            .join('') +
+          '</dl>';
+
+        const chips: string[] = [];
+        for (const c of s.components || [])
+          chips.push(`<span class="spellcard-chip is-comp" title="${esc(COMP_LABEL[c] || c)}">${esc(c)}</span>`);
+        if (s.concentration) chips.push('<span class="spellcard-chip is-flag">Concentration</span>');
+        if (s.ritual) chips.push('<span class="spellcard-chip is-flag">Ritual</span>');
+        if (chips.length) html += `<div class="spellcard-tags">${chips.join('')}</div>`;
+
+        if (s.material) html += `<p class="spellcard-material">Material: ${esc(s.material)}</p>`;
+        if (s.summary) html += `<p class="spellcard-sum">${esc(s.summary)}</p>`;
+      } else {
+        html += '<p class="spellcard-note">No open 5e summary for this spell — read the full entry:</p>';
+      }
+
+      const where = s.source === 'roll20' ? 'Roll20' : 'D&D Beyond';
+      html +=
+        `<a class="spellcard-link" href="${esc(s.href)}" target="_blank" rel="noopener noreferrer">` +
+        `Full entry on ${where} <span class="arr">↗</span></a>`;
+
+      card!.innerHTML = html;
+    }
+
+    function position(badge: HTMLElement) {
+      const r = badge.getBoundingClientRect();
+      const gap = 8;
+      const margin = 8;
+      const cw = card!.offsetWidth;
+      const ch = card!.offsetHeight;
+      const vw = document.documentElement.clientWidth;
+
+      let left = r.left + window.scrollX;
+      left = Math.max(window.scrollX + margin, Math.min(left, window.scrollX + vw - cw - margin));
+
+      const below = r.top < ch + gap + 6;
+      const top = below ? r.bottom + window.scrollY + gap : r.top + window.scrollY - ch - gap;
+
+      card!.style.left = `${left}px`;
+      card!.style.top = `${top}px`;
+      card!.classList.toggle('below', below);
+    }
+
+    function open(badge: HTMLElement) {
+      const s = recordFor(badge);
+      if (!s) return;
+      activeBadge = badge;
+      clearTimeout(displayTimer);
+      render(s);
+      card!.style.display = 'block';
+      card!.setAttribute('aria-hidden', 'false');
+      position(badge);
+      requestAnimationFrame(() => card!.classList.add('is-open'));
+    }
+
+    function scheduleShow(badge: HTMLElement) {
+      clearTimeout(hideTimer);
+      if (activeBadge === badge && card!.classList.contains('is-open')) return;
+      clearTimeout(showTimer);
+      showTimer = window.setTimeout(() => {
+        load().then(() => {
+          // Cursor may have moved on during the delay/fetch — only open if still hovered.
+          if (badge.matches(':hover')) open(badge);
+        });
+      }, SHOW_DELAY);
+    }
+
+    function scheduleHide() {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(hideNow, 160);
+    }
+
+    function hideNow() {
+      clearTimeout(showTimer);
+      card!.classList.remove('is-open');
+      card!.setAttribute('aria-hidden', 'true');
+      activeBadge = null;
+      displayTimer = window.setTimeout(() => {
+        if (!card!.classList.contains('is-open')) card!.style.display = 'none';
+      }, 220);
+    }
+
+    // Only spell badges in the Spells pane trigger a card (not the Feats pane).
+    const spellBadge = (t: EventTarget | null): HTMLElement | null =>
+      t instanceof Element
+        ? (t.closest('[data-pane="spells"] .pd-badge') as HTMLElement | null)
+        : null;
+
+    document.addEventListener('mouseover', (e) => {
+      if ((e.target as Element)?.closest?.('#spellcard')) {
+        clearTimeout(hideTimer); // cursor is on the card — keep it open so the link is clickable
+        return;
+      }
+      const badge = spellBadge(e.target);
+      if (badge) scheduleShow(badge);
+    });
+    document.addEventListener('mouseout', (e) => {
+      const onCard = (e.relatedTarget as Element)?.closest?.('#spellcard');
+      if (onCard) return; // moving from badge onto the card
+      if (spellBadge(e.target) || (e.target as Element)?.closest?.('#spellcard')) scheduleHide();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && activeBadge) hideNow();
+    });
+    window.addEventListener('scroll', hideNow, { passive: true });
+    window.addEventListener('resize', hideNow);
+  }
+</script>

@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PartyDashboard from '../../components/PartyDashboard.astro';
+import { colorFor } from '../../lib/radar';
+import HeaderChrome from '../../components/headers/HeaderChrome.astro';
+import Icon from '../../components/Icon.astro';
+import ViewToggle from '../../components/headers/ViewToggle.astro';
+import CardGridBody, { type Group } from '../../components/headers/CardGridBody.astro';
+import EntityTableBody from '../../components/headers/EntityTableBody.astro';
+import EpisodesBody from '../../components/headers/EpisodesBody.astro';
+import EpisodesSlicer from '../../components/headers/EpisodesSlicer.astro';
+import GazetteerBody from '../../components/headers/GazetteerBody.astro';
+import GazetteerSlicer from '../../components/headers/GazetteerSlicer.astro';
+import { getPublic } from '../../lib/collections';
+import { getEpisodesPayload } from '../../lib/episodes';
+import { getTablePayload } from '../../lib/header-table';
+import { getLocationsPayload } from '../../lib/locations';
+import { ENTITY_TIERS, NAV_TIERS, TIER_LABELS } from '../../lib/paths';
+import { isFormerMember } from '../../lib/nav';
+
+export async function getStaticPaths() {
+  // NAV_TIERS, not ENTITY_TIERS: kingdoms has no index page — `/kingdoms` redirects
+  // to `/locations` (astro.config.mjs), where kingdoms live as gazetteer sections.
+  const tiers = [...NAV_TIERS, 'episodes', 'arcs'];
+  return tiers.map((collection) => ({ params: { collection }, props: { collection } }));
+}
+
+const { collection } = Astro.props as { collection: string };
+const label = TIER_LABELS[collection] ?? collection;
+const entries = await getPublic(collection as any);
+
+// Party-view label: collapse characters to their first name (Quinton Shackleford →
+// Quinton), matching the sidebar, while the dossier keeps the full name. `short_name`
+// wins if set.
+const charLabel = (e: any) => e.data.short_name ?? (e.data.name ?? e.id).split(/\s+/)[0];
+
+// Entity tiers carry codex art and render through the shared image-forward
+// CardGridBody (with the global Cards⇄List toggle). Locations is the exception:
+// it gets the bespoke gazetteer body (Phase 4) instead of the card grid.
+// Episodes & arcs are handled by their own branches below.
+const isCardGrid =
+  (ENTITY_TIERS as readonly string[]).includes(collection) && collection !== 'locations';
+
+// Episodes get a bespoke arc-grouped body with badges + slicers (Phase 3);
+// Locations get the kingdom-grouped gazetteer (Phase 4). Everything else flows
+// through the shared `groups` shape below.
+const epPayload = collection === 'episodes' ? await getEpisodesPayload() : null;
+const gazPayload = collection === 'locations' ? await getLocationsPayload() : null;
+
+let groups: Group[] = [];
+
+if (collection === 'episodes') {
+  // handled by epPayload + EpisodesBody; no `groups` needed.
+} else if (collection === 'arcs') {
+  const rows = entries
+    .sort((a: any, b: any) => a.id.localeCompare(b.id, undefined, { numeric: true }))
+    .map((e: any) => ({
+      href: `/arcs/${e.id}`,
+      title: e.data.title ?? e.id,
+      img: e.data.art?.image ? `/art/arcs/thumbs/${e.id}.webp` : null,
+      meta: e.data.art?.scene_title ?? e.data.episodes ?? undefined,
+    }));
+  groups = [{ rows }];
+} else if (collection === 'characters') {
+  // Active party first; the dead and departed get their own quieter section below.
+  const toRow = (e: any) => ({
+    href: `/characters/${e.id}`,
+    title: charLabel(e),
+    meta: e.data.status ?? undefined,
+    img: e.data.art?.image ?? null,
+    artType: e.data.art?.type,
+  });
+  const byName = (a: any, b: any) => (a.data.name ?? '').localeCompare(b.data.name ?? '');
+  const party = entries.filter((e: any) => !isFormerMember(e.data.status)).sort(byName).map(toRow);
+  const former = entries.filter((e: any) => isFormerMember(e.data.status)).sort(byName).map(toRow);
+  groups = [
+    // The page is already titled "Party"; the active roster needs no sub-heading.
+    { rows: party },
+    ...(former.length ? [{ heading: 'Former members', rows: former }] : []),
+  ];
+} else if (collection === 'npcs') {
+  // Card view = browse: grouped by allegiance (spec §4). Allies → Enemies →
+  // Neutral; anyone with no `relation` folds into Neutral. Within each, A–Z.
+  const toRow = (e: any) => ({
+    href: `/npcs/${e.id}`,
+    title: e.data.name ?? e.id,
+    img: e.data.art?.image ?? null,
+    artType: e.data.art?.type,
+  });
+  const byName = (a: any, b: any) => a.title.localeCompare(b.title);
+  const bucket = (rel: string) =>
+    entries
+      .filter((e: any) =>
+        rel === 'neutral'
+          ? (e.data.relation ?? 'neutral') === 'neutral'
+          : e.data.relation === rel,
+      )
+      .map(toRow)
+      .sort(byName);
+  groups = [
+    { heading: 'Allies', rows: bucket('ally') },
+    { heading: 'Enemies', rows: bucket('enemy') },
+    { heading: 'Neutral', rows: bucket('neutral') },
+  ].filter((g) => g.rows.length);
+} else {
+  const rows = entries
+    .map((e: any) => ({
+      href: `/${collection}/${e.id}`,
+      title: e.data.name ?? e.id,
+      img: e.data.art?.image ?? null,
+      artType: e.data.art?.type,
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));
+  groups = [{ rows }];
+}
+
+// NPCs & Items gain a sortable "analyze" table alongside the card gallery (spec §5).
+const tablePayload =
+  collection === 'npcs' || collection === 'items'
+    ? await getTablePayload(collection as 'npcs' | 'items')
+    : null;
+
+const totalRows = epPayload
+  ? epPayload.total
+  : gazPayload
+    ? gazPayload.total
+    : groups.reduce((n, g) => n + g.rows.length, 0);
+
+// Characters index: the comparison dashboard plots the active party — anyone
+// with full ability scores. Former members lack sheet data anyway. Ordered for a
+// stable legend; one flat shape feeds every visual (radar/alignment/treemap/…).
+const members =
+  collection === 'characters'
+    ? entries
+        .filter((e: any) => !isFormerMember(e.data.status) && e.data.sheet?.abilities)
+        .map((e: any) => ({
+          slug: e.id,
+          name: charLabel(e),
+          href: `/characters/${e.id}`,
+          color: colorFor(e.id),
+          abilities: e.data.sheet.abilities,
+          ac: e.data.sheet.ac ?? null,
+          hp: e.data.sheet.hp ?? null,
+          speed: e.data.sheet.speed ?? null,
+          skills: e.data.sheet.skills ?? null,
+          skillsExpert: e.data.sheet.skills_expert ?? [],
+          saves: e.data.sheet.saves ?? null,
+          savesProf: e.data.sheet.saves_prof ?? [],
+          spells: e.data.sheet.spells ?? [],
+          feats: e.data.sheet.feats ?? [],
+          alignment: e.data.alignment ?? null,
+          inferred: e.data.alignment_inferred,
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name))
+    : [];
+---
+
+<BaseLayout title={label} description={`All ${label.toLowerCase()} in the Alambor campaign.`}>
+  <Breadcrumbs trail={[{ label: 'Wiki', href: '/' }, { label }]} />
+  {collection === 'characters' && (
+    <figure class="party-hero" data-pagefind-ignore>
+      <img
+        src="/art/party-hero-banner.webp"
+        alt="The Alambor Six lined up in a tavern — Quinton mid-song on the lute, the party around him"
+        width={1536}
+        height={820}
+        loading="eager"
+      />
+      <figcaption class="party-hero-cap">
+        <h1>Party</h1>
+        <span>The Alambor Six</span>
+      </figcaption>
+    </figure>
+  )}
+  {
+    isCardGrid ? (
+      <HeaderChrome title={label} count={totalRows} hideTitle={collection === 'characters'}>
+        {/* Party (characters) sticks to the card view — the toggle adds nothing
+            there. In its place, a prominent jump into Party Analysis (the shared
+            brand for the comparison dashboard below). Other entity tiers keep the
+            Cards⇄List (or Cards⇄Table) control. */}
+        {collection === 'characters' ? (
+          <a class="analysis-jump" slot="toggle" href="#party-analysis">
+            <Icon name="scale" size={15} /> Party Analysis
+          </a>
+        ) : tablePayload ? (
+          <ViewToggle slot="toggle" cardsLabel="Cards" listLabel="Table" />
+        ) : (
+          <ViewToggle slot="toggle" />
+        )}
+        {tablePayload ? (
+          <div class="hp-cardview">
+            <CardGridBody collection={collection} groups={groups} />
+          </div>
+        ) : (
+          <CardGridBody collection={collection} groups={groups} />
+        )}
+        {tablePayload && (
+          <EntityTableBody
+            collection={collection}
+            columns={tablePayload.columns}
+            rows={tablePayload.rows}
+          />
+        )}
+        {collection === 'characters' && members.length > 0 && (
+          <section class="party-dash-wrap" id="party-analysis">
+            <h2>Party Analysis</h2>
+            <p class="party-dash-sub">Compare the Alambor Six side by side — abilities, saves, skills, defenses, and spells.</p>
+            <PartyDashboard members={members} />
+          </section>
+        )}
+      </HeaderChrome>
+    ) : epPayload ? (
+      // Episodes (Phase 3): arc-grouped body + badges + slicers. The Grouped⇄Flat
+      // control is the same global density attr, relabelled.
+      <HeaderChrome title={label} count={totalRows}>
+        <ViewToggle slot="toggle" cardsLabel="Grouped" listLabel="Flat" />
+        <Fragment slot="slicer">
+          <EpisodesSlicer
+            charOptions={epPayload.charOptions}
+            locOptions={epPayload.locOptions}
+            arcOptions={epPayload.arcOptions}
+          />
+        </Fragment>
+        <EpisodesBody arcs={epPayload.arcs} />
+      </HeaderChrome>
+    ) : gazPayload ? (
+      // Locations (Phase 4): kingdom-grouped gazetteer + external bucket. The
+      // Grouped⇄Flat control is the same global density attr, relabelled.
+      <HeaderChrome title={label} count={totalRows}>
+        <ViewToggle slot="toggle" cardsLabel="Grouped" listLabel="Flat" />
+        <Fragment slot="slicer">
+          <GazetteerSlicer />
+        </Fragment>
+        <GazetteerBody kingdoms={gazPayload.kingdoms} external={gazPayload.external} />
+      </HeaderChrome>
+    ) : (
+      // Arcs: scene-plate thumbnail cards in story order.
+      <HeaderChrome title={label} count={totalRows}>
+        {groups.map((g) => (
+          <>
+            {g.heading && <h2>{g.heading}</h2>}
+            <ul class="arc-cards">
+              {g.rows.map((r) => (
+                <li>
+                  <a href={r.href}>
+                    {r.img && (
+                      <span class="arc-card-thumb">
+                        <img src={r.img} alt="" loading="lazy" width="320" height="213" />
+                      </span>
+                    )}
+                    <span class="arc-card-title">{r.title}</span>
+                    {r.meta && <span class="arc-card-meta">{r.meta}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))}
+      </HeaderChrome>
+    )
+  }
+</BaseLayout>
+
+<style>
+  /* Arcs index: scene-plate thumbnail cards (plate on top, title + caption beneath). */
+  .arc-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .arc-cards a {
+    display: block;
+    color: var(--text);
+  }
+  .arc-cards a:hover {
+    text-decoration: none;
+  }
+  .arc-card-thumb {
+    display: block;
+    aspect-ratio: 3 / 2;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    margin-bottom: 0.5rem;
+  }
+  .arc-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+  .arc-cards a:hover .arc-card-thumb {
+    border-color: var(--gold-soft);
+  }
+  .arc-cards a:hover .arc-card-thumb img {
+    transform: scale(1.04);
+  }
+  .arc-card-title {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .arc-card-meta {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* Hero masthead — the six together in a tavern, with the page title set onto
+     the art so it reads as an intentional banner rather than a floating image.
+     A bottom scrim keeps the title legible over the painting; crisp edges. */
+  .party-hero {
+    position: relative;
+    margin: 0.2rem 0 1.4rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .party-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .party-hero-cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2.4rem 1.4rem 1rem;
+    background: linear-gradient(
+      to top,
+      rgba(20, 14, 6, 0.78) 0%,
+      rgba(20, 14, 6, 0.45) 45%,
+      rgba(20, 14, 6, 0) 100%
+    );
+  }
+  .party-hero-cap h1 {
+    margin: 0;
+    color: #f6efe0;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  }
+  .party-hero-cap span {
+    display: block;
+    margin-top: 0.25rem;
+    color: rgba(246, 239, 224, 0.82);
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  /* The party comparison dashboard sits below the roster cards. */
+  .party-dash-wrap {
+    margin-top: 1.6rem;
+    scroll-margin-top: 7.5rem;
+  }
+  .party-dash-wrap h2 {
+    margin-bottom: 0.2rem;
+  }
+  .party-dash-sub {
+    color: var(--muted);
+    margin: 0 0 1rem;
+    max-width: var(--measure);
+  }
+
+  /* Top-of-roster jump into Party Analysis — sits in the header toolbar where the
+     view toggle would be, branded to match the dossier "Party Analysis" pill and
+     the home-page link. */
+  .analysis-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    font: 600 0.8rem 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .analysis-jump:hover {
+    color: var(--gold);
+    border-color: var(--gold-soft);
+    text-decoration: none;
+  }
+  .analysis-jump svg {
+    color: var(--gold);
+    flex: none;
+  }
+  .analysis-jump:hover svg {
+    color: inherit;
+  }
+</style>

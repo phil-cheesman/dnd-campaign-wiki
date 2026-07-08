@@ -1,0 +1,182 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Backlinks from '../../components/Backlinks.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Badges from '../../components/Badges.astro';
+import StatBlock from '../../components/StatBlock.astro';
+import Icon from '../../components/Icon.astro';
+import GraphView from '../../components/graph/GraphView.tsx';
+import { getPublic } from '../../lib/collections';
+import { subgroupFor, isFormerMember } from '../../lib/nav';
+import { ENTITY_TIERS, TIER_LABELS } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const tiers = [...ENTITY_TIERS]; // characters, npcs, kingdoms, locations, factions, items, worldbuilding
+  const paths = [];
+  for (const collection of tiers) {
+    const entries = await getPublic(collection as any);
+    for (const entry of entries) {
+      paths.push({ params: { collection, slug: entry.id }, props: { collection, entry } });
+    }
+  }
+  return paths;
+}
+
+const { collection, entry } = Astro.props as any;
+const { Content, headings } = await render(entry);
+const data = entry.data;
+const label = TIER_LABELS[collection] ?? collection;
+
+const aliases: string[] = Array.isArray(data.aliases) ? data.aliases : [];
+const episodes: string[] = Array.isArray(data.episodes) ? data.episodes : [];
+const hasStatBlock = collection === 'characters' && (data.sheet || data.alignment);
+// Active PCs with ability scores are plotted in the /characters comparison
+// dashboard — offer a one-tap jump that pre-pins this character there.
+const isDashboardMember =
+  collection === 'characters' && !isFormerMember(data.status) && !!data.sheet?.abilities;
+const portrait: string | null = data.art?.image ?? null;
+// Show the art at its true shape: portraits 2:3, landscapes 3:2, crests/objects 1:1.
+// Matching width/height keeps the intrinsic ratio (no crop) and avoids layout shift.
+const artType: string = data.art?.type ?? 'portrait';
+const artDims =
+  artType === 'landscape'
+    ? { w: 304, h: 203 }
+    : artType === 'portrait'
+      ? { w: 304, h: 456 }
+      : { w: 304, h: 304 }; // crest / object — square
+const hasInfobox =
+  portrait ||
+  hasStatBlock ||
+  data.status ||
+  data.player ||
+  data.kingdom ||
+  data.parent ||
+  aliases.length ||
+  episodes.length;
+
+const group = subgroupFor(collection, data);
+// Kingdoms are folded into Locations: a kingdom article breadcrumbs back to the
+// Locations gazetteer (its own `/kingdoms` index redirects there anyway).
+const parent =
+  collection === 'kingdoms'
+    ? { label: TIER_LABELS.locations, href: '/locations' }
+    : { label, href: `/${collection}` };
+const trail = [
+  { label: 'Wiki', href: '/' },
+  parent,
+  ...(group ? [{ label: group }] : []),
+  { label: data.name },
+];
+---
+
+<BaseLayout title={data.name} description={`${label} in the Alambor campaign.`} headings={headings}>
+  <Breadcrumbs trail={trail} />
+  <Badges tier={collection} role={data.role} status={data.status} relation={data.relation} />
+  <h1>{data.name}</h1>
+
+  {
+    hasInfobox && (
+      <aside class="infobox" slot="rail" data-pagefind-ignore>
+        {portrait && (
+          <div class="infobox-portrait-frame">
+            <img class="infobox-portrait" src={portrait} alt={`Art of ${data.name}`} width={artDims.w} height={artDims.h} loading="lazy" />
+          </div>
+        )}
+        <h2>{data.name}</h2>
+        {hasStatBlock && <StatBlock data={data} slug={entry.id} />}
+        {isDashboardMember && (
+          <a class="compare-link" href={`/characters?focus=${entry.id}#party-analysis`}>
+            <Icon name="scale" size={15} /> Party Analysis
+          </a>
+        )}
+        <dl>
+          {data.status && (<><dt>Status</dt><dd>{data.status}</dd></>)}
+          {data.player && (<><dt>Player</dt><dd>{data.player}</dd></>)}
+          {data.kingdom && (<><dt>Kingdom</dt><dd>{data.kingdom}</dd></>)}
+          {data.parent && (<><dt>Part of</dt><dd>{data.parent}</dd></>)}
+          {aliases.length > 0 && (<><dt>Also known as</dt><dd>{aliases.join(', ')}</dd></>)}
+          {episodes.length > 0 && (<><dt>Episodes</dt><dd>{episodes.join(', ')}</dd></>)}
+        </dl>
+        {collection === 'locations' && (
+          <a class="map-link" href={`/map?place=${entry.id}`}>
+            <Icon name="map-pin" size={15} /> View on map
+          </a>
+        )}
+      </aside>
+    )
+  }
+
+  <article class="prose">
+    <Content />
+  </article>
+
+  <section class="localgraph" data-pagefind-ignore>
+    <h2>Connections</h2>
+    <p class="lg-sub">Direct links to and from {data.name}. Click a node to jump · <a href="/graph">full graph →</a></p>
+    <div class="graph-hero">
+      <GraphView client:only="react" height="440px" fullHref="/graph" localTo={`${collection}/${entry.id}`} />
+    </div>
+  </section>
+
+  <Backlinks collection={collection} slug={entry.id} />
+</BaseLayout>
+
+<style>
+  /* AI-generated codex art, top of the infobox. The width/height attributes carry
+     the art's true aspect ratio (portrait 2:3, landscape 3:2, crest/object 1:1),
+     so it renders uncropped at its natural shape. The frame clips the image so a
+     gentle hover zoom stays within the rounded border. */
+  .infobox-portrait-frame {
+    display: block;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 0 0.75rem;
+  }
+  .infobox-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Zoom the child on parent-hover (not the img itself) to avoid flicker as the
+       cursor crosses the scaling edge. GPU transform only. */
+    transition: transform var(--dur-state) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .infobox-portrait-frame:hover .infobox-portrait {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Jump into the party comparison dashboard with this character pre-pinned.
+     A full-width pill at the foot of the stat block.
+     .map-link reuses the same pill to deep-link a location into /map. */
+  .compare-link,
+  .map-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0.1rem 0 0.7rem;
+    padding: 0.5rem 0.8rem;
+    min-height: 2.5rem;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    font: 600 0.78rem 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .compare-link:hover,
+  .map-link:hover {
+    color: var(--gold);
+    border-color: var(--gold-soft);
+    text-decoration: none;
+  }
+  .compare-link svg,
+  .map-link svg { color: var(--gold); flex: none; }
+  .compare-link:hover svg,
+  .map-link:hover svg { color: inherit; }
+  /* The map link sits below the metadata list, so give it a little breathing room. */
+  .map-link { margin-top: 0.7rem; margin-bottom: 0.2rem; }
+</style>

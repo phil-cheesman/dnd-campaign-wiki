@@ -1,0 +1,202 @@
+[
+  {
+    "slug": "alambor-six",
+    "collection": "factions",
+    "name": "The Alambor Six (the party)",
+    "role": "heroic adventuring party",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A heraldic shield centered on a plain field. The central charge is a slain dragon's head pierced by an upright lance, crowned above by a small six-pointed arrangement of stars for the six companions. Flanking sprigs of laurel curve up the sides. Bold gold and royal purple with crimson accents. Noble, victorious, knightly bearing of honored champions and dragon-slayers.",
+    "ref_images": []
+  },
+  {
+    "slug": "archivists",
+    "collection": "factions",
+    "name": "Archivists (Archevesian Order)",
+    "role": "sacred keeper order",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A roundel centered on a plain field. A single ancient white-barked tree with spreading gnarled limbs and leaves shading white to deep purple, a lone unicorn standing beneath it. A ring of stylized coins encircles the tree. Lime green, white, and deep purple with silver. Serene, sacred, custodial; the balance-keeping guardians of life and its gift.",
+    "ref_images": []
+  },
+  {
+    "slug": "aum-shai",
+    "collection": "factions",
+    "name": "Aum Shai",
+    "role": "shadow conspiracy",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A dark roundel centered on a plain field. The central charge is a coiled winged dragon clutching a dagger, set before an eclipsed crescent moon. Faint concentric rings suggest hidden ranks radiating outward. Black and deep blood-red with cold silver edging. Sinister, secretive, cultist; the emblem of an unseen conspiracy that hides inside other powers.",
+    "ref_images": []
+  },
+  {
+    "slug": "beaubois-family",
+    "collection": "factions",
+    "name": "Beaubois Family",
+    "role": "fallen noble house",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A cracked noble shield centered on a plain field. A decayed crowned crest broken down the middle, a writhing worm coiling through the fracture, with a withered black rose below. Tarnished gold, faded wine-purple, and corrupt sickly green. Once-stately heraldry gone to rot; the device of a proud house fallen into black magic, poison, and undeath.",
+    "ref_images": []
+  },
+  {
+    "slug": "canick-tribe",
+    "collection": "factions",
+    "name": "Canick Tribe",
+    "role": "raider tribe",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A crude banner device centered on a plain field. The central charge is a stark red open-palm handprint, slapped raw and dripping. Behind it crossed jagged bone-and-stone clubs, ringed by severed fingers and tusks. Blood red, bone white, and dirty grey-brown. Savage, primal, brutal; the mark of a goblinoid raider host that brands its raids with a bloody hand.",
+    "ref_images": []
+  },
+  {
+    "slug": "gidian-navy",
+    "collection": "factions",
+    "name": "Gidian Navy",
+    "role": "imperial naval force",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A naval roundel centered on a plain field. A prowed warship under full sail crossed behind by a foul anchor and a fouled chain, a stern lion's head crowning the top. Steel grey, deep navy blue, and gold. Martial, imperial, hard-edged; the device of a conquering fleet that controls the ports and enforces an expanding empire's will at sea.",
+    "ref_images": []
+  },
+  {
+    "slug": "harpers",
+    "collection": "factions",
+    "name": "Harpers",
+    "role": "covert freedom network",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A subtle roundel centered on a plain field. The central charge is a small harp framed by a broken shackle and snapped chain, a crescent moon behind it. A thin open ring encircles the whole. Silver, slate grey, and muted moonlit blue with a touch of dawn gold. Quiet, defiant, clandestine; the secret sign of freedom-fighters and spies who break the chains of slavery.",
+    "ref_images": []
+  },
+  {
+    "slug": "knights-of-gidia",
+    "collection": "factions",
+    "name": "Knights of Gidia",
+    "role": "knightly paladin order",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "An austere knightly shield centered on a plain field. A bold rampant lion, regal and watchful, set above a closed armored gauntlet. A simple crenellated stone tower line forms the base. White, gold, and steel grey with deep crimson. Disciplined, martial, righteous; the heraldry of an elite order of warrior-mages sworn to strike the empire's enemies.",
+    "ref_images": []
+  },
+  {
+    "slug": "knights-of-theydune",
+    "collection": "factions",
+    "name": "Knights of Theydune (the Nine White Knights)",
+    "role": "dark paladin order",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A gothic shield centered on a plain field. The central charge is a sundered black helm wreathed in shadow, behind it a gothic obsidian tower; nine cold points of light ring the upper field. Obsidian black, ash white, and a pale spectral glow. Funereal, dread, undying; the device of nine exiled dark paladins banished to the Shadowfell, hungering to return.",
+    "ref_images": []
+  },
+  {
+    "slug": "pirate-trinity",
+    "collection": "factions",
+    "name": "Pirate Trinity",
+    "role": "pirate confederation",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A black pirate banner device centered on a plain field. Three crossed cutlasses meeting at a central skull, a coiled kraken's tentacles rising behind them in a trident-like trio. A torn rope border frames the field. Bone white, jet black, and storm-sea teal. Piratical, lawless, menacing; a mocking three-part union of pirate fleets that lord over the open sea.",
+    "ref_images": []
+  },
+  {
+    "slug": "shadowed-moon",
+    "collection": "factions",
+    "name": "Shadowed Moon",
+    "role": "conspiracy inner circle",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A dark roundel centered on a plain field. A single eclipsed crescent moon, its dark face dominant, with a faint dragon silhouette coiled within the shadow and one cold star at its heart. Black, deep indigo, and tarnished silver. Supreme, hidden, malevolent; the seal of the topmost rank of a shadow conspiracy, a darkness that crowns the whole order.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-fist",
+    "collection": "factions",
+    "name": "The Fist",
+    "role": "elite strike team",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A compact martial roundel centered on a plain field. The central charge is a clenched armored gauntlet driving forward, a small lion's head above it and a faint burst of impact behind the knuckles. Steel grey, gold, and crimson on white. Hard, decisive, elite; the badge of a hand-picked strike force within a knightly order, the empire's striking hand made into a single fist.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-hive",
+    "collection": "factions",
+    "name": "The Hive",
+    "role": "drow archmage conclave",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A dark hexagonal roundel centered on a plain field. The central charge is a nine-faceted radiant gem cradled within a honeycomb of nine cells, fine arcane threads of seven colors converging on it. Obsidian black, drow violet, and prismatic arcane light. Esoteric, sinister, ancient; the conclave-sigil of nine drow archmages who would restore the ancient ones and rule over all.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-kings",
+    "collection": "factions",
+    "name": "The Kings (Gloomville gang)",
+    "role": "criminal street gang",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A rough street-banner device centered on a plain field. A battered five-pointed crown tilted at a cocky angle, crossed daggers beneath it, a small tiefling's horns flanking the crown's points. Dull brass, dark red, and shadowfell grey. Gritty, gang-marked, swaggering; the turf-sign of a criminal crew that scrawls its crown across the gloom of a Shadowfell city.",
+    "ref_images": []
+  },
+  {
+    "slug": "vithian-alliance",
+    "collection": "factions",
+    "name": "Vithian Alliance",
+    "role": "raider sea-theocracy",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A round wooden raider shield centered on a plain field. A dragon-prowed longship riding a cresting wave, a storm-bolt of lightning splitting the sky above its mast, crossed oars below. Sea grey-green, storm blue, and weathered iron with white foam. Hardy, seafaring, devout; the storm-god device of viking-flavored raiders who sail out each summer and revere the tempest.",
+    "ref_images": []
+  },
+  {
+    "slug": "volstruckers",
+    "collection": "factions",
+    "name": "Volstruckers",
+    "role": "arcane assassin guild",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A dark roundel centered on a plain field. A forearm wound in black maze-like tattoos grips a thin curved dagger; behind it a black dragon coils within a deep shadow. Faint arcane runes thread the border. Sapphire blue, ink black, and cold silver. Clandestine, lethal, arcane; the hidden sigil of a guild of arcane assassins who strike from the shadows without pity.",
+    "ref_images": []
+  },
+  {
+    "slug": "vontrice-family",
+    "collection": "factions",
+    "name": "Vontrice Family",
+    "role": "wealthy noble house",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "An ornate noble shield centered on a plain field. Two outspread black wings cradling a single faceted red ruby at their join, a slim coronet arching above. Black, deep crimson, and burnished gold. Wealthy, courtly, with a cold undercurrent; the signet of the richest and most connected noble house of the realm, elegant on its surface and rotten beneath.",
+    "ref_images": []
+  },
+  {
+    "slug": "widowmakers",
+    "collection": "factions",
+    "name": "Widowmakers",
+    "role": "masked mercenary company",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A grim mercenary banner device centered on a plain field. The central charge is a blank featureless mask, crossed below by a sword and a coiled whip, a black widow spider with its red hourglass perched above the brow. Black, ash grey, and venom red. Cold, hired, predatory; the mark of a masked mercenary company that sells slaughter and leaves widows in its wake.",
+    "ref_images": []
+  },
+  {
+    "slug": "yuan-ti",
+    "collection": "factions",
+    "name": "Yuan-Ti",
+    "role": "serpent-folk enclave",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A jungle temple roundel centered on a plain field. The central charge is a coiled serpent with a raised fanged head wound around a glowing enchanted gemstone amulet, framed by a stepped pyramid silhouette between two fang-like peaks. Jade green, gold, and deep jungle emerald with venomous yellow. Reclusive, cunning, predatory; the sigil of serpent-folk who hoard powerful artifacts in a hidden jungle city.",
+    "ref_images": []
+  },
+  {
+    "slug": "zeeven-dynasty",
+    "collection": "factions",
+    "name": "Zeeven Dynasty",
+    "role": "ancient fallen drow dynasty",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "An ancient roundel centered on a plain field. An upside-down crescent moon with a bright central star and six smaller stars ringed around it; below, a single mountain crowned by a blooming white flower. Obsidian black, drow violet, and starlit silver-white. Antediluvian, proud, fallen; the recurring sigil of a pre-Sundering drow dynasty that deemed itself greater than the gods and was unmade.",
+    "ref_images": []
+  }
+]

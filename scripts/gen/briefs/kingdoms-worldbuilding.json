@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "carasian-kingdom",
+    "collection": "kingdoms",
+    "name": "Carasian Kingdom",
+    "role": "Wealthy French-flavored royal kingdom of the Trine",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A heraldic national emblem on a shield. The central charge is a rampant lion of bright gold, paws raised, mane flaring, set against a field of deep sapphire blue. Above the shield rests a gilded royal crown set with a single blue gem. Twined grapevines heavy with fruit frame the lower edges, and a flowing ribbon banner curls beneath, blank and unlettered. Burnished gold borders the shield. Rich, regal, sun-warmed coloring.",
+    "ref_images": []
+  },
+  {
+    "slug": "gidian-empire",
+    "collection": "kingdoms",
+    "name": "Gidia",
+    "role": "Dominant British-flavored seafaring trade empire",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A heraldic national emblem on a square-cornered shield. The central charge is a stout grey stone fortress tower flanked by two crossed war-galley oars, set against a field of slate grey banded with a horizontal stripe of cold steel blue. A breaking ocean wave curls along the base of the shield. Above sits a heavy iron imperial crown. Silver and pewter metals dominate, austere and martial, with a narrow border of riveted iron.",
+    "ref_images": []
+  },
+  {
+    "slug": "islands-of-maadolonia",
+    "collection": "kingdoms",
+    "name": "Islands of Maadolonia",
+    "role": "Hardy seafaring island vassal realm of the empire",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "Six storm-battered islands scattered across a churning grey sea. A snow-tipped mountain range splits a cliffside capital town down its center, fishing boats crowded in a sheltered harbor below. Rolling green hills dotted with grazing livestock frame one island; a dark misty woodland crowns another. Wind-scoured barren black cliffs take the brunt of gale-driven spray. Tropical reefs and pale sandbars ring the outer waters under a heavy, fast-moving sky.",
+    "ref_images": []
+  },
+  {
+    "slug": "luzonovian-sovereignty",
+    "collection": "kingdoms",
+    "name": "Luzonovia",
+    "role": "Insular Germanic nationalist sovereignty of the Trine",
+    "type": "crest",
+    "eligibility": "ok",
+    "visual": "A heraldic national emblem on a tall narrow shield. The central charge is a black double-headed raven with wings spread, perched atop a single sharp grey mountain peak, set against a field of cold steel grey over a band of deep forest green. An open book rests at the base of the shield. A plain iron coronet crowns the top. Muted, disciplined coloring of iron, charcoal, and pine, bordered by a clean dark frame.",
+    "ref_images": []
+  },
+  {
+    "slug": "parathia",
+    "collection": "kingdoms",
+    "name": "Parathia",
+    "role": "Moroccan-flavored desert elven mageocracy",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A jewel-in-the-desert city of yellow sandstone walls and winding markets glowing in low golden light. Golden-domed palaces rise with hanging gardens and glittering reflecting pools. Triangular multicolored sails crowd a broad river running past the walls. Behind the city, ochre cliffs, layered plateaus, and shadowed slot canyons climb toward a vast rift in the earth, faint multicolored woods just visible on the high ledges. Open dunes and a lone camel caravan stretch into the hazy distance.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-sundering-and-the-gift",
+    "collection": "worldbuilding",
+    "name": "The Sundering, the Trine, and the Gift (Arbor Alma)",
+    "role": "World-reshaping cataclysm and the tree that gives transmutation",
+    "type": "landscape",
+    "eligibility": "symbolic-only",
+    "visual": "A massive, ancient tree with stark white bark and gnarled limbs leaning far out over a perfectly circular clearing, its leaves shading from white at the trunk to deep purple at the tips. The tree stands on a shelf of smooth, obsidian-black stone. A fine purple pollen drifts through the air and dusts the grove, where plants and animals seem caught mid-change into strange, fluid forms; a single unicorn stands among them. Mountains ring the glade under a still, otherworldly sky.",
+    "ref_images": []
+  },
+  {
+    "slug": "gods-of-alambor",
+    "collection": "worldbuilding",
+    "name": "Gods of Alambor",
+    "role": "The post-Sundering pantheon of faithful and betrayer gods",
+    "type": "landscape",
+    "eligibility": "symbolic-only",
+    "visual": "A vast night sky over a low dark horizon of silhouetted mountains, scattered with divine constellations picked out in fine bright stars and faint connecting lines — a stag, a raven, a smith's hammer, a sun-disc, a storm cloud, a spider, a coiled serpent. The constellations near the zenith glow warm and gold, while a cluster of dimmer, half-extinguished stars fades toward the lower edge as if some lights have gone dark. A still, reverent, otherworldly atmosphere with no figures.",
+    "ref_images": []
+  },
+  {
+    "slug": "calendar-and-festivals",
+    "collection": "worldbuilding",
+    "name": "Calendar and Festivals of Alambor",
+    "role": "The 300-cycle annum, six sextets, and the realm's festivals",
+    "type": "object",
+    "eligibility": "symbolic-only",
+    "visual": "A great circular calendar wheel of aged bronze and parchment divided into six equal spoked segments around a central hub shaped like a single budding leaf. Three segments carry summer motifs — a sun, a sheaf of grain, a mason's tools — and three carry winter motifs — a storm, a raven, a snowflake. Concentric rings of tiny tick-marks count the days, and a faint purple bloom marks the first segment. Single object, centered, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "texere-and-transmutation",
+    "collection": "worldbuilding",
+    "name": "Texere and Transmutation",
+    "role": "The Gift, the magic economy, and the texere coin",
+    "type": "object",
+    "eligibility": "symbolic-only",
+    "visual": "A single pressed coin stained deep violet-purple and dusted with fine shifting iridescent powder, resting beside one slender white-and-purple leaf from the Arbor Alma. A few grains of glittering purple texere dust spill from the coin's edge, catching a faint magical glow. Single grouped arrangement, centered, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-trine",
+    "collection": "worldbuilding",
+    "name": "The Trine",
+    "role": "The three allied nations and the Council of Reckoning",
+    "type": "object",
+    "eligibility": "symbolic-only",
+    "visual": "A heavy ceremonial seal of dark weathered metal: three interlocking rings fused at a central raised boss, each ring stamped with one simple emblem — a stout fortress tower, a rampant lion, and a raven perched on a mountain peak. A fine binding cord loops the three rings together. Worn and ancient, museum-catalog presentation. Single object, centered, three-quarter view, plain neutral background.",
+    "ref_images": []
+  }
+]

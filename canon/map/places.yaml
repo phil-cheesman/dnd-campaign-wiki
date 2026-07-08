@@ -1,0 +1,81 @@
+# Map places — canonical coordinates for the interactive Journey map.
+#
+# Coordinates are NORMALISED (0–1) over each map image, so they survive
+# re-exports/resizes of Jon's source maps. x = fraction from left, y = fraction
+# from top. The seeds below are APPROXIMATE eyeball placements on the real
+# Alambor world map — refine any of them by opening /map?calibrate and clicking
+# the map (it prints the normalised x,y to copy back here).
+#
+# `dossier`  → slug under canon/locations/ for the "<place> →" card link (null if none yet).
+# `plane`    → world | avernus | shadowfell  (non-world stops are reached via a portal on the world map).
+# `on`       → per-region coordinates for the Phase 3c regional maps (see `maps:` below).
+#              A place's top-level x,y is its WORLD position; `on: { gidia: {x,y} }` adds
+#              its position on the Gidia regional image. Calibrate via /map?calibrate&map=gidia.
+#              Region members without an `on` coord are scattered on that region's image
+#              (a "pin me down later" state), exactly like the world atlas does.
+
+# --- Map registry (Phase 3c) -------------------------------------------------------------
+# Every map (world + regional, + future city maps) is one entry here. Each region:
+#   parent → the map you drill in FROM (world).
+#   group  → the atlas kingdom-group slug to cross-filter the index to when this region is
+#            active (null = no kingdom group, so no cross-filter — e.g. Dalacia is a
+#            location, not a kingdom; its map still swaps in, pins appear as calibrated).
+#   image / width / height → the committed display JPG + its pixel dims (for the Leaflet
+#            bounds aspect ratio). Built by scripts/maps/build_displays.py; coords are
+#            normalised so the downscale doesn't move any pin.
+maps:
+  world:
+    # 2048px downscale of Jon's full-res export (world.jpg, 4096×3072, local-only) — 10×
+    # cheaper to composite, so zoom stays smooth. width/height stay the NATIVE pixel space:
+    # coords are normalised, so the 2048 image stretches over the same bounds correctly.
+    image: /maps/world-display.jpg
+    width: 4096
+    height: 3072
+    label: Alambor
+  gidia:
+    image: /maps/gidia-display.jpg
+    width: 2048
+    height: 1345
+    label: Gidian Empire
+    parent: world
+    group: gidian-empire
+  carasia:
+    image: /maps/carasia-display.jpg
+    width: 2048
+    height: 1085
+    label: Carasia
+    parent: world
+    group: carasian-kingdom
+  dalacia:
+    image: /maps/dalacia-display.jpg
+    width: 2048
+    height: 1560
+    label: Dalacia
+    parent: world
+    group: null   # Dalacia is a location dossier, not an atlas kingdom group → no cross-filter (v1)
+
+# Calibration pass (2026-06-15): re-pinned against the 4096×3072 grid. Places with
+# a readable label on Jon's map are marked `# labeled` (high confidence). Small DM
+# towns + sea-arc stops aren't drawn on the kingdoms map, so they're placed by canon
+# region/narrative and marked `# approx` — fine-tune those few with /map?calibrate.
+places:
+  carasian-coast:  { x: 0.456, y: 0.721, plane: world, dossier: null,          city_map: null }  # calibrated — midpoint of clicked shore range (0.413,0.686)→(0.499,0.756)
+  carstone:        { x: 0.486, y: 0.708, plane: world, dossier: carstone,      city_map: null }  # NEEDS RE-CLICK — currently identical to sultray (pins overlap)
+  sultray:         { x: 0.486, y: 0.708, plane: world, dossier: surtree,       city_map: null }  # calibrated — Surtree, Carasian river port (home base)
+  kierkenwall:     { x: 0.549, y: 0.513, plane: world, dossier: kierkenwall,   city_map: null }  # calibrated — Gidian Empire capital
+  vallon:          { x: 0.425, y: 0.631, plane: world, dossier: vallon,        city_map: null }  # calibrated — Carasian capital
+  goldcrest:       { x: 0.510, y: 0.520, plane: world, dossier: goldcrest,     city_map: null }  # calibrated — Gidian port
+  callum-heights:  { x: 0.435, y: 0.492, plane: world, dossier: null,          city_map: null }  # approx — mountain range NW of Goldcrest
+  evershire:       { x: 0.555, y: 0.405, plane: world, dossier: evershire,     city_map: null }  # approx — Gidia/Dalacia border (lake valley)
+  great-rift:      { x: 0.658, y: 0.799, plane: world, dossier: great-rift,    city_map: null }  # calibrated — canyon spires E of Tarlif
+  tarlif:          { x: 0.599, y: 0.821, plane: world, dossier: tarlif,        city_map: null }  # calibrated — Parathia
+  mag-stormeach:   { x: 0.785, y: 0.300, plane: world, dossier: null,          city_map: null }  # approx — eastern cliff city
+  veiled-ocean:    { x: 0.862, y: 0.470, plane: world, dossier: null,          city_map: null }  # approx — open ocean E (Mandalonia escape)
+  anchors-rest:    { x: 0.880, y: 0.545, plane: world, dossier: null,          city_map: null }  # approx — pirate haven, eastern isles
+  krakens-reef:    { x: 0.820, y: 0.615, plane: world, dossier: null,          city_map: null }  # approx — reef near the volcano
+  jazacha:         { x: 0.140, y: 0.800, plane: world, dossier: jazacha,       city_map: null }  # calibrated — SW jungle island
+
+  # Other planes — placed at their world-side portal so the route line stays legible.
+  # (Phase 3c can swap these for a proper inset/overlay.)
+  avernus:         { x: 0.835, y: 0.578, plane: avernus,    dossier: avernus,   city_map: null }  # approx — via Hells Gate (the eastern volcano)
+  shadowfell:      { x: 0.628, y: 0.868, plane: shadowfell, dossier: shadowfell, city_map: null }  # approx — Pool of Death, SE of Tarlif

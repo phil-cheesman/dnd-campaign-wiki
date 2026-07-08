@@ -1,0 +1,202 @@
+[
+  {
+    "slug": "arcane-collar",
+    "collection": "items",
+    "name": "Arcane Collar",
+    "role": "magic restraining chain",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A long, heavy chain collar of intertwined blueish-gold links, coiled loosely so its open clasp faces the viewer. At its center hangs a smooth round orb that shimmers with shifting color, faintly glowing as if holding caged power. The metal is ancient and weathered yet ornate. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "carpet-of-flying",
+    "collection": "items",
+    "name": "Carpet of Flying",
+    "role": "magic flying carpet",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A richly woven rectangular carpet with deep crimson, indigo, and gold geometric patterning and tasseled fringe at both ends. It floats and curls gently at one corner as if caught mid-flight, edges rippling. The weave is plush and intricate, faintly luminous threads tracing arcane motifs. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "carved-god-eyes",
+    "collection": "items",
+    "name": "Carved god-eyes (obsidian / amber / jade orbs)",
+    "role": "carved eye orbs",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "Three baseball-sized polished orbs resting together, each carved with a single large staring eye: one of glossy black obsidian, one of warm translucent amber, one of deep green jade. Their surfaces are smooth and reflective, and a faint abjuration glow seeps from the carved irises. Single grouped object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "forged-amber",
+    "collection": "items",
+    "name": "Forged Amber",
+    "role": "lightning-charged amber artifact",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A fist-sized chunk of translucent golden amber, faceted and irregular, with a live crackling lightning bolt suspended and frozen inside it. Arcs of blue-white electricity branch through the warm resin and flicker across its surface, casting a charged glow. The stone hums with contained power. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "mace-of-terror",
+    "collection": "items",
+    "name": "Mace of Terror",
+    "role": "magic mace",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A heavy flanged war mace with a dark iron head of cruel ridged blades and a leather-wrapped haft bound in gold. The metal is blackened and menacing, etched with faint sinister sigils that emit a dim red glow. Wisps of dread-like shadow cling around the head. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "mallorys-magic-mirror",
+    "collection": "items",
+    "name": "Mallory's Magic Mirror",
+    "role": "enchanted portal mirror",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A tall full-length standing mirror in an ornate antique frame of dark carved wood and tarnished gold. Instead of a reflection, its surface shimmers like liquid, showing a faint glimpse of a distant room rather than the viewer. The glass ripples with a soft arcane glow at the edges. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "pierres-ceremonial-dagger",
+    "collection": "items",
+    "name": "Pierre's ceremonial dagger",
+    "role": "ornate ceremonial dagger",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "An ornate ceremonial dagger shaped like a flying dragon: a golden hilt formed of outspread dragon wings, and a curved blade rippling with a wave-pattern damascened sheen. The guard and pommel are finely detailed scales and a dragon's head. The metal gleams polished and regal. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "pierres-pocket-book",
+    "collection": "items",
+    "name": "Pierre Beaubois's Small Leather Pocket Book",
+    "role": "damaged leather ledger",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A small worn leather pocket book lying closed at a slight angle, its cover stained with dried dark blood, edges scorched and charred, with a long slash cut across the binding. The leather is cracked and softened with age, a few singed pages fanning loose. Battered and intimate in scale. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "potentium",
+    "collection": "items",
+    "name": "Potentium",
+    "role": "crystalline power source",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A jagged cluster of blue-white crystal radiating intense inner light, its facets glowing as though holding limitless energy. Tendrils of pale luminescence ripple across its surface and the surrounding air seems to warp faintly around it. The crystal feels otherworldly, not of any earthly stone. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "ring-of-x-ray-vision",
+    "collection": "items",
+    "name": "Ring of X-ray Vision",
+    "role": "magic ring",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A polished silver ring with a wide flat bezel set with a single clear crystal lens, faintly smoky and translucent, that seems to look through whatever lies behind it. The band is engraved with fine delicate filigree. A subtle cool glow emanates from the gem. Small in scale, shown close. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "rod-of-attenuation",
+    "collection": "items",
+    "name": "Rod of Attenuation",
+    "role": "arcane relic rod",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A slender ancient metal rod about a forearm long, dark and worn, capped with a crystal that rotates between glowing purple and green light. Pulsing bands of color travel along the rod's length, and faint runic etchings line its shaft. The relic feels old and charged. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "rod-of-lordly-might",
+    "collection": "items",
+    "name": "Rod of Lordly Might",
+    "role": "magic rod",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A thick ornate metal rod of polished steel and gold, ringed with six gemstone buttons of different colors along its length and capped with a flanged mace-like head. The bar is sturdy and regal, gleaming with a faint magical sheen. A commanding, heavy implement. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "sending-stones",
+    "collection": "items",
+    "name": "Sending stones",
+    "role": "paired communication stones",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A matched pair of small smooth polished stones, rounded like river pebbles, pale gray flecked with veins of faint blue. Each glows softly from within as if humming with a distant voice. They rest side by side, one slightly turned. Small and tactile in scale. Single grouped object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "siren-of-the-sea-necklace",
+    "collection": "items",
+    "name": "Necklace from a Siren of the Sea",
+    "role": "magic gemstone necklace",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "An elegant necklace of fine gold links studded with deep red rubies and brilliant green emeralds, arranged around a large central teardrop gem. The stones glimmer with an enchanted shimmer, and a faint iridescent glow plays across them like sea-light. Laid out in a graceful curve. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "soul-leech-dagger",
+    "collection": "items",
+    "name": "Soul Leech dagger",
+    "role": "cursed life-stealing dagger",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A sinister dagger with a darkened blade in which two anguished human faces appear faintly pressed beneath the steel's surface. The hilt is wrapped in worn black leather with a twisted iron crossguard. A dim malevolent glow and faint shadow-tendrils seep from the metal. The blade feels hungry. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "texair",
+    "collection": "items",
+    "name": "Texair",
+    "role": "arcane spice-powder currency",
+    "type": "object",
+    "eligibility": "symbolic-only",
+    "visual": "A small open vessel and a scatter of pressed coins holding a fine glittering powder, deep violet-purple shot with shifting iridescent highlights, faintly luminous as if charged with transmutation magic. A little of the shimmering purple dust spills across the surface beside a few stamped coin-pressings that are themselves stained the same rich purple. Single grouped arrangement, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-sundering-book",
+    "collection": "items",
+    "name": "The Sundering (book)",
+    "role": "ancient coded tome",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A thick old leather-bound book, roughly five centuries old, its cover dark cracked hide embossed with worn arcane sigils and bound with tarnished metal clasps. It lies closed at a slight angle, spine frayed, pages yellowed and brittle at the edges. A faint air of secrecy clings to it. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "tuning-forks",
+    "collection": "items",
+    "name": "Tuning forks",
+    "role": "planar-travel tuning forks",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "Five slender metal tuning forks of differing lengths, arranged in a loose fan, each a polished two-pronged rod on a smooth handle. The metal ranges from silver to dark bronze; one fork shimmers with a faint vibrating glow as if still ringing. Clean and precise in form. Single grouped object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "windvane",
+    "collection": "items",
+    "name": "Windvane",
+    "role": "magic double-bladed spear",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "A long jeweled scepter-spear ending in twin curved double-edged blades, the shaft of polished steel and gold inlaid with glinting gemstones. Faint blue-white lightning crackles along the blade edges and arcs between the points. Tall and imposing, the weapon hums with stormy energy. Single object, three-quarter view, plain neutral background.",
+    "ref_images": []
+  },
+  {
+    "slug": "zeben-artifacts",
+    "collection": "items",
+    "name": "Zeben artifacts (the six gate keys)",
+    "role": "set of ancient gate-key relics",
+    "type": "object",
+    "eligibility": "ok",
+    "visual": "Six ancient mismatched relics arranged together: a slender rune-etched rod, a folded dark cloak clasp, and assorted small carved drow artifacts of stone and tarnished metal. Each gives off a faint differently-colored arcane glow, hinting they belong to one set. Old, ornate, and powerful. Single grouped arrangement, three-quarter view, plain neutral background.",
+    "ref_images": []
+  }
+]

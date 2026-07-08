@@ -1,0 +1,74 @@
+---
+/**
+ * 3×3 alignment chart for the party. Rows = Lawful/Neutral/Chaotic,
+ * columns = Good/Neutral/Evil. Each PC drops into their cell as a chip
+ * linking to the dossier. PCs with no parseable alignment list below.
+ */
+import {
+  parseAlignment,
+  LAW_CHAOS,
+  GOOD_EVIL,
+  LAW_CHAOS_LABEL,
+  GOOD_EVIL_LABEL,
+} from '../lib/alignment';
+
+interface PC {
+  name: string;
+  href: string;
+  slug?: string;
+  color?: string;
+  alignment?: string | null;
+  inferred?: boolean;
+}
+const { pcs } = Astro.props as { pcs: PC[] };
+
+const placed = pcs.map((p) => ({ ...p, cell: parseAlignment(p.alignment) }));
+const unaligned = placed.filter((p) => !p.cell);
+const cellOf = (lc: string, ge: string) =>
+  placed.filter((p) => p.cell && p.cell.lawChaos === lc && p.cell.goodEvil === ge);
+const anyInferred = placed.some((p) => p.cell && p.inferred);
+---
+
+<div class="aligngrid-wrap" data-pagefind-ignore>
+  <div class="aligngrid" role="table" aria-label="Party alignment chart">
+    <span class="corner" aria-hidden="true"></span>
+    {GOOD_EVIL.map((ge) => <span class={`colhead ax-${ge}`}>{GOOD_EVIL_LABEL[ge]}</span>)}
+
+    {
+      LAW_CHAOS.map((lc) => (
+        <>
+          <span class={`rowhead ax-${lc}`}>{LAW_CHAOS_LABEL[lc]}</span>
+          {GOOD_EVIL.map((ge) => {
+            const here = cellOf(lc, ge);
+            return (
+              <div class={`cell ${here.length ? 'has' : ''}`}>
+                {here.map((p) => (
+                  <a class="pcchip" href={p.href} data-char={p.slug ?? undefined} style={p.color ? `--c:${p.color}` : undefined}>
+                    {p.color && <span class="pcchip-sw" aria-hidden="true" />}
+                    {p.name}
+                    {p.inferred && <span class="qm" title="Inferred alignment">*</span>}
+                  </a>
+                ))}
+              </div>
+            );
+          })}
+        </>
+      ))
+    }
+  </div>
+
+  {
+    unaligned.length > 0 && (
+      <p class="unaligned">
+        Unaligned:{' '}
+        {unaligned.map((p, i) => (
+          <>
+            {i > 0 && ', '}
+            <a href={p.href}>{p.name}</a>
+          </>
+        ))}
+      </p>
+    )
+  }
+  {anyInferred && <p class="gridnote">* alignment inferred from canon, not a character sheet</p>}
+</div>

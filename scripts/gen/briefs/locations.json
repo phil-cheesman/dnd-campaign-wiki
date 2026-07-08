@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "avernus",
+    "collection": "locations",
+    "name": "Avernus",
+    "role": "hell plane",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A treeless infernal waste stretches to the horizon under a sunless sky of churning ash-clouds. Rivers of blood wind through cracked black rock where only blood-red moss clings. Far off, columns of warring devils and demons clash in the smoke. A spiked tower of red stone rises five hundred feet into the clouds, crowned by a fortress-forge of sacrifice. Jagged spurs and bone-littered plains spread beneath, lit by distant fires and the dull red glow of the land itself. Crimson, charcoal, and ember-orange dominate a scorched, oppressive vista.",
+    "ref_images": []
+  },
+  {
+    "slug": "blackwood-manor",
+    "collection": "locations",
+    "name": "Blackwood Manor",
+    "role": "fortified hilltop manor",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A walled hilltop complex of many timber-and-stone buildings rises above the moors, ringed by a moat and overlooking a large, still lake that mirrors a grey sky. A two-story keep with wrap-around ramparts anchors the compound, flanked by a long roofed great hall and lesser outbuildings. Reed-fringed marsh and rolling heath surround the hill; a causeway crosses the moat to the gate. The mood is brooding and isolated, the architecture sturdy but joyless. Muted palette of weathered grey stone, dark wood, dull green moor, and the lake's leaden sheen.",
+    "ref_images": []
+  },
+  {
+    "slug": "carstone",
+    "collection": "locations",
+    "name": "Carstone",
+    "role": "riverside farming village",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A quaint riverside farming village in southern grasslands. The road drops from dusty high grasses and scattered trees toward a slow, small river lined with poplars and great oaks whose huge roots reach into the bed; the grass greens and lushens, fish jumping in the streams. Around a bend the river widens; across the bank, rows of fields are filled with crops, and beyond them sits the modest, well-kept town, smoke rising gently from its larger central buildings. Several bridges cross upstream and a wharf holds a few small barges at its docks.",
+    "ref_images": []
+  },
+  {
+    "slug": "corwell-keep",
+    "collection": "locations",
+    "name": "Corwell Keep",
+    "role": "hilltop keep",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A stone keep crowns a lone hill in a lake valley beneath the largest peak of a jagged mountain range. Curtain walls and towers ring the high seat; a winding road climbs past it toward distant highlands. In the aftermath of dragonfire the surrounding land lies blasted and boggy, the walls acid-scarred and scorched, pools of dark water standing in the churned earth below. Mountains loom behind, their slopes hazed with mist. A grim, war-touched palette of grey stone, burnt timber, sickly green scorch-marks, and the cold blue of the valley lake.",
+    "ref_images": []
+  },
+  {
+    "slug": "dalacia",
+    "collection": "locations",
+    "name": "Dalacia",
+    "role": "frontier prairie region",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A wide American-Southwest prairie of rolling hills and small rivers, flanked by mountains and plateaus, with wagon trains rolling constantly between farms and settlements, carrying cotton, wheat, and beautifully crafted furniture out and guarded loads of texere in.",
+    "ref_images": []
+  },
+  {
+    "slug": "evershire",
+    "collection": "locations",
+    "name": "Evershire",
+    "role": "lake valley region",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A beautiful lake valley cradled between forested foothills and a great jagged mountain range on the kingdom's border. A broad mirror-still lake fills the valley floor, fed by streams threading through meadows and woodland; scattered farmsteads, a hilltop keep, and small towns dot the slopes. Yet the land bears scars of past ruin: patches of acid-blighted ground, abandoned fields, and a darker fringe where raids and plague once swept through. Mountains rise sharply behind, their peaks snow-touched. Palette of deep valley greens, slate-blue water, and the grey-purple of distant stone.",
+    "ref_images": []
+  },
+  {
+    "slug": "feldbruk",
+    "collection": "locations",
+    "name": "Feldbruk",
+    "role": "fog-drenched marsh city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A fog-drenched marsh city surrounded on all sides by sprawling moors and swamps, with winding reed-lined waterways stretching to the horizon. Wooden causeways and raised paths wind through the marsh; houses stand on stilts and floating platforms of weathered timber, reached only by boat or floating dock. A central island core is a labyrinth of narrow mossy cobblestone alleys, rain dripping from eaves, buildings leaning with age. Stout grey defensive walls and ivy-cloaked bastions emerge from the fog like sentinels; watchtowers pierce the haze. Canals mirror the fog-draped sky as cloaked figures pole gondolas silently through an otherworldly glow.",
+    "ref_images": []
+  },
+  {
+    "slug": "goldcrest",
+    "collection": "locations",
+    "name": "Goldcrest",
+    "role": "cliff harbor city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "Approached from the sea: high white cliffs ringed with tall whitewashed walls hung with rose banners, a great cathedral and proud statues crowning the heights, water cascading endlessly down the rock from a bubbling pool. An ornate bridge over a hundred feet high spans the harbor mouth, lined with shops and a defensive tower, flanked by two forts bristling with spiked ballistae. Beyond it opens a wide bay fed by three rivers, docks teeming with ships and goods, smoke rising from shipbuilding yards with great cranes and dry docks. A factory island sits mid-bay with ships afloat around it.",
+    "ref_images": []
+  },
+  {
+    "slug": "great-rift",
+    "collection": "locations",
+    "name": "The Great Rift",
+    "role": "vast canyon",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A colossal canyon splits the land, plunging thousands of feet to a shadowed floor far below. Supernaturally carved stone spires rise impossibly tall from the depths, ten thousand feet of fluted rock standing like the columns of dead gods. Sheer banded cliffs in ochre and rust drop in dizzying tiers; slender pale trees cling to ledges along the rim. Mist and a faint otherworldly shimmer drift in the lower reaches where caves yawn into darkness. A sweeping, awe-struck vista under a wide sky, palette of sun-baked sandstone, deep blue shadow, and hazy violet depths.",
+    "ref_images": []
+  },
+  {
+    "slug": "grillers",
+    "collection": "locations",
+    "name": "Grillers",
+    "role": "walled lakeside city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "Tall yellowed-limestone walls of expertly carved stone rise out of green farmland, topped by towers with cone-capped roofs of dark blue shingles flying bright banners. Well-kept farms and scattered trees flank the road; dense thickets partly shroud a cerulean-blue lake dotted with everything from small shore fishing boats to large lake- and river-runner vessels coming and going from port. Above the walled towers rises an inner stronghold of many cream-marble towers crowned by a central octagonal keep with a golden dome, gleaming white on a raised rampart above the rest of the city. A river to the north meanders through the countryside into the city.",
+    "ref_images": []
+  },
+  {
+    "slug": "jazacha",
+    "collection": "locations",
+    "name": "Jazacha",
+    "role": "deep jungle land",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A dense, steaming tropical jungle blankets the land to the horizon, broken by fang-like mountains whose ridges enclose hidden bowl valleys. Coral reefs fringe a turquoise coastline where surf breaks over shallows. Inland, ancient stone ruins and a temple's weathered carvings emerge from the canopy, half-swallowed by vines and roots. Mist hangs in the green hollows; rivers thread the lowlands toward the sea. Brilliant emerald foliage, dark wet stone, jade water, and the haze of jungle humidity give a wild, overgrown, secretive mood — an ancient land of lizardfolk and forgotten treasure.",
+    "ref_images": []
+  },
+  {
+    "slug": "kierkenwall",
+    "collection": "locations",
+    "name": "Kierkenwall",
+    "role": "fortified river capital",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A blocky, stout grey-walled city stands on the bend where three wide rivers combine into one. A moat rings it entirely, behind a high grey wall of very old construction studded with square, squat towers at regular intervals. Six fortresses form bastions around the perimeter and make up the districts, their many buildings colored to match. Several raised areas rise within. Out on the wide, squally river, breakwater sea-walls built on outcropping islands break the rushing water and shield the harbor. At the bay's entrance stands a lighthouse holding a great blue gem that catches the light.",
+    "ref_images": []
+  },
+  {
+    "slug": "shadowfell",
+    "collection": "locations",
+    "name": "Shadowfell",
+    "role": "dark mirror plane",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A lightless, desolate plane stretches to the horizon under a sky with neither sun nor moon, only a dim grey murk. No living trees stand, only burned black stumps scattered across cracked, ashen ground as far as the eye can see. A sluggish river cuts through the waste, split by a faint shimmering wall of pale light where the planes press thin. Skeletal ruins and a distant dark tower break the flatness. The whole vista is drained of color, all charcoal, bone-grey, and cold shadow, suffused with dread and a creeping, sorrowful stillness.",
+    "ref_images": []
+  },
+  {
+    "slug": "surtree",
+    "collection": "locations",
+    "name": "Surtree",
+    "role": "walled river port city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A large walled town spans both banks of a river as morning fog burns off. A smaller right-bank barge quarter sits outside the wall with a single gate and small docks, ringed by modest buildings amid trees and fields. The left-bank main town, far larger, has three great gates, a cobblestone riverbank with walkways and greenways, and midway a forked canal where small pleasure boats are docked. Grand ornate buildings of religion, learning, and government rise above the rest, with a raised inner tier behind a hilltop wall. A tall bridge spans the river; on high banks a burned, crumbling estate stands ruined.",
+    "ref_images": []
+  },
+  {
+    "slug": "tarlif",
+    "collection": "locations",
+    "name": "Tarlif",
+    "role": "desert mageocracy city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A classic Middle-Eastern medieval city. High thick yellow-sandstone walls ring a vast network of winding streets, markets, and homes. A great river runs past the city, triangular-sailed multicolored ships at its docks. Smoke rises but the wind sweeps it quickly away. To the south a dried-up canal cuts to a sealed breach in the walls. To the north and east the city climbs an incline to a palace with gleaming golden roofs, hanging gardens, and endless glittering pools. The city backs against rising cliffs and plateaus, slot canyons working into a great rift, with multicolored woods just visible atop the high plateaus.",
+    "ref_images": []
+  },
+  {
+    "slug": "the-trene",
+    "collection": "locations",
+    "name": "The Trene",
+    "role": "realm of nations",
+    "type": "landscape",
+    "eligibility": "symbolic-only",
+    "visual": "A sweeping vista of a vast and varied world: a network of distant nations spread beneath a wide sky, hinted by far-off walled cities, sailing fleets on a broad sea, mountains, prairies, and forests all sharing one horizon. Three great rivers or sea-lanes converge in the middle distance, suggesting union and shared waterways, while guarded citadels stand at the crossroads between lands. The mood is grand and diplomatic, an entire order of realms held in fragile balance. Soft golden light over a panoramic, map-like expanse of land and water in muted, harmonious earth and sea tones.",
+    "ref_images": []
+  },
+  {
+    "slug": "vallon",
+    "collection": "locations",
+    "name": "Vallon",
+    "role": "island capital city",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "White towers glimmer in the setting sun as a massive city sprawls across multiple cliff-tiered islands above a surrounding bay, with one large central island. Homes and villas crowd every outcropping and islet; boats travel between the islands incessantly. Massive arched bridges tower over a hundred feet above the water, letting ships pass beneath. A great arena sits among the rooftops, and on the central hill stand impossibly tall white towers. Wrapping around, a vast bowing harbor ring, part manmade and part cliff, holds hundreds of docked ships, its inner ring paved with docks, guns and ballista hidden through the defending cliffs.",
+    "ref_images": []
+  },
+  {
+    "slug": "vault-of-izdar",
+    "collection": "locations",
+    "name": "Vault of Izdar",
+    "role": "underground evil temple",
+    "type": "landscape",
+    "eligibility": "ok",
+    "visual": "A vast subterranean temple complex carved deep beneath a great rift, lit only by sickly glows in the dark. Towering obelisks of black stone bear graven sigils and creeping inscriptions; colossal plinth statues of robed drow figures loom over cracked stone floors. Pillared halls open onto a still, mirror-flat water room where dim reflections waver, and a chamber of staring eye-shaped mirrors recedes into shadow. Ancient relief carvings of nine dark deities mark the walls. Dust, decay, and cold menace fill the air. Palette of obsidian black, deep violet, dull bronze, and the wan green of arcane light.",
+    "ref_images": []
+  }
+]

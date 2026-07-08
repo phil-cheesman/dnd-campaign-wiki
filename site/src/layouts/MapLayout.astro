@@ -1,0 +1,160 @@
+---
+import Topbar from '../components/Topbar.astro';
+import MobileDrawer from '../components/MobileDrawer.astro';
+import Analytics from '@vercel/analytics/astro';
+import AnalyticsEvents from '../components/AnalyticsEvents.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+
+// Social / link-preview metadata — see BaseLayout for rationale.
+const siteUrl = Astro.site ?? new URL('https://alambor-wiki.vercel.app');
+const ogImage = new URL('/og-image.png', siteUrl).href;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const ogTitle = `${title} · Alambor Codex`;
+const ogDesc = description ?? 'Knowledge base for the Alambor D&D campaign — the Alambor Six.';
+
+// Same module set as BaseLayout; Map is the live/active one here.
+// (Calendar was a "soon" marker — hidden until/unless it's actually built.)
+const modules = [
+  { key: 'wiki', label: 'Wiki', href: '/' },
+  { key: 'graph', label: 'Graph', href: '/graph' },
+  { key: 'map', label: 'Map', href: '/map' },
+  { key: 'gallery', label: 'Gallery', href: '/gallery' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Resolve the theme before first paint (no flash): an explicit stored
+      // choice wins; otherwise default to light (mirrors BaseLayout). ThemeToggle
+      // persists changes.
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t !== 'light' && t !== 'dark') t = 'light';
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+    <title>{title} · Alambor Codex</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#14161d" />
+    <meta name="apple-mobile-web-app-title" content="Alambor" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Alambor Codex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Alambor Codex" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDesc} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Topbar modules={modules} activeKey="map" variant="map" />
+
+    {/* Map has no Sidebar, so the drawer exposes the module links (Wiki/Graph/
+        Map/Gallery) at minimum — nav stays reachable once the topbar row hides. */}
+    <MobileDrawer modules={modules} activeKey="map" />
+
+    <slot />
+
+    <style is:global>
+      :root {
+        --bg: #fcfbf8;
+        --surface: #f4f1ea;
+        --text: #23211c;
+        --ink-soft: #46423a;
+        --muted: #75705f;
+        --faint: #b3ad9d;
+        --hairline: #e3ddcf;
+        --gold: #a8842c;
+        --gold-soft: #c9b06a;
+        --link: #6a33b0;
+        --link-hover: #8348cf;
+        /* White-bark logo needs a dark edge to read on the cream topbar; see .wordmark .logo. */
+        --logo-halo: rgba(35, 33, 28, 0.5);
+        --sea: #e9eef0;
+        --panel-bg: rgba(252, 251, 248, 0.9);
+        /* Journey route + markers (texair purple) */
+        --route: #6a33b0;
+        --route-soft: #b39ad6;
+        --topbar-h: 4.85rem;
+        /* Motion tokens (mirror BaseLayout) so map interactions speak the same
+           timing/easing language. */
+        --dur-instant: 130ms;
+        --dur-state: 200ms;
+        --dur-panel: 280ms;
+        --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+        --ease-in: cubic-bezier(0.4, 0, 1, 1);
+        --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== Dark theme (mirrors BaseLayout — cool slate) ===== */
+      :root[data-theme='dark'] {
+        --bg: #14161d;
+        --surface: #1d2029;
+        --text: #e9ebf2;
+        --ink-soft: #c9cdda;
+        --muted: #8e93a6;
+        --faint: #5c6172;
+        --hairline: #2c303d;
+        --gold: #d2ad55;
+        --gold-soft: #b99b51;
+        --link: #b89af0;
+        --link-hover: #cdb6f7;
+        /* Dark codex desk gives the white bark its own contrast — no halo needed. */
+        --logo-halo: transparent;
+        --sea: #1a2027;
+        --panel-bg: rgba(20, 22, 29, 0.9);
+        --route: #b89af0;
+        --route-soft: #7d5bb0;
+      }
+
+      /* Topbar + theme-toggle CSS now lives in Topbar.astro (shared by both layouts). */
+      * { box-sizing: border-box; }
+      html { font-size: 15.5px; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        /* dvh, not vh: the map page is a locked full-height column (overflow:hidden,
+           no page scroll). With 100vh the column is taller than the iOS visible
+           viewport, so the bottom-anchored legend + ☰ Atlas pill fell below the
+           screen (only reachable by pinch-zooming out). dvh tracks the real chrome. */
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { color: var(--link-hover); }
+    </style>
+    <Analytics />
+    <AnalyticsEvents />
+  </body>
+</html>

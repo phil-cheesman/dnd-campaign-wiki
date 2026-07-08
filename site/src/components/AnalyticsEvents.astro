@@ -1,0 +1,54 @@
+---
+// Custom Vercel Web Analytics events for interactions that pageviews can't see.
+// Pageviews (which pages people land on) are automatic via <Analytics/>; this
+// adds a few *behaviour* signals on top, wired with one delegated listener so
+// it stays cheap and never touches per-component markup. All calls are
+// best-effort — if `track` fails to load, the UI is unaffected.
+//
+// Events emitted here:
+//   outbound_link { url }  — a click that sends someone off-site (e.g. Discord).
+//   search        { query } — what people type into the Pagefind search modal.
+//
+// In-app events (gallery/graph) are emitted from their React islands instead,
+// because those interactions live in component state, not the DOM.
+---
+<script>
+  import { track } from '@vercel/analytics';
+
+  // ---- Outbound links -------------------------------------------------------
+  // An outbound link is any anchor whose host differs from ours. Captured at the
+  // document level so it covers links anywhere (prose, footer, cards).
+  document.addEventListener(
+    'click',
+    (e) => {
+      const a = e.target instanceof Element ? e.target.closest('a') : null;
+      if (!a) return;
+      if (a.host && a.host !== location.host) {
+        track('outbound_link', { url: a.href });
+      }
+    },
+    { capture: true },
+  );
+
+  // ---- Search queries -------------------------------------------------------
+  // The Pagefind modal mounts its input lazily, so we can't bind to it directly.
+  // Instead, listen for `input` on any search box inside the modal, debounce so
+  // we record the *settled* query rather than every keystroke, and dedupe so a
+  // pause mid-typing doesn't log the same string twice. Min length 3 keeps junk
+  // out and conserves the (limited, on Hobby) custom-event budget.
+  let searchTimer = 0;
+  let lastQuery = '';
+  document.addEventListener('input', (e) => {
+    const el = e.target;
+    if (!(el instanceof HTMLInputElement)) return;
+    if (!el.closest('pagefind-modal, .pagefind-ui')) return;
+    const q = el.value.trim();
+    clearTimeout(searchTimer);
+    if (q.length < 3) return;
+    searchTimer = window.setTimeout(() => {
+      if (q === lastQuery) return;
+      lastQuery = q;
+      track('search', { query: q });
+    }, 1000);
+  });
+</script>

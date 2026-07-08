@@ -1,0 +1,273 @@
+---
+/**
+ * Ability-score spider chart. Two modes, one component:
+ *  - tiny / single series  → sits in the dossier infobox under the score table.
+ *  - interactive / many    → the party comparison web on the characters index;
+ *    a legend of chips, hover/focus a chip to pop that character's polygon.
+ *
+ * Pure SVG (geometry from lib/radar.ts), themed off the Codex CSS vars; the only
+ * client JS is the legend-highlight wiring, and only for interactive instances.
+ */
+import {
+  RADAR_AXES,
+  abilityPolygon,
+  ringPolygon,
+  vertex,
+  colorFor,
+  type Abilities,
+} from '../lib/radar';
+
+interface Series {
+  name: string;
+  slug: string;
+  abilities: Abilities;
+  href?: string;
+}
+interface Props {
+  series: Series[];
+  size?: number;
+  interactive?: boolean;
+  title?: string;
+  caption?: string;
+}
+const { series, size = 180, interactive = false, title, caption } = Astro.props as Props;
+
+const N = RADAR_AXES.length;
+const cx = size / 2;
+const cy = size / 2;
+const r = size * 0.34;
+const compact = size < 220;
+
+const rings = [0.25, 0.5, 0.75, 1];
+const spokes = RADAR_AXES.map((_, i) => vertex(cx, cy, r, i, N, 1));
+const labels = RADAR_AXES.map(([label], i) => {
+  const [x, y] = vertex(cx, cy, r * 1.27, i, N);
+  const anchor = Math.abs(x - cx) < 1 ? 'middle' : x > cx ? 'start' : 'end';
+  const dy = Math.abs(y - cy) < 1 ? (y < cy ? '-0.1em' : '0.7em') : '0.32em';
+  return { label, x, y, anchor, dy };
+});
+
+const plotted = series.map((s, i) => ({
+  ...s,
+  color: colorFor(s.slug, i),
+  points: abilityPolygon(s.abilities, cx, cy, r),
+  dots: RADAR_AXES.map(([, key], ai) =>
+    vertex(cx, cy, r, ai, N, Math.max(0, Math.min(1, (s.abilities[key as keyof Abilities] - 6) / 14))),
+  ),
+}));
+---
+
+<figure class={`statradar${interactive ? ' is-interactive' : ''}${compact ? ' is-compact' : ''}`}>
+  {title && <figcaption class="sr-title">{title}</figcaption>}
+  <svg
+    class="sr-svg"
+    viewBox={`0 0 ${size} ${size}`}
+    role="img"
+    aria-label={`Ability-score chart${plotted.length === 1 ? ` for ${plotted[0].name}` : ' comparing the party'}`}
+  >
+    <g class="sr-grid">
+      {rings.map((t) => <polygon class="sr-ring" points={ringPolygon(cx, cy, r, t)} />)}
+      {spokes.map(([x, y]) => <line class="sr-spoke" x1={cx} y1={cy} x2={x} y2={y} />)}
+    </g>
+    <g class="sr-labels">
+      {labels.map((l) => (
+        <text class="sr-axis" x={l.x} y={l.y} text-anchor={l.anchor} dy={l.dy}>
+          {l.label}
+        </text>
+      ))}
+    </g>
+    {
+      plotted.map((p) => (
+        <g class="sr-series" data-series={p.slug} style={`--c:${p.color}`}>
+          <polygon class="sr-poly" points={p.points} />
+          {p.dots.map(([x, y]) => <circle class="sr-dot" cx={x} cy={y} r={compact ? 1.8 : 2.4} />)}
+        </g>
+      ))
+    }
+  </svg>
+
+  {
+    interactive && (
+      <ul class="sr-legend" role="list">
+        {plotted.map((p) => (
+          <li>
+            <a
+              class="sr-chip"
+              href={p.href}
+              data-key={p.slug}
+              style={`--c:${p.color}`}
+            >
+              <span class="sr-swatch" aria-hidden="true" />
+              {p.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  {caption && <figcaption class="sr-caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .statradar {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sr-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    display: block;
+  }
+  .sr-title {
+    align-self: stretch;
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.5rem;
+  }
+  .sr-caption {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    text-align: center;
+  }
+
+  /* Web grid */
+  .sr-ring {
+    fill: none;
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+  .sr-ring:last-of-type {
+    stroke: color-mix(in srgb, var(--gold-soft) 55%, var(--hairline));
+  }
+  .sr-spoke {
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+  .sr-axis {
+    font: 600 0.56rem 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+    fill: var(--muted);
+  }
+  .statradar:not(.is-compact) .sr-axis {
+    font-size: 0.66rem;
+  }
+
+  /* Series polygons */
+  .sr-series {
+    transition:
+      opacity var(--dur-state) var(--ease-out);
+  }
+  .sr-poly {
+    fill: color-mix(in srgb, var(--c) 16%, transparent);
+    stroke: var(--c);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transition:
+      fill var(--dur-state) var(--ease-out),
+      stroke-width var(--dur-state) var(--ease-out);
+  }
+  .sr-dot {
+    fill: var(--c);
+  }
+
+  /* Single-series (dossier) — solid, no dimming logic. */
+  .statradar:not(.is-interactive) .sr-poly {
+    fill: color-mix(in srgb, var(--c) 20%, transparent);
+  }
+
+  /* Interactive comparison: all faint-ish at rest, highlight one on hover/focus. */
+  .is-interactive .sr-poly {
+    fill: color-mix(in srgb, var(--c) 9%, transparent);
+    stroke-width: 1.6;
+  }
+  .is-interactive[data-active] .sr-series {
+    opacity: 0.18;
+  }
+  .is-interactive[data-active] .sr-series.is-active {
+    opacity: 1;
+  }
+  .is-interactive .sr-series.is-active .sr-poly {
+    fill: color-mix(in srgb, var(--c) 26%, transparent);
+    stroke-width: 2.6;
+  }
+
+  /* Legend */
+  .sr-legend {
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem 0.45rem;
+  }
+  .sr-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: 500 0.78rem 'Inter', sans-serif;
+    color: var(--text);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.18rem 0.6rem 0.18rem 0.45rem;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-instant) var(--ease-out),
+      background var(--dur-instant) var(--ease-out);
+  }
+  .sr-chip:hover,
+  .sr-chip:focus-visible,
+  .sr-chip.is-active {
+    border-color: var(--c);
+    background: color-mix(in srgb, var(--c) 12%, transparent);
+    text-decoration: none;
+  }
+  .sr-swatch {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 3px;
+    background: var(--c);
+    flex: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sr-series,
+    .sr-poly {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Legend highlight wiring — only interactive instances carry a legend.
+  for (const root of document.querySelectorAll<HTMLElement>('.statradar.is-interactive')) {
+    const seriesEls = root.querySelectorAll<SVGGElement>('.sr-series');
+    const chips = root.querySelectorAll<HTMLElement>('.sr-chip');
+
+    const highlight = (key: string | null) => {
+      if (key) root.dataset.active = key;
+      else delete root.dataset.active;
+      seriesEls.forEach((el) =>
+        el.classList.toggle('is-active', !!key && el.dataset.series === key),
+      );
+      chips.forEach((c) => c.classList.toggle('is-active', !!key && c.dataset.key === key));
+    };
+
+    chips.forEach((chip) => {
+      const key = chip.dataset.key ?? null;
+      chip.addEventListener('mouseenter', () => highlight(key));
+      chip.addEventListener('focus', () => highlight(key));
+    });
+    root.addEventListener('mouseleave', () => highlight(null));
+    root.addEventListener('focusout', (e) => {
+      if (!root.contains((e as FocusEvent).relatedTarget as Node)) highlight(null);
+    });
+  }
+</script>

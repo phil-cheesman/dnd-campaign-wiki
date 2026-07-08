@@ -1,0 +1,19 @@
+---
+/**
+ * Codex breadcrumb trail: `Wiki ◆ <Tier> ◆ [<sub-group>] ◆ <Name>`.
+ * Takes an explicit trail; the last crumb renders as the current (texair) page.
+ */
+interface Crumb { label: string; href?: string }
+const { trail } = Astro.props as { trail: Crumb[] };
+---
+
+<nav class="crumb" aria-label="Breadcrumb">
+  {
+    trail.map((c, i) => (
+      <>
+        {i > 0 && <span class="sep">◆</span>}
+        {c.href ? <a href={c.href}>{c.label}</a> : <span class="current">{c.label}</span>}
+      </>
+    ))
+  }
+</nav>

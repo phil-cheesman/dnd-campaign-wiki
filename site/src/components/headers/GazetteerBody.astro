@@ -1,0 +1,332 @@
+---
+// Locations header body — the gazetteer (spec §3.3). Locations are bucketed
+// under their KINGDOM (crest/landscape banner + name), with their child
+// locations as image-thumb rows reusing the `.cardgrid--thumbs` look from
+// CardGridBody. An "External / Unaffiliated" bucket comes last.
+//
+// The Grouped⇄Flat control is the GLOBAL density attr (ViewToggle, relabelled):
+//   • Grouped = cards  → the kingdom-grouped outline (default)
+//   • Flat    = list   → ONE flat A–Z grid of all locations, no kingdom headings
+// Because Flat needs a genuine A–Z re-sort (not just hidden headings), we render
+// BOTH a grouped block and a flat block and toggle their visibility off
+// `html[data-density]` — there are only ~18 locations, so the duplication is
+// cheap. An optional name search (GazetteerSlicer) filters rows in both blocks.
+// This is a text-with-images outline only — the dedicated Map feature owns maps.
+import type { GazPayload, GazRow } from '../../lib/locations';
+import { colorFor } from '../graph/graph-meta';
+
+const { kingdoms, external } = Astro.props as Pick<GazPayload, 'kingdoms' | 'external'>;
+const tint = colorFor('locations');
+
+// Flat A–Z list across every kingdom + external (the Flat view).
+const flat: GazRow[] = [...kingdoms.flatMap((k) => k.locations), ...external].sort((a, b) =>
+  a.name.localeCompare(b.name),
+);
+---
+
+<div class="gaz-body">
+  <p id="gaz-empty" class="gaz-empty" hidden>No locations match that filter.</p>
+
+  {/* ===== Grouped (cards) — kingdom by kingdom ===== */}
+  <div class="gaz-grouped">
+    {
+      kingdoms.map((k) => (
+        <section class="gaz-kingdom" data-gaz-group>
+          <header class="gaz-kingdom-head">
+            {k.art?.image ? (
+              <img
+                class="gaz-crest"
+                src={k.art.image}
+                alt=""
+                width="44"
+                height="44"
+                loading="lazy"
+                style={`object-position:${k.art.type === 'portrait' ? 'center top' : 'center'}`}
+              />
+            ) : (
+              <span class="gaz-crest gaz-crest--ph" style={`background:${tint}1f;color:${tint}`}>
+                {(k.name[0] ?? '?').toUpperCase()}
+              </span>
+            )}
+            <h2 class="gaz-kingdom-title">
+              <a href={`/kingdoms/${k.slug}`}>{k.name}</a>
+              <span class="gaz-kingdom-count">{k.locations.length}</span>
+            </h2>
+          </header>
+          {k.locations.length ? (
+            <ul class="cardgrid cardgrid--thumbs gaz-locs">
+              {k.locations.map((r) => (
+                <li class="gaz-row" data-gaz-row data-name={r.name.toLowerCase()}>
+                  <a href={r.href}>
+                    {r.img ? (
+                      <img
+                        class="card-thumb"
+                        src={r.img}
+                        alt=""
+                        width="54"
+                        height="54"
+                        loading="lazy"
+                        style={`object-position:${r.artType === 'portrait' ? 'center top' : 'center'}`}
+                      />
+                    ) : (
+                      <span class="card-thumb card-thumb--ph" style={`background:${tint}1f;color:${tint}`}>
+                        {(r.name[0] ?? '?').toUpperCase()}
+                      </span>
+                    )}
+                    <span class="card-text">
+                      <span class="card-title">{r.name}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="gaz-none">No catalogued locations yet.</p>
+          )}
+        </section>
+      ))
+    }
+
+    {
+      external.length > 0 && (
+        <section class="gaz-kingdom gaz-kingdom--external" data-gaz-group>
+          <header class="gaz-kingdom-head">
+            <span class="gaz-crest gaz-crest--ph" style={`background:${tint}1f;color:${tint}`}>
+              ?
+            </span>
+            <h2 class="gaz-kingdom-title">
+              External / Unaffiliated
+              <span class="gaz-kingdom-count">{external.length}</span>
+            </h2>
+          </header>
+          <ul class="cardgrid cardgrid--thumbs gaz-locs">
+            {external.map((r) => (
+              <li class="gaz-row" data-gaz-row data-name={r.name.toLowerCase()}>
+                <a href={r.href}>
+                  {r.img ? (
+                    <img
+                      class="card-thumb"
+                      src={r.img}
+                      alt=""
+                      width="54"
+                      height="54"
+                      loading="lazy"
+                      style={`object-position:${r.artType === 'portrait' ? 'center top' : 'center'}`}
+                    />
+                  ) : (
+                    <span class="card-thumb card-thumb--ph" style={`background:${tint}1f;color:${tint}`}>
+                      {(r.name[0] ?? '?').toUpperCase()}
+                    </span>
+                  )}
+                  <span class="card-text">
+                    <span class="card-title">{r.name}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+
+  {/* ===== Flat (list) — one A–Z grid, no kingdom headings ===== */}
+  <div class="gaz-flat">
+    <ul class="cardgrid cardgrid--thumbs gaz-locs">
+      {
+        flat.map((r) => (
+          <li class="gaz-row" data-gaz-row data-name={r.name.toLowerCase()}>
+            <a href={r.href}>
+              {r.img ? (
+                <img
+                  class="card-thumb"
+                  src={r.img}
+                  alt=""
+                  width="54"
+                  height="54"
+                  loading="lazy"
+                  style={`object-position:${r.artType === 'portrait' ? 'center top' : 'center'}`}
+                />
+              ) : (
+                <span class="card-thumb card-thumb--ph" style={`background:${tint}1f;color:${tint}`}>
+                  {(r.name[0] ?? '?').toUpperCase()}
+                </span>
+              )}
+              <span class="card-text">
+                <span class="card-title">{r.name}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('[data-gaz-row]'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('[data-gaz-group]'));
+    if (!rows.length) return;
+
+    var search = document.getElementById('gaz-search') as HTMLInputElement | null;
+    var clearBtn = document.getElementById('gaz-clear') as HTMLButtonElement | null;
+    var empty = document.getElementById('gaz-empty');
+
+    function apply() {
+      var q = (search && search.value.trim().toLowerCase()) || '';
+      var anyVisible = false;
+      rows.forEach(function (el: HTMLElement) {
+        var ok = !q || (el.dataset.name || '').indexOf(q) !== -1;
+        el.hidden = !ok;
+        if (ok) anyVisible = true;
+      });
+      // Hide kingdom sections whose rows are all filtered out (so the outline
+      // closes up); only relevant while a query is active.
+      groups.forEach(function (sec: HTMLElement) {
+        var visible = sec.querySelectorAll('[data-gaz-row]:not([hidden])').length;
+        sec.hidden = !!q && visible === 0;
+      });
+      if (empty) empty.hidden = anyVisible;
+      if (clearBtn) clearBtn.disabled = !q;
+    }
+
+    if (search) search.addEventListener('input', apply);
+    if (clearBtn)
+      clearBtn.addEventListener('click', function () {
+        if (search) search.value = '';
+        apply();
+      });
+
+    apply();
+  })();
+</script>
+
+<style>
+  .gaz-empty {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0.5rem 0;
+  }
+
+  /* The flat block is hidden by default (Grouped/cards is the default density);
+     the density attr swaps which block shows. */
+  .gaz-flat {
+    display: none;
+  }
+  :global(html[data-density='list']) .gaz-grouped {
+    display: none;
+  }
+  :global(html[data-density='list']) .gaz-flat {
+    display: block;
+  }
+
+  .gaz-kingdom {
+    margin: 0 0 1.6rem;
+  }
+  .gaz-kingdom-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1.3rem 0 0.6rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .gaz-crest {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .gaz-crest--ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .gaz-kingdom-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+  /* Purple like the location links beneath it, so the kingdom heading reads as
+     "click me to open the kingdom's article" rather than a plain section label. */
+  .gaz-kingdom-title a {
+    color: var(--link);
+  }
+  .gaz-kingdom-title a:hover {
+    color: var(--link-hover);
+  }
+  .gaz-kingdom-count {
+    color: var(--faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .gaz-none {
+    color: var(--faint);
+    font-style: italic;
+    font-size: 0.88rem;
+    margin: 0.2rem 0 0;
+  }
+
+  /* The `.cardgrid--thumbs` row look lives scoped inside CardGridBody, so it
+     doesn't reach here — replicate the thumb-row styling for the location rows.
+     The gazetteer stays image-forward in BOTH Grouped and Flat (this is our own
+     toggle, not the global Cards⇄List density), so no list-compression here. */
+  .gaz-locs.cardgrid--thumbs a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+  }
+  .gaz-locs .card-thumb {
+    flex: none;
+    width: 54px;
+    height: 54px;
+    border-radius: 6px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .gaz-locs .card-thumb--ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .gaz-locs .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+  .gaz-locs .card-title {
+    line-height: 1.25;
+  }
+
+  /* The filter script toggles the `hidden` attr; `.cardgrid--thumbs li` carries
+     no explicit display, but `[data-gaz-group]` sections do via flex children —
+     re-assert the hide with higher specificity to beat any author display rule. */
+  .gaz-row[hidden],
+  .gaz-kingdom[hidden] {
+    display: none;
+  }
+</style>

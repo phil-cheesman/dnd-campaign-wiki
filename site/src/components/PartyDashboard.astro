@@ -1,0 +1,1346 @@
+---
+/**
+ * Party comparison dashboard — the cross-character roster view on /characters.
+ *
+ * One legend rules them all: hover a name to spotlight that PC across every
+ * visual at once (radar, alignment, HP treemap, AC/speed bars, records); click
+ * to pin one or more for a side-by-side read. Everything that represents a
+ * character carries `data-char="<slug>"`, and a single script toggles `.is-active`
+ * on the matching marks — pure CSS does the dimming. Visuals are pure SVG/HTML,
+ * themed off the Codex CSS vars; the radar geometry comes from lib/radar.ts.
+ */
+import { RADAR_AXES, abilityPolygon, ringPolygon, vertex, type Abilities } from '../lib/radar';
+import {
+  bars,
+  donut,
+  records,
+  softSpots,
+  fmtMod,
+  SKILL_COLS,
+  skillHeat,
+  saveNorm,
+  signed,
+  spellbook,
+  type PartyMember,
+  type SpellRef,
+} from '../lib/party';
+import { RADAR_AXES, vertex } from '../lib/radar';
+import AlignmentGrid from './AlignmentGrid.astro';
+import Icon from './Icon.astro';
+import SpellHovercard from './SpellHovercard.astro';
+
+interface Member extends PartyMember {
+  href: string;
+  alignment?: string | null;
+  inferred?: boolean;
+  skills?: Record<string, number> | null;
+  skillsExpert?: string[];
+  saves?: Record<string, number> | null;
+  savesProf?: string[];
+  spells?: SpellRef[];
+  feats?: string[];
+}
+const { members } = Astro.props as { members: Member[] };
+
+const hasSkills = members.some((m) => m.skills);
+const hasSaves = members.some((m) => m.saves);
+
+/* ---- Radar (inlined so it shares the dashboard legend) ---- */
+const RSIZE = 300;
+const N = RADAR_AXES.length;
+const rcx = RSIZE / 2;
+const rcy = RSIZE / 2;
+const rr = RSIZE * 0.34;
+const rings = [0.25, 0.5, 0.75, 1];
+const spokes = RADAR_AXES.map((_, i) => vertex(rcx, rcy, rr, i, N, 1));
+const axisLabels = RADAR_AXES.map(([label], i) => {
+  const [x, y] = vertex(rcx, rcy, rr * 1.27, i, N);
+  const anchor = Math.abs(x - rcx) < 1 ? 'middle' : x > rcx ? 'start' : 'end';
+  const dy = Math.abs(y - rcy) < 1 ? (y < rcy ? '-0.1em' : '0.7em') : '0.32em';
+  return { label, x, y, anchor, dy };
+});
+const radarSeries = members.map((m) => ({
+  slug: m.slug,
+  color: m.color,
+  points: abilityPolygon(m.abilities, rcx, rcy, rr),
+  dots: RADAR_AXES.map(([, key], ai) =>
+    vertex(rcx, rcy, rr, ai, N, Math.max(0, Math.min(1, (m.abilities[key as keyof Abilities] - 6) / 14))),
+  ),
+}));
+
+/* ---- Saves radar (same hexagon, save mods instead of scores) ---- */
+const saveSeries = members
+  .filter((m) => m.saves)
+  .map((m) => ({
+    slug: m.slug,
+    color: m.color,
+    points: RADAR_AXES.map(([, key], i) => {
+      const [x, y] = vertex(rcx, rcy, rr, i, N, saveNorm((m.saves as Record<string, number>)[key] ?? 0));
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' '),
+    dots: RADAR_AXES.map(([, key], ai) =>
+      vertex(rcx, rcy, rr, ai, N, saveNorm((m.saves as Record<string, number>)[key] ?? 0)),
+    ),
+  }));
+
+/* ---- Alignment grid payload ---- */
+const pcs = members.map((m) => ({
+  name: m.name,
+  href: m.href,
+  slug: m.slug,
+  color: m.color,
+  alignment: m.alignment,
+  inferred: m.inferred,
+}));
+
+/* ---- HP donut ---- */
+const DONUT_R = 45;
+const { segs: hpSegs, total: hpTotal } = donut(members, DONUT_R);
+
+/* ---- Bar strips ---- */
+const acBars = bars(members, (m) => m.ac);
+const speedBars = bars(members, (m) => m.speed, 'ft');
+
+/* ---- Auto records + soft spots ---- */
+const recs = records(members);
+const spots = softSpots(members);
+
+/* ---- Spellbook & feats badge wall ---- */
+const book = spellbook(members);
+// "vane,quinton" → spotlight set when a badge is hovered.
+const holderAttr = (holders: { slug: string }[]) => holders.map((h) => h.slug).join(',');
+const badgeTitle = (name: string, holders: { name: string }[]) =>
+  `${name} — ${holders.map((h) => h.name).join(', ')}`;
+// Default to the view that has data (spells unless a non-caster-only party).
+const defaultView = book.hasSpells ? 'spells' : 'feats';
+---
+
+<section class="party-dash" data-pagefind-ignore>
+  {/* ===== The one legend ===== */}
+  <div class="pd-legend-wrap">
+    <ul class="pd-legend" role="list">
+      {members.map((m) => (
+        <li>
+          <button type="button" class="pd-chip" data-char={m.slug} style={`--c:${m.color}`} aria-pressed="false">
+            <span class="pd-swatch" aria-hidden="true" />
+            {m.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+    <p class="pd-hint">
+      <a href="#" class="pd-clear" hidden>clear selection</a>
+    </p>
+  </div>
+
+  <div class="pd-grid">
+    {/* ===== Ability radar ===== */}
+    <article class="pd-card pd-card--radar">
+      <h3>Ability scores</h3>
+      <svg class="pd-radar" viewBox={`0 0 ${RSIZE} ${RSIZE}`} role="img" aria-label="Ability scores comparing the party">
+        <g class="pd-rgrid">
+          {rings.map((t) => <polygon class="pd-ring" points={ringPolygon(rcx, rcy, rr, t)} />)}
+          {spokes.map(([x, y]) => <line class="pd-spoke" x1={rcx} y1={rcy} x2={x} y2={y} />)}
+        </g>
+        {axisLabels.map((l) => (
+          <text class="pd-axis" x={l.x} y={l.y} text-anchor={l.anchor} dy={l.dy}>{l.label}</text>
+        ))}
+        {radarSeries.map((s) => (
+          <g class="pd-series" data-char={s.slug} style={`--c:${s.color}`}>
+            <polygon class="pd-poly" points={s.points} />
+            {s.dots.map(([x, y]) => <circle class="pd-rdot" cx={x} cy={y} r={2.4} />)}
+          </g>
+        ))}
+      </svg>
+    </article>
+
+    {/* ===== Saving throws radar ===== */}
+    {hasSaves && (
+      <article class="pd-card pd-card--radar">
+        <h3>Saving throws</h3>
+        <svg class="pd-radar" viewBox={`0 0 ${RSIZE} ${RSIZE}`} role="img" aria-label="Saving-throw modifiers comparing the party">
+          <g class="pd-rgrid">
+            {rings.map((t) => <polygon class="pd-ring" points={ringPolygon(rcx, rcy, rr, t)} />)}
+            {spokes.map(([x, y]) => <line class="pd-spoke" x1={rcx} y1={rcy} x2={x} y2={y} />)}
+          </g>
+          {axisLabels.map((l) => (
+            <text class="pd-axis" x={l.x} y={l.y} text-anchor={l.anchor} dy={l.dy}>{l.label}</text>
+          ))}
+          {saveSeries.map((s) => (
+            <g class="pd-series" data-char={s.slug} style={`--c:${s.color}`}>
+              <polygon class="pd-poly" points={s.points} />
+              {s.dots.map(([x, y]) => <circle class="pd-rdot" cx={x} cy={y} r={2.4} />)}
+            </g>
+          ))}
+        </svg>
+      </article>
+    )}
+
+    {/* ===== Alignment ===== */}
+    <article class="pd-card pd-card--align">
+      <h3>Alignment</h3>
+      <AlignmentGrid pcs={pcs} />
+    </article>
+
+    {/* ===== HP donut ===== */}
+    <article class="pd-card pd-card--hp">
+      <h3>Hit points <span class="pd-sub">— share of the party's {hpTotal} HP</span></h3>
+      <div class="pd-hp-row">
+        <svg class="pd-donut" viewBox="0 0 120 120" role="img" aria-label="Hit points by character, arc proportional">
+          <circle class="pd-donut-base" cx="60" cy="60" r={DONUT_R} fill="none" />
+          <g transform="rotate(-90 60 60)">
+            {hpSegs.map((s) => (
+              <circle
+                class="pd-arc"
+                data-char={s.slug}
+                style={`--c:${s.color}`}
+                cx="60"
+                cy="60"
+                r={DONUT_R}
+                fill="none"
+                stroke-width="15"
+                stroke-dasharray={`${Math.max(s.dash - 1.4, 0)} ${s.gap + 1.4}`}
+                stroke-dashoffset={s.offset}
+              />
+            ))}
+          </g>
+          <text class="pd-donut-tot" x="60" y="58" text-anchor="middle">{hpTotal}</text>
+          <text class="pd-donut-lab" x="60" y="73" text-anchor="middle">HP</text>
+        </svg>
+        <ul class="pd-hp-list" role="list">
+          {hpSegs.map((s) => (
+            <li class="pd-hp-item" data-char={s.slug} style={`--c:${s.color}`}>
+              <span class="pd-hp-sw" aria-hidden="true" />
+              <span class="pd-hp-name">{s.name}</span>
+              <span class="pd-hp-val">{s.value}<span class="pd-hp-pct">{Math.round(s.share * 100)}%</span></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+
+    {/* ===== AC + speed bars ===== */}
+    <article class="pd-card pd-card--bars">
+      <h3>Armor Class</h3>
+      <ul class="pd-bars" role="list">
+        {acBars.rows.map((b) => (
+          <li class="pd-bar" data-char={b.slug} style={`--c:${b.color}`}>
+            <span class="pd-bar-name">{b.name}</span>
+            <span class="pd-bar-track"><span class="pd-bar-fill" style={`width:${b.pct}%`} /></span>
+            <span class="pd-bar-val">{b.value}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+
+    <article class="pd-card pd-card--bars">
+      <h3>Speed</h3>
+      <ul class="pd-bars" role="list">
+        {speedBars.rows.map((b) => (
+          <li class="pd-bar" data-char={b.slug} style={`--c:${b.color}`}>
+            <span class="pd-bar-name">{b.name}</span>
+            <span class="pd-bar-track"><span class="pd-bar-fill" style={`width:${b.pct}%`} /></span>
+            <span class="pd-bar-val">{b.value} ft</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+
+    {/* ===== Skills heatmap ===== */}
+    {hasSkills && (
+      <article class="pd-card pd-card--heat">
+        <h3>Skills <span class="pd-sub">— darker = stronger; ◆ = expertise. Best in each column wins that skill.</span></h3>
+        <div class="pd-heat-scroll">
+          <table class="pd-heat">
+            <thead>
+              <tr>
+                <th class="pd-heat-corner" scope="col"></th>
+                {SKILL_COLS.map((c) => (
+                  <th
+                    scope="col"
+                    class:list={['pd-heat-skill', { 'group-start': c.groupStart }]}
+                    title={`${c.full} (${c.ab})`}
+                  >
+                    <span class="pd-heat-ab">{c.ab}</span>
+                    <span class="pd-heat-abbr">{c.abbr}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {members.filter((m) => m.skills).map((m) => (
+                <tr class="pd-heat-row" data-char={m.slug} style={`--c:${m.color}`}>
+                  <th scope="row" class="pd-heat-name">{m.name}</th>
+                  {SKILL_COLS.map((c) => {
+                    const mod = m.skills?.[c.k] ?? 0;
+                    const exp = (m.skillsExpert ?? []).includes(c.k);
+                    return (
+                      <td
+                        class:list={['pd-heat-cell', { 'group-start': c.groupStart, light: skillHeat(mod) > 0.5 }]}
+                        style={`background:color-mix(in srgb, var(--c) ${Math.round(skillHeat(mod) * 100)}%, transparent)`}
+                        title={`${m.name} · ${c.full}: ${signed(mod)}${exp ? ' (expertise)' : ''}`}
+                      >
+                        {signed(mod)}{exp && <span class="pd-heat-exp" aria-hidden="true">◆</span>}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </article>
+    )}
+
+    {/* ===== Party spellbook & feats badge wall ===== */}
+    {(book.hasSpells || book.hasFeats) && (
+      <article class="pd-card pd-card--spells" data-view={defaultView}>
+        <header class="pd-spell-head">
+          <h3>Party spellbook &amp; feats <span class="pd-sub">— a dot per holder; one dot = a single point of failure</span></h3>
+          <div class="pd-spell-tools">
+            <input
+              type="search"
+              class="pd-spell-search"
+              placeholder="filter by name…"
+              aria-label="Filter spells and feats by name"
+              autocomplete="off"
+            />
+            {book.hasSpells && book.hasFeats && (
+              <div class="pd-seg" role="group" aria-label="Show spells or feats">
+                <button type="button" class="pd-seg-btn is-on" data-view-btn="spells" aria-pressed="true">Spells</button>
+                <button type="button" class="pd-seg-btn" data-view-btn="feats" aria-pressed="false">Feats</button>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* ---- Spells pane ---- */}
+        {book.hasSpells && (
+          <div class="pd-pane" data-pane="spells">
+            <div class="pd-filters">
+              <span class="pd-spell-sum"><strong>{book.totalSpells} spells</strong> · {book.sharedSpells} shared by 2+</span>
+              <div class="pd-cats" role="group" aria-label="Filter spells by type">
+                {book.cats.map((c) => (
+                  <button type="button" class="pd-cat" data-cat-btn={c.key} aria-pressed="false">{c.label}</button>
+                ))}
+              </div>
+              <button type="button" class="pd-solo" data-solo aria-pressed="false">
+                <span class="pd-solo-flag" aria-hidden="true">⚑</span> Solo only
+              </button>
+            </div>
+            <div class="pd-srows pd-no-match-hide">
+              {book.groups.map((g) => (
+                <div class="pd-srow" data-group>
+                  <span class="pd-srow-lab">{g.label}</span>
+                  <div class="pd-badges">
+                    {g.entries.map((e) => (
+                      <span
+                        class="pd-badge"
+                        data-holders={holderAttr(e.holders)}
+                        data-name={e.name.toLowerCase()}
+                        data-cat={e.cats.join(' ')}
+                        data-solo-badge={e.holders.length === 1 ? '1' : '0'}
+                        title={badgeTitle(e.name, e.holders)}
+                      >
+                        <span class="pd-badge-name">{e.name}</span>
+                        <span class="pd-dots" aria-hidden="true">
+                          {e.holders.map((h) => (
+                            <span class="pd-dot" data-char={h.slug} style={`--c:${h.color}`} />
+                          ))}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p class="pd-no-match" hidden>No matches.</p>
+          </div>
+        )}
+
+        {/* ---- Feats pane ---- */}
+        {book.hasFeats && (
+          <div class="pd-pane" data-pane="feats">
+            <div class="pd-filters">
+              <span class="pd-spell-sum"><strong>{book.totalFeats} feats</strong></span>
+              <button type="button" class="pd-solo" data-solo aria-pressed="false">
+                <span class="pd-solo-flag" aria-hidden="true">⚑</span> Solo only
+              </button>
+            </div>
+            <div class="pd-srows pd-no-match-hide">
+              <div class="pd-srow" data-group>
+                <div class="pd-badges">
+                  {book.feats.map((e) => (
+                    <span
+                      class="pd-badge"
+                      data-holders={holderAttr(e.holders)}
+                      data-name={e.name.toLowerCase()}
+                      data-solo-badge={e.holders.length === 1 ? '1' : '0'}
+                      title={badgeTitle(e.name, e.holders)}
+                    >
+                      <span class="pd-badge-name">{e.name}</span>
+                      <span class="pd-dots" aria-hidden="true">
+                        {e.holders.map((h) => (
+                          <span class="pd-dot" data-char={h.slug} style={`--c:${h.color}`} />
+                        ))}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p class="pd-no-match" hidden>No matches.</p>
+          </div>
+        )}
+      </article>
+    )}
+
+    {/* ===== Superlatives (best & worst of the party) ===== */}
+    {recs.length > 0 && (
+      <article class="pd-card pd-card--recs">
+        <h3>Superlatives <span class="pd-sub">— best &amp; worst of the six, stats and skills</span></h3>
+        <ul class="pd-recs" role="list">
+          {recs.map((r) => (
+            <li class="pd-rec" data-char={r.slug} style={`--c:${members.find((m) => m.slug === r.slug)?.color}`}>
+              <span class="pd-rec-icon" aria-hidden="true"><Icon name={r.icon} size={18} /></span>
+              <span class="pd-rec-body">
+                <span class="pd-rec-label">{r.label}</span>
+                <span class="pd-rec-who">{r.name} <span class="pd-rec-val">· {r.value}</span></span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    )}
+
+    {/* ===== Collective soft spots ===== */}
+    {spots.length > 0 && (
+      <article class="pd-card pd-card--gaps">
+        <h3>Where you're thin <span class="pd-sub">— who covers for whom</span></h3>
+        <ul class="pd-gaps" role="list">
+          {spots.map((s) => (
+            <li class="pd-gap">
+              <span class="pd-gap-ax">{s.label}</span>
+              <span class="pd-gap-text">
+                party average {s.avg.toFixed(1)} — best is <strong>{s.bestName}</strong> at {s.bestScore} ({fmtMod(s.bestScore)}).
+                {s.exposed.length > 0 && (
+                  <>
+                    {' '}Exposed:{' '}
+                    {s.exposed.map((e, i) => (
+                      <>
+                        {i > 0 && ', '}
+                        <span class="pd-gap-who" data-char={e.slug} style={`--c:${members.find((m) => m.slug === e.slug)?.color}`}>{e.name} ({fmtMod(e.score)})</span>
+                      </>
+                    ))}
+                  </>
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    )}
+  </div>
+</section>
+
+<SpellHovercard />
+
+<style>
+  .party-dash {
+    margin-top: 0.4rem;
+  }
+
+  /* ---- Legend ---- */
+  .pd-legend-wrap {
+    position: sticky;
+    /* Sit below the sticky topbar + breadcrumb. This is a no-JS fallback; the
+       script overwrites `top` with the measured header height so it stays correct
+       when the topbar wraps to two rows (≤1080) or the breadcrumb goes static. */
+    top: calc(var(--topbar-h) + 2.45rem);
+    z-index: 3;
+    background: var(--bg);
+    padding: 0.55rem 0 0.5rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .pd-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.45rem;
+  }
+  .pd-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: 600 0.82rem 'Inter', sans-serif;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem 0.22rem 0.5rem;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-instant) var(--ease-out),
+      background var(--dur-instant) var(--ease-out);
+  }
+  .pd-chip:focus-visible,
+  .pd-chip.is-active {
+    border-color: var(--c);
+    background: color-mix(in srgb, var(--c) 14%, transparent);
+  }
+  /* Cosmetic hover only on real-hover devices — avoids sticky-hover on touch where
+     the JS-driven .is-active/.is-locked classes already show pinned state. */
+  @media (hover: hover) {
+    .pd-chip:hover {
+      border-color: var(--c);
+      background: color-mix(in srgb, var(--c) 14%, transparent);
+    }
+  }
+  .pd-chip.is-locked {
+    border-color: var(--c);
+    box-shadow: inset 0 0 0 1px var(--c);
+  }
+  .pd-swatch {
+    width: 0.66rem;
+    height: 0.66rem;
+    border-radius: 3px;
+    background: var(--c);
+    flex: none;
+  }
+  /* Only the "clear selection" affordance lives here now; it stays hidden until
+     something is pinned, so the row reserves no space until it has content. */
+  .pd-hint {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .pd-hint:has(.pd-clear:not([hidden])) {
+    margin: 0.45rem 0 0;
+  }
+  .pd-clear {
+    color: var(--gold);
+  }
+
+  /* ---- Grid of cards ---- */
+  .pd-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+    align-items: stretch; /* paired cards in a row share a height */
+  }
+  .pd-card {
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--surface) 55%, transparent);
+    padding: 0.7rem 0.85rem 0.8rem;
+    min-width: 0;
+  }
+  .pd-card h3 {
+    margin: 0 0 0.55rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .pd-sub,
+  .pd-card h3 .pd-sub {
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+  .pd-card--recs,
+  .pd-card--heat,
+  .pd-card--gaps,
+  .pd-card--spells {
+    grid-column: 1 / -1;
+  }
+  /* Cards whose content should sit centered when stretched taller than needed. */
+  .pd-card--hp,
+  .pd-card--radar {
+    display: flex;
+    flex-direction: column;
+  }
+  .pd-card--hp .pd-hp-row {
+    flex: 1 1 auto;
+  }
+  .pd-card--radar .pd-radar {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  @media (max-width: 40rem) {
+    .pd-grid {
+      grid-template-columns: 1fr;
+    }
+    .pd-card {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ---- Spotlight dimming (shared across all visuals) ---- */
+  .party-dash.is-filtering [data-char]:not(.is-active) {
+    opacity: 0.16;
+  }
+  [data-char] {
+    transition: opacity var(--dur-state) var(--ease-out);
+  }
+  /* Chart marks pin on click — show they're interactive. */
+  .pd-clickable {
+    cursor: pointer;
+  }
+
+  /* ---- Radar ---- */
+  .pd-radar {
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    overflow: visible;
+    display: block;
+    margin: 0 auto;
+  }
+  .pd-ring {
+    fill: none;
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+  .pd-ring:last-of-type {
+    stroke: color-mix(in srgb, var(--gold-soft) 55%, var(--hairline));
+  }
+  .pd-spoke {
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+  .pd-axis {
+    font: 600 0.66rem 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+    fill: var(--muted);
+  }
+  .pd-poly {
+    fill: color-mix(in srgb, var(--c) 9%, transparent);
+    stroke: var(--c);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    transition:
+      fill var(--dur-state) var(--ease-out),
+      stroke-width var(--dur-state) var(--ease-out);
+  }
+  .pd-rdot {
+    fill: var(--c);
+  }
+  .pd-series.is-active .pd-poly {
+    fill: color-mix(in srgb, var(--c) 28%, transparent);
+    stroke-width: 2.6;
+  }
+
+  /* ---- HP donut ---- */
+  .pd-hp-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .pd-donut {
+    flex: none;
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+  .pd-donut-base {
+    stroke: color-mix(in srgb, var(--hairline) 60%, transparent);
+    stroke-width: 15;
+  }
+  .pd-arc {
+    stroke: var(--c);
+    transition:
+      opacity var(--dur-state) var(--ease-out),
+      stroke-width var(--dur-state) var(--ease-out);
+  }
+  .pd-cell.is-active .pd-arc,
+  .pd-arc.is-active {
+    stroke-width: 18;
+  }
+  .pd-donut-tot {
+    fill: var(--text);
+    font: 700 19px 'Inter', sans-serif;
+  }
+  .pd-donut-lab {
+    fill: var(--muted);
+    font: 600 9px 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+  }
+  .pd-hp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+  }
+  .pd-hp-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font: 500 0.8rem 'Inter', sans-serif;
+  }
+  .pd-hp-sw {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 2px;
+    background: var(--c);
+    flex: none;
+  }
+  .pd-hp-name {
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pd-hp-val {
+    margin-left: auto;
+    color: var(--text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+  .pd-hp-pct {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.72rem;
+    min-width: 2.2rem;
+    text-align: right;
+  }
+
+  /* ---- Bars ---- */
+  .pd-bars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .pd-bar {
+    display: grid;
+    grid-template-columns: 4.6rem 1fr auto;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .pd-bar-name {
+    font: 500 0.8rem 'Inter', sans-serif;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pd-bar-track {
+    height: 0.72rem;
+    background: color-mix(in srgb, var(--hairline) 60%, transparent);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .pd-bar-fill {
+    display: block;
+    height: 100%;
+    background: var(--c);
+    border-radius: 999px;
+  }
+  .pd-bar-val {
+    font: 600 0.8rem 'Inter', sans-serif;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .pd-bar.is-active .pd-bar-val {
+    color: var(--text);
+  }
+
+  /* ---- Records ---- */
+  .pd-recs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.5rem;
+  }
+  .pd-rec {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--c);
+    border-radius: 7px;
+    padding: 0.45rem 0.6rem;
+  }
+  .pd-rec-icon {
+    display: flex;
+    flex: none;
+    color: var(--c);
+  }
+  .pd-rec-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pd-rec-label {
+    font: 600 0.66rem 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pd-rec-who {
+    font: 600 0.85rem 'Inter', sans-serif;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pd-rec-val {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ---- Soft spots ---- */
+  .pd-gaps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .pd-gap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+  }
+  .pd-gap-ax {
+    flex: none;
+    width: 3rem;
+    font: 700 0.78rem 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+  .pd-gap-text {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .pd-gap-who {
+    border-bottom: 2px solid var(--c);
+    white-space: nowrap;
+  }
+
+  /* ---- Alignment chips: colour-coded + spotlight-aware ---- */
+  .pd-card--align :global(.pcchip) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem 0.1rem 0.34rem;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-instant) var(--ease-out),
+      background var(--dur-instant) var(--ease-out);
+  }
+  .pd-card--align :global(.pcchip.is-active) {
+    border-color: var(--c);
+    background: color-mix(in srgb, var(--c) 14%, transparent);
+    text-decoration: none;
+  }
+  @media (hover: hover) {
+    .pd-card--align :global(.pcchip:hover) {
+      border-color: var(--c);
+      background: color-mix(in srgb, var(--c) 14%, transparent);
+      text-decoration: none;
+    }
+  }
+  .pd-card--align :global(.pcchip-sw) {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--c);
+    flex: none;
+  }
+
+  /* ---- Skills heatmap ---- */
+  .pd-heat-scroll {
+    overflow-x: auto;
+  }
+  .pd-heat {
+    border-collapse: collapse;
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  .pd-heat th,
+  .pd-heat td {
+    text-align: center;
+    padding: 0;
+  }
+  .pd-heat-skill {
+    padding: 0 0.15rem 0.3rem;
+    vertical-align: bottom;
+    line-height: 1.05;
+  }
+  .pd-heat-ab {
+    display: block;
+    font: 700 0.5rem 'Inter', sans-serif;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+  }
+  .pd-heat-abbr {
+    display: block;
+    font: 600 0.66rem 'Inter', sans-serif;
+    color: var(--muted);
+  }
+  .pd-heat-name {
+    text-align: right;
+    padding-right: 0.5rem;
+    padding-left: 0.1rem;
+    font: 600 0.8rem 'Inter', sans-serif;
+    color: var(--text);
+    white-space: nowrap;
+    /* Freeze the character-name column while the skills scroll horizontally, so
+       you can always tell whose row you're reading on a narrow phone. The card is
+       a translucent surface over the page bg; flatten that composite to an opaque
+       fill so the colored skill cells can't bleed through the frozen column. */
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+  }
+  /* Top-left corner shares the frozen column; sits above the name cells so the
+     scrolled skill-header row tucks under it cleanly. */
+  .pd-heat-corner {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+  }
+  .pd-heat-name::before {
+    content: '';
+    display: inline-block;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--c);
+    margin-right: 0.35rem;
+    vertical-align: -1px;
+  }
+  .pd-heat-cell {
+    font: 600 0.74rem 'Inter', sans-serif;
+    color: var(--ink-soft);
+    height: 1.75rem;
+    min-width: 1.9rem;
+    border: 1px solid var(--bg);
+    border-radius: 3px;
+    transition: opacity var(--dur-state) var(--ease-out);
+  }
+  .pd-heat-cell.light {
+    color: #fff;
+  }
+  .pd-heat-cell.group-start,
+  .pd-heat-skill.group-start {
+    border-left: 2px solid var(--hairline);
+  }
+  .pd-heat-exp {
+    font-size: 0.55em;
+    vertical-align: 0.25em;
+    margin-left: 0.1em;
+    opacity: 0.85;
+  }
+  /* In the heatmap, dim whole rows (not individual cells) when filtering. */
+  .party-dash.is-filtering .pd-heat-row:not(.is-active) {
+    opacity: 0.22;
+  }
+  .pd-heat-row {
+    transition: opacity var(--dur-state) var(--ease-out);
+  }
+
+  /* ---- Spellbook & feats badge wall ---- */
+  .pd-spell-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .pd-spell-head h3 {
+    margin: 0;
+  }
+  .pd-spell-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .pd-spell-search {
+    font: 500 0.78rem 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    width: 9rem;
+    max-width: 42vw;
+  }
+  .pd-spell-search:focus-visible {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .pd-seg {
+    display: inline-flex;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    overflow: hidden;
+    flex: none;
+  }
+  .pd-seg-btn {
+    font: 600 0.74rem 'Inter', sans-serif;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    padding: 0.2rem 0.75rem;
+    cursor: pointer;
+    transition: background var(--dur-instant) var(--ease-out);
+  }
+  .pd-seg-btn.is-on {
+    color: var(--text);
+    background: color-mix(in srgb, var(--gold) 18%, transparent);
+  }
+
+  /* Pane visibility driven by data-view on the card. */
+  .pd-card--spells .pd-pane {
+    display: none;
+  }
+  .pd-card--spells[data-view='spells'] .pd-pane[data-pane='spells'],
+  .pd-card--spells[data-view='feats'] .pd-pane[data-pane='feats'] {
+    display: block;
+  }
+
+  .pd-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.55rem;
+    margin: 0 0 0.7rem;
+  }
+  .pd-spell-sum {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .pd-spell-sum strong {
+    color: var(--text);
+  }
+  .pd-cats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .pd-cat,
+  .pd-solo {
+    font: 600 0.72rem 'Inter', sans-serif;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.16rem 0.6rem;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-instant) var(--ease-out),
+      background var(--dur-instant) var(--ease-out),
+      color var(--dur-instant) var(--ease-out);
+  }
+  .pd-cat:hover,
+  .pd-solo:hover {
+    border-color: color-mix(in srgb, var(--gold) 55%, var(--hairline));
+    color: var(--text);
+  }
+  .pd-cat[aria-pressed='true'],
+  .pd-solo[aria-pressed='true'] {
+    color: var(--text);
+    border-color: var(--gold);
+    background: color-mix(in srgb, var(--gold) 16%, transparent);
+  }
+  .pd-solo {
+    margin-left: auto; /* push the fragility toggle to the far right of the bar */
+  }
+  .pd-solo-flag {
+    color: var(--gold);
+  }
+
+  .pd-srows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .pd-srow {
+    display: grid;
+    grid-template-columns: 4.2rem minmax(0, 1fr); /* minmax(0,…) lets badges wrap at the visible edge */
+    align-items: start;
+    gap: 0.55rem;
+  }
+  .pd-srow-lab {
+    font: 700 0.68rem 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: right;
+    padding-top: 0.32rem;
+  }
+  .pd-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .pd-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.16rem 0.42rem 0.16rem 0.55rem;
+    font: 500 0.76rem 'Inter', sans-serif;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition:
+      opacity var(--dur-state) var(--ease-out),
+      border-color var(--dur-instant) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .pd-badge:hover {
+      border-color: color-mix(in srgb, var(--gold) 60%, var(--hairline));
+    }
+  }
+  .pd-badge-name {
+    white-space: nowrap;
+  }
+  .pd-dots {
+    display: inline-flex;
+    gap: 2px;
+  }
+  .pd-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2px;
+    background: var(--c);
+    flex: none;
+  }
+  .pd-badge--hidden {
+    display: none;
+  }
+  .pd-no-match {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin: 0.4rem 0 0;
+  }
+
+  /* Pin/peek a character → dim badges with no active holder dot inside. */
+  .party-dash.is-filtering .pd-badge:not(:has(.is-active)) {
+    opacity: 0.2;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-char],
+    .pd-poly,
+    .pd-arc,
+    .pd-badge {
+      transition: none;
+    }
+  }
+
+  /* Phone (≤480): the legend names + the spell/feat filter chips are the primary
+     touch controls (tap = spotlight, see Phase 3), so grow them to a comfortable
+     ~44px target. Tighter card padding reclaims width on a 390px screen. */
+  @media (max-width: 480px) {
+    /* Dense wrapping legend of 10 names — a comfortable inline target without the
+       bulk a full 44px would add to ten chips. The few segmented/filter toggles
+       below it get the full 44px since they're the primary, sparse controls. */
+    .pd-chip { min-height: 2.5rem; padding: 0.4rem 0.8rem 0.4rem 0.6rem; }
+    .pd-seg-btn { min-height: 2.75rem; }
+    .pd-cat,
+    .pd-solo { min-height: 2.75rem; }
+  }
+</style>
+
+<script>
+  // Touch devices have no real hover: skip the transient peek listeners so the only
+  // interaction is tap = pin (routed to the same toggleLock path as desktop click),
+  // and synthesized mouse events can't leave a chip stuck in a peeked/hover state.
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
+  for (const dash of document.querySelectorAll<HTMLElement>('.party-dash')) {
+    const chips = Array.from(dash.querySelectorAll<HTMLElement>('.pd-chip'));
+    const marks = Array.from(dash.querySelectorAll<HTMLElement>('[data-char]'));
+    const clearBtn = dash.querySelector<HTMLElement>('.pd-clear');
+    const locked = new Set<string>();
+
+    // `peek` = transient hover spotlight (legend chips only); `locked` = pinned set.
+    let peek: string[] = [];
+    const rerender = () => {
+      const active = new Set(locked);
+      for (const p of peek) active.add(p);
+      dash.classList.toggle('is-filtering', active.size > 0);
+      for (const el of marks) {
+        el.classList.toggle('is-active', active.has(el.dataset.char ?? ''));
+      }
+      for (const c of chips) {
+        const key = c.dataset.char ?? '';
+        c.classList.toggle('is-active', active.has(key));
+        c.classList.toggle('is-locked', locked.has(key));
+        c.setAttribute('aria-pressed', String(locked.has(key)));
+      }
+      if (clearBtn) clearBtn.hidden = locked.size === 0;
+    };
+    const setPeek = (keys: string[]) => { peek = keys; rerender(); };
+    const toggleLock = (keys: string[]) => {
+      // Toggle the whole set together: if all are already pinned, unpin; else pin.
+      const allLocked = keys.length > 0 && keys.every((k) => locked.has(k));
+      for (const k of keys) (allLocked ? locked.delete(k) : locked.add(k));
+      rerender();
+    };
+
+    // Keep the sticky legend's offset equal to the *actual* sticky header height.
+    // A fixed rem offset clips it: ≤1080 the topbar wraps to two (taller) rows and
+    // the breadcrumb stops being sticky, so measure both and track on resize.
+    const legendWrap = dash.querySelector<HTMLElement>('.pd-legend-wrap');
+    if (legendWrap) {
+      const topbar = document.querySelector<HTMLElement>('.topbar');
+      const crumb = document.querySelector<HTMLElement>('.crumb');
+      const setStick = () => {
+        const tb = topbar?.offsetHeight ?? 0;
+        const cb = crumb && getComputedStyle(crumb).position === 'sticky' ? crumb.offsetHeight : 0;
+        legendWrap.style.top = `${tb + cb}px`;
+      };
+      setStick();
+      window.addEventListener('resize', setStick);
+    }
+
+    // Deep-link: /characters?focus=slug[,slug] (a character dossier's "Compare in
+    // roster" button) arrives with those members pre-pinned in the comparison.
+    try {
+      const focus = new URLSearchParams(location.search).get('focus');
+      if (focus) {
+        const valid = new Set(chips.map((c) => c.dataset.char ?? ''));
+        const wanted = focus.split(',').map((s) => s.trim()).filter((s) => valid.has(s));
+        if (wanted.length) {
+          for (const k of wanted) locked.add(k);
+          rerender();
+        }
+      }
+    } catch (e) {}
+
+    // Legend name buttons are the gentle entry point: peek on hover/focus, pin on
+    // click. (Hover-spotlighting every chart mark was too twitchy with this many.)
+    for (const chip of chips) {
+      const key = chip.dataset.char ?? '';
+      if (!key) continue;
+      if (canHover) {
+        chip.addEventListener('mouseenter', () => setPeek([key]));
+        chip.addEventListener('mouseleave', () => setPeek([]));
+        chip.addEventListener('focus', () => setPeek([key]));
+        chip.addEventListener('blur', () => setPeek([]));
+      }
+      chip.addEventListener('click', () => toggleLock([key]));
+    }
+
+    // Every OTHER chart mark pins ON CLICK ONLY — no hover. Skip the legend chips
+    // (handled above), badge holder-dots (the badge handles its own click), and
+    // the alignment <a> chips (those navigate to the character page).
+    for (const el of marks) {
+      const key = el.dataset.char ?? '';
+      if (!key || el.classList.contains('pd-chip') || el.closest('a') || el.closest('.pd-badge')) continue;
+      el.classList.add('pd-clickable');
+      el.addEventListener('click', () => toggleLock([key]));
+    }
+
+    // A spellbook/feat badge pins its WHOLE holder set on click.
+    for (const badge of dash.querySelectorAll<HTMLElement>('.pd-badge')) {
+      const holders = (badge.dataset.holders ?? '').split(',').filter(Boolean);
+      if (!holders.length) continue;
+      badge.addEventListener('click', () => toggleLock(holders));
+    }
+
+    // Live filtering over the badge wall: free-text search + a single spell-type
+    // category + a "solo only" (single point of failure) toggle, ANDed together.
+    // Hides non-matching badges, empty level rows, and shows a per-pane note.
+    const search = dash.querySelector<HTMLInputElement>('.pd-spell-search');
+    const panes = Array.from(dash.querySelectorAll<HTMLElement>('.pd-pane'));
+    const catBtns = Array.from(dash.querySelectorAll<HTMLElement>('.pd-cat'));
+    let activeCat: string | null = null;
+
+    const applyFilters = () => {
+      const q = (search?.value ?? '').trim().toLowerCase();
+      for (const pane of panes) {
+        const soloBtn = pane.querySelector<HTMLElement>('.pd-solo');
+        const solo = soloBtn?.getAttribute('aria-pressed') === 'true';
+        let anyVisible = false;
+        for (const badge of pane.querySelectorAll<HTMLElement>('.pd-badge')) {
+          const nameHit = !q || (badge.dataset.name ?? '').includes(q);
+          // Feats carry no data-cat → they ignore the (spells-only) category filter.
+          const cats = badge.dataset.cat;
+          const catHit = !activeCat || cats === undefined || cats.split(' ').includes(activeCat);
+          const soloHit = !solo || badge.dataset.soloBadge === '1';
+          const hit = nameHit && catHit && soloHit;
+          badge.classList.toggle('pd-badge--hidden', !hit);
+          if (hit) anyVisible = true;
+        }
+        for (const row of pane.querySelectorAll<HTMLElement>('.pd-srow')) {
+          row.classList.toggle('pd-badge--hidden', !row.querySelector('.pd-badge:not(.pd-badge--hidden)'));
+        }
+        const noMatch = pane.querySelector<HTMLElement>('.pd-no-match');
+        if (noMatch) noMatch.hidden = anyVisible;
+      }
+    };
+    search?.addEventListener('input', applyFilters);
+
+    // Category chips — single-select (click the active one to clear).
+    for (const btn of catBtns) {
+      btn.addEventListener('click', () => {
+        activeCat = activeCat === btn.dataset.catBtn ? null : (btn.dataset.catBtn ?? null);
+        for (const b of catBtns) b.setAttribute('aria-pressed', String(b.dataset.catBtn === activeCat));
+        applyFilters();
+      });
+    }
+
+    // "Solo only" toggles per pane (single point of failure).
+    for (const soloBtn of dash.querySelectorAll<HTMLElement>('.pd-solo')) {
+      soloBtn.addEventListener('click', () => {
+        soloBtn.setAttribute('aria-pressed', String(soloBtn.getAttribute('aria-pressed') !== 'true'));
+        applyFilters();
+      });
+    }
+
+    // Spells | Feats toggle — flips which pane the card shows.
+    const card = dash.querySelector<HTMLElement>('.pd-card--spells');
+    const segBtns = Array.from(dash.querySelectorAll<HTMLElement>('.pd-seg-btn'));
+    for (const btn of segBtns) {
+      btn.addEventListener('click', () => {
+        if (card) card.dataset.view = btn.dataset.viewBtn ?? 'spells';
+        for (const b of segBtns) {
+          const on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-pressed', String(on));
+        }
+      });
+    }
+
+    if (canHover) {
+      dash.addEventListener('mouseleave', () => setPeek([]));
+      dash.addEventListener('focusout', (e) => {
+        if (!dash.contains((e as FocusEvent).relatedTarget as Node)) setPeek([]);
+      });
+    }
+    clearBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      locked.clear();
+      setPeek([]);
+    });
+  }
+</script>

@@ -1,0 +1,329 @@
+---
+// Episodes header body (spec §3.4). Default = episodes grouped under their arc
+// heading for a pseudo-timeline scroll; each row carries computed badges
+// (death · combat · milestone · media — monochrome line-icons, one hue each).
+// The Grouped⇄Flat view control is the GLOBAL density attr (ViewToggle):
+// Grouped = cards (arc headings shown), Flat = list (headings hidden → one
+// chronological list, since arcs are already sequential). Client-side slicing is
+// wired here, reading the EpisodesSlicer controls (both render on the same page)
+// — same mechanic as glossary.astro. The §3.5 hover popover is a separate phase.
+import type { EpisodesPayload } from '../../lib/episodes';
+import Icon from '../Icon.astro';
+
+const { arcs } = Astro.props as Pick<EpisodesPayload, 'arcs'>;
+
+// Tokens a row matches against for the badge slicer + the data-search blob.
+const badgeTokens = (r: (typeof arcs)[number]['rows'][number]) =>
+  [r.combat && 'combat', r.deaths.length && 'death', r.milestone && 'milestone']
+    .filter(Boolean)
+    .join(' ');
+---
+
+<div class="ep-body">
+  <p id="ep-empty" class="ep-empty" hidden>No episodes match those filters.</p>
+
+  {
+    arcs.map((arc) => (
+      <section class="ep-arc" data-arc-group={arc.slug}>
+        <h2 class="ep-arc-title">
+          {arc.title}
+          <span class="ep-arc-count">{arc.rows.length}</span>
+        </h2>
+        <ul class="ep-list">
+          {arc.rows.map((r) => (
+            <li
+              class="ep-row"
+              data-ep-row
+              data-num={r.num}
+              data-arc={arc.slug}
+              data-chars={` ${r.chars.join(' ')} `}
+              data-locs={`|${r.locs.join('|').toLowerCase()}|`}
+              data-badges={badgeTokens(r)}
+              data-search={[r.label, r.charNames.join(' '), r.locs.join(' '), r.milestone ?? '']
+                .join(' ')
+                .toLowerCase()}
+            >
+              {r.thumb && (
+                <a class="ep-thumb" href={r.href} aria-hidden="true" tabindex="-1">
+                  <img src={r.thumb} alt="" loading="lazy" width="60" height="40" />
+                </a>
+              )}
+              <a class="ep-link" href={r.href}>
+                {r.label}
+              </a>
+              <span class="ep-badges" aria-hidden="false">
+                {r.deaths.map((d) => (
+                  <span
+                    class={`ep-badge ep-death${d.kind === 'revived' ? ' ep-death--revived' : ''}`}
+                    title={`${d.name} died${d.kind === 'revived' ? ' — revived same session' : ' (permanent)'}`}
+                  >
+                    <Icon name="skull" size={15} />
+                  </span>
+                ))}
+                {r.combat && (
+                  <span class="ep-badge ep-combat" title="Party combat">
+                    <Icon name="swords" size={15} />
+                  </span>
+                )}
+                {r.milestone && (
+                  <span class="ep-badge ep-milestone" title={r.milestone}>
+                    <Icon name="trophy" size={15} />
+                  </span>
+                )}
+                {r.media && (
+                  <span class="ep-badge ep-media" title="Has photos">
+                    <Icon name="camera" size={15} />
+                  </span>
+                )}
+              </span>
+              <span class="ep-date">{r.dateLabel}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<script>
+  (function () {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('[data-ep-row]'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-arc-group]'));
+    if (!rows.length) return;
+
+    var search = document.getElementById('ep-search') as HTMLInputElement | null;
+    var charSel = document.getElementById('ep-char') as HTMLSelectElement | null;
+    var locSel = document.getElementById('ep-loc') as HTMLSelectElement | null;
+    var arcSel = document.getElementById('ep-arc') as HTMLSelectElement | null;
+    var clearBtn = document.getElementById('ep-clear') as HTMLButtonElement | null;
+    var empty = document.getElementById('ep-empty');
+    var badgeBtns = Array.prototype.slice.call(
+      document.querySelectorAll('.ep-badge-btn'),
+    ) as HTMLButtonElement[];
+    // The shared HeaderChrome count, kept in sync with the active filter so it
+    // reads "59 of 163 episodes" when slicing and "163 episodes" when idle.
+    var countEl = document.querySelector('.hp-count');
+    var total = rows.length;
+
+    function activeBadges() {
+      return badgeBtns
+        .filter(function (b) {
+          return b.getAttribute('aria-pressed') === 'true';
+        })
+        .map(function (b) {
+          return b.getAttribute('data-badge') || '';
+        });
+    }
+
+    function apply() {
+      var q = (search && search.value.trim().toLowerCase()) || '';
+      var badges = activeBadges();
+      var ch = (charSel && charSel.value) || '';
+      var lc = (locSel && locSel.value.toLowerCase()) || '';
+      var ar = (arcSel && arcSel.value) || '';
+      var anyFilter = !!(q || badges.length || ch || lc || ar);
+
+      var visibleCount = 0;
+      rows.forEach(function (el: HTMLElement) {
+        var d = el.dataset;
+        var ok =
+          (!q || (d.search || '').indexOf(q) !== -1) &&
+          (!badges.length ||
+            badges.some(function (b) {
+              return (d.badges || '').split(' ').indexOf(b) !== -1;
+            })) &&
+          (!ch || (d.chars || '').indexOf(' ' + ch + ' ') !== -1) &&
+          (!lc || (d.locs || '').indexOf('|' + lc + '|') !== -1) &&
+          (!ar || d.arc === ar);
+        el.hidden = !ok;
+        if (ok) visibleCount++;
+      });
+      var anyVisible = visibleCount > 0;
+
+      // Hide arc sections with no visible rows (so the timeline closes up), and
+      // keep each arc's heading count in sync with what's actually shown.
+      sections.forEach(function (sec: HTMLElement) {
+        var visible = sec.querySelectorAll('[data-ep-row]:not([hidden])').length;
+        sec.hidden = visible === 0;
+        var c = sec.querySelector('.ep-arc-count');
+        if (c) c.textContent = String(visible);
+      });
+
+      if (empty) empty.hidden = anyVisible;
+      if (countEl) {
+        countEl.textContent = anyFilter
+          ? visibleCount + ' of ' + total + ' episodes'
+          : total + ' episodes';
+      }
+      // Keep Clear in the layout always (disabled when idle) so it never jumps lines.
+      if (clearBtn) clearBtn.disabled = !anyFilter;
+    }
+
+    function clearAll() {
+      if (search) search.value = '';
+      if (charSel) charSel.value = '';
+      if (locSel) locSel.value = '';
+      if (arcSel) arcSel.value = '';
+      badgeBtns.forEach(function (b) {
+        b.setAttribute('aria-pressed', 'false');
+      });
+      apply();
+    }
+
+    if (search) search.addEventListener('input', apply);
+    if (charSel) charSel.addEventListener('change', apply);
+    if (locSel) locSel.addEventListener('change', apply);
+    if (arcSel) arcSel.addEventListener('change', apply);
+    if (clearBtn) clearBtn.addEventListener('click', clearAll);
+    badgeBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+        apply();
+      });
+    });
+
+    apply();
+  })();
+</script>
+
+<style>
+  .ep-empty {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0.5rem 0;
+  }
+
+  .ep-arc {
+    margin: 0 0 1.6rem;
+  }
+  .ep-arc-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin: 1.3rem 0 0.5rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ep-arc-count {
+    color: var(--faint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ep-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ep-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0.2rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ep-thumb {
+    flex: 0 0 auto;
+    width: 60px;
+    height: 40px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    line-height: 0;
+  }
+  .ep-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.18s ease;
+  }
+  .ep-row:hover .ep-thumb img {
+    transform: scale(1.06);
+  }
+  /* The filter script toggles the `hidden` attr, but `.ep-row{display:flex}`
+     would otherwise override the UA `[hidden]{display:none}` (equal specificity,
+     author wins) — so the hide must be re-asserted with higher specificity. */
+  .ep-row[hidden] {
+    display: none;
+  }
+  .ep-row:hover {
+    border-bottom-color: var(--gold-soft);
+  }
+  .ep-link {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-weight: 500;
+  }
+
+  .ep-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    flex: none;
+  }
+  .ep-badge {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    cursor: default;
+  }
+  /* Monochrome line-icons, one hue per badge type so they read at a glance.
+     Mid-tones chosen to stay legible on both the dark and cream codex themes;
+     the slicer chips (EpisodesSlicer) reuse the same four hues. */
+  .ep-death {
+    color: #d05c54;
+  }
+  .ep-combat {
+    color: #7f9cc6;
+  }
+  .ep-milestone {
+    color: #cfa14b;
+  }
+  .ep-media {
+    color: #54a59b;
+  }
+  /* A revived death is faded + marked so it's distinguishable from a permanent
+     one at a glance (spec §3.4). */
+  .ep-death--revived {
+    opacity: 0.45;
+  }
+
+  .ep-date {
+    flex: none;
+    color: var(--faint);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    width: 6.5rem;
+    text-align: right;
+  }
+
+  /* ===== Flat density (global ViewToggle "Flat") — drop the arc headings so the
+     episodes read as one continuous chronological list. Arcs are already in story
+     order, so simply hiding the headings yields a correct flat timeline. ===== */
+  :global(html[data-density='list']) .ep-arc {
+    margin: 0;
+  }
+  :global(html[data-density='list']) .ep-arc-title {
+    display: none;
+  }
+  :global(html[data-density='list']) .ep-row {
+    padding: 0.3rem 0.2rem;
+  }
+  :global(html[data-density='list']) .ep-thumb {
+    width: 42px;
+    height: 28px;
+  }
+
+  @media (max-width: 640px) {
+    .ep-date {
+      display: none;
+    }
+  }
+</style>

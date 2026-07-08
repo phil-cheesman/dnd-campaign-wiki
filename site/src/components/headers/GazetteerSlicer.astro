@@ -1,0 +1,61 @@
+---
+// Locations gazetteer filter bar (spec §3.3, optional slicer) — sits in
+// HeaderChrome's `slicer` slot. Pure markup; the filtering logic lives in
+// GazetteerBody's inline script, which reads `#gaz-search` / `#gaz-clear`
+// (both render on the same page). Mirrors EpisodesSlicer.
+---
+
+<div class="gaz-slicer" data-gaz-slicer>
+  <input
+    id="gaz-search"
+    type="search"
+    class="gaz-search"
+    placeholder="Filter locations…"
+    autocomplete="off"
+    aria-label="Filter locations by name"
+  />
+  <button id="gaz-clear" type="button" class="gaz-clear" disabled>Clear</button>
+</div>
+
+<style>
+  .gaz-slicer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+  }
+  .gaz-search {
+    flex: 1 1 12rem;
+    min-width: 9rem;
+    max-width: 16rem;
+    padding: 0.32rem 0.6rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--hairline);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .gaz-search:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 25%, transparent);
+  }
+  .gaz-clear {
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font: 600 0.78rem 'Inter', sans-serif;
+    padding: 0.3rem 0.4rem;
+    white-space: nowrap;
+  }
+  .gaz-clear:hover:not(:disabled) {
+    text-decoration: underline;
+  }
+  .gaz-clear:disabled {
+    color: var(--faint);
+    opacity: 0.5;
+    cursor: default;
+  }
+</style>

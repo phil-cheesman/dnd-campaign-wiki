@@ -1,0 +1,859 @@
+# Alambor Glossary
+> Canonical names and known aliases. Built from episode notes E00–E161. Aliases include misspellings seen in the source notes — use this to resolve fuzzy name matches.
+
+## Player characters
+- **Cruucar** (active) — dragonborn ex-Widowmaker/Golden Company soldier; arch nemesis Zax; attuned to the Soul Leech dagger; carried the Rod of Attenuation; made captain of a captured ship. Aliases: Crucrax, Crucaar, Cruccar, Crucar, Cuucar, Cuucrar, Cruucars, Krukar, Kakar, Foucault, Anthony (cover alias). Episodes: E18, E21, E23, E24, E27, E29, E30, E32, E35, E37, E39, E40, E41, E42, E43, E47, E48, E49, E50, E54, E57, E58, E59, E60, E61, E67, E69, E70, E71, E72, E75, E76, E77, E80, E81, E83, E85, E86, E87, E88, E89, E90, E91, E93, E94, E95, E96, E97, E98, E99, E104, E105, E106, E107, E108, E110, E111, E112, E117, E118, E119, E120, E121, E122, E123, E124, E126, E127, E129, E131, E133, E134, E135, E136, E137, E138, E143, E145, E146, E151, E154, E158, E159, E161, E162, E163, E164.
+- **Noctis** (active) — rogue/monk; member of the Harpers and the Last Shadow; based out of Autumn Fall; swallowed by Dragoloth and later by the Kraken. Aliases: Nocits, Nox, Notics, Nocs, nox, Notis, Nocts, Noctic, Noctos, Noctus, Knox, Naptis, Nocti. Episodes: E03, E04, E08, E09, E14, E20, E21, E25, E26, E32, E35, E37, E38, E41, E46, E49, E52, E53, E54, E57, E59, E61, E62, E63, E65, E67, E68, E69, E71, E75, E76, E77, E80, E81, E83, E84, E85, E86, E87, E88, E89, E90, E91, E92, E94, E95, E96, E97, E99, E100, E102, E107, E108, E110, E111, E112, E115, E116, E117, E120, E121, E122, E123, E126, E127, E129, E131, E132, E139, E141, E143, E144, E145, E146, E149, E151, E152, E154, E155, E156, E159, E162, E163, E164.
+- **Quinton Shackleford** (active) — bard (Phil's main PC); songwriter ("Evac's Whore"); family killed by Aum Shai; long entanglement with the witch Viola; carries the Mace of Terror. Aliases: Shack, Qutitin, QUinton, Quiton, Quintons, Big Q, Quin, Quintina, Qutinon, Quinten, quinton, Q, Q-man, Quentin, Tailsby Tornsmain (cover alias). Episodes: E02, E03, E04, E14, E23, E27, E28, E29, E30, E31, E32, E33, E35, E37, E40, E41, E42, E43, E46, E54, E56, E57, E58, E59, E61, E62, E63, E64, E65, E67, E69, E100, E101, E102, E105, E108, E111, E112, E115, E117, E118, E119, E121, E122, E123, E124, E125, E126, E127, E129, E130, E131, E133, E134, E138, E140, E143, E145, E146, E149, E150, E151, E152, E153, E154, E155, E156, E158, E160, E162, E163, E164.
+- **Berrian** (active) — paladin from Moonbright near Vermalock; father Borrus "Bo", mother Valadriel, sister Marora, fey elk familiar Gregory; died E131 (episode title), returned E135; greeted by the Arbor Alma. Aliases: Barrian, Berrian MarMorn, Barrien, Berian, BErrian, Berrrian, Berrian the Raker, Barion, Baryan, Faryon, Barry. Episodes: E66, E67, E68, E71, E73, E74, E77, E80, E81, E83, E84, E85, E86, E87, E88, E89, E90, E94, E96, E99, E100, E101, E102, E104, E105, E107, E108, E109, E110, E111, E113, E114, E116, E117, E118, E119, E120, E121, E122, E123, E124, E126, E127, E129, E130, E131, E132, E135, E139, E140, E141, E143, E144, E145, E146, E149, E150, E151, E154, E158, E161, E162, E163, E164.
+- **Vane** (active) — tall slim elf shapeshifter/caster (dimension door, polymorph, arcane gate); died E128 and was revivified by Torgoth; holds the tuning forks and Rod of Attenuation; eats slain-creature flesh in a recurring ritual (first done at the Vault of Izdar). Bound to Mallie Grisham by a pact (a tattooed cord on his arm/wrist) — Vane gained a **scrying ability** and owes Mallie a favor: to return to the Great Sun Temple pit once the quest is done and rescue Mallie and his world from **Aeralora** (E163). Aliases: Vein, Vain, Viens, Vayne, Bane, Alec / Roger (cover alias), Dustin (impersonation), Gorgoth (devil disguise). Episodes: E73, E74, E76, E77, E80, E81, E87, E89, E90, E91, E92, E94, E95, E96, E97, E98, E99, E100, E104, E108, E109, E115, E116, E118, E120, E121, E122, E123, E124, E126, E128, E129, E130, E131, E132, E133, E138, E145, E146, E149, E152, E154, E155, E158, E159, E163, E164.
+- **Torgoth** (active) — 8.5 ft gray-skinned goliath cleric/fighter (played by Steve, his current PC); joined the crew in Tarlif (E111); wields the Forged Amber and wind vane; revivified Vane. Aliases: Tor, TOr, TORGOTH, torgoth, Tori, Tory. Episodes: E111, E114, E115, E117, E118, E121, E122, E123, E124, E126, E127, E128, E129, E130, E131, E132, E141, E143, E145, E146, E148, E149, E155, E156, E158, E160, E161, E162, E163, E164.
+- **Evac** (deceased) — Vedalken wizard from the Mena Isles, Zook's replacement (E07; played by Steve); decoded the Sundering book; absorbed the obsidian god-eye ("Consume / Return"); died in the wagon ambush (E75), body burned. Aliases: Evak, Eekna (cover alias). Episodes: E07, E08, E19, E23, E24, E25, E27, E28, E29, E30, E32, E34, E35, E36, E38, E40, E41, E43, E46, E49, E50, E54, E57, E58, E59, E63, E64, E65, E66, E67, E68, E69, E71, E73, E74, E75.
+- **Zanim** (departed) — druid wild-shaper; lost his foot to hobgoblins (prosthetic leg from Leon); died at the wedding and was revived by Adune (E50); died again grabbing a Warg rider (E70); left the party to meet Ford (E73); later hailed by Aberdeeners as "Zanim the Bold" (E132). Aliases: Zanum, Zanums, zanim, zanum, Zanim the Bold, ZANIM the BOLD. Episodes: E02, E03, E04, E10, E14, E15, E23, E27, E28, E29, E30, E31, E35, E36, E37, E41, E44, E47, E50, E51, E52, E54, E57, E58, E59, E62, E67, E70, E71, E73, E132.
+- **Zook** (deceased) — original PC (played by Steve); attacked bandits on the beach, drank moonshine; died E07; memorialized in Quinton's song (E29) and a moment of silence (E60). Aliases: Zooks. Episodes: E02, E03, E05, E07, E29, E60.
+- **Benjamin "Benny"** (deceased) — party cleric/healer (played by Steve, his third PC after Zook and Evac); Robin Hood-style thief from Gidea/Goldcrest; killed Viola with a javelin crit; took the scepter spear Windvane; died in the beholder fight (E110). Aliases: Ben, Bengy, Benny, Benjaman, Beny, Beni Blisters, Benni buckets. Episodes: E75, E76, E77, E80, E81, E85, E86, E87, E88, E89, E94, E97, E98, E99, E100, E101, E105, E108, E110, E111.
+- **Betty** (temporary PC, played by Phil) — Quinton's player ran Betty for the stretch when Quinton was off on a side quest (Phil traveling for work); big red-headed brawny woman; Evershire rebellion agent, guide and messenger who "killed the crag." The head-of-guard "Betty" in Avernus (E97) is her, not Benjamin's nickname. Episodes: E74, E75, E77, E81, E83, E97.
+## NPCs
+- **Maximilian "Max" Taldross** — Knights of Gidia (Red Hawk rank), the party's longest-running ally; son of Aldo/Waldo Taldross; led "the Fist"; impersonated by the doppelganger Ors (E38–E40); died saving the party at the Ethereum (E136). Aliases: Maximilian taldross, Taldross, Max, "Max", max, MAx. Episodes: E08, E09, E10, E13, E14, E15, E20, E22, E24, E25, E26, E27, E28, E29, E32, E33, E37, E38, E40, E44, E46, E47, E48, E52, E67, E69, E71, E84, E86, E90, E91, E94, E96, E98, E99, E100, E101, E102, E131, E132, E134, E135, E136.
+- **Adune (Morgenrath Gafar)** — High Chancellor of Gidia and long-time party patron; revealed as a 1,200-year-old drow lich, surviving Zeeven, leader of Aum Shai / the Remenant; murdered King Felix; absorbed an Omago fragment. Aliases: Aldune, Hadoon, High Counsilor Adune, High chancellor Hadoon, Morgan Wrath Tifar, Morgan Rath Gafar, Morgenrath, Moregnrath, Morgenrath Gafar. Episodes: E27, E28, E33, E34, E35, E36, E37, E43, E45, E47, E50, E52, E67, E69, E71, E84, E90, E91, E92, E93, E94, E99, E100, E101, E102, E114, E115, E116, E131, E132, E135, E136, E139, E144.
+- **Lord Blackwood / Valadon the Black Dread** — 6'6" Special Regent slumlord of Evershire; actually the black dragon Valadon, Arch Dragon of Auumshai; his acid "Black Dread" raids decimated Evershire and killed the Baron's twins; slain when Able threw LJ to lance him (E90). Aliases: lord blackwell, Blackwell, BW, Blackwoods, Validon, Valadon the Black Dredge, The Black Dredge, the black dread. Episodes: E52, E69, E71, E72, E73, E74, E77, E80, E81, E83, E85, E86, E87, E88, E89, E90, E100, E132.
+- **Pierre Beaubois** — eldest Beaubois brother; bitter high-born elf; recreated the Spawn of Kyuss and plotted a zombie plague; Auumshai member (rank "Viper") whose token was a flying-dragon ceremonial dagger; as "Viper Beaubois" pitched the Shadowed Moon to approve his own pet project (E24). Aliases: Pierre gerent, pierre boobo, piotr, Pierre the Pussay, Pierres, Pierrie, pierries, Viper Beaubois. Episodes: E08, E09, E10, E11, E12, E14, E15, E19, E20, E23, E24, E27, E29, E37, E38, E52, E66, E80, E89.
+- **Viola, "the Mother"** — white-haired swamp witch and deal-maker, Aum Shai "Viper"; once pregnant by Baron Janis and banished; cursed LJ; threatened Quinton's family; gripped the party with a cold curse; killed by the party, head taken (E87). Aliases: Violia (E24 letter contact, likely same), Voila, Violas, Viper Viola, Viola the Voracious, The shadowed mother, the Mother, the witch, Rotten Mother. Episodes: E24, E29, E31, E32, E33, E37, E40, E43, E56, E64, E80, E81, E82, E83, E85, E86, E87, E89, E115.
+- **Mallie "Molly" Grisham, the Sparrow** — pirate captain of Fortune's Favor; collector who held the final Zeben artifact; traded its location for the Kraken capture; guided the Jazaka jungle expedition; wished Zuk'taal away with a bracelet; in the Great Sun Temple **left the party on floor four by diving into the pit toward Aeralora** (E163), calling in his favor from Vane. Same person as Shauwn O'Malley, the wedding letter deliverer of E20. (The "Molly" of the texair cart, E28–E29, is a *different* person — DM-confirmed; see the separate Molly entry.) Recovered the final Zeban artifact from the **Temple of Felnriel** and traded it to the Yuan-Ti of Oojezz (Jon, E164 email). **"Mallie" is the canonical spelling** (Jon, E164 email); earlier notes spelled it "Mally." Aliases: Mally, Mally Grisham, Shauwn O'Malley, Shawn Omallery, Molly Grisham, Milly Grisham, Milly Grissom, Captain maley grenshums, Malley, Maly, Mali, Maui, Nally, Melly, O'Mally, Mallyhas, MAlly. Episodes: E20, E143, E144, E147, E149, E150, E151, E152, E153, E155, E156, E157, E158, E159, E160, E161, E162, E163.
+- **Sir Trent Hightower** — Righteous Hand and leader of the Knights of Gidia; tall silver fox in plate; revealed as the mole — Aum Shai second-in-command; now hunting the party. Aliases: Trenton Hightower, sir trent, Sir Trent, Trent, Hightower. Episodes: E27, E91, E100, E132, E134, E135, E136, E139, E142, E143, E144, E145, E146, E155, E156, E164.
+- **Leon Janice "LJ"** — Baron Janis's lost eldest twin son, cursed by Viola into a flightless foul-smelling bird (part-time captain of Wrecked at the Reef per Quinton's song); freed of curse and mind control, lanced the dragon Valadon; now rules Evershire with the party in his debt. **Distinct from Leon Steadyfoot** (the goliath carpenter) — bare "Leon" is ambiguous between them; disambiguate by context. Aliases: LJ, LJs, LG. Episodes: E37, E52, E56, E64, E67, E69, E70, E71, E81, E82, E83, E86, E88, E89, E90.
+- **King Felix the Cold** — King of Gidia, father of Princess Anabelle; troubled by his late wife; murdered by Adune at the war council, with the party framed for the assassination. Aliases: Felix, king felix, king of gidia, King of Gidea, the king. Episodes: E24, E25, E27, E33, E37, E47, E54, E100, E132, E134, E135, E136, E137, E144.
+- **Yankee Williams** — old dwarf (later noted as gnome) hired as first mate, then captain running the party's ship; recruited the crew; "Yankee is good". Aliases: Yankee, Yankee (Sven), Sven, Captain Yankee Williams, Yankee Doodle Dandy Williams. Episodes: E53, E54, E59, E60, E61, E64, E67, E69, E113, E132, E137, E140, E147, E150, E164.
+- **Nardif Darksi, the Nightmare King (Nardeef)** — fey drow mage of Tarlif's Mageocracy; interplanar traveler and Lusinovian spy scientist; served as Aum Shai Arch Dragon (killed Beevus and Keevus); "savior" of Berrian's mother; gave gifts at Moonbright; repeatedly escapes. Aliases: Knightmare King, Nardeef, Nardiff, Nardif, Nardif darkski, Iberian, Iberrian, aberrian, Berrian Darksee, Aberan, Aberian, ArchDragon. Episodes: E91, E92, E93, E114, E115, E116, E129, E130, E131, E132, E133, E134, E135, E136.
+- **Valinor** — tall armored man in a long green cloak; appears in the party's prophetic dreams — Berrian's, and (as the golden-eyed man commanding roots, confronting seven shadow figures) in Zanim's E47 dream, where he was recorded as "Valdron" (DM-confirmed the same figure); brought news of Berrian's father; became a party companion; died and was resurrected; turns into a giant eagle; fought four White Knights with Bo. Aliases: Valenor, Valdron. Episodes: E47, E73, E90, E100, E101, E113, E117, E118, E122, E123, E124, E126, E129, E132.
+- **Ford (Fjord)** — gunslinger from Aberdeen (capital of Dalacia); Max's friend and recurring ally; helped investigate Viola; fought in Dalacia and Evershire; burst into the council room at the Ethereum. Aliases: Ford the gunslinger, Fjord. Episodes: E29, E31, E33, E46, E52, E67, E70, E71, E73, E131, E132, E136.
+- **Zax (General Zax)** — big black dragonborn, Cruucar's arch nemesis and former commanding officer; ordered the odd Jakarta fortress attack; stole half the map and later a Zeben relic; leads the Widowmakers; called the dragon's "dog"; hunting the party with six leaders and ~30 mercenaries. His ship, **the Black Widow**, joins the Aum Shai fleet attacking the party in the E164 sea battle (Jon, E164 email). Aliases: Zak, Zaxs, Zaxx, General Zaxx. Episodes: E24, E35, E47, E71, E73, E89, E139, E142, E144, E147, E155, E156, E164.
+- **Queen Beatrice** — Queen of Carasia, "the Lion's Blood"; pardoned the Beaubois at trial; slaughtered the Horde; hired the party as Prince Thomas's secret protectors; banished them until the prince was avenged and declared war on Luzonovia. Aliases: Beatris Lionsblood, Biatris, BEATRICE THE LIONS BLOOD, Be-ah-tris, Beatris, beatice, Queen of croatia, Queen of Carasia, the queen. Episodes: E08, E09, E14, E24, E37, E39, E47, E48, E51, E52, E137, E139.
+- **Princess Anabel (Annabella / Anabelle)** — princess of Gidia, King Felix's daughter; vegetarian; reclusive bride of Prince Thomas; target of the Luzonovian and succubus assassination plots. Aliases: Anabella, anabell, princess annabella, Princess Anabelle, the princess. Episodes: E03, E04, E08, E20, E27, E33, E43, E44, E47, E48, E100.
+- **Rasheed Soltar (Rashid)** — dock master of Tarlif, slave-ferrying smuggler; Aum Shai slave master relocated to Mandalonia; ran the Whispering Stacks; interrogated Kieran; killed and reanimated by the party (confirmed dead E145). Aliases: Rasheed Viper, Rasheem, Rashiid, rashiid, Rashid Sonatar. Episodes: E115, E116, E131, E132, E139, E141, E142, E143, E144, E145.
+- **Baron Alexander Janis** — Baron of Evershire at Corwell Keep; sickly with a scarred arm; lost his twin sons to the dragon's acid; once loved the witch "Mother"; mind controlled by Mallory; died around the dragon's fall. Aliases: Janis, Janice, Alexander, the Baron, Baron of Evershire, Barron, the barren. Episodes: E69, E71, E73, E81, E82, E83, E86, E88, E90.
+- **Mallory** — Baron's Chief Advisor recommended by Blackwood; blood-domain cleric controlling the Baron through whom the Mother worked her grip magic; had a magic mirror; killed with Moonbeam. Aliases: Malory, Malroy, mallory. Episodes: E71, E73, E77, E80, E81, E83, E87, E88, E90.
+- **Jameti Costco** — tomb-robber ranger / Harper mage who can travel between planes; tasked to get the artifact with his family threatened; led Berrian's father to the White Knights; later Mallie's jungle guide ("something went real wrong"). Aliases: Jamedi Cosko, Cosko, Jametti, Jameti, Jametti Costco, jepidi costco, Jametia Costco, Jemetti Costco, Jemedi cosco, Jemeti. Episodes: E102, E111, E113, E114, E115, E116, E131, E132, E155.
+- **Marquise Avesy, "the Easterner"** — shady Salton Steele Company owner and Goldcrest council member; party robbed his manor vault; the same figure as "the Goldcrest Marque" (DM-confirmed) who hung Shawn Williams's people and chased the ancient Zevans; seen with the Widowmakers ambush; Aum Shai meeting attendee. Aliases: Marquis Avesy, The Easterner, The Marque, The Goldcrest Marque, Marquee, The Marquee. Episodes: E55, E56, E57, E75, E100, E101, E102, E139, E142.
+- **Bo / Borrus (Berrian's father)** — went to meet Jameti Cosko and was led to the White Knights; held in the Tower of Illmore; rescued by the party and recovering. Also went by his druidic/Verdant name **Faldorn** — DM-confirmed the same man (the E132 census note treating Faldorn as a separate person is an error). Aliases: Borris, Borris 'Bo', bo, Berrians Father, Berrian's dad, Faldorn. Episodes: E102, E113, E114, E116, E122, E126, E129, E132.
+- **Eloise Vontrice** — Penelope's "adopted niece"; the real Eloise died months earlier — impersonated by a succubus/devil-creature of the Shadowed organization plotting the princess's assassination; infatuated Prince Thomas. Aliases: Eloise Vontrece, Elouise Vontrece, Elousie Vontrice, Elousie, Elouise, Elouse. Episodes: E37, E40, E41, E43, E44, E45, E46, E47.
+- **Prince Thomas (Tomas)** — Prince of Carasia, Queen Beatrice's only son; playboy groom of the royal wedding; stabbed by his best man Justin at the wedding (E50). Aliases: Tomas, Thoman, thomas, Prince Tomas. Episodes: E03, E04, E20, E39, E43, E44, E47, E48.
+- **Robert Kavney** — peacekeeper/watchman and sneaky spy-master; protected Lorenzo, took the party's letters and put four forged ones in the queen's hands; "no good/evil aura"; mentions "the other energy source". Aliases: Robert Kavny, Robert Kaveny, Robert Kafney, Robert Cavney, Kavney, Cavney, Lavney. Episodes: E27, E28, E29, E37, E51, E52, E100.
+- **Elizabeth Janis (the Baroness)** — Baron Janis's wife, LJ's mother; taken by the dragon and rescued from a cage in its lair; gave the party the Heroes Feast chalice. Aliases: elizabeth alexander, Baroness, Barroness, Elizabeth. Episodes: E71, E81, E82, E83, E88, E89, E90.
+- **Able Foster, "the Bear"** — Evershire rebellion leader, then Chief Guard; transforms into a huge axe-wielding bear via blood rites (lycanthrope-style); ate an orc head; threw LJ to lance the dragon. Aliases: Able, Bear, the Bear. Episodes: E73, E77, E81, E83, E88, E89, E90.
+- **Shaahim (Shaheem)** — leader of the Harpers in the Dustfall/Tarlif area; warlock-wizard-monk; teleported and disguised the party; died at the Ethereum (E136). Aliases: Shahim, Shaheem, Sahim, Sajem. Episodes: E115, E116, E131, E132, E134, E135, E136.
+- **Kieran (Kiron)** — girl who first introduced Noctis to the Harpers; spy inside the slave trade; captured and tortured repeatedly beneath the Whispering Stacks; has info on the final artifact. Aliases: Kiran, Kerran, kiran, Kirin. Episodes: E53, E142, E143, E144, E145, E146, E147.
+- **The Merchant, "the Foreigner"** — mysterious Goldcrest figure hunting the party; first mate Craaxis; expected attendee of Rashid's Aum Shai meeting; possibly the same person as Marquise Avesy / the Marque. Aliases: Goldcrest Merchant guy, the Foreigner, Foreigner. Episodes: E142, E143, E144, E147, E149, E155, E156, E164.
+- **Zeenoth the Righteous (High Architect Zenith)** — head archivist/architect of the order; conducted the royal wedding; closed the assassins' portal; briefed the party on Uquatoa lore; also the elderly High Architect "Zenith"/Zenoth, keeper of the Donum Vite (E139). Aliases: Zinoff, Zinoff the Righteous, Zionough the righteous, Zeenoph, Archevast Zinoff, high archavists, High archivist, Zenoth, zenith, High Architect, High Architext. Episodes: E20, E33, E37, E50, E51, E52, E139.
+- **Lorenzo Stansport** — texair shipper from Galsia named in Pierre's letters; betrayed the party and was revealed as an Oni; Cruucar took his glaive. (His monstrous true form is referred to as the "Ooni.") Aliases: Larenxo stansport, Lorzeno, 'Renzo, Ooni, Oni, Lorenz-oni. Episodes: E24, E27, E28, E29, E30, E32.
+- **Leofrene** — book keeper of land at Corwell Keep with darkness around him; took the party's blood to the Witch; his head later floats in Blackwood's wine. Aliases: Leofring, Leofraine, leofrene, Leofrange, leon fring gorst, Lefraine. Episodes: E71, E72, E80, E82, E83, E87.
+- **Elias** — Lorenzo's contact whom Lorenzo would meet before the Baron (E28); later Captain of the guard at Corwell Keep for 16 seasons; gave Fjord free reign; led the party through the secret cellar to the butcher-shop hideout; his head ends up in Blackwood's vintage wine. Aliases: Elais. Episodes: E28, E71, E72, E81, E83, E86, E87.
+- **Sane** — Gloomville gang leader of the Night Reapers; 3'2" bald pudgy man covered in rings. Episodes: E121, E122, E123, E124, E125, E126.
+- **Aldo (Waldo) Taldross** — Max's father, master of commerce on the King's council; estranged from Max, later appreciative dinner host; party infiltrated the council disguised under his identity (the lone E135 note calling Waldo Max's *brother* is an error — Aldo and Waldo are one man, Max's father). Aliases: Aldron Talldross, Aldo, Waldo Taldross, Taldros. Episodes: E25, E27, E28, E100, E102, E135.
+- **Yenneth** — drow Gloomville leader and Texair middleman, exiled from the Shadowfell era of Tarlif where she murdered a family; killed Luvash; killed by the party. Aliases: Yinnith, Janette? (no — see Jeanette), Yinnith. Episodes: E124, E126, E127, E128, E129.
+- **Captain Mckinnon** — halfling Captain of the Guard from the Morion Kingdom; red hair and beard. Aliases: mckennon, mckinen. Episodes: E14, E15, E16, E20, E24.
+- **High Rector Lucia** — tall purple tiefling, high rector archaviesian; party contact who offered 10,000 platinum and bought the party their ship. Aliases: Rector Lucia, Lucias. Episodes: E39, E40, E47, E48, E52.
+- **Atwell** — Corwell Keep's keeper of coin, fat with rings, darkness around him; shuffled money to the Shimmering mine; burned to a crisp. Episodes: E71, E72, E73, E74, E75.
+- **Koru (Kuro)** — High Harper ("master Koru"); Noctis owes him a fulfilled promise; uses Shadow Step; retrieved a relic at the Labyrinth of Ninath and was ambushed by the Widowmakers; left behind by the party (E147). Episodes: E53, E116, E117, E139, E147.
+- **Leon Steadyfoot** — 7'8" 430 lb shaved-head tattooed goliath; began as the boatman who took the party up the river (girl back home named Thary); ran the Iron Chisel shop in Sutrey where he built Zanim's prosthetic leg; later the ship's bosun/carpenter — retired when Roland took over, rejoined as crew keeping detailed records, burned Mandalonian ships at the Battle of Dorcha Cliffs; died at the Ethereum (E136, as "Leon/Liam"). **Distinct from Leon Janice "LJ"** (the cursed bird-son) — bare "Leon" is ambiguous between them; disambiguate by context. Aliases: Leon, Liam, thanos, Leon of the Iron Chisel, Leon the goliath bosun. Episodes: E04, E05, E13, E14, E15, E54, E61, E131, E132, E136.
+- **Bell (General Bell)** — devil leader, CR 27 pit fiend and former ruler of Avernus; Zariel's advisor seeking to overthrow her; beheaded Colossus with a flaming sword. Episodes: E94, E95, E98, E99.
+- **Ventius, the High Recter** — centaur judge and leader of the courts in Sutrey. Aliases: Vinitous, Vindicious, venetis, High Recter. Episodes: E14, E15, E20, E22.
+- **Avesia, Viscountess of Sutrey** — shrewd high elf leader of Sutrey; do not lie to her. Aliases: Avici, Avicia, Vicountess, Viscountess, Vi-countess, Countess, Vicount. Episodes: E13, E14, E15, E24.
+- **Jeanette Beaubois** — Pierre's younger sister, "hot older elf with crazy eyes"; married Claude; Patrice's mother; jewelry looted from her. Aliases: Junnet, Junet, Janette. Episodes: E09, E10, E23, E24.
+- **Claude Beaubois** — Jeanette's married-in husband; tweaking blonde elf with piercing blue eyes; main grave in the catacombs. Aliases: Claud, Clad Bubo. Episodes: E09, E10, E23, E24.
+- **General Barnabas** — Guidian General of the North Armies; hunched, white hair, eye scar; reported dead E100. Aliases: barnabas, General Barnanbus. Episodes: E62, E66, E69, E100.
+- **Shawn Williams** — Leaping Trout captain of Hightower, Goldcrest; hired the party to steal Avesy's ledger and raid Marc Carivessee's vault; his people were hung after trying to dethrone the Marque. Aliases: Shawn, Sean Williamson, sean, Shaun Williams. Episodes: E55, E56, E64, E100.
+- **Captain McKay** — Gidian Navy captain and Aum Shai meeting attendee; named by Kiron as possibly behind the slave trade (E53). Episodes: E53, E142, E143, E144.
+- **Dwemerlake** — undead 9-foot robed master of the Tower of Illmore; one of the Nine dark paladins. Aliases: Dwemer Lake, Dwemer Lakes, TDL. Episodes: E116, E124, E126, E131.
+- **Thomas Davis** — Evershire rebellion member who tracked the cash taxes to the Shimmering mine and warned of the ambush. Episodes: E73, E74, E75, E77.
+- **Daylor** — dashingly handsome deputy first mate ("Gen Z fuck boi"); name on the forged ship deed; "the SOB who didn't help at all". Episodes: E54, E61, E140, E150.
+- **Razortail** — female dragonborn weapon master / master-at-arms; Golden Company deserter from Jaakarta; lost her tail — "just Razor now". Aliases: Razertail, Razor. Episodes: E54, E61, E132, E150.
+- **Penelope Vontrice** — Vontrice matriarch, Mantel member advising the queen; named in Pierre's journal as possibly behind the assassination. Aliases: Lady Penelope Vontrice, penelope. Episodes: E37, E39, E40, E47.
+- **Justin** — Prince Thomas's best man (helped women into his chambers with Tristane); stabbed the prince at the wedding and escaped as a black-cloaked figure. Episodes: E44, E50, E51.
+- **Patrice (Patrese)** — son of Jeanette and Claude; acts like and hangs with Pierre; got away. Episodes: E09, E10, E24.
+- **Tristane** — gave the party the texair theft rundown in Sultray; a Tristane also helps women into Thomas's chambers (E44, possibly a different man). Aliases: Tristain, Tristaine. Episodes: E07, E08, E44.
+- **Jon Louie (Jon Loo Wee)** — young half elf leading the Carasian guard escort; shared wedding guard command with the party. Aliases: Jon Loue, Jon. Episodes: E36, E47, E48.
+- **Milo Zulezi, "the Wise Owl"** — Wise Owl of the Harpers (Grier, later Vallon at the Temple of Erathis). Aliases: Milo - the Wise Owl, Wise Owl. Episodes: E26, E39, E40.
+- **Rudar** — dwarf merchant of Rudar's Armory Inc.; contracted the party to deliver weapons to Goldcrest; Yankee's crew later works with him at the Bay of Resplendence. Aliases: Rudar the dwarf. Episodes: E53, E54, E67.
+- **Skoony** — red tiefling leader of the Kings gang ("do not kill"). Aliases: Scoony, Scuny. Episodes: E124, E125, E126.
+- **Casamir** — Withervale estate husband selling Texair in an iron plague mask; killed by Cruucar with the dagger; later found gone from his room. Aliases: Cassemire, Casimir, Kasemere, Kas, cashmere, Casemire. Episodes: E125, E126, E127.
+- **Luvash** — Casamir's wife at Withervale estate; killed by Yenneth; an older beaten woman by that name later found caged (E126). Aliases: Louvash, louvesh. Episodes: E125, E126, E127.
+- **Tinkertop, "the Clockmaker" (Hazeem Viper)** — gadget mastermind of the Tarlif plot; white hair and glasses; troublesome Septum member. Aliases: Clockmaker, Hazeem, Hazeem Viper, tinkertop. Episodes: E114, E115, E116.
+- **Orgmond** — pre-Sundering 38 ft storm giant from the Feywild; sends trees downstream; his father fell in the Sundering; was/is King of the Ungoth Giants. Episodes: E118, E119, E149.
+- **Omago** — chief architect of the Hive and arch mage of transmutation; the Potentium power source is his sentience; a fragment empowers Adune. Aliases: Omogo, Omagal, Amago. Episodes: E108, E136, E139.
+- **Felnriel** — one of the archmages of the Hive (the ancient Zeban order of mages); the final Zeban artifact — the crystal orb recovered from the Coiled Ascendry's fifth floor (E164) — is "the fabled artifact of Felnriel" (Jon's E164 recap). Namesake of the underwater **Temple of Felnriel**, where Mallie originally recovered the artifact before trading it to the Yuan-Ti of Oojezz; the party came to Oojezz to take it back (Jon, E164 email — confirms the Temple of Fenreal / Felnriel are one and the same). Aliases: Fenreal, Fellreil, Felnreal. Episodes: E164.
+- **Dorian** — first mate aboard the Blood Mist; stood over the chaos commanding her guns in the fleet battle off Jazaka. Episodes: E164.
+- **Mr. Whiskers** — rat guide through the Madalonia storm drains and sewers, paid in wheels of cheese. Episodes: E144, E145, E146.
+- **Izzdar the Undying** — lich-like member of the Hive dwelling below the Vault; Withers serves him; a plinth figure resembles him. Aliases: Isdar, Izzdar the Lith, Izzard, vault Izdar. Episodes: E104, E105, E108.
+- **Odo** — ex-dairy farmer leader of Emerald Lake; tasked the party with recovering the missing scout's message. Aliases: Oto, Otos. Episodes: E61, E62, E64.
+- **Alby Hopkins** — sole surviving scout of the harpy attack; guided the party; called a lame coward. Aliases: Alby, alby. Episodes: E62, E63, E64.
+- **Drachen** — leader of the Blackwood guard sent to the Crag; serpent tattoos and a flying-dragon dagger matching Pierre's; killed. Aliases: Blachen goodale. Episodes: E73, E80.
+- **Hezekiah** — rebellion agent near the Shimmering Grotto cave. Aliases: Ezekial. Episodes: E75, E77.
+- **Marora** — Berrian's sister with an Irish accent; knows plants; guided the party near Moonbright. Aliases: Berrian's sister. Episodes: E117, E118.
+- **Beevus** — wish-casting survivor found in the Rift; killed by Nardeef over the fake artifact. Episodes: E111, E115.
+- **Keevus** — found in the Rift with Beevus; killed by Nardeef over the fake artifact. Episodes: E111, E115.
+- **Myrrl Blackfinger** — female dark-arts sorcerer who secluded herself in the delta tower; disappeared. Aliases: Black Finger, Blackfinger, Marrow black manger. Episodes: E15, E16.
+- **Weatherface** — dying man who asked the party to deliver a letter to the Last Drop in Sultray. Episodes: E02, E03.
+- **Jon-Pierre** — tall half-elf Viscount of Carstone; hired the party over the wine delivery problem. Episodes: E03, E04.
+- **Bernard (Carstone)** — large rosy-cheeked man in his 40s at the Carstone tavern. Episodes: E03, E04.
+- **Professor Williams** — short white-haired gnome scientist at the university analyzing the green vials. Episodes: E14, E15.
+- **Reinhard Heimlick** — Lozernovian advisor to the Archivists; guided the party and got them passage. Aliases: reinhard, Heimlickreimer. Episodes: E137, E139. *(Out-of-world author note, cleared by Jon: the character's name riffs on a real-world historical figure — inspiration only; the in-world canonical name is Reinhard Heimlick.)*
+- **Killian "Saltbeard" Adorma** — innkeeper of the Storm-Sundered Tankard; cloudy eye he blames on a lightning strike; later noted "guard?". Episodes: E141, E142.
+- **Rise the Bold** — found Goldcrest islands' defended cove 250 anum ago; has the top statue. Episodes: E54, E55.
+- **Nicholas the Merchant** — merchant king of Goldcrest; bottom statue. Aliases: Nicolas the Merchant. Episodes: E54, E55.
+- **Sofia Rose Hand** — queen who moved Guidia's capital to Goldcrest; civil war over her queenship. Aliases: Sophia. Episodes: E54, E55.
+- **Duke Arden** — King Felix's second son; smart, likes a good time; close to Avesy. Aliases: the Duke. Episodes: E54, E56.
+- **Kaden Clark** — runs Le Kraken bar and lodging near the Eastown market; sheltered the party post-heist. Episodes: E55, E56.
+- **Vex Totem** — pirate captain seeking the sea artifact; based in Freetown. Aliases: Vex Tottem, Vex, Vax. Episodes: E35, E36.
+- **Osmeant** — texair cart co-driver found with an arrow in his back. Aliases: Oswald. Episodes: E28, E29.
+- **Molly (texair cart)** — guard of the "Order of the Exchange," there to escort the texere shipment safely to its destination; kept the texair cart's books and wrote the letter of events (E28–E29). A *different* person from the pirate captain Mallie Grisham (DM-confirmed). Episodes: E28, E29.
+- **Vince** — one of Lorenzo's boys; 15 gold found on him. Episodes: E28, E29.
+- **The Baron (Lorenzo's contact)** — recipient of Lorenzo's second framing letter. Aliases: the barren. Episodes: E28, E29.
+- **Etak** — Gloomville tavern contact who gave gang info; notes say he killed his wife Yenneth. Aliases: Etalk. Episodes: E124, E126.
+- **Elville** — drow Gloomville leader, Yenneth's partner/assistant; skimmed Texair via the Archevists. Aliases: ELville, Ellville. Episodes: E124, E126.
+- **Francis** — villager drafting the appeal about Blackwood; escorted home to Squamish. Episodes: E71, E72.
+- **Olf** — soul kept by an Arinece in Avernus; lied about it; killed by Cruucar. Episodes: E94, E96.
+- **Harden (Hardon)** — one-eyed human from the Swords Coast hunting a Boulder's Gate noble; paid the party 200 gold, then sold them out to Bell. Episodes: E96, E98.
+- **Zariel (Zarious)** — ruler of Avernus whom Bell seeks to overthrow; also referred to as "Cario, Duke of Avernus" (E95). Aliases: Zarious, Cario, Duke of Avernus. Episodes: E94, E95, E98.
+- **Daniel Bradston** — representative of the people at the Baron's court; good council member, "Man of the People". Aliases: Daniel. Episodes: E71, E88, E90.
+- **Colossus** — Avernus companion in soul debt with the party; head cleaned off by Bell's flaming sword. Episodes: E94, E98.
+- **Vaxoldon Vortily** — worker at Arcane Infinity; there are five of him (Simulacrums). Aliases: Vaxaldon, Valdon. Episodes: E100, E101, E102.
+- **Genaveve (Jenavive)** — Max's sibling; horse racer and archer; engaged to Percival. Episodes: E102, E134.
+- **Shawn (Taldross)** — Max's sibling, Carasia diplomat. Episodes: E102, E134.
+- **Jeremiah (Emerald Lake)** — wharf master at Emerald Lake who took the party to Odo. Aliases: Jermiah. Episodes: E61, E62.
+- **Lila O'cane** — leader at Airsteach; fan of the slaves' cause, hates the empire. Aliases: Lila. Episodes: E148, E149.
+- **Mano** — part stone giant representing the union of the Giant and People clans at Airsteach. Episodes: E149, E150.
+- **Renee** — drunk by the Airsteach docks; ex-employee of Mallie who knows Anchors Rest. Episodes: E149, E150.
+- **Thurston "Intrepid" Carrick** — flamboyant elf pirate captain of the Intrepid; lost his siren necklace in a card game. Aliases: Thurston. Episodes: E152, E155.
+- **Ronkros (Roncorose)** — aarakocra navigator/crow's-nest watch with spectacles; can fly but the sky is scary. Episodes: E54, E149, E150.
+- **Taryn (Taran)** — red tiefling ship cook, 23 summers at sea; ship mother, boss bitch; perfecting the legendary "Stormchowder". Episodes: E54, E150.
+- **Withers (Gourah)** — Vault guard of the Order of Torag, from before the time of corruption; attacked the party and turned to dust; his moldy journal reveals gods/Hive/Potentium lore. Episodes: E108.
+- **Finnad** — famous bard who tells a story. Episodes: E01.
+- **Chias** — person in sapphire blue silk robes who shows the party around; Valkstraker. Episodes: E01.
+- **Gayai** — gypsy lady by the fire from northern Gruier; gives wine, only wants coin. Episodes: E02.
+- **Riton Goldfoot** — Carstone wharfmaster, a scrooge; complains of bandits. Aliases: Riton. Episodes: E03.
+- **Jon** — the widow's missing merchant husband; rescued from gnolls on the north road. Episodes: E04.
+- **Rolin Blaze** — tiny jacked halfling first seen on Leon's boat (E04); later a high-level magic user in Max's service, captured at the Spires and rescued by the party (E84). Aliases: Roland Blaze. Episodes: E04, E84.
+- **Thary** — Leon Steadyfoot's girl back home. Episodes: E05.
+- **Sintar** — man in emerald green robes and a jeweled turban; jumps super far. Episodes: E05.
+- **Olivie** — soft-spoken farmer hosting the party; grows plums and legumes; knows Leon. Episodes: E05.
+- **Ada** — Olivie's wife. Episodes: E05.
+- **Colette** — 16-year-old daughter of Olivie and Ada. Episodes: E05.
+- **Everand** — 14-year-old son of Olivie and Ada. Episodes: E05.
+- **Heza** — child of Olivie and Ada (age unclear). Episodes: E05.
+- **Tamon** — crew worker eaten by the demon creature in the fields. Episodes: E05.
+- **Ferant** — found dead under a table in a satin sheet at the crumbling manor. Episodes: E07.
+- **Constantina** — pregnant girl the note-taker returns to. Episodes: E07.
+- **Orotelli** — turtle man at the Last Drop in Sultray. Episodes: E08.
+- **Jeremiah (Last Drop)** — nervous 17-year-old at the Last Drop. Episodes: E08.
+- **Professor Willis** — gnome professor of antiquity (architecture and records) in Surtree; identified the tower blueprints (E15). Distinct from Theo Willis — DM-confirmed two different men. Episodes: E15.
+- **Theo Willis** — Max Taldross's retainer; heard the party at the Last Drop and took Noctis up to a fancy room (E08). Distinct from Surtree's Professor Willis — DM-confirmed. Episodes: E08.
+- **Jeaun** — noble head of the Beaubois family before the brothers took over. Episodes: E09.
+- **Red Rocklin** — named in the Taldross letter as the princess's knight. Episodes: E09.
+- **Blastoise** — told the party about the Beaubois mansion and family history. Episodes: E09.
+- **Broomhida** — large copper dragonborn armorer at Iron Works, 7 ft tall. Episodes: E13.
+- **Priestess Elana** — priestess of Paylor in Sutrey's arcane/religious sector. Aliases: Elana. Episodes: E15.
+- **Andreate Quious** — architect who secretly constructed Blackfinger's tower, 195PD. Aliases: A.Quious, Quious. Episodes: E15.
+- **Kyuss** — ancient high priest of Orcus who created the worm-spawn from corpses. Episodes: E15.
+- **Raymond the Kind** — Beatrice's father, killed in a Horde ambush south of Dracone. Episodes: E14.
+- **Otto the Stern (Ottam)** — Deliberator, high in the Archivist order; left for King Felix (E24); attendee at the Duke meeting (E26). Aliases: Ottam. Episodes: E24, E26.
+- **Arch Dragon (Aum Shai rank)** — counsel-seat rank of Aum Shai; trades information for blueprints; held at different times by Valadon/Blackwood and Nardeef. Aliases: arch dragon, Arch Dragon of Aumshi. Episodes: E23, E24, E115, E116, E134, E135.
+- **Madam Alex** — brothel madam showing tons of cleavage. Episodes: E24.
+- **Duke Fenenis Qiparious** — Duke of Greer; stickler, cold; cousin to the King; outsider. Episodes: E25.
+- **Duke Athinien** — nervous duke worried something will happen in Grier. Episodes: E26.
+- **Souvenir** — stable boy at the Blushing Monk. Episodes: E25.
+- **Drucaar** — seven dwarves at the Blushing Monk; assholes. Episodes: E25.
+- **Jacobo** — short chubby olive-skinned man with a ponytail; slave trade route maps. Episodes: E26.
+- **Salem** — high priest of Paylor; led the party to the teleportation citadel. Episodes: E26.
+- **Joahne Revare** — House of Commons member at the Duke meeting. Episodes: E26.
+- **Aurovan** — the water person at the Duke meeting. Episodes: E26.
+- **Giom Lecom** — attendee at the Duke meeting. Episodes: E26.
+- **Tannerack Tantan** — guildmaster at the Duke meeting. Episodes: E26.
+- **Percival Degraves** — the King's right-hand man and childhood friend; engaged to Genaveve, Max's sister (E102). Aliases: Percible, Percival. Episodes: E27, E102.
+- **Hyrector Revaneous** — chief archivist; weedy old albino half elf with purple hands. Episodes: E27.
+- **James Royce** — supreme commander, Master of the Deck; deaf, speaks only war matters. Episodes: E27.
+- **Ralph Ironfist** — Vindicator of the Knights of Gidia, one level above Max; power hungry; took the letters from the party and gave them to Kavney. Aliases: Ralph Iron Fist, Ralph, Rolph, Ralph ironfist. Episodes: E20, E24, E26, E27, E48, E52.
+- **Orwell** — the other co-driver of the texair cart. Episodes: E28.
+- **Bo (Lorenzo's lookout)** — Lorenzo's man on ridge lookout; 20 gold on him; unrelated to Berrian's father. Episodes: E29.
+- **Marge** — Lorenzo's woman fighter; carried platinum and a blood-covered letter. Episodes: E29.
+- **Alan the Wise** — first arcavist; stopped the post-Sundering wars 480 years ago. Episodes: E33.
+- **Captain James Cook** — captain of the Tides Breath with a crew of 20. Aliases: captain cook. Episodes: E34.
+- **Jarold** — shipping boat captain from Jazacha; relayed the temple/aging-man story. Aliases: Jerold. Episodes: E34.
+- **Avantika** — half-elf female captain with her own ship; unknown to Adune. A name the party has only seen written — on a parchment (E00) — and has not yet met in play; "Avekna" was a misreading of her name, not the lich-god Vecna (DM-confirmed). Aliases: Avekna. Episodes: E00, E35.
+- **The Gentleman** — runs Freetown; subject of a map in the chest. Episodes: E35.
+- **Lora Fel** — elf member of the Runekeepers. Episodes: E34.
+- **Amara** — dwarf member of the Runekeepers. Episodes: E34.
+- **Talen** — cleric member of the Runekeepers. Episodes: E34.
+- **Autumn** — chief advisor to Queen Beatrice, role similar to Adune's. Episodes: E37, E47.
+- **Heinrek** — top person speaking for Lusenovia at the summit; Zanim spoke with him. Episodes: E37.
+- **Martinet Ludinus Dealeth** — tall council speaker, potential Voldstrucker leader; invited the party to the Ethenium. Aliases: Ludinus Dealeth. Episodes: E37, E43.
+- **Auto** — Losinovian spy captured watching the princess; dead. Episodes: E37.
+- **Lonviden** — Losinovian spy captured watching the princess; dead. Episodes: E37.
+- **Ors** — doppelganger assassin-for-hire who impersonated Max; held in the Falcon Citadel dungeons; had Pierre's ceremonial dagger. Aliases: Or. Episodes: E38, E39, E40.
+- **Albert** — Knights Watch member serving the queen. Episodes: E38.
+- **Volo** — Queen Beatrice's unmarried life partner; former soldier proven in battle. Episodes: E39.
+- **Chogg Thribble** — three-foot-tall hobbit introduced by Milo; works for himself, wants money. Episodes: E39.
+- **Robert Vontrice** — Penelope's brother handling family finances; not charismatic; 100 miles away. Episodes: E40.
+- **Baron (Vontrice)** — Vontrice land owner politely removed from the city for selling slaves. Episodes: E40.
+- **Julia Vontrice** — Vontrice diplomat in Parathia; owns a Carasia town house; by the book. Episodes: E40.
+- **Lucas Vontrice** — youngest Vontrice boy; playboy with a House of Midnight tab and a penthouse. Episodes: E40.
+- **The Great Declan** — mentioned in Quinton's song, at the witch's hut of Pelwall Marsh. Episodes: E37.
+- **Racard (Riccard)** — guard due to be punished at the morning briefing (E47); later the boat attendant the authorities were searching for (E58). Aliases: Riccard. Episodes: E47, E58.- **Aldo (guard)** — guard walking the prince down with his men; probably not Aldo Taldross. Episodes: E48.
+- **Saul** — guard posted in the main hall during the wedding. Episodes: E48.
+- **Saultan** — guard in the left main halls; knows the route. Aliases: Saltuan. Episodes: E48.
+- **Genevieve (guard)** — guard in the right main halls; she and comrades died of black wounds. Distinct from Max's sister Genaveve. Episodes: E48.
+- **Ritard** — walking the wedding venue per guard positioning. Episodes: E48.
+- **Thom** — taking in people per wedding guard positioning. Episodes: E48.
+- **Wilhelm** — named among possible forgers of the damning letters. Episodes: E52.
+- **Thessias** — Harbor Master who pointed the party toward Yankee. Episodes: E53.
+- **Roland** — took over the business, prompting Leon's retirement. Episodes: E54.
+- **Erik the Shipbuilder** — founded Goldcrest in 168 after the famous passage was completed. Episodes: E54.
+- **Jake Hayes** — master of the Salton Steele docks; small mustache; received a secret 50,000-gold package. Episodes: E55.
+- **Jeff** — man in south Goldcrest reached via the rose gold card. Episodes: E55.
+- **Zefron the Hammered** — greatest weapon smith of the Moran kingdom; signed the dwarvish letter. Episodes: E55.
+- **Margaret** — Shawn Williams's wife. Episodes: E56.
+- **Bernard (chef)** — Shawn Williams's chef; dinner is immaculate. Episodes: E56.
+- **Rafael** — named at the end of the dinner notes; no further detail. Episodes: E56.
+- **Phinacous** — bank teller in the religious district. Episodes: E58.
+- **Mr. Stevenson** — bank manager in Goldcrest. Episodes: E58.
+- **Thomas (commoner/crew)** — minor Thomases: seen at the Passant Lord (E58), dock boat hand at 10 copper/day (E61), named at the Purple Party (E100) — DM-confirmed these are different men. Episodes: E58, E61, E100.
+- **Claypool** — Yankee's friend with six sons; supplies paint and fake documents. Episodes: E60.
+- **Craig** — the other wharf master at Emerald Lake. Episodes: E61.
+- **Stevens** — scout troop leader carrying the message; tall young human, missing. Aliases: Stevenson. Episodes: E62.
+- **Marc Carivessee** — "most powerful man"; the party raided his vault and took a book. Episodes: E64.
+- **Madam Mark** — old woman shopkeeper; sold the party healing potions. Episodes: E67.
+- **Goldie Kept** — tavern keeper of the Molten Feather in Murkwell. Episodes: E67.
+- **Warleader Grumosh** — warleader invoked by the orcs raiding the village; not present. Aliases: Grumosh. Episodes: E70.
+- **Leonard** — village leader wounded in the side; healed by Zanim. Episodes: E71.
+- **Kance** — Baron Janis's son; fell under the acid. Episodes: E71.
+- **Clarence** — Baron Janis's son; fell under the acid. Episodes: E71.
+- **Daniel** — see Daniel Bradston. Episodes: E71.
+- **George** — bar keep in the mess hall; directed the party to the secret meeting spot. Episodes: E72.
+- **Reginald** — named amid the Blackwood-guard / bag-of-gold incident. Episodes: E72.
+- **The Dark One** — drove Dragoloth off from the swamps in the east. Episodes: E65.
+- **Tyrian** — met the party at the secret rebellion meeting with Able. Episodes: E73.
+- **Richard Andrews** — large man leading the town raid on the cash supply. Episodes: E73.
+- **Rufos Conway** — led the Airdale recruiting effort for the rebellion. Episodes: E73.
+- **Julian** — captured guard interrogated under Dominate Person; killed by Cruucar with the dagger; spoke of "Darkwings" and "Midnight Promises". Episodes: E80.
+- **Jonas** — leader of Airdale, good friend of the rebellion. Episodes: E81.
+- **Candance** — named with Jonas after the ambush retreat at Airdale. Episodes: E81.
+- **Oran** — dwarf Irish man sent by Max toward Iron Forge; controllable via Max's badge. Episodes: E84.
+- **Everdak** — Max's man captured on recon at the Spires, rescued by the party. Episodes: E84.
+- **Sir Gallot** — 8 ft tall goliath with Max at the Spires. Episodes: E91.
+- **White Lantern** — Adune's man, bearded human wizard who hid the power source; passphrase "The Sparrow Sent You". Episodes: E92.
+- **Merden Delarosa** — named alongside the Arinece soul-keeper ("Olf is his name"). Episodes: E94.
+- **Grady** — cave man Cruucar attacked during soul-rage. Episodes: E96.
+- **Vikrum Hodor** — named only in the E85 episode title "The Return of Vikrum Hodor". Episodes: E85.
+- **Puppet master** — leader of the Auumshai, "behind the vail"; later revealed to be Adune. Aliases: Puppet master and puller of strings, Behind the vail. Episodes: E89.
+- **Tristan** — led Blackwood's remaining 6 men; pledged allegiance for 5 gold/month. Episodes: E90.
+- **GateKeeper** — Avernus entity Cruucar sent all four souls back to. Episodes: E97.
+- **Joyce** — had a lovely time with Benjamin at the party. Episodes: E100.
+- **Joe** — named at the Purple Party. Episodes: E100.
+- **Trevor** — named at the Purple Party. Episodes: E100.
+- **Cieral prucit** — talked to at the Lavish Chateu stay. Episodes: E100.
+- **Sharron** — worker who gave a map of "Kruucar". Episodes: E101.
+- **Gregor** — Max's brother; lead scientist at Kierkenwall University. Episodes: E102.
+- **Wahle** — guide into the abyss/Great Rift; drew the return map and left. Episodes: E104.
+- **The Great Master** — Withers's master from before the time of corruption; possibly Omago or Izzdar. Aliases: Great Being. Episodes: E108.
+- **Zultan** — classmate mentioned in Withers's journal context. Episodes: E108.
+- **Wandeeb** — a monstrosity breaks the door down wearing Wandeeb's face. Episodes: E108.
+- **Ninath** — drow archmage of evocation painted in the water room; bejeweled woman with spear (namesake of the Ninath chainmail and the sea Labyrinth). Episodes: E109.
+- **Faldryal** — illusion archmage in painting; woman in dark black cloak with dagger. Episodes: E109.
+- **Zarryien** — enchantment archmage in painting; woman staring into a glowing ball, has a whip (namesake of the Zarryne orb). Episodes: E109.
+- **Ilharius** — conjuration archmage in painting; male with diamond circlet and wand. Episodes: E109.
+- **Velonim** — abjuration archmage in painting; woman in white cloak with staff. Episodes: E109.
+- **Vorace** — one of six leaders of Tarlif. Episodes: E113.
+- **Inobune** — one of six leaders of Tarlif. Episodes: E113.
+- **Abarian** — one of six leaders of Tarlif. Episodes: E113.
+- **Uvuor** — one of six leaders of Tarlif. Episodes: E113.
+- **Amari** — one of six leaders of Tarlif. Episodes: E113.
+- **Azal** — one of six leaders of Tarlif. Episodes: E113.
+- **Shadowedmoon (person)** — gave Nardeef a direct task; impatient about the artifact; see Shadowed Moon faction (= Adune). Aliases: Shadowmoon. Episodes: E115.
+- **Ulom** — signature on East Wind Trading Company papers at Rasheed's house. Episodes: E115.
+- **Prof Tritus** — old library professor; explained the artifacts, the rift, and vault Izdar. Aliases: Prof Udal. Episodes: E114.
+- **Siad** — runs the Flying Carpet inn; sent the party for enhancements. Aliases: Said. Episodes: E117.
+- **Cumalinger** — addressed as sir; Siad sent the party to him for best enhancement prices. Episodes: E117.
+- **Yamean** — told the party about the wards and the Jade Oricle. Episodes: E117.
+- **Master Mirral Kariem** — old man at the Jade Oricle; crafts weapons from vermalock tree wood. Episodes: E117.
+- **Shadow Captain** — one of the Nine pre-Sundering dark paladins sent to the Shadowfell. Episodes: E116.
+- **Chief Keeper** — one of the Nine dark paladins. Episodes: E116.
+- **Betrayer** — one of the Nine dark paladins. Episodes: E116.
+- **Tatanin** — one of the Nine dark paladins. Episodes: E116.
+- **Knight of Umber** — one of the Nine dark paladins; the fear-using "Umber Knight" destroyed by Berrian's 260-damage smite (E126) is likely him. Aliases: Umber Knight. Episodes: E116, E126.
+- **Dark Marshal** — one of the Nine dark paladins. Episodes: E116.
+- **Undying** — one of the Nine dark paladins; distinct from Izzdar "the Undying" of the Hive (shared epithet only). Episodes: E116.
+- **Kraven Morehead** — met in Grimsburg; has a crew; gave directions and warnings south. Episodes: E121.
+- **Worble** — humanoid covered in mud, harvesting little rock balls of food. Episodes: E121.
+- **Reson** — guard with platemail mask encountered by Cruucar. Episodes: E123.
+- **LieKi** — guard with platemail mask encountered by Cruucar. Episodes: E123.
+- **Zanraw** — Captain of Guard running muscle in Gloomville. Episodes: E123.
+- **Crass** — bridge guard enthralled by Quinton with the lute. Episodes: E123.
+- **Raz** — bartender at the Desperado. Episodes: E124.
+- **Trenich** — other bartender at the Desperado. Aliases: ten inch. Episodes: E124.
+- **Inka** — small gnome spy in the Night Reapers; led the party to Sane. Episodes: E124.
+- **Sivy** — female rogue tiefling, orange-blue, in the Night Reapers. Episodes: E124.
+- **Yanda** — small female sorcerer in the Night Reapers. Episodes: E124.
+- **Or** — small jacked halfling barbarian in the Night Reapers; wields a club. Episodes: E124.
+- **Roger** — man with a slave literally named Slave, aboard the barge William. Episodes: E131.
+- **Slave** — Roger's slave, literally named Slave. Episodes: E131.
+- **Charles** — boss of the barge William. Episodes: E131.
+- **Doomath** — mentioned alongside the Dwemer Lakes; no other detail. Episodes: E131.- **Valadriel** — Berrian's mother, who bridges Aum Shai and the Knights; Nardif claims to have "saved" her; named in the Moonbright recap. Episodes: E132.
+- **Sir Edward Taldross** — Max's grandfather; seal of the phoenix rising; his sword later claimed by Max. Episodes: E134.
+- **King Ruprecht the Young** — King of Luzonovia; awaiting audience with the Alambor 5 alongside Queen Beatrice. (Canonical "Ruprecht" per Jon's prose; play-notes anglicization "Rupert" demoted to alias — logged in _spelling-conflicts.md.) Aliases: Ruprecht the Young, Rupert the Young, King Rupert the Young. Episodes: E137.
+- **Master Vel Alerias** — Master of the Wild at Arcicept, one rank below the High Architect. Episodes: E139.
+- **Titus** — elder of the Archivist order; took the party through the woodland space. Episodes: E139.
+- **The Dog** — possible higher-ranking Aum Shai attendee of Rashid's meeting. Episodes: E143.
+- **Benjamin Smith** — first lieutenant/captain name tied to the house where Rasheed resided; distinct from party-Benjamin (Steve's cleric, dead since E110) despite the shared "Bengy" alias. Episodes: E142.
+- **Seamus** — short sturdy bearded port master at Port Airsteach. Aliases: Shamous. Episodes: E149.
+- **Craaxis** — the Merchant's first mate; headed south-southwest. Episodes: E149.
+- **Garthok** — King of Storm Giants high in the mountains; fickle, can create storms. Episodes: E149.
+- **Drang** — 9-foot-tall bartender at the Drunken Sparrow; knows Mano; slow pourer. Episodes: E150.
+- **Benny Golden Eye Clark** — associated with the ship Jewel of the Seas; distinct from party-Benny. Episodes: E150.
+- **Nix "Halfpenny" Quickstep** — halfling quartermaster; cheerful greedy accountant who wants a floating tavern. Episodes: E150.
+- **Selra Moontide** — moon elf navigator charting routes by star maps and cantrips. Episodes: E150.
+- **Grak Stoneback** — dwarf bosun; gruff, keeps the ship afloat through stubbornness. Episodes: E150.
+- **Vesha Blackfuse** — tiefling chief gunner; pyromaniac who names every cannon. Episodes: E150.
+- **Finnegan Holt** — human ship surgeon; hums lullabies while stitching. Episodes: E150.
+- **Jarek Flintwind** — half-elf helmsman; thrill-seeker who lives for dangerous weather. Episodes: E150.
+- **Kip** — goblin powder monkey; tastes gunpowder to check quality. Episodes: E150.
+- **Lysa Webreef** — human top-rigger; sleeps in the rigging. Episodes: E150.
+- **Haldor Driftwood** — firbolg carpenter; speaks to wood as if alive. Episodes: E150.
+- **Tulla Fen** — half-orc deckhand; dreams of becoming first mate. Episodes: E150.
+- **Jeremiah the 2nd** — second in command of the captured ship; charmed, later held and dumped overboard. Episodes: E151.
+- **Russell** — crew member Berrian bribed; 2 platinum per person. Episodes: E151.
+- **Maria** — drop dead gorgeous woman serving Mallie at the Crow's Ledger. Episodes: E152.
+- **Maggie** — pirate mage (a Calypso type) with an empathetic connection to the Kraken. Episodes: E153.
+- **Nayelli Corazon** — name asked of Mallie; he does not know them. Episodes: E153.
+- **Scar Atol** — Pirate Trinity leader; linked to the ship Pirates Grim and based at the Scargate Atoll. (DM-confirmed: the "Damned Rose" is a *ship*, not Scar Atol's banner and not a 4th leader — see the Damned Rose ship entry.) Episodes: E147, E153.
+- **Oaks** — Pirate Trinity leader; ships Grim Reaper and Executioner. Episodes: E147.
+- **Cranson Oakly** — Pirate Trinity leader; refined business guy; ship Oceans Terror. Episodes: E147.
+- **Red Flag** — burly human; one of Mallie's jungle expedition people. Episodes: E156.
+- **Brother Enoth** — cleric of Arathis; one of Mallie's people. Episodes: E156.
+- **Isla "Silver Tongue"** — bard; one of Mallie's people. Episodes: E156.
+- **Needle** — small halfling rogue; one of Mallie's people. Episodes: E156.
+- **Gunner** — gnome artificer loaded with guns; one of Mallie's people. Episodes: E156.
+- **Chizaka** — name appearing in the floor-four murals of the Great Sun Temple, amid carved scenes of Yuan-Ti civilization and the subjugation of the lizard folk; role/identity (a figure, people, or deity) unclear **(?)**. Aliases: Chazaka. Episodes: E163.
+
+## Locations
+- **Gidian Empire ("Gidia")** — British-style trade monarchy of King Felix; capital Kierkenwall (formerly Goldcrest); expanding aggressively under Adune/Trent after the king's murder. (Jon's house name "Gidian Empire 'Gidia'"; short form Gidia retained as the player-facing canonical.) Aliases: Gidia, Gideon Empire, Gideon empire, Gidians, gidian empire, Gidea, Guidia, Guidea, Guida, Quida, Gudia, Gidead, Gideon, Gidean(s), Guidian(s), Gidan, The Gilda, Gilda (people), Langdale, Strathmore, Wintervale. Episodes: E00, E03, E04, E08, E09, E24, E25, E26, E27, E28, E29, E32, E33, E34, E36, E37, E39, E40, E43, E47, E48, E52, E54, E55, E56, E58, E62, E64, E66, E67, E69, E75, E84, E100, E115, E131, E132, E135, E136, E137, E140, E141, E142, E143, E144.
+- **Carasian Kingdom ("Carasia")** — French-flavored nation of Queen Beatrice; capital Vallon/Vilan; party shipwrecked on its coast; warred with Luzonovia, later fell on hard times and lost cities to Gidia. (Jon's house name "Carasian Kingdom 'Carasa'"; short form Carasia retained as the player-facing canonical.) Aliases: Carasia, Carasa, Carasian(s), Carisia, Caursians, Croasia, croatia, Craresian, Cruasia, Cruasian, Carsian, Crasian, West Carasia, Croazia, Curacians, caraisan, tribes of Carassis, Champlet, Vierteaux, Vierbonne. Episodes: E02, E03, E04, E08, E09, E19, E20, E24, E25, E26, E27, E29, E33, E36, E37, E38, E39, E40, E43, E46, E47, E52, E54, E67, E100, E102, E132, E135, E136, E137, E139, E144.
+- **Luzonovian Sovereignty ("Luzonovia")** — inward-looking Germanic nationalist empire; behind the princess assassination plot; capital Rynestag; warred with Carasia; its rangers and spies have great arcane skill. (Jon's house name "Luzonovian Sovereignty 'Luzonovia'"; short form Luzonovia retained as the player-facing canonical. Jon's own inconsistent spellings Luzanovia/Luzonivia logged in _spelling-conflicts.md.) Aliases: Luzonovia, Luzanovia, Luzonivia, Lose a novia, loseanovia, Loseanovia, Lusonovia, luzonivians, Luzonovian(s), Lucenovia, Losinovia(ns), Lusinovia, Luzinovia(ns), Lucinovia, losernovian(s), lusinovia, Lousinovia(ns), Luzernovia(ns), luzernovia, lozernovians, Lusenovia, Luzanovian, Lousinoiva, Luzernovain, The Luxen, Freienstein, Waldemar, Rheinsteig. Episodes: E00, E03, E05, E08, E09, E11, E14, E25, E32, E33, E34, E37, E43, E44, E47, E51, E52, E56, E64, E67, E69, E84, E86, E91, E132, E135, E136, E137, E139, E144, E145, E146.
+- **Kierkenwall** — huge fortified Gidian capital ("three rivers", formerly Gilda); six knight sextets plus Olde Town; major trading island/town of the empire. (Canonical flipped to Jon's prose spelling **Kierkenwall** per his 2026 review; the play-canon spelling "Kirkenwall" is demoted to an alias. Map asset: `cities-kirkenwall--kierkenwall.jpg`.) Aliases: Kirkenwall, Kierkewall, Kierkenwald, Kirkeen(wall), North Kirkeen, Kirkenwall City, Kirkanwall, Curkenwall, Three Rivers. Episodes: E01, E03, E26, E27, E28, E29, E33, E34, E52, E54, E55, E69, E100, E102, E116, E134.
+- **Surtree** — Carasian river port city, the party's early home base; home of the Last Drop and the Beaubois family; led by Viscountess Avesia; party honored as its Defenders. (Spelling promotion: Jon's prose makes "Surtree" canonical for the play-notes "Sultray"; Jon-vs-Jon "Surterre"/"Sutree" variants logged in _spelling-conflicts.md.) Aliases: Surterre, Sutree, Sultray, Sulray, Sultre, Sutrey, Sutry, surrey, sultry, Sutray. Episodes: E01, E02, E03, E08, E09, E11, E12, E13, E14, E15, E16, E20, E24, E100, E127.
+- **Evershire** — oldest Gideon settlement in Dalacia; decimated by the Black Dread, taxed under Blackwood's martial law; saved by the party ("Proctors of Evershire"); now ruled by LJ. Episodes: E52, E56, E64, E69, E73, E81, E83, E86, E89, E90, E100, E132.
+- **Parathia** — southern Moroccan-style mage-ruled elven land; a Carasian vassal mageocracy; Raven Queen worship, tiefling slaves, rift incursions; opposed the wedding; supplies magical artifacts. Capital is the city Tarlif. (Spelling promotion per pre-approved decision: Jon's prose "Parathia" wins over the play-notes "Paratha".) Aliases: Paratha, Parathea, Paratheon, Parathean, Perathons, Parathion, Kingdom of Parathia, Carassis, Sestet. Episodes: E00, E02, E05, E10, E40, E43, E61, E67, E102, E113, E118, E137.
+- **Tarlif** — mageocracy city of pre-Sundering elves run by a panel of six; capital of Parathia; slave trade in tieflings and tabaxi; the Great Rift lies east of it. (Canonical flipped to Jon's prose city-doc spelling **Tarlif** per his 2026 review; the play-canon spelling "Tarleaf" is demoted to an alias.) Aliases: Tarleaf, Tarilif, Tarilef, Tar Leaf, Tarlief, tarleaf, The Rise and Fall. Episodes: E05, E67, E101, E102, E113, E115, E116, E129, E132, E135, E137.
+- **Corwell Keep** — hilltop keep of Baron Janis in Evershire (on the Gidia/Delasia border); site of the brain-block confrontation and the dragon's green-flame attack. Aliases: Cormel Keep, Cornwell Keep, Cromwell Keep, Corwel Keep, Corwell. Episodes: E52, E69, E71, E73, E77, E80, E81, E83, E87, E88, E90.
+- **The Trine (Trene)** — the realm of realms spanning the three nations (Gidian Empire, Carasian Kingdom, Luzonovian Sovereignty); the Archivists keep its peace; teleportation links the Trenes; formed at the Council of Reckoning; the Pirate Trinity mocks it. Framing article: the-trine. Aliases: the Trene, Trene, Treen, trene, Council of Reckoning. Episodes: E26, E29, E33, E35, E40, E135, E136, E137, E139, E147, E151.
+- **Goldcrest** — rich Venice-like harbor city on three rivers, founded 168 by Erik the Shipbuilder; former capital of Guidia; districts Endless Falls, Eastown, Hightower; rivalry with Kierkenwall. Aliases: GoldCrest, gold crest, goldcrest, Gold's Crest, Our Fair Lady. Episodes: E28, E53, E54, E55, E56, E61, E64, E75, E101, E102, E146.
+- **Islands of Maadolonia** — vassal island state (6 islands) of Gidia; manual labor and under-the-books slave trade; the campaign started there; its island capital ports the Gidian Navy; Rasheed relocated there. (Spelling promotion per pre-approved decision: Jon's prose "Maadolonia/Maadolinia" wins over the play-notes mishearing "Mandalonia"; Jon-vs-Jon -inia/-inian/Maandolin variants logged in _spelling-conflicts.md.) Aliases: Maadolonia, Maadolinia, Maadolinian, Maandolin, Mandalonia, Madalonia, Mandolonian, isles of mandalonia, Manalonia, mandonlian, Mandaloneya, Maadalonia, mandolin capital, Madalonian, Mag Stoirmeach, Tiarnan the Bold. Episodes: E00, E33, E52, E53, E116, E132, E137, E139, E144, E145.
+- **Blackwood Manor** — Blackwood's fortified hilltop manor near the swamp/moores; 22 names logged; awarded to the party for slaying the dragon. Aliases: the Manor, Blackwood's Manor, blackwell manor, Blackwoods Manor. Episodes: E71, E73, E77, E80, E83, E86, E87, E88, E89, E90.
+- **Jazacha (Jakarta / Jazaka)** — jungle land of lizard people and ancient treasures; alien flat-plane temple; reefs offshore; deep-jungle home of the Yuan-Ti; raided by the Vithian alliance. Aliases: Jakarta, JaKarta, Jakarrta, gazaca, Jazarka, Jaakarta, Jazaka, Jizzacha, Jizz-akka. Episodes: E00, E24, E33, E34, E35, E47, E52, E150, E155, E156.
+- **Shadowfell** — dark evil mirror plane; the Nine dark paladins were sent there; Yenneth exiled there; party swam in via the scepter pool. Aliases: Shadow Plane (E51, likely same), shadowfell. Episodes: E51, E93, E102, E116, E118, E119, E120, E129, E130.
+- **Vallon (Vilan / Valon / Velen / Velon)** — capital of Carasia and royal wedding venue (Halls of Wonder); the party's ship was built there in 478. Aliases: valon, Vilan, Velen, Valen, Vellon, velen, Velon, Balom, saphir sur la mer, sapphire on the sea. Episodes: E08, E20, E24, E33, E39, E44, E48, E62, E102, E137.
+- **Vault of Izdar (The Vault / Izzdar's Hive)** — evil underground temple complex below the Great Rift; nine bad-god rooms; connection to the Zeevens; guarded by Withers; source of the Rod of Attenuation. Aliases: The Vault, the vault, Izzdars' Hive, vault Izdar, Izdar. Episodes: E102, E104, E108, E113, E114, E135, E139, E144.
+- **Airdale** — walled rebellion-friendly town of 300–400 in Evershire (Embry Basin); burned and pillaged by cloaked men; crops enriched by Berrian. Aliases: AireDale, airedale. Episodes: E69, E73, E77, E81, E83, E87, E88, E90.
+- **Dalacia (Dallasia / Delasia)** — free-state confederacy of self-governing towns; farmers, half-elves, tieflings; Paylor worship; capital Aberdeen; dragon attack then plague; defended by the Aberdeeners. Aliases: dallasia, dalosia, Delasia, dalacia, Disacka, Free States of Dalacia. Episodes: E00, E27, E29, E52, E64, E67, E69, E132, E137.
+- **Callum Heights** — mountain range west of Emerald Lake where the red dragon dwells; border area of the texair exchange; Archavist lands nearby; teleport destination. Aliases: Caelum heights, Calum heights, callam heights, calum heights. Episodes: E28, E52, E62, E66, E89, E136, E138.
+- **The Great Rift** — canyon expanse made by the gods Carinian and Torog dying in battle; thousands of feet deep; monsters venture out; the Vault lies below. Aliases: Great rift, the rift, The Rift. Episodes: E05, E10, E102, E104, E114, E115, E116.
+- **Grillers** — one of the biggest Carasian cities (a breadbasket), with four districts and a Duke; closest Knights of Gidia outpost; merfolk in its waters; later listed among remaining Carasian cities. (Canonical "Grillers" per Jon's doc title + map filenames; his own body spelling "Grelliers" and play-notes "Grellier" logged in _spelling-conflicts.md and demoted to aliases.) Aliases: Grelliers, Grellier, GRELLIERS, Greer, Gellier, Grier, Grear, Gruier. Episodes: E02, E14, E15, E25, E26, E137.
+- **Murkwell** — cold walled swamp town; peat moss exports; "racist swamp town". Aliases: Murkwel, murkwell. Episodes: E60, E61, E62, E67, E69.
+- **Emerald Lake** — lake town led by Odo; martial law and texair collection imposed; crew rendezvous point. Aliases: emerald lake, Emerald Lake city. Episodes: E53, E60, E61, E62, E64, E69.
+- **Salmon Run** — large resort river town on the northern part of the lake; cove nearby used to repaint and rename the ship. Episodes: E59, E60, E61, E64, E67, E69.
+- **Avernus** — hell plane with the blood river, ruled by Zariel (formerly Bell); entered via pact costing souls plus interest; Max's team retrieved the crystalline power source there. Episodes: E94, E95, E96, E98, E132.
+- **Freetown** — slave trade hub run by the Gentleman; Vex Totem's base; "still okay" amid Gidean expansion. Episodes: E26, E35, E36, E137, E153.
+- **Gloomville** — gang-ridden Shadowfell city south of Grimsburg; the Knights pull strings there like puppets. Aliases: GLoomville, gloomsville. Episodes: E121, E123, E126, E129, E132.
+- **Kingswatch** — northern Guidian town; Max recalled there; battles fought nearby. Aliases: Kings Watch, kingswatch. Episodes: E61, E67, E69, E71.
+- **Banderhop / Bandersnatch Mountains** — largest mountain nearby Evershire; gem mines raided; the dragon's lair with the hidden mural room. Aliases: Banderhop Mountain, bandersnatch, Bandersnatch mountains, The Bandersnatch mountains. Episodes: E69, E72, E87, E88, E89.
+- **Tower of Illmore** — 1000-ft black spiked spire, HQ of the Knights of Theydune; "Grandmother's House"; people don't come out. Aliases: Tower of Ilmore. Episodes: E121, E124, E125, E126.
+- **Tamworth** — town south of Corwell Keep; Betty found there at the Hairy Pussy bar. Episodes: E73, E74, E81, E83.
+- **The Crag** — Blackwood mountain fortress above ravine and river; 20 names logged; taken and burned by the party. Aliases: crague, The Craig, the craig. Episodes: E73, E77, E80, E83.
+- **Shimmering Grotto** — family mine taken by Blackwood after the Canick tribe destroyed it; tax cash funneled there; sabotaged by the party. Aliases: Shimmering Gratoe, shimmering mine, Grotto. Episodes: E73, E74, E77, E80.
+- **Beaubois Chalet (Bubo Chalet / Beaubo Chato)** — ruined 170-acre Beaubois mansion-fortress on bluffs outside Sultray; arcane fountain, cemetery, catacombs; infiltrated during the party performance; lands later granted to the party. Aliases: Bubo chalet, Beauboi chalet, Challey, Bubbo Chato, beaboi chalet, beaubois mansion, Bubbo place, burned down Bubbo grounds. Episodes: E08, E09, E10, E15, E21, E22, E24.
+- **Vermalock (Forest of Correlian)** — forest on the Carasian-Parathean border where the planes are thin; special purple trees grow there; Berrian's home region. Aliases: vermalock. Episodes: E67, E116, E117, E119.
+- **Flying Carpet (inn)** — Tarlif meeting place/inn run by Siad where the party regroups. Episodes: E113, E115, E116, E117.
+- **Slayer's Take** — inn in a rough area of Vallon; party lodging and meeting spot. Aliases: Slayer Take, Slayers Take. Episodes: E39, E40, E43, E46, E47.
+- **Temple of Erathis** — large hilltop church in Vallon with blue-robed monks; royal wedding venue; Milo found there. Aliases: Temple of Arathis, Temple of Arathous, Temple of Palor. Episodes: E39, E43, E46, E47.
+- **Le Kraken** — Kaden Clark's bar/lodging near the Eastown market; party hideout after the vault heist. Aliases: The Kraken, Kraken. Episodes: E55, E56, E57, E58.
+- **Anchors Rest** — pirate haven where Mallie makes berth; 10-day trip. Aliases: Anchor's Rest. Episodes: E147, E149, E150, E152.
+- **Krakens Reef** — pirate meeting haven every five years; reef protected by the Kraken. Aliases: Kraken's Reef. Episodes: E147, E152, E156.
+- **The Last Drop** — Sultray/Sutrey inn; letter delivery point, Taldross meeting place, party lodging. Aliases: Last Drop, last drop. Episodes: E02, E08, E13, E14.
+- **Carstone** — village 40 miles north of the shipwreck; viscount-led; bandit trouble. Aliases: Caston, Village of Carstone. Episodes: E02, E03, E04.
+- **Zildran** — vassal state of mostly paladins who want to preserve life; prospective grain buyer; its warriors later employed by the Trine; also Orgmond's home, ringed by wyverns, some tamed and ridden (E119) — DM-confirmed the same place as "Zyldron." Aliases: Zildronians, Zyldron. Episodes: E00, E03, E27, E119, E151.
+- **Bandit Shores** — pirate kleptocracy where wealth rules. Aliases: bandin shores. Episodes: E00, E137, E153.
+- **Morian Kingdom (Morion / Moran)** — secluded dwarf kingdom of the north; Mckinnon's homeland; Zefron's kingdom; taken by the Gideans. Aliases: Morion Kingdom, Moran kingdom, Morian kingdom. Episodes: E00, E14, E55, E137.
+- **Feldbruk** — swampy place with dykes and walls keeping creatures out; Losinovian troops massed there; Max assigned to fight nearby. (Canonical "Feldbruk" per Jon's city doc + the `locations/feldbruk.md` dossier; "Feldbrook"/"Fellbrook" demoted to aliases.) Aliases: Feldbruck, Feldbrook, Fellbrook. Episodes: E33, E52, E67, E137.
+- **Feywild** — fey plane, opposite of the Shadowfell; the way in is mixed along the rift; Orgmond is from there. Episodes: E05, E116, E118.
+- **Mena Isles** — Evac's home isles; used in the party's alias cover story. Aliases: Meaner Isles, Mena isles. Episodes: E07, E27, E61.
+- **Blackfinger Tower** — lost 6-story tower in the Madean delta; site of Pierre's refinery and Cruucar's rescue. Aliases: Myrrl Blackfinger tower, the tower. Episodes: E15, E16, E17.
+- **Aberdeen** — capital of Dalacia/Delasia, Ford's hometown; burned in Zanum's dream; later won and recovering. Episodes: E52, E73, E91.
+- **Grasping Moore** — dangerous multi-headed-monster marsh; three-day crossing hugging the mountains. Aliases: Graspin Moore. Episodes: E67, E69.
+- **Pelwall Marsh (Pellwell)** — marsh with a witch's hut (Viola's); a dragon too; in Quinton's song. Aliases: Pellwell Marsh, Pelwall. Episodes: E37, E62, E67.
+- **Moonbright** — Berrian's dilapidated hometown north of Tarlif, 10–15 people left; healed with the party's help. Episodes: E116, E118, E132.
+- **Shadowmoon Tower** — six-level trippy obsidian tower tied to the Aumshai; target of the party's plan. Aliases: Shadowmoon, Shadowmoon tower. Episodes: E129, E131, E132.
+- **Lavish Chateu** — high-end Kierkenwall apartment where the party stays. Aliases: Lavish Chatue, Lavish Chaute, the Lavish. Episodes: E100, E101, E102.
+- **Material Plane** — the surface world the Nine came from; Texair may enable a portal back; opposite the Shadowfell on Vane's rod. Episodes: E124, E129, E130.
+- **Bell's Forge (Temple of Blood Sacrifice)** — blood-sacrifice temple atop a spiked red stone tower in the clouds of Avernus, 20–30 miles in. Aliases: bell forge, The Citadel or the Temple of Blood Sacrifice, The Blood Sacrifice. Episodes: E94, E95, E97, E98.
+- **Endless Falls** — Goldcrest's religious First District; the bank is there. Aliases: High Falls, District Falls. Episodes: E55, E58.
+- **Eastown** — Goldcrest District Four; most business, old market, academies. Aliases: East town. Episodes: E55.
+- **Hightower (district)** — Goldcrest District Three; nobles and posh; Shawn Williams lives there. Aliases: Hightown. Episodes: E55.
+- **Spires of the Kraken** — entrance guard towers of the major mineral mine; assaulted and retaken; Adune's teleportation circle there. Aliases: the Spire, Spires, the Spires, Spire of Kracken. Episodes: E84, E91, E99.
+- **Mag Stormeach** — cliffside fortress city "where the sea breaks but the people do not". Aliases: stormreach, Mag Stormich. Episodes: E140, E143, E149.
+- **Temple of Felnriel** — underwater ruin in the Veiled Ocean where Mallie recovered the final Zeban artifact (later raided empty by Aum Shai); named for the archmage **Felnriel** (Jon, E164 email). Mallie then traded the artifact to the Yuan-Ti of Oojezz. Aliases: Temple of Fenreal, Fellreil, temple of fentrial, temple of fellreil. Episodes: E139, E143, E153.
+- **Donum Vite (Dona Vita Glen)** — "gift of life"; Archivist tree-grown city of 2–3k; the Grove holds the Arbor Alma. Aliases: Dona vita, Do no vita glen, donum vite, don viote, Donveetay, the Grove, gorve. Episodes: E00, E139.
+- **Royal Ethenium (Grand Archive)** — massive archive / published learning institution; party read four books in booth #1; Ludinus invited them there. Aliases: Royal Ethemium, royal ethenium, Grand Archive. Episodes: E36, E43, E44.
+- **Ethereum** — site of the artifact/energy source with a secret passageway and antechamber (the Atium); Max, Leon and Shaheem died there; possibly the Royal Ethenium. Aliases: ethereum. Episodes: E136.
+- **Inverness** — pits formed by the artifact; Lolth dwells there. Aliases: inverness. Episodes: E102, E105.
+- **The Deep** — deep darkness of terrors below the Rift, linked to the Shadowfell. Episodes: E102, E104.
+- **The Farm** — guarded classified site of the artifact/weapon project, near Palor's garden. Episodes: E102, E135.
+- **Rynestag (Rights Steg)** — Luzonovian capital atop bluffs, 50 miles from Bootenhill; armada target. Aliases: rynstag. Episodes: E52, E137.
+- **Iron Forge (Ironforge Mines)** — plateau mountainside stronghold with 7 iron towers in Wintervail; teleport destination; site of the Nightmare King fight. Episodes: E84, E135.
+- **Wintervail (Winterdale)** — northern region containing Iron Forge; origin of the invading Lusinovians. Aliases: winterdale. Episodes: E84, E86.
+- **Arcicept** — massive Archivist citadel with three iron-bound gates. Aliases: Arsispect. Episodes: E138, E139.
+- **Sorrowshade** — Shadowfell forest west of Gloomville, split by the River of Whispers; moved over time. Aliases: Sorrow shade, Sollowshade. Episodes: E121, E129.
+- **Desperado** — upscale inn in Gloomville; Sane comes around. Aliases: Desporato. Episodes: E123, E124.
+- **Starthmore** — northern Guidia; source of the cotton consignment. Episodes: E58, E62.
+- **The Spur** — landmark half a day from Emerald Lake. Aliases: spurn. Episodes: E62, E69.
+- **Squamish** — village 15 miles from Corwell Keep; Francis's home. Aliases: Squawmish. Episodes: E71, E72.
+- **Jane's Butcher Shop** — its basement hides the rebellion wounded, reached by secret passage. Aliases: butcher shop. Episodes: E74, E81, E83.
+- **Carningsby** — nearby town also attacked the night Airdale burned. Aliases: caringsBee. Episodes: E81, E83.
+- **Whispering Stacks** — Rasheed's main base; slaves caged in the sewers beneath. Aliases: whisper stacks. Episodes: E141, E143.
+- **Airsteach** — bluff-top island town of 700–1000; post-Sundering giant refuge nearby. Aliases: Port Airsteach. Episodes: E148, E149.
+- **Drunken Sparrow** — bar at the Airsteach docks; Drang tends bar. Episodes: E149, E150.
+- **Veiled Ocean** — forever moist fog-and-cloud waters, hard to navigate; held the artifact. Episodes: E153, E155.
+- **Scargate Atoll** — atoll in the Pirate Trinity's waters; Scar Atol is based here. Aliases: Scargate Atol. Episodes: E147, E153.
+- **Oojezz (YuJez)** — city of the Yuan-Ti in a bowl valley between fang mountains; three rings and an inner temple. Aliases: YuJez, Ujaz, Ujez. Episodes: E155, E159, E160, E161, E162, E163, E164.
+- **Aeralora** — the place/world (the trapped "whole world") Mallie Grisham dove into via the floor-four pit of the Great Sun Temple; subject of the favor he called in from Vane (return, scry, rescue Mallie and his world, "get them out of Aeralora"). Reached through the pit, at the bottom of which a colossal yellow-eyed snake head (>30 ft wide) gazes up. Noctis (well-travelled) has never heard the name **(?)**; relationship to other planes unknown. In **E153** the name was put to Mallie and he denied knowing it — in light of E163 (it is his own trapped world) that denial reads as concealment **(?)**. Canonical spelling per Jon, who spelled it out on mic in E163: **A-E-R-A-L-O-R-A**. Aliases: Eralora, Aralora, Areola (player mishearings). Episodes: E153, E163.
+- **Great Sun Temple ("the Coiled Ascendry")** — the ancient sun temple at the heart of Oojezz, sacred to the Yuan-Ti gods; named **the Coiled Ascendry** by Jon (E164 recap); a five-floor sacrifice pyramid the party descended to take the last Zeban artifact. Floors seen: 1 (serpent sanctuary), 2 (jungle/Hydra chamber), 3 (**the Bloodmult Crucible** — the alchemical molting chamber: molten "engine," blood channels, alchemical vats, molting pits, green-eyed serpent idols), 4 (the abyssal **pit chamber** — purple braziers, coiled-serpent statues, serpent-mouth-carved pit walls, three retracting bridges, a colossal snake head below; murals of Yuan-Ti history and Chizaka), 5 (the **heart chamber** — a vast beating green heart-shaped pool amid living flesh walls; holding pens and shrines; garrisoned by Anathemas, Abominations and Spirit Nagas; home of the **Avatar of the Coiled Eclipse**; the artifact of Felnriel hovered force-fielded on a black green-veined dais until taken, E164). Aliases: the Coiled Ascendry, Coiled Ascendry, The Serpent's Coil, Serpent Coil, Ancient Sun Temple, Coiled Serpent, Coil Temple, the Bloodmult Crucible, Blood Mult Crucible. Episodes: E160, E161, E162, E163, E164.
+- **Alambor** — the world/setting, 499–500 years after the Sundering; party hailed as Saviors of Alambor. Aliases: Alanbor, alambor, Alamboor, Alamoor, Alambore. Episodes: E01, E29, E36, E47, E55, E112, E135, E137.
+- **High Gilda** — central Kierkenwall area; Gilda was the original settlement name. Aliases: Gilda. Episodes: E27, E28.
+- **Kingfisher** — Kierkenwall tavern with legal basement fights; Lorenzo meeting spot. Aliases: King fisher, King Fisher. Episodes: E27, E28.
+- **Nessel Nook Inn** — out-of-the-way Kierkenwall inn where the party preps for the King. Aliases: Nesseled nooked. Episodes: E26, E27.
+- **Kings Road** — road north of Kierkenwall used for the texair transport. Aliases: King's road. Episodes: E28, E29.
+- **Bay of Resplendence** — sailing route toward Kierkenwall; Yankee's crew works there with Rudar. Episodes: E52, E67.
+- **Lady's Arena** — old Goldcrest arena where The Lady of the Rose plays. Aliases: Old arena. Episodes: E55, E56.
+- **Gleaming Height(s)** — Greer District 1 main area with the ivory citadel; also where Waldo Taldross's house is. Aliases: gleaming height, Gleaming Hieghts. Episodes: E25, E102.
+- **Arcane Infinity** — magic shop where Vaxoldon Vortily works. Episodes: E100, E101.
+- **Tarlif districts — South Sun Ward / Dust Fall (Dustfall)** — ward containing the Jade Oricle; Dustfall slums hold the Harpers' hideout. Aliases: Dustfall. Episodes: E117, E131.
+- **Jade Oricle** — Master Mirral Kariem's enhancement shop in the South Sun Ward. Episodes: E117.
+- **Alambor misc — Treaborg** — Russian vassal state of Luzonovia; tree people. Episodes: E00.
+- **Chrision Empire** — French/Tunisian/Persian-flavored empire of elves. Episodes: E00.
+- **Wey** — no one knows. Episodes: E00.
+- **Jemis General Store** — Carstone store where the party buys rations. Episodes: E04.
+- **Gilmores Glorious Garments** — garment shop. Episodes: E09.
+- **Emerald District** — underground entertainment area the party must work into. Episodes: E10.
+- **Iron Chisel** — Leon's Sutrey shop; party paid 100 platinum and a gem. Episodes: E13.
+- **Iron Works** — steam-punky armor store next to the Iron Chisel; Broomhida works the bellows. Episodes: E13.
+- **Madean Delta** — delta southwest of the Beaubois chalet, 60 miles away; the tower's rumored location. Episodes: E15.
+- **The Embassy** — guest quarters near the palace, inner walls; six rooms. Episodes: E15.
+- **Dracone** — one of the biggest cities; Raymond killed in ambush south of it. Episodes: E14.
+- **Halls of Wonder** — palace in Valon; royal wedding venue; blueprints sought by conspirators. Aliases: Hall of Wonder. Episodes: E20, E24.
+- **Talons** — Greer District 4; working-class docks run mafia-style by the Warfmaster. Episodes: E25.
+- **Greenway** — Greer District 2; main street with trees between lanes. Episodes: E25.
+- **River Charmay** — river 450 yards wide, 20 miles from Greer along the Queens Road. Episodes: E25.
+- **Queens Road** — road the party leaves on toward the capital. Episodes: E25.
+- **The Blushing Monk** — Greer tavern where the party stays. Aliases: blushing monk. Episodes: E25.
+- **Autumn Fall** — place Noctis is based out of. Episodes: E26.
+- **Olde Town** — seventh Kierkenwall area predating the six sextets. Episodes: E27.
+- **Crucible** — large circular arena near the Gidia the Tall statue. Episodes: E27.
+- **Langdale** — crop region with a great harvest wanting to sell excess grain. Episodes: E27.
+- **Pion** — prospective buyer of Langdale grain, south Carasia area. Episodes: E27.
+- **Glesing Stone** — mines around it; petition for more support. Episodes: E27.
+- **Galsia** — Lorenzo's homeland. Episodes: E28.
+- **Fordam** — source of six men who helped Molly take texair to the farm. Episodes: E29.
+- **Norbury** — Quinton's hometown, NE of Kingswood. Episodes: E33.
+- **Kingswood** — place Norbury lies northeast of. Episodes: E33.
+- **Straits of Rhys (Rise)** — straits where Luzonovia moved a force, violating a 200-year treaty. Aliases: Straits of Rise. Episodes: E33, E52.
+- **The Falling Feather** — spot in Kierkenwall's Red district. Episodes: E33.
+- **Canal Juli** — joint Gidia–Carasia canal effort: Carasian cash, Gidian engineer. Episodes: E36.
+- **Three Crowns** — small nice tavern (Fireganesch bartender); later reported burned down. Episodes: E36, E39.
+- **Falcon Citadel** — its dungeons hold the doppelganger Ors. Episodes: E39.
+- **Moon Hand Bastille** — prison the party was taken to and broke out of. Episodes: E39.
+- **The Cloven Hoof** — lodging option Lucia recommended. Episodes: E39.
+- **The Vital Market ("the Little Bird")** — market for the sunset meeting with the dealer. Episodes: E39.
+- **The House of Midnight** — brothel next to Lucas Vontrice's penthouse. Episodes: E40.
+- **Revana District** — district with the Raven Queen temple; Eloise's villa nearby. Episodes: E40.
+- **Whitecastle** — destination named only in the E42 episode title. Episodes: E42.
+- **Nine Hells** — subject of the infernal-language book on Asmodeus. Episodes: E44.
+- **Underdark** — mythical hot underground home of the Durgar. Episodes: E49.
+- **Cragworth** — destroyed settlement area under Emerald Lake's ownership. Episodes: E64.
+- **Merk Wood** — listed with the Straits of Rise regarding the fighting. Episodes: E52.
+- **Ammont Lake** — on the route through Kierkenwall to Evershire. Episodes: E52.
+- **Galion Haul** — dock bar; crew interviews held there. Episodes: E52.
+- **Crowing Cock** — bar; kids repaint the C into a G. Episodes: E53.
+- **The Maria** — ladies-of-the-night establishment in Goldcrest Eastown. Episodes: E55.
+- **Lorton** — a shop in Goldcrest. Episodes: E58.
+- **Passant Lord** — place an hour away; 20-minute wait. Episodes: E58.
+- **Club Foot** — "tie one off with the girls at the Club Foot". Episodes: E61.
+- **Salted Fish** — the town's only pub; five rooms. Episodes: E61.
+- **Grimsburg** — where the party met Kraven Morehead. Episodes: E121.
+- **Tornsworth** — logging/shipbuilding town, smallest of the northern three colonies. Aliases: Ionsworth. Episodes: E69.
+- **Embry Basin** — basin in Evershire near Airdale. Episodes: E69.
+- **Molten Feather** — Murkwell tavern kept by Goldie Kept. Episodes: E67.
+- **Northern Waters** — waters with a river connection to Murkwell. Episodes: E67.
+- **Bredon Fortress** — fortress under assault; party tasked to relieve it. Aliases: bredon fortress. Episodes: E71.
+- **Northern Rise** — has passages an army slipped through near Kingswatch. Episodes: E71.
+- **Balin Post** — secret meeting spot; chalk mark on the well signals go. Episodes: E72.
+- **New Langdale** — Evershire town where the Baron gave the party free reign. Episodes: E73.
+- **Latwind Myre** — rumored witch location southeast of Blackwood's manor. Episodes: E73.
+- **Midnight Promises** — unknown dot on the captured map; maybe the Mother's location. Episodes: E80.
+- **The Hairy Pussy** — Tamworth bar where the party finds Betty. Episodes: E83.
+- **Mount Carhead** — two of the Spire towers go up to it. Episodes: E84.
+- **The Depths** — mine in the mountains; the Lusinovians flipped a leading chemist there. Episodes: E84.
+- **Moran Mountain Range** — range the party heads into from Iron Forge. Aliases: Morane. Episodes: E84.
+- **Great Wastes of the North** — wintering mountain range painted in Blackwood's bedroom. Episodes: E89.
+- **Shea** — hyper-emotional mirror plane. Episodes: E93.
+- **Fort Knucklebow** — days southwest in Avernus; several ways out. Episodes: E96.
+- **Bronze Citadel** — has a teleportation circle out of Avernus. Episodes: E96.
+- **Pillar of Skulls** — way to and from several different worlds. Episodes: E96.
+- **Swords Coast** — Harden's home region. Episodes: E96.
+- **Boulder's Gate** — city with a noble insurrection; Harden's target lives there. Aliases: boulders gate. Episodes: E96.
+- **Arcan's Tower** — tower of the man Harden's group hunts. Episodes: E96.
+- **Kierkenwall University** — where Gregor is lead scientist. Episodes: E102.
+- **Palor's Garden** — lush open field near the Farm, reached by Adune's teleport token. Episodes: E102.
+- **The Reef** — where the party's ship wrecked. Episodes: E102.
+- **Ancot Market Inn** — Parathia inn where Cosko will be. Aliases: Ancot MArket Inn. Episodes: E102.
+- **Planes of Soltar** — mentioned in Withers's journal. Episodes: E108.
+- **Astral Sea** — plane; moving in and out of planes happens sometimes. Episodes: E114.
+- **Hotstone** — place reached via alleyways where the conspirators met. Episodes: E115.
+- **The Vale** — conspirators discussed other ways through it past the barrier. Episodes: E115.
+- **Pool of Death** — pool at the waterfall's end where the planes are thinnest. Episodes: E118.
+- **Sedona** — where the party finds a zombie moose as big as an oliphaunt. Episodes: E118.- **Shadowfen** — dark marsh to cross; don't drink the water. Aliases: Shadowfend. Episodes: E121.
+- **Sorrow Swell** — inn and bar in Gloomville. Episodes: E123.
+- **Towers of the Teeth** — plateau north of Gloomville where shadow dragons lay coveted eggs. Episodes: E124.
+- **Mattermore Downs** — area of nice country homes including Withervale estate. Episodes: E125.
+- **Withervale Estate** — three-story thorn-surrounded home of Casamir and Luvash. Episodes: E125.
+- **River of Whispers** — river splitting the Sorrowshade forest. Episodes: E129.
+- **Dark Glen** — very dark open hilltop deep in the Sorrowshade woods. Aliases: dark glade. Episodes: E129.
+- **Battalonia** — region where Wrecked at the Reef deployed in battles. Episodes: E132.
+- **Bootenhill** — site of great battle/carnage; mass Carasian and Lozernovian casualties. Episodes: E137.
+- **Airhark Lake** — where the Losers' trap bottlenecked the attacking Carasians. Episodes: E137.
+- **Waldamere** — named in the war status rundown. Episodes: E137.
+- **Atium** — antechamber reached inside the Ethereum. Episodes: E136.
+- **Loflorien** — temple-like building by the great tree; the High Architect's seat. Episodes: E139.
+- **Labyrinth of Ninath** — sea labyrinth found by Trent Hightower; Kuro retrieved a relic there. Episodes: E139.
+- **Arcis Austra** — route the party travels back south through. Episodes: E140.
+- **Plain of the Great Breaker** — brutal stretch of coastline outside the port city. Episodes: E141.
+- **Harbor of the Shattered Teeth** — heart of the cliff city, carved by the tide. Episodes: E141.
+- **Storm-Sundered Tankard** — Mag Stormeach inn run by Killian "Saltbeard" Adorma. Episodes: E141.
+- **The Feidh Woods** — island area known for Stone, Cloud, and Storm Giants. Episodes: E149.
+- **Iron Route** — shipping route bounding the party's mid-ocean position. Episodes: E150.
+- **New World Shipping Route** — the other bounding shipping route. Episodes: E150.
+- **The Salty Anchor** — Anchors Rest bar; card game with Thurston. Episodes: E152.
+- **Crow's Ledger** — two-story building with bell tower where the party meets Mallie. Episodes: E152.
+
+## Factions
+- **Knights of Gidia** — Gidian knightly order with arcane and holy abilities (ranks incl. Red Hawk, Vindicator, Righteous Hand); made the party honorary knights; led by Sir Trent Hightower — who proved to be the Aum Shai mole. Aliases: knights of gidia, Knights of Guidia, Knights of Gidea, knights of giedea, Giedia, Knight of Gidea, Knights of Guidea, Knight of Guida, Knights of Gidead, the Order. Episodes: E08, E10, E15, E20, E22, E24, E25, E26, E27, E28, E32, E54, E56, E86, E132, E136, E144, E145, E151, E156.
+- **Archivists (Archevesian Order)** — ~10,000-strong order of advisors and warriors keeping peace across the Trene; keepers of the Arbo Alma spice, makers and equal distributors of texair; lime green cloaks. Aliases: Archevists, archevesian order, argeneisian order, alchevists, arcavists, arcaviesians, Archavists, Archavesians, archevisians, arcivigeous, arcivious, Archavist advisors/warriors, Donum Vitae, Donum Vite, Arcis Sept, Zeenoth the Righteous. Episodes: E00, E05, E07, E20, E25, E30, E31, E33, E84, E86, E91, E129, E134, E136, E137, E139, E155.
+- **Aum Shai (Auumshai)** — Adune's uninfiltratable conspiracy; ranks Fangs / Wolf / Viper / Arch Dragon / Shadowed Moon; members carry tokens and changing code phrases; killed Quinton's family; ran the slave trade; held five of the six Zeben relics. Aliases: Auumshai, Auumshin, "Oh I'm Shy", Auumshi, Aumshai, Aumshi, Aaumshi, Aaum Shai, Auum Shai. Episodes: E51, E52, E87, E89, E102, E116, E129, E132, E135, E139, E143, E144, E153.
+- **The Alambor Five/Six (the party)** — the party's public name and titles: Defenders of Sutray, Saviors of Evershire, Defenders of Sutrey, Saviors of Alambor. Aliases: The Defenders of Sutray, the Alambor, ALambor Five, Alabbor 5, alambor 5, Saviors of Alambor, Saviors of Evershire. Episodes: E03, E19, E24, E40, E55, E90, E100, E132, E135, E137.
+- **Zeeven Dynasty** — pre-Sundering drow dynasty, "chosen of the gods" who defied them and caused the Sundering; Adune seeks their return; the dark Zivians once ruled Mana. Aliases: Zeven dynasty, Zevan, Zevan Dynasty, Xivian dynasty, Xevin dynasty, Zyvan dynasty, Ziven, Zeevens, Zeben, zeeven, Zevans, zivens, Zivians, Zivans, The Dynasty. Episodes: E00, E01, E23, E89, E102, E108, E134, E136, E139, E144.
+- **Beaubois Family (Bubo)** — fallen wealthy Sultray family; opiates and black magic; experimented on people; in league with the Luzonovians; kicked out 20 years prior. Aliases: Bubo, Beaubos, Beauboi, Boobleys, Boob-bios, Booboes, Boobos, Bubbos, Boobo, Bobos, Beaubo. Episodes: E08, E09, E10, E14, E15, E20, E21, E22, E24.
+- **Knights of Theydune / The Nine White Knights** — nine pre-Sundering dark paladins punished to the Shadowfell (Shadow Captain, Chief Keeper, Betrayer, Dwemer Lake, Tatanin, Knight of Umber, Dark Marshal, Undying, +1); cruel knights HQ'd in the Tower of Illmore; took Berrian's father. Aliases: White Knights, men in white, Knights of Thadun, Knights of Athune, 9 White Knights, the Nine, the 9. Episodes: E33, E115, E116, E118, E121, E124, E126, E129, E130.
+- **Harpers** — do-gooder spy network; Noctis a member; Wise Owls Milo (Grier/Vallon) and leaders Shaahim and High Harper Koru; Dustfall hideout. Aliases: Harper's, harpers. Episodes: E39, E53, E102, E115, E116, E117, E131, E132, E139.
+- **Shadowed Moon** — supreme rank/figure of Aum Shai and the cult around it; appointed Viola; named first as Trent Hightower, finally as Adune. The "Crescent Moon" Dragoloth asked about (E65) is the same figure (DM-confirmed). Aliases: Shadow Moon, Shadowed moon, Shadowmoon, the shadowed moon, Shadow King, Crescent Moon. Episodes: E23, E24, E31, E51, E52, E65, E66, E115, E134, E136.
+- **Widowmakers** — Cruucar's former masked mercenary group, fallen from favor in Guidia; led by General Zax; ambushed Kuro posing as merchants. Aliases: Widow Makers, Widow makers, The Widowmakers. Episodes: E27, E33, E35, E66, E71, E139.
+- **Gidian Navy** — Gidia's navy controlling the ports; the party disguised themselves as its forces. Aliases: Gideon navy, Gidan navy, Guidian Navy, Gideon naval forces. Episodes: E137, E139, E140, E142, E143, E144.
+- **The Hive** — Izzdar's group of nine drow leaders of the Zeevens, led by chief architect Omago; "shall rule over all, restoring the ancient ones". Aliases: the hive, Hives, HIVE. Episodes: E104, E105, E108, E134, E139.
+- **Canick Tribe** — red-handprint raider tribe of goblins, trolls, ogres, orcs; destroyed the mine; blamed (framed) by Blackwood. Aliases: Kanick tribe, Cannick tribe, canick tribe. Episodes: E71, E73, E75, E80, E81.
+- **The Fist(s)** — Max's hand-picked group of ~12 fighters within the Knights of Gidia; also the Kierkenwall equivalent of the Knights of Guidea. Aliases: the Fist, The Fists. Episodes: E54, E84, E86, E91.
+- **Vithian Alliance (Vithians)** — theocracy under one religious leader worshipping Cord; fishing and raiding pirates; Losinovian vassal; eventually scattered off the coast. Aliases: Vithians, Vithien, vithians, Vithia, Tempast Court, Drangar. Episodes: E00, E33, E35, E132.
+- **Volstruckers (Valkstraker)** — secretive, highly dangerous protectors of the realm of Luzonovia; possibly led by Ludinus Dealeth; Chias's people. Aliases: valkstraker, voldstrucker, Voldstruckers, Scourgers. Episodes: E01, E14, E37, E45.
+- **Vontrice Family** — wealthiest family of the Trene; signet of two black wings with a ruby; slave-trade past; named in Pierre's letters ("Vontirece", E24). Aliases: Vontrece, Vontirece. Episodes: E24, E39, E40, E46.
+- **Pirate Trinity** — coalition of three pirate captains and fleets (Scar Atol, Oaks, Cranson Oakly); a mockery of the Trine. Aliases: The Trinity, pirate trinity. Episodes: E147, E152, E153, E156.
+- **The Kings** — rival Gloomville gang led by Skoony; contracted to secure the artifact. Aliases: Kings. Episodes: E124, E125, E126.
+- **Yuan-Ti** — reclusive snake-people of YuJez deep in the Jazaka jungle; obsessive about powerful artifacts; control lizard folk via enchanted necklaces. Temple castes/types seen include broodguards, malisons, **pit masters** (Eldritch Blast), the eight-headed **Anathema** (Entangle, poison/constriction), **Nightmare Speakers** (Hunger of Hadar, Witch Bolt, magical darkness), a serpent-queen **Marilith** (seven sword arms, parry reaction), and the homebrew "Moltborn Brute" (alongside allied Spirit Nagas and animated serpent statues). Aliases: YuanTi, Yuanti, YT, Auntie Yuan-Ti, Yonti, Yon-Ti, Yanti, Yachty; (Anathema spellings) Anthema, Anthemona, Anathama; (Marilith) Marileth, Merilith, Mirrorleth. Episodes: E155, E156, E159, E160, E161, E162, E163.
+- **Golden Company** — dragonborn mercenary company; Cruucar's and Razortail's former outfit. Episodes: E54, E150.
+- **The Library** — Goldcrest center of knowledge; Knights of Guidea base; Avesy's school. Episodes: E54, E56.
+- **The Dark Flame** — outfitter giving letter-bearers assistance/discounts; owner demanded 490 gold post-contract. Episodes: E40, E45.
+- **Queens Guard** — the queen's guard; its unnamed leader attends meetings. Episodes: E37, E47.
+- **The Remenant (The Remnant)** — group whose leader is revealed as Adune; Pierre's blade reminded the Viscountess of it. Episodes: E24, E136.
+- **Righteous Hand(s)** — with Adune, tasked Max's group to investigate the Lusinovians; named in the coded mole letter. Episodes: E84, E134.
+- **Mageocracy** — panel of six mage-sorcerers running Tarlif under the Arch Dragon; probably the same body as the Sextet. Aliases: mageacracy, Magecracy. Episodes: E132, E135.
+- **The Septum** — Tarlif body run by the Sextet; the Clockmaker is a troublesome member. Aliases: septum. Episodes: E114.
+- **The Sextet** — group that runs the Septum; likely the six leaders of Tarlif. Episodes: E114.
+- **Tempest Court** — part of the Vithian alliance theocracy. Episodes: E00.
+- **Defenders of Godo** — party sworn in as defenders of godo at breakfast. Aliases: defendewrs of godo. Episodes: E08.
+- **The Horde** — rumored on the move as early as E05 ("Hoard Alliance"); killed Raymond the Kind in ambush; slaughtered by Beatrice. Aliases: Hoard Alliance. Episodes: E05, E14.
+- **Alliance of the 5 Armies** — mentioned in hushed Parathean talk about capital attacks. Episodes: E10.
+- **The Magnificent Four** — party's band name for infiltrating the Beaubois party. Episodes: E10.
+- **Dar Maise** — family the party stays with upriver. Episodes: E05.
+- **Royal Craresian Orchestra** — orchestra performing at the royal wedding. Episodes: E20.
+- **Staffmoore** — its members protected the texair cart for a while. Episodes: E28.
+- **Runekeepers** — blunt-weapon adventuring party for dirty, less discrete work (Lora Fel, Amara, Talen). Episodes: E34.
+- **Knights Watch** — serves the queen; Albert belongs to it. Episodes: E38.
+- **The Mantel** — body advising the queen; Penelope Vontrice a member. Episodes: E39.
+- **Shadowed organization** — organization the devil-creature "Eloise" belongs to; likely Aum Shai. Episodes: E43.
+- **Scourgers** — identified by zigzag raised tattoos on their forearms. Episodes: E45.
+- **Freedom Fighters "The Shadow"** — Noctis fought with them; gathered in Mandalonia; "will find him". Episodes: E53.
+- **Rudar's Armory Inc.** — Rudar's weapons and armor business. Episodes: E54.
+- **Salton Steele Company** — Marquise Avesy's company; dock workers seem like slaves. Aliases: Steele Company, Salton Steele. Episodes: E55.- **Barrack Clan** — clan that joined the rebellion, adding 4 fighters. Episodes: E73.
+- **East Wind Trading Company** — company on papers with Ulom's signatures at Rasheed's house. Episodes: E115.
+- **Night Reapers** — Sane's Gloomville crew: Sivy, Inka, Yanda, Or. Episodes: E124.
+- **Vault of Shadows** — very violent Gloomville gang. Episodes: E124.
+- **The Gauntlet** — group formed while searching for a WMD; possibly contains the mole. Episodes: E132.
+- **Aberdeeners** — defenders of Dalacia who hailed Zanim the Bold. Episodes: E132.
+- **Verdant Brotherhood** — organization similar to the Harpers. Episodes: E102.
+- **Order of Torag** — Withers's vault order ("Father Torag"). Episodes: E108.
+- **Vault Elders** — mentioned in Withers's journal. Episodes: E108.
+- **Last Shadow** — group whose member (Noctis) infiltrated Rasheed's circle before going dark. Episodes: E139.
+- **Ungoth Giants** — giant group ruled by Orgmond. Episodes: E149.
+
+## Items & artifacts
+- **Texair** — transmutation-magic spice/powder currency (1 texair ≈ platinum) made from the Arbor Alma and distributed equally by the Archivists since the Sundering; volatile at full potential; a corrupted form was poured into sewers. Aliases: tex air, Tex arin, texere, Texare, Textare, textair, Texere (pressed coins). Episodes: E00, E05, E07, E08, E09, E15, E19, E24, E25, E27, E28, E29, E30, E39, E61, E66, E67, E87, E102, E108, E126, E129, E132, E139, E148, E149.
+- **Magic carpet (Carpet of Flying)** — the party's flying carpet (taken from an evil warlock per Vane); used for the chimera fight, swamp crossings and city flyovers. Aliases: flying carpet, the carpet, flyiug carpet. Episodes: E58, E64, E67, E85, E87, E90, E102, E122, E132.
+- **Potentium** — blue-white crystal cluster of unlimited energy, not of this plane; raw divine power ("the Gods are potentium"); Omago's sentience; with transmutation it caused the Sundering. Aliases: power source, the titan killer, Titan Killer, Potentiaatim, crystalline power source. Episodes: E89, E91, E92, E93, E102, E108, E139, E140.
+- **Rod of Attenuation** — Zeben relic carried by Cruucar/Vane from the Vault of Izdar; rotates purple/green indicating Shadowfell vs Material Plane; 4th of the 6 gate keys. Aliases: rod of attenuation, the rod. Episodes: E130, E134, E135, E136, E139, E144.
+- **Pierre's ceremonial dagger** — flying-dragon dagger, Pierre's Auumshai token; copies/matches seen with Ors, in the Shadowed Moon cave, on Drachen, and as a letter seal. Aliases: Pierres ceremonial dagger, Pierres' Dagger, pierres dagger. Episodes: E38, E52, E66, E80, E89.
+- **Soul Leech dagger** — demon-possessed pact dagger; Cruucar attuned; two faces appear on the blade; used to kill Julian. Aliases: life stealing dagger, evil cursed dagger. Episodes: E61, E67, E69, E71, E80.
+- **Carved god-eyes (obsidian / amber / jade orbs)** — three abjuration eye orbs; the obsidian one merged into Evac whispering "Consume / Return"; the amber one speaks to Cruucar in Zaxx's voice. Aliases: large carved eyes, obsidian, amber, jade eyes, amber orb, black orb, the orb. Episodes: E35, E36, E40, E47.
+- **Zeben artifacts (the six gate keys)** — six relics that combined open a gate to bring back the Zeeven; Aum Shai held five; the final one — the artifact of Felnriel, a crystal orb — was in Jazaka with the Yuan-Ti until the party took it from the Coiled Ascendry's fifth floor (E164; now in the Bag of Holding). Aliases: 6th gate keys, relics, Zeben artifact. Episodes: E136, E139, E144, E156, E164.
+- **Sending stones** — communication stones from Max; five ear-worn ones acquired for the wedding. Aliases: Sending Stone, sending stone. Episodes: E27, E32, E40, E45.
+- **Arcane Collar** — long blueish-gold chain that contained the Kraken; clasped to control it. Aliases: chain, collar. Episodes: E153, E154, E155, E156.
+- **Windvane (wind vane)** — Benny's +2 jeweled scepter spear; lightning, flight, vow-breaking flaw; later thrown by Torgoth. Episodes: E99, E101, E143.
+- **The Sundering (book)** — old coded 33-page Drow book grabbed by Evac and decoded; first page "The Spark"; read aloud at sea. Aliases: Sundering, the sundering. Episodes: E19, E25, E30, E34, E55.
+- **Rod of Lordly Might** — bought from the magic shop; used in the sewers and to pry open the Kraken's jaws; extended into its 50-ft ladder for Noctis's nat-20 pole-vault rescue of Tor (E164). Aliases: Lord of mighty rod. Episodes: E101, E145, E155, E164.
+- **Artifact of Felnriel (the crystal orb)** — the final Zeban artifact: a perfectly clear crystal orb the size of a large apple, held hovering over a black green-veined dais on the Coiled Ascendry's fifth floor behind an invisible force field (7 necrotic + max-HP reduction on contact); dispelled blind by Vane and scooped into the Bag of Holding (E164). Aliases: the orb, artifact of Fenreal. Episodes: E164.
+- **Purple-gem ring (Marilith ring)** — magical ring with a purple gem taken from the dead Marilith's hand on floor four; molds to fit; properties unknown **(?)**; worn by Quinton on his thumb. Episodes: E164.
+- **Serpent blade of the Marilith Guardian** — ornate thick-bladed curved scimitar with a coiled-serpent hilt and twin ruby-gem eyes, recovered by Cruucar beside the dead Marilith; its first swing crit for 76 and beheaded a Spirit Naga outright (apparent decapitation/charge mechanic **(?)**). Aliases: serpent blade, serpent scimitar. Episodes: E164.
+- **Crimson Night** — Berrian's sword; **Max's old blade**, recovered by Berrian after Max sacrificed himself (formerly named "Crimson"). Carries charges (three) that cast **Incendiary Cloud**; Berrian spent the second in E164 (Jon, E164 email). Aliases: Crimson. Episodes: E164.
+- **Ring of Evasion** — Noctis's ring; let him auto-succeed the Avatar's dagger-rain Dex save in E164 (Jon, E164 email). Episodes: E164.
+- **Ring of X-ray Vision** — magic shop ring; Cruucar later paid it to the front-gate guards. Aliases: Ring of Xray Visions, xray ring. Episodes: E101, E123, E124.
+- **Ring of Protection** — blue sapphire abjuration ring from the Vault throne room. Aliases: blue sapphire ring. Episodes: E111, E115, E116.
+- **Mallory's Magic Mirror** — full-body mirror portal linking Mallory's lair, Blackwoods Manor and the dragon cavern. Aliases: odd full body mirror, magic portal. Episodes: E88, E89, E90.
+- **Lion talisman** — Pierre's ruby-eyed lion talisman used to seal coded letters. Aliases: talisonman lion with ruby eyes. Episodes: E19, E24.
+- **Zarryne** — orange-sized cloudy glass orb on a silver stand, drow word carved; named for archmage Zarryien. Episodes: E24, E25.
+- **Cloven crystals** — crystals possibly controlling the gate and binding of the sea god Uquatoa. Episodes: E35, E52.
+- **Mace of Terror** — vault mace held by Quinton. Aliases: the mace. Episodes: E111, E115.
+- **Bracers of Archery** — vault bracers held by Noctis. Aliases: bracer. Episodes: E111, E115.
+- **Elvish finger of guidance** — severed finger pointing the way when lost; limited daily uses. Aliases: Human finger. Episodes: E32, E33.
+- **Galas Var** — eight-legged walking cauldron holding 100 pounds, moves 35 feet. Aliases: Gallus var. Episodes: E32, E33.
+- **Blue Sapphire** — large gem atop the lighthouse at Kierkenwall's bay entrance. Aliases: Blue crystal. Episodes: E27, E34.
+- **Tuning forks** — five planar-travel forks; one attuned to the material plane; one sent Cruucar away. Aliases: tuning fork, turning fork, attuning forks. Episodes: E93, E94.
+- **Mode of Elemental Energy** — yellow diamond casting Conjure Elemental (earth). Aliases: yellow gem (diamond). Episodes: E88, E89.
+- **Cauldron (abjuration)** — 10 lb cauldron hiding stolen items from detect magic. Episodes: E58, E59.
+- **Dagger of Venom** — grabbed by Cruucar in Avesy's vault. Episodes: E57, E58.
+- **Figurine of Wondrous Power (Golden Lions)** — looted from Avesy's vault case. Aliases: small golden figurine. Episodes: E57, E58.
+- **Instrument of the Bards, Doss Lute** — looted from Avesy's vault case; **Quinton's** bardic focus (requires attunement by a bard). Grants charge-cast **Animal Friendship, Fly, Invisibility, Levitate, Protection from Energy, Protection from Evil and Good, and Protection from Poison** (Phil, E164). In E164 it carried Quinton unseen across the heart chamber (recorded in-session as "Etherealness," which Quinton does not have). Aliases: a lute. Episodes: E57, E58, E164.
+- **Golden Chalice** — Janis family chalice holding a single use of Heroes Feast; gift from the Baroness. Aliases: chalice. Episodes: E82, E83.
+- **Necklace from a Siren of the Sea** — Thurston's ruby-emerald necklace; shows the future, made three Noctises. Aliases: lucky necklace. Episodes: E152, E155.
+- **The Orb (paralyzing)** — released from the bag of holding; paralyzes on a failed save; recovered gambling. Episodes: E150, E152.
+- **Ring of Evasion** — magic shop ring; 1 of 3 slots used in the Rift fight. Aliases: evasion rings. Episodes: E101, E104.
+- **Comara Blackfire's spellbook** — spellbook found in Withers's desk and the beholder's treasure alcoves. Episodes: E108, E111.
+- **Annals of the Kings and the Gods: Pre-Sundering** — library book; Berrian gives it to Quinton after a possible god visitation. Aliases: Annals of the Kings and Gods. Episodes: E140, E149.
+- **The Betrayer** — book taken from the chalet. Episodes: E12.
+- **Blunder Buster** — Knights of Gidia device; fires bright light out a window like a flare. Episodes: E10.
+- **Izzdar (cloak)** — Noctis's cloak, identified via Drow reading; shares a name with Izzdar the Undying. Episodes: E25.
+- **Felynriel** — ring identified via Drow reading. Episodes: E25.
+- **Ninath (chainmail)** — chainmail identified via Drow reading; named for the drow archmage. Episodes: E25.
+- **Danger** — weapon with minor enchantment, ritually driven by blood. Episodes: E26.
+- **Lorenzo's Glaive** — two-handed non-magical glaive, +7 to hit, 2d12+4 slashing; taken by Cruucar. Aliases: Lorenzos Glaive. Episodes: E32.
+- **The Glaive (purple heart wood)** — purple heart wood in Evershire near Cormel Keep, likely the upgrade for Cruucar's glaive. Episodes: E52.
+- **Vampyric Potion** — grants 6d4 hp boost; enemies DC14 or lose life force. Episodes: E32.
+- **Kybinens Drop** — blood of devil, demon, celestial; DC17 Con; exhaustion, eventually kills. Aliases: Kybinens drop. Episodes: E32.
+- **Random Potion #13** — unknown potion held by Noctis. Episodes: E32.
+- **Poisons and Their Forms** — book from Viola's hut. Episodes: E32.
+- **Enchantments and Soul Removal** — book from Viola's hut. Episodes: E32.
+- **Der Cats and Boots** — fairytale about cats from Viola's hut. Episodes: E32.
+- **Cloven (book)** — book on Cloven crystals, possibly the way to control Uquatoa. Episodes: E35.
+- **Maritime Table** — table with a ship-model slot projecting a 30-mile coastal hologram. Aliases: The Magic Table. Episodes: E35.
+- **Wonders of the Trene** — pirate-ship book taken by Evac. Episodes: E35.
+- **Lost Artifacts of the Deep** — pirate-ship book taken by Zanim. Episodes: E35.
+- **How to Get Rich Quick** — pirate-ship book taken by Cruucar. Episodes: E35.
+- **Portable Hole** — looted from Avesy's vault; later stores all the texair. Episodes: E58, E66.
+- **Nolzur's Marvelous Pigments** — looted from Avesy's vault. Episodes: E58.
+- **Tarokka deck** — divination deck needing a user directly connected with the gods. Episodes: E61.
+- **Blood magic book** — found in Mallory's lair. Episodes: E88.
+- **Dragon Lore & History book** — found in Mallory's lair. Episodes: E88.
+- **Rope of Entanglement** — 30 ft rope, command word "Melon", DC 20 Strength. Aliases: magic rope. Episodes: E89.
+- **Dragon slayer scimitar** — long ornate scimitar from the dragon hoard. Episodes: E90.
+- **Ring of mind shielding** — hoard loot ring with large blue gem. Episodes: E90.
+- **Chainmail shirt of resistance** — psychic-resistance hoard loot. Episodes: E90.
+- **Hide armor of acid resistance** — tanned hide hoard loot. Aliases: red / brown hide armor. Episodes: E90.
+- **Red Ring** — fire resistance ring worn by Cruucar. Aliases: Fire resistance ring. Episodes: E91.
+- **Rope of ArchMagi** — for sale at the magic shop. Episodes: E101.
+- **Efreeti Chain** — for sale at the magic shop. Episodes: E101.
+- **Sword of Answering** — for sale at the magic shop. Episodes: E101.
+- **Wand of the War Mage +2** — for sale at the magic shop. Episodes: E101.
+- **Wand of Magic Missile** — for sale at the magic shop. Episodes: E101.
+- **Wither's Journal** — moldy journal revealing gods, Hive, and Potentium lore. Episodes: E108.
+- **Nine Lives Stealer** — long black sword with skulls, red gems, nine blades. Episodes: E113.
+- **Axe of Rage** — massive 2d12+3 axe with negative effects, given to Cruucar. Episodes: E113.
+- **Charm of the Ghoul** — heals 3d8+3, 5 uses; requires a mouthful of day-dead humanoid flesh. Episodes: E112.
+- **Pearl of Power** — given to Torgoth; recovers a spell slot each long rest. Episodes: E117.
+- **Wings of Flying** — bought in Tarlif for one apple-sized gem. Episodes: E117.
+- **Amulet of Health** — acquired during Tarlif shopping. Episodes: E117.
+- **Bag of Holding** — contains shield and magic spear of lightning. Episodes: E110.
+- **Clary** — drug Cruucar deals in Gloomville; traded for info. Aliases: Clairvoyance, clairvoyance. Episodes: E123, E124.
+- **Forged Amber** — Nardeef's gift to Tor; live lightning bolt (10d8), can shock a friend alive. Episodes: E131.
+- **Silken Vail** — Nardeef's gift to Noctis; greater invisibility for 10 minutes. Episodes: E131.
+- **Seal of Aumshi** — found in the tower; opens with a specific crest. Episodes: E135.
+- **Cloak of Displacement** — sixth and final Zeben relic; party tasked to locate it. Episodes: E139.
+- **Dark Pacts** — library book with some information on liches. Episodes: E140.
+- **Thunderfoam Ale** — ale served at the Storm-Sundered Tankard. Episodes: E141.
+- **Maw's Mercy** — dark rum served at the Storm-Sundered Tankard. Episodes: E141.
+
+## Deities
+- **Gods of Alambor** — the post-Sundering pantheon (reduced by the Great War): faithful living gods, dead faithful gods, betrayer gods, and dead betrayer gods, with their domains and alignments. Reference article: gods-of-alambor. Aliases: Alambor Pantheon, the pantheon. Episodes: E00, E12, E108, E139, E140.
+- **Kord (Cord)** — tempest and war/storm god of the sea; sole god of the Vithian alliance; statue with blue gem eyes; dislikes Uquatoa; the storm giants embody his soul. Aliases: Cord, Kord the Tempest of the Water. Episodes: E00, E35, E36, E52, E149.
+- **Torog (Torag)** — bad god (shackle symbol); died fighting Carinian — their battle made the Great Rift; Withers's order named for him. Aliases: torog, Torag. Episodes: E05, E105, E108, E114.
+- **Paylor (Palor)** — god of summer/sun, keeper of time, agriculture and harvest; Dalacia's god; high priests Salem and Elana; main citadel in Grier. Aliases: Palor, paylor. Episodes: E00, E15, E26, E102.
+- **Asmodeus** — lord of the Nine Hells; among the evil gods; worshipped by the Durgar; energy sword symbol in the Vault. Aliases: Azmodeus, Assmodius, asmodiuos, asmodeus. Episodes: E00, E44, E49, E105.
+- **Tiamat** — evil five-headed dragon queen, god of chromatic dragons, dwelling in Avernus; pinwheel symbol room in the Vault. Aliases: tiamet. Episodes: E96, E105, E108, E109.
+- **Bane** — evil god; talons symbol; mummified skull shaped like his logo. Episodes: E00, E105, E106, E108.
+- **Gruumsh** — evil god; tri-cross bones symbol; room of 64 clay orc warriors and a mummified one-eyed orc; maybe the chariot figure. Aliases: Grumesh, Grummash, Gruumash. Episodes: E00, E105, E107, E111.
+- **Lolth** — spider queen betrayer god dwelling in Inverness; deals with the drow; a deity of Tarlif (the "Demon Queen"). Aliases: Loleth, lolth, Demon Queen. Episodes: E00, E105, E108, E113.
+- **Zehir (Zahir)** — evil god; snake symbol room in the Vault. Aliases: zehir, Zeher. Episodes: E00, E105, E108.
+- **Arethus (Arathis / Erathis)** — god of civilization, main god of Luzonovia; a deity of Tarlif; Brother Enoth's god; namesake of the Vallon temple. Aliases: arethis, arathis, Arathis. Episodes: E00, E113, E156.
+- **Vecna** — bad god of the undead; skull symbol; "Never reveal all that you know". Aliases: vecna. Episodes: E105, E108.
+- **Tharizdun** — bad god; spiral symbol (logo paper missing); the last Vault room was his. Episodes: E105, E109.
+- **Orcus** — god of betrayal who fell in the Sundering; undead servants; skull-topped wand; Kyuss was his high priest. Aliases: orcus. Episodes: E12, E15.
+- **Uquatoa** — squid-like leviathan lesser sea god, locked away after the Sundering south of Jakarta; the Cloven crystals control his binding. Aliases: Ookatowa. Episodes: E35, E52.
+- **Malora** — disappeared/"destroyed" chaotic-good god of the Sundering; speaks to Berrian. Episodes: E00, E140.
+- **Raven Queen** — goddess of winter, spinner of fate, funeral rites; Paratha's god; her Revana temple clerics question the dead. Episodes: E00, E40.
+- **Avandra** — god of trickery; fought against the bad gods. Episodes: E00, E108.
+- **Betrayer Gods** — the evil gods who whispered to the Zeeven, causing the Sundering; Adune seeks their return. Aliases: betrayer gods, bad gods. Episodes: E00, E139.
+- **Bahamet** — dragon god; dead. Episodes: E00.
+- **Ioon** — dead god. Episodes: E00.
+- **Morden** — dwarf god of miners and smiths. Episodes: E00.
+- **Zeckma** — listed among evil gods. Episodes: E00.
+- **Carinian** — god who died fighting Torog; their battle caused the Great Rift. Aliases: carinian. Episodes: E05.
+- **Dawn Gods** — from the Sundering reading: Good, Evil, Law, Chaos, Light, Dark. Episodes: E55.
+- **All Giver** — mentioned at the religious district bank. Episodes: E58.
+- **Rracsius** — god from the Sundering the dragon tried to recruit. Episodes: E89.- **Corellon** — won some fights against the bad gods; namesake of Vermalock's old name. Episodes: E108.
+
+## Ships
+- **Wrecked at the Reef / Resurrect at the Reef** — the party's ship (the repainted, renamed **Black Veil**; forged deed under "James Beach"); AC 15, HP 400, 10 cannons, full named crew; deployed around Battalonia; named in Quinton's E37 song. Originally "Wrecked at the Reef"; **renamed "Resurrect at the Reef" after it crashed and had to be rebuilt, before the party reached Jazaka** (Phil) — same ship, and the Jazacha-arc episodes (E164 sea battle) use the newer name. Aliases: Resurrect at the Reef, wrecked athe reef, WRecked at th reef, Resu-wrecked at the Reef, Resurrect the Reef, RWatR. Episodes: E37, E61, E62, E64, E132, E140, E148, E149, E150, E152, E153, E164.
+- **Fortune's Favor** — Mallie Grisham's 5th/4th-rate Man o' War; sparrow symbol; held the final artifact; fought captainless in the E164 fleet battle, circled "like a wounded beast going in for the kill." Aliases: Fortunes Favor, Fortunes Rest. Episodes: E143, E144, E147, E153, E164.
+- **Blood Mist** — ship of the party's fleet; knifed through the smoke in the E164 battle under first mate Dorian, guns flashing. Episodes: E164.
+- **Neptune's Delivery** — ship of the party's fleet, engaged in the E164 battle. Episodes: E164.
+- **Wavehammer** — Sir Trent Hightower's warship: brutal, iron-bound, smoking broadsides, Trent standing at her prow. Aliases: Wave Hammer. Episodes: E164.
+- **Siren's Call** — the Merchant's ship; ran down the Wrecked at the Reef at terrifying speed with boarders, grappling hooks and boarding planks readied. Aliases: Sirens Call. Episodes: E164.
+- **Damned Rose** — a Pirate Trinity ship/fleet (DM-confirmed: a ship, not a person and not a 4th Trinity leader). Aliases: Dammed Rose. Episodes: E147, E153.
+- **Black Veil** — the pirate ship the party commandeered (crew wore a woman's-face tattoo; worked with the Widowmakers and Zax); bought by Lucia for the party for 1,000 platinum, later repainted and renamed **Wrecked at the Reef** (later **Resurrect at the Reef**). Jon (E164 email) corrects the earlier Black Widow/Black Veil conflation: *this* is the party's original ship. Aliases: Black Viel. Episodes: E35, E52, E147.
+- **Black Widow** — **General Zax's ship**; part of the Aum Shai fleet that ambushes the party in the E164 sea battle, circling Fortune's Favor "going in for the kill." Not the party's ship — that was the Black Veil (Jon, E164 email, disambiguating the recording's "Black Widow"). Episodes: E164.
+- **The Marquee (The Marque)** — ship linked to Goldcrest and the Foreigner/Merchant. Episodes: E146, E147.
+- **Intrepid** — Thurston Carrick's frigate, slightly smaller than the party's ship. Episodes: E152, E153.
+- **Tides Breath** — 100 ft man-of-war captained by James Cook, crew of 20. Episodes: E34.
+- **The Leaping Trout** — ship captained by Shawn Williams. Episodes: E55.
+- **The Implication** — E54 episode title for the party ship's departure to Goldcrest; refers to the party's vessel (the Black Veil, later renamed Wrecked at the Reef), not a separate ship. Episodes: E54.
+- **Jewel of the Seas** — double-deck gunship; blue sapphire on waves flag; Benny Golden Eye Clark. Episodes: E150.
+- **William** — barge with boss Charles; Roger and Slave aboard. Episodes: E131.
+- **Pirates Grim** — listed with Pirate Trinity leader Scar Atol. Episodes: E147.
+- **Grim Reaper** — ship under Trinity leader Oaks. Episodes: E147.
+- **Executioner** — ship under Trinity leader Oaks. Episodes: E147.
+- **Oceans Terror** — ship of Trinity leader Cranson Oakly. Episodes: E147.
+- **Swordfish** — Gideon ship running up and down the Jazaka coast. Episodes: E156.
+
+## Creatures
+- **Kraken** — sea beast controlling weather at Krakens Reef; swallowed Noctis; captured with the arcane collar. Aliases: KRaken, the dune worm. Episodes: E152, E153, E154, E155, E156.
+- **Gloomstalkers** — circling flying worm creatures of the Shadowfell, out at night; eggs harvested for elixirs. Aliases: gloom stalkers, Stalkers. Episodes: E121, E123, E124, E125.
+- **Spawn of Kyuss** — worm-filled undead whose worms infect and turn victims; created by Kyuss, recreated by Pierre; later found in the tower store room. Aliases: Spawn, Spawn of Kyuse. Episodes: E15, E23, E127.
+- **Gregory** — Berrian's fey spirit familiar in giant elk form; scouted the wagon train; killed by hunters. Episodes: E67, E69, E74.
+- **The red devil (red dragon)** — fire-breathing red dragon of upper Callum Heights that Dragoloth wanted to challenge. Aliases: Red one, Red dragon. Episodes: E62, E65, E66.
+- **Charmara (Chimera)** — creature worshipped by harpies; killed by the party with the flying carpet. Episodes: E63, E64.
+- **Beltraz the Unseen** — beholder with terrible eye rays in the orb room; killed by the party (Benny died in the fight). Episodes: E109, E110.
+- **Torbruh** — Orgmond's massive blue ox. Episodes: E118, E119.
+- **Luna** — companion that scouts from above; killed by hunters with Gregory. (Distinct from Luna, Noctis's familiar — below.) Episodes: E68, E69.
+- **Luna (Noctis's familiar)** — Noctis's Find Familiar companion, kept in an ethereal pocket; takes spider form for scouting (the spider familiar of E126). Lost in E164: sent down the Great Sun Temple's floor-four pit, the warg connection severed ~50–60 ft down and she could not be recalled — presumed passed through a portal **(?)**. Episodes: E126, E163 (?), E164.
+- **Avatar of the Coiled Eclipse** — the colossal legendary serpent coiled in the beating heart-pool of the Coiled Ascendry's fifth floor; the largest living serpent the party has seen. Its eyes change color by mode: emerald green at rest, **black** for its mass psychic gaze (62 psychic to four PCs) and for the unseen kill-spell **"Gaze of the Black Sun,"** **yellow** for its ceiling-rain of poison daggers (30 poison + 23 radiant). Has Legendary Resistance. Denied its kill when the party teleported out (E164); still alive. Aliases: the Avatar, Coiled Eclipse. Episodes: E164.
+- **Gregory 2.0** — magical steed unhittable by cannons; its gifted rider was blown apart. Aliases: Sir Gregory 2.0. Episodes: E147, E151.
+- **Dragoloth the Silent** — 12-legged behir in a cave; swallowed Noctis; wanted to slay the red dragon. Aliases: Dragoloth. Episodes: E65.
+- **LJ (bird form)** — see NPC Leon Janice "LJ".
+- **White stag** — seen by Evac; on the archivist crest; with the wolf, instrumental in forming texair. Episodes: E30.
+- **Fireganesch** — super rare red-haired being; bartender at the Three Crowns; none reside in Alambor. Episodes: E36.
+- **Shield Guardian** — guardian whose controlling bracelet is with Cruucar. Episodes: E48.
+- **Durgar** — rare Underdark mining dwarves worshipping Asmodeus; removed with the pre-Sundering evil dynasty. Episodes: E49.
+- **Noah** — horse used heading west of Emerald Lake. Episodes: E62.
+- **Glen** — horse used heading west of Emerald Lake. Episodes: E62.
+- **Penelope (horse)** — party horse, named with Juniper. Episodes: E62.
+- **Juniper** — party horse, named with Penelope. Episodes: E62.
+- **Grey Renders** — two large creatures found dead in the Grasping Moore. Episodes: E68.
+- **Warg** — raid leader's dog monster; Zanim died grabbing its rider. Aliases: WArg. Episodes: E70.
+- **Liphenthropes** — use blood rites to pull forward their abilities (re: Able the bear). Episodes: E77.
+- **Black Dread (dragon)** — see Lord Blackwood / Valadon. Episodes: E81.
+- **Tenarooks** — 10–12 approached the party on the road to Bell's Forge. Episodes: E97.
+- **Valkadans** — humanoid slave type marched with Dragonborn and Minotaurs. Episodes: E97.
+- **Iranese** — devil type among the temple denizens. Episodes: E98.
+- **Shadowfell Wyverns** — black shimmer-skinned dragon cousins breathing different energies. Episodes: E119.
+- **Windigo** — half-elk creature Berrian saw during his watch. Episodes: E123.
+- **Swamp stalkers** — monsters whose venom is a valuable harvest. Episodes: E124.
+- **The Tainted** — fiends familiar to Nox, Quinton, Cruucar; Berrian destroyed one for 200 damage. Episodes: E127.
+- **Nithrant** — plant/tree monster that grabbed and lifted the party. Episodes: E130.
+- **Zuk'taal** — gigantic rock monster in the cavern; nearly killed the party; Mallie wished it away. Episodes: E158.
+- **Aboleth** — fought alongside two snake people and their lizard mounts. Episodes: E157.
+- **Lizard folk** — 8–9 ft tall patrollers with glowing chains, nocturnal, controlled by the Yuan-Ti. Episodes: E159.
+- **Kettlebarks** — mutated crocodile-like creatures lashing at boats on the Jazaka river. Episodes: E156.
+- **Seasnakes** — massive snake-like creatures with appendages in the Jazaka river. Episodes: E156.
+- **Bog Wraiths** — jungle hazard the party is warned about. Episodes: E156.
+- **Hydra** — in a room with two abominations and two wizard snake people. Aliases: Hyrda. Episodes: E161.
+- **Medusa** — party disguised as medusas delivering magical artifacts to the lower levels. Episodes: E161.
+
+## Events
+- **The Sundering** — the cataclysm 499–500 years ago: the Zeeven dynasty, whispered to by the Betrayer Gods, defied the gods; many gods died, transmutation magic vanished, the world was reshaped; "when the Gods left the tree". Aliases: Great Calamity. Episodes: E00, E01, E03, E12, E33, E44, E49, E52, E54, E55, E89, E112, E113, E114, E116, E118, E119, E126, E139, E140, E144, E149.
+- **The Royal Wedding** — wedding of Prince Thomas and Princess Anabel(la) at Vallon's Halls of Wonder / Temple of Erathis on Midsummer; targeted by Luzonovian and succubus assassination plots; ends with the prince stabbed by Justin (E50). Aliases: royal wedding, mid-summer wedding, Midsummer wedding, the big wedding, princess annabella wedding, the weddin, the wedding. Episodes: E03, E04, E08, E20, E24, E27, E29, E33, E39, E40, E41, E42, E43, E44, E45, E46, E47, E48.
+- **Bazaar bombing** — the party blew up the bazaar, dropping Lucia's name and the Alambor Five name. Aliases: BAZAAR BOMBING. Episodes: E39, E40, E41.
+- **Council of Pirates** — pirate captains gather at Krakens Reef every five years; Mallie attended. Aliases: conceal of pirates, Pirate Trinity meeting. Episodes: E147, E155, E156.
+- **War on Luzonovia** — war declared by Carasia after the prince's death; battles at Kingswatch and Bredon; eventually peace made. Aliases: War on luzernovia. Episodes: E51, E64, E71.
+- **Black Dread devastation** — Valadon's acid raids that decimated Evershire and killed the Baron's twins ten years prior. Aliases: black dread. Episodes: E69, E71.
+- **Midsommer** — the 29th day of Paleath; the wedding is tied to it. Aliases: mid-summer. Episodes: E03.
+- **Festival of Amentes** — the Shadowed Moon meeting takes place after this festival. Episodes: E24.
+- **The Lady of the Rose** — play showing at the Lady's Arena while Avesy is away. Episodes: E56.
+- **The Pact** — Avernus gatekeeper deal: one soul toll plus one soul per person daily. Episodes: E94.
+- **Feast of Vita Messies** — celebratory feast; party honorary guests of the King. Episodes: E100.
+- **The Armada** — leaves Cruasia in 87 days, on the 31st of Arathin. Episodes: E100.
+- **Red Eclipse** — every 100 years at midwinter; the rod is needed after it but before the Armada sails. Episodes: E134.
+- **Shadowfell saga** — past arc when Berrian palmed texair and cast Plant Growth. Episodes: E139.
+- **Mid-winter festival** — happening on the party's return; they were gone 60 days. Episodes: E131.
+- **Battle of Aberdeen** — defenders repelled the Losernovians. Episodes: E132.
+- **Battle of Dorcha Cliffs** — fleet battle; Leon burned Mandalonian ships and got a medal. Episodes: E132.
+- **Carasian invasion** — coming invasion; ships have set sail; Harpers preparing. Episodes: E132.
+- **Trials of Novernus** — mentioned regarding Adune's insight into the power source. Episodes: E132.
+
+## Other (calendar, aliases, misc)
+- **Calendar & Festivals of Alambor** — the Alambor year (300 cycles/annum, 6 sextets of 50 days; A.S./P.T. dating) and its festivals: Carnival Amantes, Midsommer, Feast of Vita Messis, Festival de Jeux, Midwinter. Reference article: calendar-and-festivals. Aliases: Carnival Amantes, Amantes Festival, Festival de Jeux, Feast of Vita Messis. Episodes: E03, E24, E100, E131, E134.
+- **Texere & Transmutation** — the "how magic money works" explainer: the Gift, why transmutation was removed from the weave (divination put in its place), Kord's feast/famine, and the texere-cost table. Reference article: texere-and-transmutation; the currency item is Texair. Aliases: texerine, transmutation economics. Episodes: E00, E39, E108, E119, E139.
+- **Arbor Alma (Arbo Alma tree)** — great white-barked purple-leaved tree in a mountain-ringed glade; source of the texair spice kept by the Archivists; placed by the gods at the Sundering's end; said "Welcome back, Berrian". Aliases: Arbo alma tree, Arbor Alum, Alborama (as texair source). Episodes: E00, E39, E119, E139.
+- **The Sparrow** — Mallie Grisham's symbol/calling card and crew flag; also the passphrase "The Sparrow Sent You" identifying Adune's hidden man (E92) — possibly connected. Aliases: Sparrow. Episodes: E92, E147, E149, E150, E151.
+- **Avondi (Avandi)** — calendar month (33rd/38th/42nd day references; 14th of avandee in ship's orders). Aliases: avande, novandi, avondy, avandee. Episodes: E04, E08, E09, E24, E151.
+- **Palious (Paleos / Paleous)** — calendar month: wedding the 25th, package pickup the 7th, 38th before martial law. Aliases: paleos, paleas, Palios, paleous. Episodes: E20, E24, E29, E33, E55, E61.
+- **Ruidious (Rudice)** — the red moon, up and down in 3 days; 3 cycles ≈ 30 days. The "Redious" the dragon spoke of recruiting (E89) is the same — the red moon, not a separate deity (DM-confirmed). Aliases: Rudice, Redious. Episodes: E23, E61, E89.
+- **Catha** — smaller blueish-green moon with a normal cycle. Episodes: E23.
+- **Paleath** — calendar month; Midsommer is its 29th day. Aliases: paleath. Episodes: E03.
+- **Rovana** — calendar month; the armada sets sail the 25th, midwinter. Episodes: E52.
+- **Arthin** — calendar month; Blackwood's letter signed 3rd of Arthin. Aliases: arthin. Episodes: E80.
+- **Arackus** — calendar month; 17th day noted. Episodes: E92.
+- **Arathin** — calendar month; the Armada leaves the 31st. Episodes: E100.
+- **Pentacian** — calendar month; Cosko in Parathia by the 3rd. Aliases: pentacian. Episodes: E102.
+- **James Beach** — party forged alias: cotton consignment payee and purchaser/owner on the ship's deed. Episodes: E58, E61, E62.
+- **Party cover aliases (Mena Isles story)** — Roger/Alec, Anthony (Cruucar), Eekna (Evac), Tailsby Tornsmain (Quinton); Daylor and Razortail names also written on the forged deed. Episodes: E61.
+- **Gorgoth** — Vane's devil disguise name in Avernus. Episodes: E98.
+- **Mike Hunt** — joke alias used while deceiving the innkeeper. Episodes: E141.
+- **Squinton and the Scorpions** — band act; Squinton the scorpion got squished on stage. Aliases: Squinton the Squorpion. Episodes: E114, E115.
+- **Evac's Whore** — song by Quinton Shackleford pleading Lorenzo not to betray the party. Episodes: E29.
+- **Luzonovian Rhapsody** — piece in the party's chalet performance. Episodes: E11.
+- **Chiaos** — name on a scroll circa 193PD with an annotated map of a research tower. Episodes: E11.
+- **Souccre** — Pierre's projects with Souccre angered the Shadow King. Episodes: E23.
+- **Ella Dine Trees** — trees now growing along the Great Rift. Episodes: E05.
+- **Galadon** — purple trees with gold leaves in Vermalock; enhanceable wood. Episodes: E117.
+- **Immanue tree** — purple tree with strong sinew used for special weapons. Episodes: E119.
+- **Yaro tree** — very resilient tree used to build halls and war shields. Episodes: E119.
+- **Gidia the Tall** — statue of a tall man with flowing hair in Kierkenwall; presumably the empire's founder. Episodes: E27.
+- **Kai-Ti-Akay** — a goodbye said by Koru. Episodes: E53.
+- **A Parathion** — linked to Avesy's possible magical arts; high elves. Episodes: E56.
+- **Lentil** — noted at the Jameti Costco meeting; riddle lines follow; context unclear. Episodes: E111.
+- **Mytherian** — noted alongside the letter to Yankee about bringing the ship; unclear. Episodes: E113.
+- **True Gateway** — conspirators' goal; "everything almost in place, just need the artifact". Episodes: E115.
+- **Darkwings** — phrase spoken by Julian alongside "Midnight Promises" under interrogation. Episodes: E80.
+- **Valinor (dream spire)** — see NPC Valinor; first appeared in Berrian's dream as a green cloak and tall black spire. Episodes: E73.
+- **King's Cage** — mentioned with the Nightmare King's booming voice in the cavern. Episodes: E92.
+- **Centias** — the power source has some semblance of centias. Episodes: E92.
+- **Arinece** — a title: keeper of Olf's soul and many souls. Episodes: E94.
+- **Loosesack** — noted at the halfway point of the march; unclear. Episodes: E97.
+- **Oodon** — single unexplained mention in the Royal Ethenium notes. Episodes: E44.
+- **Mana** — transmutation given to all, ruled by the dark Zivians, now gone. Episodes: E108.
+- **Oryan** — constellation; floating platforms mirrored its shape in the portal room. Episodes: E133.
+- **Remiste Celeste** — noted at landfall; about one hour of travel to the island. Episodes: E149.
+- **Guidian (armed presence)** — full-plate armed presence noted at Iron Forge. Episodes: E84.
+- **Betrayer Gods (char-creation note)** — see Deities. Episodes: E00.
+- **Maena (cartography, out-of-world)** — author note, cleared by Jon: the Alambor world map is traced over a real-world map; "Maena" refers to that real-world geographic overlay the DM used as a mapping device (not in-world lore). Aliases: Maena and Alambor Overlay.

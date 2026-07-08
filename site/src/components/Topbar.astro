@@ -1,0 +1,191 @@
+---
+// Shared sticky module top bar — wordmark + modules nav + (optional) search slot
+// + theme toggle. One source of truth for both BaseLayout and MapLayout so the
+// chrome can't drift between the wiki and the map. Pass `modules` and the active
+// module (either an `isActive(key)` predicate or a static `activeKey`). Slot a
+// search trigger into `search`; when absent (the map), the theme toggle pushes to
+// the right edge instead. `variant="map"` swaps the sticky positioning for the
+// map's full-height flex-column layout (non-sticky, above Leaflet's panes).
+import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Module {
+  key: string;
+  label: string;
+  href: string;
+  soon?: boolean;
+}
+interface Props {
+  modules: Module[];
+  isActive?: (key: string) => boolean;
+  activeKey?: string;
+  variant?: 'default' | 'map';
+}
+const { modules, isActive, activeKey, variant = 'default' } = Astro.props as Props;
+const active = (key: string) => (isActive ? isActive(key) : key === activeKey);
+const hasSearch = Astro.slots.has('search');
+---
+
+<header class:list={['topbar', { 'topbar--map': variant === 'map' }]}>
+  <button
+    type="button"
+    class="hamburger"
+    data-drawer-toggle
+    aria-label="Open navigation menu"
+    aria-controls="mobile-drawer"
+    aria-expanded="false"
+  >
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path
+        d="M3 6h18M3 12h18M3 18h18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      ></path>
+    </svg>
+  </button>
+  <a class="wordmark" href="/">
+    <Logo size={52} />
+    <span>Alambor Codex</span>
+  </a>
+  <nav class="modules" aria-label="Modules">
+    {
+      modules.map((m) =>
+        m.soon ? (
+          <span class="module soon" aria-disabled="true" title="Coming soon">
+            {m.label}
+            <em>soon</em>
+          </span>
+        ) : (
+          <a href={m.href} class:list={['module', { active: active(m.key) }]}>
+            {m.label}
+          </a>
+        ),
+      )
+    }
+  </nav>
+  {hasSearch && <slot name="search" />}
+  <ThemeToggle class:list={{ push: !hasSearch }} />
+</header>
+
+<style is:global>
+  /* ===== Module top bar (sticky) ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.7rem 2rem;
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  /* Map: topbar is a flex child of a full-height column (not sticky) and must sit
+     above Leaflet's panes. */
+  .topbar--map {
+    position: static;
+    top: auto;
+    flex-shrink: 0;
+    z-index: 1000;
+  }
+  /* Mobile nav trigger — hidden on desktop, revealed ≤1080 (the same width at
+     which the sidenav collapses, so nav is never lost). ≥44px tap target. */
+  .hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: -0.5rem 0 -0.5rem -0.5rem; /* eat the oversized box back into the bar */
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .hamburger:hover { color: var(--gold); border-color: var(--gold-soft); }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+  }
+  .wordmark:hover { text-decoration: none; }
+  .wordmark .logo {
+    display: block;
+    /* Stacked 1px shadows = a crisp dark rim so the white bark separates from
+       the cream topbar. Halo is transparent in dark mode, so this is a no-op there. */
+    filter:
+      drop-shadow(0 0 0.5px var(--logo-halo))
+      drop-shadow(0 0 1px var(--logo-halo));
+  }
+  .modules { display: flex; gap: 1.4rem; font-size: 0.85rem; font-weight: 500; }
+  .module { color: var(--muted); display: inline-flex; align-items: baseline; gap: 0.3rem; }
+  .module.active { color: var(--text); position: relative; }
+  .module.active::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -0.75rem;
+    height: 2px;
+    background: var(--gold);
+  }
+  .module.soon { color: var(--faint); cursor: default; }
+  .module.soon em {
+    font-style: normal;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 0 0.28rem;
+    color: var(--faint);
+  }
+  .search {
+    margin-left: auto;
+    min-width: 15rem;
+  }
+  .search-fallback { padding: 0.4rem 0.7rem; width: 100%; border: 1px solid var(--hairline); border-radius: 8px; background: var(--surface); }
+
+  /* ===== Theme toggle ===== */
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; width: 2rem; height: 2rem; padding: 0;
+    border: 1px solid var(--hairline); border-radius: 8px;
+    background: transparent; color: var(--muted); cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  /* No search slot (map): the toggle takes over the right-edge push. */
+  .theme-toggle.push { margin-left: auto; }
+  .theme-toggle:hover { color: var(--gold); border-color: var(--gold-soft); }
+  .theme-toggle .icon-sun { display: none; }
+  :root[data-theme='dark'] .theme-toggle .icon-sun { display: block; }
+  :root[data-theme='dark'] .theme-toggle .icon-moon { display: none; }
+
+  /* Tablet/phone (≤1080 "collapse"): topbar tightens its gap/padding so the
+     hamburger sits beside the wordmark (otherwise the desktop 2rem gap pushes the
+     title into a second line). The search-specific wrap rules stay gated off the
+     map variant (it has no search slot). The hamburger appears on BOTH layouts —
+     this is the same width the sidenav hides at, so nav is never lost. */
+  @media (max-width: 1080px) {
+    .hamburger { display: inline-flex; }
+    .topbar { gap: 1rem; padding: 0.7rem 1rem; flex-wrap: wrap; }
+    .topbar:not(.topbar--map) .search { min-width: 100%; order: 3; margin-left: 0; }
+    /* With the modules hidden and the search dropped to its own wrapped row, the
+       toggle would otherwise cling to the wordmark on the left. Pin it to the
+       right edge of the first row so it's always in the expected top-right spot. */
+    .topbar:not(.topbar--map) .theme-toggle { margin-left: auto; }
+    /* The wrapped module row in the topbar is now redundant with the drawer's
+       module links; hide it ≤1080 to declutter (search + theme stay). */
+    .topbar .modules { display: none; }
+  }
+</style>

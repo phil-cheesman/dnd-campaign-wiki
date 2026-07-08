@@ -1,0 +1,192 @@
+---
+import { buildSidebar, type SidebarCollection } from '../lib/nav';
+
+const model = await buildSidebar(Astro.url.pathname);
+const path = Astro.url.pathname;
+const refActive = (p: string) => path === p;
+
+// Views & utilities — flat links, deliberately *not* collection-style (no diamond
+// eligibility as "collections"); the active one still gets the current marker.
+// Graph / Map / Gallery live in the top bar already, so they're omitted here to
+// keep the rail short (and give the expanded list more room).
+const views = [
+  { label: 'Party Analysis', href: '/characters#party-analysis' },
+  { label: 'Timeline', href: '/timeline' },
+  { label: 'Glossary', href: '/glossary' },
+  { label: 'Changelog', href: '/changelog' },
+];
+---
+
+<aside class="sidenav" aria-label="Codex navigation">
+  <nav class="nav-tier">
+    <div class="tier-head">Codex</div>
+    {
+      model.collections.map((c: SidebarCollection) => (
+        <>
+          <a
+            href={c.href}
+            class:list={['nav-coll', { current: refActive(c.href), here: c.active && !refActive(c.href) }]}
+          >
+            <span class="nav-coll-label">{c.label}</span>
+            <span class="n">{c.total}</span>
+          </a>
+          {c.active && c.groups && (
+            <div class="nav-members">
+              {c.groups.map((g) => (
+                <>
+                  {g.label &&
+                    (g.href ? (
+                      <a
+                        href={g.href}
+                        class:list={['subgroup', 'subgroup-link', { current: g.href === path }]}
+                      >
+                        {g.label}
+                      </a>
+                    ) : (
+                      <div class="subgroup">{g.label}</div>
+                    ))}
+                  {g.items.map((it) => (
+                    <a href={it.href} class={it.href === path ? 'current' : ''}>
+                      {it.name}
+                    </a>
+                  ))}
+                </>
+              ))}
+            </div>
+          )}
+        </>
+      ))
+    }
+  </nav>
+
+  <nav class="nav-tier">
+    <div class="tier-head">Story</div>
+    <a
+      href={model.episodes.href}
+      class:list={[
+        'nav-coll',
+        { current: refActive(model.episodes.href), here: model.episodes.active && !refActive(model.episodes.href) },
+      ]}
+    >
+      <span class="nav-coll-label">Episodes</span>
+      <span class="n">{model.episodes.total}</span>
+    </a>
+    {
+      model.episodes.items.length > 0 && (
+        <div class="nav-members">
+          {model.episodes.items.map((it) => (
+            <a href={it.href} class={it.href === path ? 'current' : ''}>
+              {it.name}
+            </a>
+          ))}
+          <a class="see-all" href={model.episodes.href}>View all →</a>
+        </div>
+      )
+    }
+
+    <a
+      href={model.arcs.href}
+      class:list={['nav-coll', { current: refActive(model.arcs.href), here: model.arcs.active && !refActive(model.arcs.href) }]}
+    >
+      <span class="nav-coll-label">{model.arcs.label}</span>
+      <span class="n">{model.arcs.total}</span>
+    </a>
+    {
+      model.arcs.active && model.arcs.groups && (
+        <div class="nav-members">
+          {model.arcs.groups.map((g) => (
+            <>
+              {g.items.map((it) => (
+                <a href={it.href} class={it.href === path ? 'current' : ''}>
+                  {it.name}
+                </a>
+              ))}
+            </>
+          ))}
+        </div>
+      )
+    }
+  </nav>
+
+  <nav class="nav-tier">
+    <div class="tier-head plain">Views</div>
+    {
+      views.map((v) => (
+        <a href={v.href} class={refActive(v.href) ? 'current' : ''}>
+          {v.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <nav class="nav-tier nav-quick">
+    <button type="button" class="quick-link" data-random>
+      <svg class="dice" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <circle cx="8" cy="8" r="1.5" fill="currentColor" />
+        <circle cx="16" cy="8" r="1.5" fill="currentColor" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+        <circle cx="8" cy="16" r="1.5" fill="currentColor" />
+        <circle cx="16" cy="16" r="1.5" fill="currentColor" />
+      </svg>
+      <span>Random page</span>
+    </button>
+    <div class="recent" data-recent hidden>
+      <div class="subgroup">Recently viewed</div>
+      <div class="recent-list"></div>
+    </div>
+  </nav>
+</aside>
+
+<script define:vars={{ randomHrefs: model.randomHrefs }}>
+  // The sidebar can be rendered twice on a page (the desktop rail + the mobile
+  // drawer reuses the same tree), so every bit of wiring iterates over *all*
+  // instances rather than the first match — otherwise the drawer copy is dead.
+
+  // Random jump — pick any entity/episode and go.
+  (function () {
+    document.querySelectorAll('[data-random]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (!randomHrefs.length) return;
+        var i = Math.floor(Math.random() * randomHrefs.length);
+        location.href = randomHrefs[i];
+      });
+    });
+  })();
+
+  // Recently viewed — read the ring buffer the BaseLayout writer maintains.
+  (function () {
+    var list = [];
+    try {
+      list = JSON.parse(localStorage.getItem('recent.pages') || '[]');
+    } catch (e) {}
+    list = list.filter(function (x) {
+      return x && x.href && x.href !== location.pathname;
+    });
+    if (!list.length) return;
+    document.querySelectorAll('[data-recent]').forEach(function (wrap) {
+      var out = wrap.querySelector('.recent-list');
+      if (!out) return;
+      list.slice(0, 4).forEach(function (x) {
+        var a = document.createElement('a');
+        a.href = x.href;
+        a.textContent = x.title || x.href;
+        out.appendChild(a);
+      });
+      wrap.hidden = false;
+    });
+  })();
+
+  // Center the current item inside the active section's scroll window. Run on the
+  // next frame — *after* the recently-viewed block above has been injected (which
+  // grows the footer and so finalises the member box's height) and after the flex
+  // layout settles. offsetTop is used because it ignores the fold-in transform.
+  requestAnimationFrame(function () {
+    document.querySelectorAll('.nav-members').forEach(function (box) {
+      if (box.scrollHeight <= box.clientHeight + 4) return;
+      box.classList.add('is-scrollable'); // turns on the fade hint
+      var cur = box.querySelector('a.current');
+      if (cur) box.scrollTop = cur.offsetTop - (box.clientHeight - cur.offsetHeight) / 2;
+    });
+  });
+</script>

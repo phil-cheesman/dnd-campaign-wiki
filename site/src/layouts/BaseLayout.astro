@@ -1,0 +1,1090 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import Toc from '../components/Toc.astro';
+import Topbar from '../components/Topbar.astro';
+import MobileDrawer from '../components/MobileDrawer.astro';
+import Hovercard from '../components/Hovercard.astro';
+import HeadingAnchors from '../components/HeadingAnchors.astro';
+import Analytics from '@vercel/analytics/astro';
+import AnalyticsEvents from '../components/AnalyticsEvents.astro';
+
+interface Heading { depth: number; slug: string; text: string }
+const { title, description, headings = [], variant = 'default' } = Astro.props as {
+  title: string;
+  description?: string;
+  headings?: Heading[];
+  variant?: 'default' | 'full';
+};
+const isFull = variant === 'full';
+
+// Social / link-preview (Open Graph + Twitter) metadata. Without these, scrapers
+// (iMessage, Slack, etc.) grab an arbitrary image off the page; og:image pins it.
+const siteUrl = Astro.site ?? new URL('https://alambor-wiki.vercel.app');
+const ogImage = new URL('/og-image.png', siteUrl).href;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const ogTitle = `${title} · Alambor Codex`;
+const ogDesc = description ?? 'Knowledge base for the Alambor D&D campaign — the Alambor Six.';
+
+// Modules occupy the top bar. Wiki + Graph + Map + Gallery are live.
+// (Calendar was a "soon" marker — hidden until/unless it's actually built.)
+const modules = [
+  { key: 'wiki', label: 'Wiki', href: '/', soon: false },
+  { key: 'graph', label: 'Graph', href: '/graph', soon: false },
+  { key: 'map', label: 'Map', href: '/map', soon: false },
+  { key: 'gallery', label: 'Gallery', href: '/gallery', soon: false },
+];
+
+// Exactly one module is "active" per page. Graph/Map/Gallery own their own
+// sub-trees; Wiki is the catch-all for everything else (entity/episode pages).
+const path = Astro.url.pathname;
+const isActiveModule = (key: string) => {
+  if (key === 'graph') return path === '/graph' || path.startsWith('/graph/');
+  if (key === 'map') return path === '/map' || path.startsWith('/map/');
+  if (key === 'gallery') return path === '/gallery' || path.startsWith('/gallery/');
+  if (key === 'wiki')
+    return !(path.startsWith('/graph') || path.startsWith('/map') || path.startsWith('/gallery'));
+  return false;
+};
+
+// Right-rail TOC: only h2/h3, and only worth showing on longer pages (>= 3).
+const tocItems = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const hasToc = tocItems.length >= 3;
+// The right rail is one unified column: a page-supplied infobox (slot="rail")
+// stacked above the "On this page" TOC. It exists if either is present.
+const hasRail = hasToc || Astro.slots.has('rail');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Resolve the theme before first paint (no flash): an explicit stored
+      // choice wins; otherwise default to light (the codex's primary look) rather
+      // than following the OS preference. ThemeToggle persists changes.
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t !== 'light' && t !== 'dark') t = 'light';
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+      // Recently-viewed ring buffer (key `recent.pages`, newest-first, capped at 6).
+      // Records only two-segment dossier pages; the sidebar reads it back. Mirrors
+      // the `sidenav.folds` localStorage pattern. Deferred so <title> is parsed.
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          var seg = location.pathname.split('/').filter(Boolean);
+          var TIERS = ['characters', 'npcs', 'locations', 'kingdoms', 'factions', 'items', 'worldbuilding', 'episodes', 'arcs'];
+          if (seg.length !== 2 || TIERS.indexOf(seg[0]) === -1) return;
+          var title = (document.title || '').replace(/ · Alambor Codex$/, '') || location.pathname;
+          var KEY = 'recent.pages';
+          var list = [];
+          try { list = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+          list = list.filter(function (x) { return x && x.href !== location.pathname; });
+          list.unshift({ href: location.pathname, title: title });
+          localStorage.setItem(KEY, JSON.stringify(list.slice(0, 6)));
+        } catch (e) {}
+      });
+    </script>
+    <title>{title} · Alambor Codex</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#14161d" />
+    <meta name="apple-mobile-web-app-title" content="Alambor" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Alambor Codex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Alambor Codex" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDesc} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/pagefind/pagefind-component-ui.css" />
+    <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
+  </head>
+  <body class:list={{ 'is-full': isFull }}>
+    <Topbar modules={modules} isActive={isActiveModule}>
+      <pagefind-modal-trigger slot="search" id="search" class="search"></pagefind-modal-trigger>
+    </Topbar>
+
+    {/* Mobile nav (≤1080px): hamburger-opened drawer with the module links + the
+        full Sidebar tree. Inert/hidden above the breakpoint; lives outside .shell. */}
+    <MobileDrawer modules={modules} isActive={isActiveModule}>
+      <Sidebar slot="nav" />
+    </MobileDrawer>
+
+    {isFull ? (
+      <main class="fullbleed">
+        <slot />
+      </main>
+    ) : (
+      <div class="shell" data-rail={hasRail ? '' : null}>
+        <Sidebar />
+
+        <main class="article">
+          <slot />
+        </main>
+
+        {hasRail && (
+          <aside class="rail">
+            <slot name="rail" />
+            {hasToc && <Toc items={tocItems} />}
+          </aside>
+        )}
+      </div>
+    )}
+
+    {!isFull && (
+      <footer class="site-footer">
+        <span>Alambor Codex — regenerated from <code>canon/</code>. Facts only; spoilers excluded.</span>
+      </footer>
+    )}
+
+    <Hovercard />
+    <HeadingAnchors />
+
+    {/* Pagefind Component UI modal — the trigger lives in the topbar; this is the
+        overlay it opens. show-sub-results matches the old Default UI behaviour. */}
+    <pagefind-modal show-sub-results="true" show-images="false"></pagefind-modal>
+
+    <script is:inline>
+      // The Component UI script (pagefind-component-ui.js) only exists after the
+      // build's pagefind step, so the custom elements never register in `astro dev`.
+      // Detect that and drop a disabled fallback into the trigger so the topbar
+      // doesn't show an empty gap during local development.
+      (function () {
+        setTimeout(function () {
+          if (window.customElements && customElements.get('pagefind-modal-trigger')) return;
+          var mount = document.getElementById('search');
+          if (mount)
+            mount.innerHTML =
+              '<input type="search" placeholder="Search (built site only)" disabled class="search-fallback" />';
+        }, 600);
+      })();
+    </script>
+
+    <style is:global>
+      /* ===== Responsive breakpoint constants =====================================
+         Three agreed widths the whole codex standardizes on. CSS can't read custom
+         properties inside `@media`, so these are documented constants, not vars —
+         use these exact values, don't add new one-off widths.
+           1080px — "collapse": 3-col shell → 1-col; sidenav + toc hide; the mobile
+                    nav hamburger appears (so nav is never lost).
+            640px — "compact": floats/columns drop to a single column.
+            480px — "phone": typography scale, padding, and tap-target sizing.
+         (Migrate stray 540/560/720/900 values toward these; see the mobile spec.)
+         ========================================================================= */
+      :root {
+        /* Codex base (mockup 02) */
+        --bg: #fcfbf8;
+        --surface: #f4f1ea;
+        --text: #23211c;
+        --ink-soft: #46423a; /* prose slightly softer than --text */
+        --muted: #75705f;
+        --faint: #b3ad9d; /* counts, "soon" chips, off legend items */
+        --hairline: #e3ddcf;
+        /* Gold structure */
+        --gold: #a8842c;
+        --gold-soft: #c9b06a;
+        /* Texair purple — links + active/current states */
+        --link: #6a33b0;
+        --link-hover: #8348cf;
+        --logo-fruit: #7a3bb8;
+        /* White-bark logo needs a dark edge to read on the cream topbar; see .logo. */
+        --logo-halo: rgba(35, 33, 28, 0.5);
+        /* Translucent chrome (sticky topbar / crumb / floating graph panels) */
+        --panel-bg: rgba(252, 251, 248, 0.9);
+        --maxw: 1280px;
+        --measure: 68ch;
+        /* Sticky-header geometry. --topbar-h ≈ logo(52px) + 0.7rem×2 padding + 1px border. */
+        --topbar-h: 4.85rem;
+        --shell-pad-top: 2.5rem;
+        /* ===== Motion tokens — one timing/easing language for the whole codex.
+           Durations: instant (hover/press), state (accordion/tabs), panel (drawers).
+           Easing: out=enter (fast start, soft land), in=exit, in-out=state/drawer. */
+        --dur-instant: 130ms;
+        --dur-state: 200ms;
+        --dur-panel: 280ms;
+        --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+        --ease-in: cubic-bezier(0.4, 0, 1, 1);
+        --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== Dark theme — cool "slate codex": a deep blue-grey desk that lets the
+         purple links and gold structure read as the accents, not the brown bg ===== */
+      :root[data-theme='dark'] {
+        --bg: #14161d;
+        --surface: #1d2029;
+        --text: #e9ebf2;
+        --ink-soft: #c9cdda;
+        --muted: #8e93a6;
+        --faint: #5c6172;
+        --hairline: #2c303d;
+        --gold: #d2ad55;
+        --gold-soft: #b99b51;
+        --link: #b89af0;
+        --link-hover: #cdb6f7;
+        --logo-fruit: #b89af0;
+        /* Dark codex desk gives the white bark its own contrast — no halo needed. */
+        --logo-halo: transparent;
+        --panel-bg: rgba(20, 22, 29, 0.9);
+      }
+      /* Badges/chips: muted dark fills with their hue carried in the text. */
+      :root[data-theme='dark'] .badge.type,
+      :root[data-theme='dark'] .feed-tag.is-new,
+      :root[data-theme='dark'] .pcchip { background: #3a3115; color: #d8b75e; }
+      :root[data-theme='dark'] .pcchip:hover { background: #4a3f1c; color: #e6c870; }
+      :root[data-theme='dark'] .badge.s-active,
+      :root[data-theme='dark'] .badge.r-ally { background: #1f2c1f; color: #8fb585; }
+      :root[data-theme='dark'] .badge.s-destroyed,
+      :root[data-theme='dark'] .badge.r-enemy { background: #341f19; color: #d28a76; }
+      :root[data-theme='dark'] .badge.s-deceased { background: #272b36; color: #aab0c0; }
+      :root[data-theme='dark'] .badge.s-unknown,
+      :root[data-theme='dark'] .badge.r-neutral,
+      :root[data-theme='dark'] .feed-tag.is-upd,
+      :root[data-theme='dark'] .feed-tag.is-edit { background: #242832; color: #9197a8; }
+      :root[data-theme='dark'] .feed-tag.is-art { background: #2a2140; color: #b89af0; }
+      :root[data-theme='dark'] .feed-tag.is-maint { color: var(--faint); border-color: var(--hairline); }
+      :root[data-theme='dark'] .align-dot { background: #242832; color: #9197a8; }
+      :root[data-theme='dark'] .a-good .align-dot,
+      :root[data-theme='dark'] .aligngrid .ax-good { background: #1f2c1f; color: #8fb585; }
+      :root[data-theme='dark'] .a-evil .align-dot,
+      :root[data-theme='dark'] .aligngrid .ax-evil { background: #341f19; color: #d28a76; }
+      /* ax-* are text-only labels in the grid; keep them transparent. */
+      :root[data-theme='dark'] .aligngrid .ax-good,
+      :root[data-theme='dark'] .aligngrid .ax-evil { background: none; }
+      /* Leaflet zoom control sits on the dark desk on map-less pages too. */
+      :root[data-theme='dark'] .leaflet-bar a {
+        background: var(--surface); color: var(--text); border-color: var(--hairline);
+      }
+      :root[data-theme='dark'] .leaflet-bar a:hover { background: var(--hairline); }
+      * { box-sizing: border-box; }
+      html { font-size: 15.5px; scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        line-height: 1.7;
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; }
+
+      /* Sticky-topbar offset: in-page anchor jumps (and the dashboard heading) land
+         a hair below the sticky topbar instead of hiding underneath it. */
+      :where(h1, h2, h3, h4, h5, h6, [id]) {
+        scroll-margin-top: calc(var(--topbar-h) + 1rem);
+      }
+
+      a.srdlink { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+      a.srdlink:hover { color: var(--gold); }
+      a.srdlink::after { content: ' ↗'; font-size: 0.7em; vertical-align: super; opacity: 0.6; }
+
+      /* ===== Internal entity links (auto-linked dossiers) =====
+         A resting dotted-gold underline marks "this is a codex entity you can hover";
+         on hover a solid gold underline draws from the centre outward (background-size
+         grows from a centred 0%). Doubles as the affordance for the hovercard preview. */
+      a.wikilink {
+        text-decoration: none;
+        border-bottom: 1px dotted color-mix(in srgb, var(--gold-soft) 60%, transparent);
+        background-image: linear-gradient(var(--gold), var(--gold));
+        background-repeat: no-repeat;
+        background-position: 50% calc(100% + 1px);
+        background-size: 0% 1.5px;
+        transition: background-size var(--dur-state) var(--ease-out), color var(--dur-instant) ease;
+      }
+      @media (hover: hover) {
+        a.wikilink:hover {
+          color: var(--link-hover);
+          text-decoration: none;
+          border-bottom-color: transparent;
+          background-size: 100% 1.5px;
+        }
+      }
+
+      /* ===== Reduced motion — honour the OS setting. Translation/scale/keyframes
+         collapse to ~instant; opacity fades are vestibular-safe and left intact. */
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Topbar + theme-toggle CSS now lives in Topbar.astro (shared by both layouts). */
+
+      /* ===== Three-column codex shell ===== */
+      .shell {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 3.5rem;
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: var(--shell-pad-top) 2rem 5rem;
+      }
+      /* One unified right rail (infobox + "On this page"). Sized to comfortably
+         hold the infobox; the content column lands near the 68ch measure. */
+      .shell[data-rail] { grid-template-columns: 220px minmax(0, 1fr) 16rem; }
+
+      /* ===== Left sidebar ===== */
+      /* Sticky offset == its own start position (topbar + shell top padding) so it
+         locks the instant you scroll, with no "scroll up a bit then catch" jump. */
+      /* Sticky, capped at the viewport, and laid out as a flex column. The sidebar
+         is never its *own* scroll container (that bred a nested scrollbar that
+         desynced from the page). Instead the one expanded section flex-shrinks and
+         its member list scrolls internally, so the structural links and the
+         quick-links footer below it always stay on screen. */
+      .sidenav {
+        font-size: 0.85rem;
+        position: sticky;
+        top: calc(var(--topbar-h) + var(--shell-pad-top));
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - var(--topbar-h) - var(--shell-pad-top) - 1.5rem);
+      }
+      .nav-tier { margin-bottom: 1.15rem; flex: 0 0 auto; }
+      /* The group holding the expanded list is the only one allowed to shrink. */
+      .nav-tier:has(> .nav-members) {
+        flex: 0 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .nav-tier:last-child { margin-bottom: 0; }
+      /* Tier header — gold, links to the index */
+      .tier-head {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0 0 0.45rem;
+      }
+      a.tier-head:hover { color: var(--gold); text-decoration: underline; }
+      .tier-head.plain { color: var(--muted); }
+
+      /* ===== Collection links (flat "index of header pages") =====
+         One link per collection; the active section expands its members inline.
+         Slightly stronger than a member leaf, with the count pushed to the right. */
+      .sidenav a.nav-coll {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        color: var(--ink-soft);
+        font-weight: 500;
+        padding: 0.22rem 0;
+        line-height: 1.3;
+      }
+      .sidenav a.nav-coll:hover { color: var(--link-hover); }
+      .nav-coll .n { margin-left: auto; }
+      .sidenav a.nav-coll.current { color: var(--text); font-weight: 600; }
+      /* Two-level "you are here": the section you're inside (but not exactly on)
+         gets a hollow gold diamond; the live page keeps the solid one (.current). */
+      .sidenav a.nav-coll.here { color: var(--text); font-weight: 600; }
+      .sidenav a.nav-coll.here::before {
+        content: '';
+        display: inline-block;
+        width: 5px; height: 5px;
+        border: 1px solid var(--gold-soft);
+        background: transparent;
+        transform: rotate(45deg);
+        margin-right: 0.5rem;
+        vertical-align: 2px;
+      }
+
+      /* Expanded members — indented under a faint gold-anchored spine. A long roster
+         (e.g. all NPCs) scrolls *within itself*, capped so the surrounding nav and the
+         quick-links footer never get pushed off-screen. The fade mask hints there's
+         more below; the scrollbar is kept thin and quiet. */
+      .nav-members {
+        position: relative; /* so a member's offsetTop is measured against this box */
+        padding-left: calc(0.95rem - 1.5px);
+        margin: 0.1rem 0 0.3rem 0.15rem;
+        border-left: 1.5px solid var(--hairline);
+        overflow-y: auto;
+        /* Scrollable, but the bar itself is hidden — it read as clutter. The current
+           item is auto-centered (Sidebar.astro) and a soft fade hints at more. */
+        scrollbar-width: none;
+      }
+      .nav-members::-webkit-scrollbar { display: none; }
+      /* Inside the shrinking group, the member list is what gives way and scrolls. */
+      .nav-tier:has(> .nav-members) > .nav-members { flex: 1 1 auto; min-height: 2.5rem; }
+      /* Only fade when the list actually overflows (class set after layout). */
+      .nav-members.is-scrollable {
+        -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.2rem), transparent);
+        mask-image: linear-gradient(to bottom, #000 calc(100% - 1.2rem), transparent);
+      }
+      /* Cascade the leaves in when a section expands — a short staggered reveal
+         rather than a hard pop. Capped so the whole sweep stays under ~300ms. */
+      @media (prefers-reduced-motion: no-preference) {
+        .nav-members > * { animation: fold-in var(--dur-state) var(--ease-out) both; }
+        .nav-members > *:nth-child(2) { animation-delay: 30ms; }
+        .nav-members > *:nth-child(3) { animation-delay: 60ms; }
+        .nav-members > *:nth-child(4) { animation-delay: 90ms; }
+        .nav-members > *:nth-child(5) { animation-delay: 120ms; }
+        .nav-members > *:nth-child(6) { animation-delay: 150ms; }
+        .nav-members > *:nth-child(n + 7) { animation-delay: 180ms; }
+      }
+      @keyframes fold-in {
+        from { opacity: 0; transform: translateY(-4px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      /* ===== Quick links (Random / Recently viewed) ===== */
+      .quick-link {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border: 0;
+        padding: 0.2rem 0;
+        margin: 0;
+        font: inherit;
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        cursor: pointer;
+      }
+      .quick-link:hover { color: var(--gold); }
+      .quick-link .dice { flex: none; color: var(--gold); transition: transform var(--dur-state) var(--ease-out); }
+      .quick-link:hover .dice { transform: rotate(-18deg); color: var(--gold-soft); }
+      .recent .recent-list a { display: block; color: var(--muted); padding: 0.18rem 0; line-height: 1.3; }
+
+      /* Sub-group label (Party / Former members / Allies …) — quieter than the tier head */
+      .subgroup {
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9a9483;
+        margin: 0.7rem 0 0.25rem;
+      }
+      /* A clickable sub-group heading (a kingdom in the Locations rail): reads as a
+         sub-group label at rest, behaves as a link into that kingdom's article, and
+         takes the gold current-diamond like any other member when you're on it. */
+      .sidenav a.subgroup-link { color: #9a9483; }
+      .sidenav a.subgroup-link:hover { color: var(--link-hover); }
+      .sidenav a.subgroup-link.current { color: var(--text); }
+      .sidenav a { display: block; color: var(--muted); padding: 0.2rem 0; line-height: 1.35; }
+      .sidenav a:hover { color: var(--link-hover); text-decoration: none; }
+      .sidenav a.current { color: var(--text); font-weight: 600; }
+      .sidenav a.current::before {
+        content: '';
+        display: inline-block;
+        width: 5px; height: 5px;
+        background: var(--gold);
+        transform: rotate(45deg);
+        margin-right: 0.5rem;
+        vertical-align: 2px;
+      }
+      .see-all {
+        font-size: 0.76rem !important;
+        color: var(--link) !important;
+        margin-top: 0.3rem;
+      }
+      .see-all:hover { color: var(--link-hover) !important; }
+      /* Faded count chip on Browse links */
+      .sidenav .n { color: var(--faint); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+      .sidenav a.current .n { color: var(--muted); }
+
+      /* ===== Unified right rail ===== */
+      /* Plain flow column. The grid stretches it to the (much taller) article's
+         height, which gives the sticky TOC room to track the whole scroll while
+         the infobox above it scrolls away naturally. */
+      .rail { min-width: 0; }
+      .rail .toc { margin-top: 1.6rem; }
+      .rail > .toc:first-child { margin-top: 0; } /* TOC-only rail (no infobox) */
+
+      /* ===== Right TOC ===== */
+      .toc { position: sticky; top: calc(var(--topbar-h) + var(--shell-pad-top)); height: fit-content; font-size: 0.82rem; }
+      .toc h5 {
+        font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
+      }
+      .toc a {
+        display: block; color: var(--muted);
+        padding: 0.22rem 0 0.22rem 0.85rem;
+        border-left: 1.5px solid var(--hairline);
+      }
+      .toc a:hover { color: var(--link-hover); text-decoration: none; }
+      .toc a.sub { padding-left: 1.7rem; font-size: 0.95em; }
+      .toc a.on { color: var(--text); border-left-color: var(--gold); font-weight: 500; }
+
+      /* ===== Article column ===== */
+      .article { min-width: 0; }
+      .article h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 2.7rem;
+        line-height: 1.08;
+        letter-spacing: -0.005em;
+        margin: 0 0 0.3rem;
+      }
+      .article h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 1.7rem;
+        margin: 2.4rem 0 0.7rem;
+        scroll-margin-top: 7.5rem;
+      }
+      .article h2::after {
+        content: '';
+        display: block;
+        width: 2.2rem;
+        border-bottom: 2px solid var(--gold-soft);
+        margin-top: 0.4rem;
+      }
+      .article h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin: 1.8rem 0 0.5rem;
+        scroll-margin-top: 7.5rem;
+      }
+      .article p, .article li { max-width: var(--measure); }
+      .article ul, .article ol { margin: 0 0 1rem 1.2rem; }
+      .article li { margin-bottom: 0.35rem; }
+      .article li::marker { color: var(--gold); }
+      .article img { max-width: 100%; height: auto; border-radius: 8px; }
+
+      .kicker {
+        color: var(--gold);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin: 0 0 0.4rem;
+      }
+
+      /* ===== Breadcrumbs (sticky "you are here" — last crumb is the page name) ===== */
+      .crumb {
+        position: sticky;
+        top: calc(var(--topbar-h) - 1px); /* tuck under the topbar, no sliver gap */
+        z-index: 4;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin: 0 0 1.4rem;
+        padding: 0.55rem 0;
+        background: var(--panel-bg);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .crumb a { color: var(--muted); }
+      .crumb a:hover { color: var(--link-hover); }
+      .crumb .sep { margin: 0 0.5rem; color: var(--gold-soft); }
+      .crumb .current { color: var(--link); font-weight: 500; } /* texair = current */
+
+      /* ===== Badges (frontmatter-driven) ===== */
+      .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.9rem; }
+      .badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 99px;
+        white-space: nowrap;
+      }
+      .badge.type { background: #efe6cf; color: #7a5410; } /* gold */
+      .badge.s-active, .badge.r-ally { background: #e4ecdf; color: #4a6741; } /* green */
+      .badge.s-destroyed, .badge.r-enemy { background: #f0ddd8; color: #8a3d2c; } /* red-brown */
+      .badge.s-deceased { background: #e8e2da; color: #6b5d52; } /* muted stone */
+      .badge.s-unknown, .badge.r-neutral { background: #ece9e1; color: #75705f; } /* grey */
+
+      /* ===== Infobox (facts strip — top of the unified right rail) ===== */
+      .infobox {
+        width: 100%;
+        margin: 0;
+        padding: 1rem 1.1rem;
+        background: var(--surface);
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        font-size: 0.86rem;
+        line-height: 1.5;
+      }
+      .infobox h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        border: 0;
+        margin: 0 0 0.5rem;
+      }
+      .infobox h2::after { display: none; }
+      .infobox dt {
+        color: var(--gold);
+        font-size: 0.64rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 0.6rem;
+      }
+      .infobox dd { margin: 0.12rem 0 0; }
+      @media (max-width: 640px) { .infobox { float: none; width: 100%; margin: 0 0 1.25rem; } }
+
+      /* ===== PC stat block (inside the infobox) ===== */
+      .statblock { margin: 0 0 0.6rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--hairline); }
+      .align-line { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.5rem; }
+      .align-dot {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 2rem; height: 1.6rem; padding: 0 0.35rem;
+        border-radius: 6px; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.03em;
+        background: #ece9e1; color: #75705f; /* neutral default */
+      }
+      .a-good .align-dot { background: #e4ecdf; color: #4a6741; }
+      .a-evil .align-dot { background: #f0ddd8; color: #8a3d2c; }
+      .align-label { font-weight: 600; font-size: 0.92rem; }
+      .align-label .inferred {
+        font-style: normal; font-weight: 500; font-size: 0.6rem; text-transform: uppercase;
+        letter-spacing: 0.06em; color: var(--faint); margin-left: 0.4rem;
+        border: 1px solid var(--hairline); border-radius: 4px; padding: 0.05rem 0.3rem;
+      }
+      .statblock .subline { color: var(--muted); font-size: 0.82rem; margin: 0 0 0.6rem; }
+      .statblock .combat {
+        display: flex; gap: 1.1rem; list-style: none; padding: 0; margin: 0 0 0.7rem;
+      }
+      .statblock .combat li { display: flex; flex-direction: column; line-height: 1.15; }
+      .statblock .combat .ck {
+        font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+      }
+      .statblock .combat .cv { font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+      .statblock .abilities {
+        display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.3rem;
+        list-style: none; padding: 0; margin: 0 0 0.2rem;
+      }
+      .statblock .abilities li {
+        display: flex; flex-direction: column; align-items: center;
+        padding: 0.3rem 0; border: 1px solid var(--hairline); border-radius: 7px; background: var(--bg);
+      }
+      .statblock .abilities .al { font-size: 0.54rem; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); }
+      .statblock .abilities .as { font-size: 0.95rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+      .statblock .abilities .am { font-size: 0.66rem; color: var(--gold); font-variant-numeric: tabular-nums; }
+      .statblock .sig { margin-top: 0.7rem; }
+      .statblock .sig dt {
+        color: var(--gold); font-size: 0.64rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      }
+      .statblock .sig ul { margin: 0.25rem 0 0; padding-left: 1.05rem; }
+      .statblock .sig li { margin: 0.1rem 0; font-size: 0.82rem; }
+
+      /* ===== Alignment chart (3×3) ===== */
+      .aligngrid-wrap { max-width: 40rem; margin: 0.4rem 0 1.8rem; }
+      .aligngrid {
+        display: grid;
+        grid-template-columns: 5.5rem repeat(3, 1fr);
+        gap: 0.4rem;
+      }
+      .aligngrid .corner { }
+      .aligngrid .colhead, .aligngrid .rowhead {
+        font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+        display: flex; align-items: center;
+      }
+      .aligngrid .colhead { justify-content: center; padding-bottom: 0.1rem; }
+      .aligngrid .rowhead { justify-content: flex-end; padding-right: 0.6rem; text-align: right; }
+      .aligngrid .ax-good { color: #4a6741; }
+      .aligngrid .ax-evil { color: #8a3d2c; }
+      .aligngrid .cell {
+        min-height: 4.2rem; border: 1px solid var(--hairline); border-radius: 9px;
+        background: var(--surface); padding: 0.4rem;
+        display: flex; flex-wrap: wrap; gap: 0.3rem; align-content: flex-start;
+      }
+      .aligngrid .cell.has { background: var(--bg); border-color: var(--gold-soft); }
+      .pcchip {
+        display: inline-flex; align-items: center; gap: 0.15rem;
+        font-size: 0.78rem; font-weight: 500; line-height: 1.2;
+        padding: 0.2rem 0.55rem; border-radius: 99px;
+        background: #efe6cf; color: #7a5410; height: fit-content;
+      }
+      .pcchip:hover { background: #e7d9b4; text-decoration: none; color: #5d3f0a; }
+      .pcchip .qm { color: var(--gold-soft); font-weight: 700; }
+      .unaligned { font-size: 0.82rem; color: var(--muted); margin: 0.7rem 0 0; }
+      .gridnote { font-size: 0.72rem; color: var(--faint); margin: 0.3rem 0 0; }
+      @media (max-width: 480px) {
+        .aligngrid { grid-template-columns: 3.4rem repeat(3, 1fr); gap: 0.25rem; }
+        .aligngrid .rowhead, .aligngrid .colhead { font-size: 0.56rem; letter-spacing: 0.04em; }
+        .pcchip { font-size: 0.68rem; padding: 0.15rem 0.4rem; }
+      }
+
+      /* ===== Backlinks ===== */
+      .backlinks { margin-top: 2.8rem; border-top: 1px solid var(--hairline); padding-top: 1.2rem; }
+      .backlinks h2 { font-family: 'Cormorant Garamond', serif; border: 0; font-size: 1.3rem; margin: 0 0 0.6rem; }
+      .backlinks h2::after { display: none; }
+      .backlinks ul { columns: 2; column-gap: 2rem; padding-left: 1.1rem; margin: 0; }
+      @media (max-width: 640px) { .backlinks ul { columns: 1; } }
+
+      /* ===== Recently-updated feed (home) ===== */
+      .feed { list-style: none; padding: 0; margin: 0.6rem 0 1.6rem; max-width: var(--measure); }
+      .feed li {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .feed li a { font-weight: 500; flex: 1 1 auto; min-width: 0; }
+      .feed-meta { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+      .feed-tag {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.12rem 0.45rem;
+        border-radius: 99px;
+        white-space: nowrap;
+      }
+      .feed-tag.is-new { background: #efe6cf; color: #7a5410; } /* gold = new article */
+      .feed-tag.is-upd,
+      .feed-tag.is-edit { background: #ece9e1; color: #75705f; } /* grey = edited */
+      .feed-tag.is-art { background: #ece1fa; color: #6a33b0; } /* violet = art (pops) */
+      .feed-tag.is-maint {
+        background: transparent;
+        color: var(--faint);
+        border: 1px solid var(--hairline);
+      }
+
+      /* ===== Card grid (indexes / home) ===== */
+      .cardgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        gap: 0.75rem 1.25rem;
+        padding: 0;
+        list-style: none;
+        margin: 0.6rem 0 1.6rem;
+      }
+      .cardgrid li {
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        padding: 0.7rem 0.9rem;
+        background: var(--bg);
+        transition:
+          transform var(--dur-state) var(--ease-out),
+          border-color var(--dur-state) var(--ease-out),
+          box-shadow var(--dur-state) var(--ease-out);
+      }
+      /* Unified card lift (matches the gallery wall) — pointer devices only. */
+      @media (hover: hover) {
+        .cardgrid li:hover {
+          transform: translateY(-4px);
+          border-color: var(--gold-soft);
+          box-shadow: 0 8px 22px rgba(35, 33, 28, 0.1);
+        }
+      }
+      .cardgrid a { display: block; font-weight: 500; }
+      .cardgrid small { color: var(--muted); }
+
+      /* ===== Footer ===== */
+      .site-footer {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 1.4rem 2rem 2.5rem;
+        border-top: 1px solid var(--hairline);
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      /* ===== Pagefind Component UI (modal) — themed to the codex palette =====
+         The Component UI reads --pf-* variables and themes via [data-pf-theme].
+         Map those vars to the site tokens (which already flip on light/dark) so
+         the modal follows the active theme automatically. */
+      pagefind-modal-trigger,
+      pagefind-modal {
+        --pf-font: 'Inter', sans-serif;
+        --pf-background: var(--bg);
+        --pf-text: var(--text);
+        --pf-text-muted: var(--muted);
+        --pf-text-secondary: var(--ink-soft);
+        --pf-border: var(--hairline);
+        --pf-border-focus: var(--gold-soft);
+        --pf-hover: var(--surface);
+        --pf-mark: var(--gold);
+        --pf-border-radius: 10px;
+        --pf-modal-backdrop: rgba(20, 18, 14, 0.45);
+        --pf-modal-max-width: 44rem;
+        --pf-modal-top: 12vh;
+        --pf-shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.28);
+      }
+      /* Trigger sits where the old search box was: right-aligned, input-like. */
+      pagefind-modal-trigger.search { display: inline-flex; align-items: center; }
+      pagefind-modal-trigger.search button {
+        font-family: 'Inter', sans-serif;
+        background: var(--surface);
+        border: 1px solid var(--hairline);
+        color: var(--muted);
+        border-radius: 8px;
+      }
+      /* Phones have no keyboard, so the "⌘K" trigger hint is noise — drop it on
+         the mobile layout (matches the ≤1080 breakpoint where the topbar collapses
+         and search wraps to its own full-width row). */
+      @media (max-width: 1080px) {
+        pagefind-modal-trigger.search .pf-trigger-shortcut { display: none; }
+      }
+
+      /* ===== Force-graph (brain view) ===== */
+      /* Full-bleed page variant: the graph fills the viewport below the topbar. Lay
+         the page out as a flex column exactly one viewport tall (no footer) and let
+         the graph host take all the leftover space. This measures the *real* topbar
+         height instead of subtracting the static --topbar-h estimate — which was
+         wrong on mobile, where the topbar wraps the search onto a second row, making
+         the host taller than the screen and pushing the bottom-left legend off the
+         bottom edge (only reachable by pinch-zooming out). dvh excludes the iOS
+         dynamic browser chrome. overflow:hidden kills sub-pixel scroll (which also
+         kept the graph's slide-out sidebar from scrolling with the page).
+         Scoped to the graph only: other full-bleed pages (e.g. the gallery) are
+         taller than one viewport and must stay scrollable. */
+      body.is-full:has(.graph-host) {
+        overflow: hidden;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+      body.is-full:has(.graph-host) .topbar { flex-shrink: 0; }
+      body.is-full:has(.graph-host) .fullbleed { flex: 1; min-height: 0; }
+      .fullbleed { width: 100%; }
+      .graph-host {
+        width: 100%;
+        height: 100%;
+      }
+      /* Home-page hero embed */
+      .graph-hero {
+        position: relative;
+        margin: 0.4rem 0 2.2rem;
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .graph-hero .gph-wrap { height: 62vh; min-height: 360px; }
+      .graph-hero.is-teaser .gph-wrap { height: 44vh; min-height: 300px; }
+      .hero-note { color: var(--muted); font-size: 0.82rem; margin: -1.6rem 0 2rem; max-width: var(--measure); }
+
+      /* ===== Home welcome banner ===== */
+      .welcome {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        gap: 1.6rem;
+        align-items: stretch;
+        margin: 0.2rem 0 2.4rem;
+        border: 1px solid var(--hairline);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .welcome-media { position: relative; min-height: 17rem; }
+      .welcome-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      /* Seam the art into the panel so it reads as one banner, not a pasted photo. */
+      .welcome-media::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0) 55%, var(--surface) 100%);
+        pointer-events: none;
+      }
+      .welcome-body { padding: 1.8rem 1.9rem; display: flex; flex-direction: column; justify-content: center; }
+      .welcome-body h1 { margin: 0 0 0.7rem; }
+      .welcome-lede { margin: 0 0 1rem; color: var(--ink); max-width: 38rem; }
+      .welcome-links { font-size: 0.9rem; margin: 0; display: flex; flex-wrap: wrap; gap: 0.55rem; }
+      .welcome-links .dot { color: var(--gold-soft); }
+      @media (max-width: 720px) {
+        .welcome { grid-template-columns: 1fr; }
+        .welcome-media { min-height: 11rem; max-height: 14rem; }
+        .welcome-media::after {
+          background: linear-gradient(180deg, rgba(0,0,0,0) 50%, var(--surface) 100%);
+        }
+      }
+
+      /* ===== Portrait roster (home party) ===== */
+      .h2-sub { font-weight: 400; color: var(--muted); font-size: 0.7em; }
+      .portraits {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+        gap: 0.9rem 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0.6rem 0 1.4rem;
+      }
+      .portraits a {
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        font-weight: 500; gap: 0.45rem;
+      }
+      .portrait-img {
+        width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden;
+        border: 1px solid var(--hairline); background: var(--bg);
+        transition:
+          transform var(--dur-state) var(--ease-out),
+          border-color var(--dur-state) var(--ease-out),
+          box-shadow var(--dur-state) var(--ease-out);
+      }
+      /* Anchor the square crop to the top so heads aren't clipped. */
+      .portrait-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+      @media (hover: hover) {
+        .portraits a:hover .portrait-img {
+          transform: translateY(-4px);
+          border-color: var(--gold-soft);
+          box-shadow: 0 8px 22px rgba(35, 33, 28, 0.12);
+        }
+      }
+      .portrait-name { line-height: 1.2; }
+      .portrait-role { font-size: 0.74rem; font-weight: 400; color: var(--muted); line-height: 1.2; }
+
+      .gph-wrap { position: relative; width: 100%; overflow: hidden; }
+      .gph-wrap canvas { display: block; }
+      .gph-msg {
+        position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+        color: var(--muted); font-size: 0.9rem; pointer-events: none;
+      }
+
+      /* Floating control panels */
+      .gph-panel {
+        position: absolute; z-index: 3; display: flex; gap: 0.4rem; align-items: center;
+        background: var(--panel-bg); backdrop-filter: blur(6px);
+        border: 1px solid var(--hairline); border-radius: 10px; padding: 0.3rem 0.4rem;
+      }
+      .gph-tl { top: 0.7rem; left: 0.7rem; }
+      .gph-tr { top: 0.7rem; right: 0.7rem; padding: 0.15rem; }
+      .gph-bl { bottom: 0.7rem; left: 0.7rem; max-width: calc(100% - 1.4rem); }
+
+      .gph-seg { display: inline-flex; border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+      .gph-seg button {
+        border: 0; background: transparent; color: var(--muted); cursor: pointer;
+        font: 600 0.72rem 'Inter', sans-serif; letter-spacing: 0.04em; padding: 0.3rem 0.6rem;
+      }
+      .gph-seg button.on { background: var(--gold); color: #fff; }
+
+      .gph-btn {
+        border: 1px solid var(--hairline); background: var(--bg); color: var(--text); cursor: pointer;
+        font: 500 0.72rem 'Inter', sans-serif; padding: 0.32rem 0.6rem; border-radius: 8px;
+      }
+      .gph-btn:hover { border-color: var(--gold-soft); text-decoration: none; }
+      a.gph-link { color: var(--link); }
+
+      .gph-tr input {
+        border: 0; background: transparent; outline: none; color: var(--text);
+        font: 500 0.78rem 'Inter', sans-serif; padding: 0.3rem 0.5rem; min-width: 9rem;
+      }
+
+      .gph-legend { flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+      .gph-leg {
+        display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer;
+        border: 0; background: transparent; color: var(--text);
+        font: 500 0.7rem 'Inter', sans-serif; padding: 0.18rem 0.4rem; border-radius: 6px;
+      }
+      .gph-leg:hover { background: var(--surface); }
+      .gph-leg .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+      .gph-leg.off { color: var(--faint); }
+      .gph-leg.off .dot { opacity: 0.3; }
+
+      /* Per-article local graph panel */
+      .localgraph { margin: 2.4rem 0 0.5rem; }
+      .localgraph h2 {
+        font-family: 'Cormorant Garamond', serif; border: 0; font-size: 1.3rem; margin: 0 0 0.2rem;
+      }
+      .localgraph h2::after { display: none; }
+      .localgraph .lg-sub { color: var(--muted); font-size: 0.8rem; margin: 0 0 0.6rem; }
+      .gph-local {
+        height: 320px; width: 100%;
+        border: 1px solid var(--hairline); border-radius: 10px;
+        background: var(--surface); overflow: hidden;
+      }
+      .gph-local canvas { display: block; }
+
+      /* ===== Tactile press feedback — every control compresses slightly on
+         press (works on tap too). Placed late so it extends, rather than loses to,
+         each control's own colour/border transitions. */
+      button, .gph-btn, .pcchip, .theme-toggle, summary.fold-head {
+        transition:
+          transform var(--dur-instant) var(--ease-out),
+          color var(--dur-instant) ease,
+          border-color var(--dur-instant) ease,
+          background-color var(--dur-instant) ease;
+      }
+      button:active, .gph-btn:active, .pcchip:active, .theme-toggle:active {
+        transform: scale(0.97);
+      }
+
+      @media (max-width: 1080px) {
+        .shell, .shell[data-rail] { grid-template-columns: 1fr; gap: 2rem; }
+        .sidenav, .toc { display: none; }
+        /* Rail collapses to a single column: the infobox hoists above the
+           article (as it always has on mobile); the TOC is hidden above. */
+        .rail { order: -1; }
+        /* Topbar wraps to two rows here (see Topbar.astro); a fixed-offset sticky
+           crumb would underlap it. */
+        .crumb { position: static; backdrop-filter: none; }
+      }
+
+      /* iPad / tablet (641–1080): the one-column collapse above hoists the infobox
+         to a full-width banner over the article — right on a phone, but on an iPad
+         it blows the portrait up huge and buries the prose. Restore a right-hand
+         rail (like desktop, minus the left nav) so the image + metadata sit beside
+         the article. Only the rail shell; plain articles stay single-column. */
+      @media (min-width: 641px) and (max-width: 1080px) {
+        .shell[data-rail] { grid-template-columns: minmax(0, 1fr) 16rem; gap: 2.5rem; }
+        .shell[data-rail] .rail { order: 0; }
+      }
+
+      /* ===== Phone polish (≤480 "phone") ========================================
+         The "designed for phone, not just reflowed" layer (mobile spec Phase 4).
+         Everything below is gated here so ≥481px is byte-identical: typography
+         scales down, the shell reclaims side padding, display titles stop wrapping
+         to three lines, and every tappable chip/toggle clears a 44px target. */
+      @media (max-width: 480px) {
+        /* Reclaim ~2.2rem of horizontal room: the 1080 block already drops the
+           shell to one column; here we tighten its side gutters and top padding so
+           the 68ch measure isn't squeezed by wide margins on a 390px screen. */
+        .shell, .shell[data-rail] { padding: 1.5rem 0.95rem 3.5rem; gap: 1.5rem; }
+
+        /* Display type was tuned for a desktop column; at phone width the 2.7rem h1
+           wraps to three lines and the 1.7rem h2 crowds. Scale the codex headings
+           down a notch (still serif, still hierarchical). */
+        .article h1 { font-size: 2.05rem; line-height: 1.1; }
+        .article h2 { font-size: 1.45rem; }
+        .article h3 { font-size: 1.18rem; }
+        .welcome-body h1 { font-size: 1.9rem; }
+
+        /* Body copy: a hair smaller + tighter list indent so wrapped lines keep a
+           comfortable measure rather than running 4–5 words per line. */
+        .article p, .article li { font-size: 0.96rem; }
+        .article ul, .article ol { margin-left: 1rem; }
+
+        /* Any wide media/embedded block can break to the screen edge instead of
+           forcing a page-level scrollbar. (Tables/stat-blocks already sit in their
+           own scroll wrappers; this is the catch-all for stray wide children.) */
+        .article :is(pre, table, img, video, iframe) { max-width: 100%; }
+        .article pre { overflow-x: auto; }
+
+        /* Tap targets ≥44px for the controls that live at phone width. Pad the
+           short ones up to a comfortable touch height without restyling them. */
+        .badge,
+        .pcchip { min-height: 1.9rem; }
+
+        /* Home hero: portraits go a touch larger (fewer, bigger heads beat a dense
+           grid of thumbnails on a narrow screen). */
+        .portraits { grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
+
+        /* Backlinks already single-column ≤640; tighten its gutter here. */
+        .backlinks ul { padding-left: 0.9rem; }
+      }
+    </style>
+    <Analytics />
+    <AnalyticsEvents />
+  </body>
+</html>

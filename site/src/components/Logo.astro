@@ -1,0 +1,22 @@
+---
+/**
+ * Arbor Alma mark — the recolored tree-of-life (white bark + texair-purple fruit).
+ * The white bark is canon: the tree is white with purple leaves. White-on-cream
+ * has no contrast in light mode, so the topbar logo gets a thin dark drop-shadow
+ * halo in light mode only (see BaseLayout .logo); dark mode leaves it bare white.
+ * Source of truth: design/logo-tree-white-purple.svg, copied to public/logo.svg.
+ * Render a touch larger than the wordmark cap-height so the canopy reads (the
+ * detailed tree muddies below ~32px).
+ */
+const { size = 34, class: className } = Astro.props as { size?: number; class?: string };
+---
+
+<img
+  src="/logo.svg"
+  alt="Arbor Alma"
+  width={size}
+  height={size}
+  class={`logo ${className ?? ''}`}
+  loading="eager"
+  decoding="async"
+/>
