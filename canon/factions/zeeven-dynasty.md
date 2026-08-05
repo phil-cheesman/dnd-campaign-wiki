@@ -27,9 +27,13 @@ art:
 
 The pre-Sundering drow dynasty at the root of the campaign's lore. The setting is 499–500 years after the Sundering between the Zeeven Dynasty and the gods (E00, E01). They were "chosen of the gods" — higher-power beings who roamed the earth with the gods themselves — until, with betrayer gods whispering in their ears, they decided they were better than the gods; the resulting battle destroyed and reshaped the world, and the link to the gods (transmutation) was taken, leaving the Tree in its place (E23, E139). Their recurring symbol: an upside-down crescent moon with a shining central star, six stars around it, and a mountain with a blooming white flower below (E23). The dark Zivians once ruled Mana before the corruption (E108); the Vault of Izdar has a connection to the Zeevens, and Omago, arch mage of transmutation, was one of their Hive of nine drow leaders (E108, E139). The dragon Valadon spoke of the Zeeven's return (E89), and the Marque showed interest in the ancient Zeevens (E102). Adune is a surviving Zeeven — Morgenrath Gafar, a 1,200-year-old drow lich whose wife and sons died in the Sundering; he hates the gods and the mortal races that replaced the Zeeven, and seeks to bring them back by combining six Zeeven artifacts to open a massive arcane gate (E136, E139, E144).
 
+**They are not extinct — they are banished.** In E165 the party, sucked through an astral gate, came face to face with the Zevan Dynasty itself: a **gigantic floating city** on a torn shelf of continent drifting in the Astral Sea — dark black-purple towers, bigger than Valon (?), its banners bearing a small crescent moon ringed by seven stars on a black field with a white flower (the same symbol Noctis remembered from the tombs beneath the Sutrey catacombs — "the ancient people gone from this world; return what is lost"). Jon: "This is the Zevan Dynasty, floating in the astral sea, banished from the world by the gods" — the very thing Adune is trying to bring back. The city was moving toward the drifting party as the session ended.
+
 ## Relationships / whereabouts
-- Effectively extinct in this world except Adune (and the Hive figures below the Vault).
-- Aum Shai holds five of their six gate-key artifacts; the sixth (Cloak of Displacement) is with the Yuan-Ti of Oojezz.
+- Not extinct: banished — their floating city survives in the Astral Sea, now approaching the stranded party (E165).
+- Adune (and the Hive figures below the Vault) remain their agents/remnants in the material world.
+- Aum Shai holds five of their six gate-key artifacts; the sixth — the orb of Felnriel (E164; the earlier "Cloak of Displacement" identification appears superseded (?)) — was lost by the party on the deck of the Resurrect at the Reef (E165) and may already be in Aum Shai hands (?).
 
 ## Open questions
 - Can the gate be opened without all six artifacts — and what exactly comes through if it is?
+- Who rules the floating city, and what do the living Zeeven want with the material world? (The party's stated plan: infiltrate posing as acolytes of the Hive.)

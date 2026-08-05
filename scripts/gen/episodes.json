@@ -3093,5 +3093,25 @@
     ],
     "collection": "episodes",
     "ref_images": []
+  },
+  {
+    "slug": "e165",
+    "episode": 165,
+    "title": "Gate to the Astral Sea",
+    "has_candidate": true,
+    "confidence": "high",
+    "art_type": "scene",
+    "scene_title": "Adrift before the Zevan Dynasty's floating city",
+    "rationale": "Ingest-authored scene brief for e165.",
+    "visual": "The Astral Sea — a vast weightless void of deep purple cosmos, drifting star-wisps and\nethereal light, no up or down. The six adventurers hang scattered in the emptiness like\ndivers in dark water, tiny against the scale of it: Vane, the tall slim elf shapeshifter,\nempty-handed and staring at his open palm where the stolen orb should be; Berrian, the\nhalf-elf paladin in living leaf-and-vine armor, cradling an unconscious foppish bard;\nNoctis, the hooded rogue, frozen mid-drift. Far below/beyond them, filling the horizon,\na colossal city on a torn shelf of continent floats toward them — dark black-purple towers\nand spires, banners swaying in the starlit void bearing a small crescent moon ringed by\nseven stars on a black field with a single white flower. In the far distance a leviathan\nshape with a long tail swims slowly through the space between stars.",
+    "key_entities": [
+      "Vane",
+      "Berrian",
+      "Noctis",
+      "Zeeven Dynasty",
+      "Astral Plane"
+    ],
+    "collection": "episodes",
+    "ref_images": []
   }
 ]

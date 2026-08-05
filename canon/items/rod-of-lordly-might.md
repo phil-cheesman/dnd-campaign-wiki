@@ -22,10 +22,10 @@ art:
 ---
 # Rod of Lordly Might
 
-A rod first seen in the inventory of Arcane Infinity, the Kierkenwall magic shop run by the Simulacrum Vaxoldon Vortily, alongside the Rope of ArchMagi, Ring of X-ray Vision, Efreeti Chain, Sword of Answering, wands, and the Ring of Evasion (E101); the party bought it there (per glossary). It has since earned its keep in two very different emergencies. During the flight through the Mandalonia sewers and the slave-pen escape beneath the Whispering Stacks, clever use of the Rod of Lordly Might helped the party overcome obstacles (E145). Its signature moment came in the Kraken fight: with Noctis swallowed and climbing the magic rope back up the beast's throat, Vane, Torgoth, and Quinton brought the rod to the Kraken's mouth and used it to pry open its jaws, letting Noctis out after the collar was secured (E155).
+A rod first seen in the inventory of Arcane Infinity, the Kierkenwall magic shop run by the Simulacrum Vaxoldon Vortily, alongside the Rope of ArchMagi, Ring of X-ray Vision, Efreeti Chain, Sword of Answering, wands, and the Ring of Evasion (E101); the party bought it there (per glossary). It has since earned its keep in two very different emergencies. During the flight through the Mandalonia sewers and the slave-pen escape beneath the Whispering Stacks, clever use of the Rod of Lordly Might helped the party overcome obstacles (E145). Its signature moment came in the Kraken fight: with Noctis swallowed and climbing the magic rope back up the beast's throat, Vane, Torgoth, and Quinton brought the rod to the Kraken's mouth and used it to pry open its jaws, letting Noctis out after the collar was secured (E155). Noctis has since made it his own: a nat-20 athletics **pole vault** launching himself and the roped Tor ~100 feet across the Coiled Ascendry's heart chamber (E164), and a bonus-action ladder-extension angled under the Siren's Call's last boarding bridge, popping bridge, railing and a marine into the sea (E165).
 
 ## Relationships / whereabouts
-Party inventory; handled most recently by Vane, Torgoth, and Quinton (E155).
+Party inventory; carried by Noctis (E164–E165), now with him in the Astral Sea.
 
 ## Open questions
 - Which of the rod's many functions the party has actually unlocked — the notes only record its use as a prying/utility tool.

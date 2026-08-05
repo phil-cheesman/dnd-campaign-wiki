@@ -1,7 +1,7 @@
 ---
 name: Yankee Williams
 aliases: [Yankee, Yankee (Sven), Sven, Captain Yankee Williams, Yankee Doodle Dandy Williams]
-episodes: [E53, E54, E59, E60, E61, E64, E67, E69, E113, E132, E137, E140, E147, E150]
+episodes: [E53, E54, E59, E60, E61, E64, E67, E69, E113, E132, E137, E140, E147, E150, E164, E165]
 status: living
 role: Ship's Captain
 relation: ally
@@ -28,6 +28,9 @@ art:
 
 An old dwarf (one later note says gnome) whom Harbor Master Thessias pointed the party toward after a stop at the Crowing Cock. Hired as first mate, he brought aboard five crew — Ronkros the aarakocra navigator, Daylor the deputy first mate, Taryn the tiefling cook, Razortail the dragonborn weapon master, and Leon the goliath bosun — and grew into captain of the party's ship. Because the party were wanted men, Quinton forged a new deed naming the ship "Wrecked at the Reef" under owners James Beach, Yankee (Sven), Daylor, Razortail, and Leon. With Yankee employed, the ship was repainted and re-papered at Salmon Run (via his friend Claypool, supplier of paint and fake documents) and passed the forged papers at Emerald Lake. The party had a frank conversation telling the crew the whole truth and promising compensation. He ran trade for a 70/30 revenue split, worked with Rudar the dwarf at the Bay of Resplendence, flew army colors during two months at sea, and earned crew pay of 5 platinum each plus 10 for himself per leg. When the ship went down, the party had to convince him not to go down with it, ferrying everyone to the cliffs. The notes' verdict: "Yankee is good." By E150 he captains a fifteen-member crew (AC 15 hull, HP 400, ten cannons).
 
+In the E164–E165 fleet battle off Jazacha he stood bloodied at the wheel of the Resurrect at the Reef under fire from the Aum Shai fleet; in the E165 boarding he steered hard to port to snap two of the Siren's Call's three boarding bridges (contested Strength, rolled 14 at +3 against the bigger ship's +5), then charged into the melee personally as his officers fell around him. His fate — and the ship's — is unknown: the party was pulled to the Astral Plane mid-battle with the Merchant's surrender terms ("your captain will live") hanging in the air.
+
 ## Relationships / whereabouts
-- Captain of Wrecked at the Reef, running the party's maritime operations; last full crew roster at E150.
+- Captain of Wrecked at the Reef / Resurrect at the Reef, running the party's maritime operations; last full crew roster at E150.
+- Last seen fighting the Siren's Call boarders aboard his mastless, burning ship (E165); fate unknown.
 - Friend of Claypool; business ties to Rudar the dwarf.
