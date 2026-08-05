@@ -1,1031 +1,153 @@
 {
-  "generatedAt": "2026-07-02T23:50:25.419Z",
+  "generatedAt": "2026-08-05T17:47:15.689Z",
   "events": [
     {
-      "date": "2026-07-02",
-      "iso": "2026-07-02T16:50:22-07:00",
-      "type": "maintenance",
-      "summary": "Ingest E164 \"Gaze of the Black Sun\" + Jon/Phil clarifications + scene plate",
-      "fileCount": 38,
-      "commit": "1374b32"
-    },
-    {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T12:10:45-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
-      "tier": "episodes",
-      "slug": "e163",
-      "name": "E163 — The Pit of Aeralora",
-      "href": "/episodes/e163",
-      "commit": "edcb988"
+      "tier": "characters",
+      "slug": "berrian",
+      "name": "Berrian",
+      "href": "/characters/berrian",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T11:07:46-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "cruucar",
+      "name": "Cruucar",
+      "href": "/characters/cruucar",
+      "commit": "73fd1ee"
+    },
+    {
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "noctis",
+      "name": "Noctis",
+      "href": "/characters/noctis",
+      "commit": "73fd1ee"
+    },
+    {
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "quinton",
+      "name": "Quinton Shackleford",
+      "href": "/characters/quinton",
+      "commit": "73fd1ee"
+    },
+    {
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "torgoth",
+      "name": "Torgoth",
+      "href": "/characters/torgoth",
+      "commit": "73fd1ee"
+    },
+    {
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
       "tier": "characters",
       "slug": "vane",
       "name": "Vane",
       "href": "/characters/vane",
-      "commit": "e9a048f"
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T11:07:46-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "zanim",
+      "name": "Zanim",
+      "href": "/characters/zanim",
+      "commit": "73fd1ee"
+    },
+    {
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
       "tier": "episodes",
-      "slug": "e162",
-      "name": "E162 — The Molting Chamber",
-      "href": "/episodes/e162",
-      "commit": "e9a048f"
+      "slug": "e164",
+      "name": "E164 — Gaze of the Black Sun",
+      "href": "/episodes/e164",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T11:07:46-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "new-article",
       "tier": "episodes",
-      "slug": "e163",
-      "name": "E163 — The Pit of Aeralora",
-      "href": "/episodes/e163",
-      "commit": "e9a048f"
+      "slug": "e165",
+      "name": "E165 — Gate to the Astral Sea",
+      "href": "/episodes/e165",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T11:07:46-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
       "tier": "factions",
-      "slug": "yuan-ti",
-      "name": "Yuan-Ti",
-      "href": "/factions/yuan-ti",
-      "commit": "e9a048f"
+      "slug": "zeeven-dynasty",
+      "name": "Zeeven Dynasty",
+      "href": "/factions/zeeven-dynasty",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-29",
-      "iso": "2026-06-29T11:07:46-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
-      "tier": "npcs",
-      "slug": "mally-grisham",
-      "name": "Mallie \"Molly\" Grisham, the Sparrow",
-      "href": "/npcs/mally-grisham",
-      "commit": "e9a048f"
-    },
-    {
-      "date": "2026-06-24",
-      "iso": "2026-06-24T19:32:02-07:00",
-      "type": "edit",
-      "tier": "episodes",
-      "slug": "e162",
-      "name": "E162 — The Molting Chamber",
-      "href": "/episodes/e162",
-      "commit": "e3878ef"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "torgoth",
-      "name": "Torgoth",
-      "href": "/characters/torgoth",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "vane",
-      "name": "Vane",
-      "href": "/characters/vane",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "episodes",
-      "slug": "e161",
-      "name": "E161 — Descent Through the Pyramid",
-      "href": "/episodes/e161",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "new-article",
-      "tier": "episodes",
-      "slug": "e162",
-      "name": "E162 — The Molting Chamber",
-      "href": "/episodes/e162",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-20",
-      "iso": "2026-06-20T08:23:37-07:00",
-      "type": "edit",
-      "tier": "npcs",
-      "slug": "mally-grisham",
-      "name": "Mallie \"Molly\" Grisham, the Sparrow",
-      "href": "/npcs/mally-grisham",
-      "commit": "96ba3c3"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T17:12:39-07:00",
-      "type": "maintenance",
-      "summary": "Reclassify Zanim as departed + sanitize two more entries",
-      "fileCount": 3,
-      "commit": "5ff7e23"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:45:37-07:00",
-      "type": "maintenance",
-      "summary": "Scene plates + thumbnails for all 163 episodes and 10 arcs",
-      "fileCount": 173,
-      "commit": "cb333ff"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:11:23-07:00",
-      "type": "edit",
-      "tier": "arcs",
-      "slug": "00-overview",
-      "name": "Campaign Overview",
-      "href": "/arcs/00-overview",
-      "commit": "42e9bee"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "evac",
-      "name": "Evac",
-      "href": "/characters/evac",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "torgoth",
-      "name": "Torgoth",
-      "href": "/characters/torgoth",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "vane",
-      "name": "Vane",
-      "href": "/characters/vane",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "zanim",
-      "name": "Zanim",
-      "href": "/characters/zanim",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T15:05:22-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "zook",
-      "name": "Zook",
-      "href": "/characters/zook",
-      "commit": "1f7c871"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
-      "type": "art-redo",
       "tier": "items",
-      "slug": "texair",
-      "name": "Texair",
-      "href": "/items/texair",
-      "art": "/art/items/texair.webp",
-      "commit": "4130adb"
+      "slug": "carpet-of-flying",
+      "name": "Carpet of Flying",
+      "href": "/items/carpet-of-flying",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
-      "type": "new-art",
-      "tier": "worldbuilding",
-      "slug": "calendar-and-festivals",
-      "name": "Calendar & Festivals of Alambor",
-      "href": "/worldbuilding/calendar-and-festivals",
-      "art": "/art/worldbuilding/calendar-and-festivals.webp",
-      "commit": "4130adb"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
-      "type": "new-art",
-      "tier": "worldbuilding",
-      "slug": "gods-of-alambor",
-      "name": "Gods of Alambor",
-      "href": "/worldbuilding/gods-of-alambor",
-      "art": "/art/worldbuilding/gods-of-alambor.webp",
-      "commit": "4130adb"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
-      "type": "new-art",
-      "tier": "worldbuilding",
-      "slug": "texere-and-transmutation",
-      "name": "Texere & Transmutation",
-      "href": "/worldbuilding/texere-and-transmutation",
-      "art": "/art/worldbuilding/texere-and-transmutation.webp",
-      "commit": "4130adb"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
-      "type": "new-art",
-      "tier": "worldbuilding",
-      "slug": "the-trine",
-      "name": "The Trine",
-      "href": "/worldbuilding/the-trine",
-      "art": "/art/worldbuilding/the-trine.webp",
-      "commit": "4130adb"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:51:02-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
-      "tier": "worldbuilding",
-      "slug": "the-sundering-and-the-gift",
-      "name": "The Sundering & the Gift (Arbor Alma)",
-      "href": "/worldbuilding/the-sundering-and-the-gift",
-      "commit": "4130adb"
+      "tier": "items",
+      "slug": "rod-of-lordly-might",
+      "name": "Rod of Lordly Might",
+      "href": "/items/rod-of-lordly-might",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "leon-janice-lj",
-      "name": "Leon Janice \"LJ\"",
-      "href": "/npcs/leon-janice-lj",
-      "art": "/art/npcs/leon-janice-lj.webp",
-      "commit": "39c79df"
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
+      "type": "edit",
+      "tier": "items",
+      "slug": "zeben-artifacts",
+      "name": "Zeben artifacts (the six gate keys)",
+      "href": "/items/zeben-artifacts",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "leon-steadyfoot",
-      "name": "Leon Steadyfoot",
-      "href": "/npcs/leon-steadyfoot",
-      "art": "/art/npcs/leon-steadyfoot.webp",
-      "commit": "39c79df"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "mally-grisham",
-      "name": "Mallie \"Molly\" Grisham, the Sparrow",
-      "href": "/npcs/mally-grisham",
-      "art": "/art/npcs/mally-grisham.webp",
-      "commit": "39c79df"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "max-taldross",
-      "name": "Maximilian \"Max\" Taldross",
-      "href": "/npcs/max-taldross",
-      "art": "/art/npcs/max-taldross.webp",
-      "commit": "39c79df"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "pierre-beaubois",
-      "name": "Pierre Beaubois",
-      "href": "/npcs/pierre-beaubois",
-      "art": "/art/npcs/pierre-beaubois.webp",
-      "commit": "39c79df"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "npcs",
-      "slug": "viola",
-      "name": "Viola, \"the Mother\"",
-      "href": "/npcs/viola",
-      "art": "/art/npcs/viola.webp",
-      "commit": "39c79df"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "benjamin-benny",
-      "name": "Benjamin",
-      "href": "/characters/benjamin-benny",
-      "art": "/art/characters/benjamin-benny.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "art": "/art/characters/berrian.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "art": "/art/characters/cruucar.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "evac",
-      "name": "Evac",
-      "href": "/characters/evac",
-      "art": "/art/characters/evac.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "art": "/art/characters/noctis.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "zanim",
-      "name": "Zanim",
-      "href": "/characters/zanim",
-      "art": "/art/characters/zanim.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "art-redo",
-      "tier": "characters",
-      "slug": "zook",
-      "name": "Zook",
-      "href": "/characters/zook",
-      "art": "/art/characters/zook.webp",
-      "commit": "421adfd"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "lorenzo-stansport",
-      "name": "Lorenzo Stansport",
-      "href": "/npcs/lorenzo-stansport",
-      "art": "/art/npcs/lorenzo-stansport.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "ooni",
-      "name": "The Oni (Lorenzo's true form)",
-      "href": "/npcs/ooni",
-      "art": "/art/npcs/ooni.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "rolin-blaze",
-      "name": "Rolin Blaze",
-      "href": "/npcs/rolin-blaze",
-      "art": "/art/npcs/rolin-blaze.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "tristane",
-      "name": "Tristane",
-      "href": "/npcs/tristane",
-      "art": "/art/npcs/tristane.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "viscountess-avesia",
-      "name": "Avesia, Viscountess of Sutrey",
-      "href": "/npcs/viscountess-avesia",
-      "art": "/art/npcs/viscountess-avesia.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
-      "type": "new-art",
-      "tier": "npcs",
-      "slug": "zeenoth",
-      "name": "Zeenoth the Righteous",
-      "href": "/npcs/zeenoth",
-      "art": "/art/npcs/zeenoth.webp",
-      "commit": "3dd1aef"
-    },
-    {
-      "date": "2026-06-17",
-      "iso": "2026-06-17T10:49:03-07:00",
+      "date": "2026-08-05",
+      "iso": "2026-08-05T10:47:09-07:00",
       "type": "edit",
       "tier": "npcs",
-      "slug": "princess-anabel",
-      "name": "Princess Anabel",
-      "href": "/npcs/princess-anabel",
-      "commit": "3dd1aef"
+      "slug": "yankee-williams",
+      "name": "Yankee Williams",
+      "href": "/npcs/yankee-williams",
+      "commit": "73fd1ee"
     },
     {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "torgoth",
-      "name": "Torgoth",
-      "href": "/characters/torgoth",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T22:17:57-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "vane",
-      "name": "Vane",
-      "href": "/characters/vane",
-      "commit": "1ed9982"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "torgoth",
-      "name": "Torgoth",
-      "href": "/characters/torgoth",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T16:20:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "vane",
-      "name": "Vane",
-      "href": "/characters/vane",
-      "commit": "47fdaf0"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T14:41:23-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "a384427"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T12:37:53-07:00",
+      "date": "2026-07-08",
+      "iso": "2026-07-08T13:53:13-07:00",
       "type": "maintenance",
-      "summary": "Sanitize public-facing titles and names before publish",
-      "fileCount": 51,
-      "commit": "11e1bd9"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T09:57:11-07:00",
-      "type": "maintenance",
-      "summary": "Episode badge data + header-pages refactor spec",
-      "fileCount": 157,
-      "commit": "ce12a15"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T06:47:39-07:00",
-      "type": "maintenance",
-      "summary": "Phase-2 art: optimize to WebP (303 MB PNG -> 13 MB), keep masters local",
-      "fileCount": 188,
-      "commit": "38477b1"
-    },
-    {
-      "date": "2026-06-16",
-      "iso": "2026-06-16T00:14:23-07:00",
-      "type": "maintenance",
-      "summary": "Phase-2 art: generate all 94 entity images (Style B inked codex)",
-      "fileCount": 92,
-      "commit": "8809cb6"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:11:12-07:00",
-      "type": "maintenance",
-      "summary": "Add badge fields for Leon Steadyfoot (NPC backfill)",
-      "fileCount": 1,
-      "commit": "ad93933"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:10:56-07:00",
-      "type": "maintenance",
-      "summary": "Backfill role badge for worldbuilding (Batch 7)",
-      "fileCount": 1,
-      "commit": "ac4ae6a"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:10:56-07:00",
-      "type": "maintenance",
-      "summary": "Backfill role badge for all 20 items (Batch 6)",
-      "fileCount": 20,
-      "commit": "8cb1f4c"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:10:56-07:00",
-      "type": "maintenance",
-      "summary": "Backfill badge fields for locations + kingdoms (Batch 5)",
-      "fileCount": 23,
-      "commit": "886724c"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "benjamin-benny",
-      "name": "Benjamin",
-      "href": "/characters/benjamin-benny",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "cruucar",
-      "name": "Cruucar",
-      "href": "/characters/cruucar",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "evac",
-      "name": "Evac",
-      "href": "/characters/evac",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "noctis",
-      "name": "Noctis",
-      "href": "/characters/noctis",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "quinton",
-      "name": "Quinton Shackleford",
-      "href": "/characters/quinton",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "torgoth",
-      "name": "Torgoth",
-      "href": "/characters/torgoth",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "vane",
-      "name": "Vane",
-      "href": "/characters/vane",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "zanim",
-      "name": "Zanim",
-      "href": "/characters/zanim",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T22:08:45-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "zook",
-      "name": "Zook",
-      "href": "/characters/zook",
-      "commit": "1f90a87"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T21:58:45-07:00",
-      "type": "maintenance",
-      "summary": "Backfill badge fields for all 20 factions (Batch 3)",
-      "fileCount": 20,
-      "commit": "1fb9c79"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T21:41:21-07:00",
-      "type": "maintenance",
-      "summary": "Backfill badge fields for NPCs 11-20 (Batch 2)",
-      "fileCount": 9,
-      "commit": "36e90ab"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T21:34:01-07:00",
-      "type": "maintenance",
-      "summary": "Backfill badge fields for top-10 NPCs (Batch 1)",
-      "fileCount": 10,
-      "commit": "8d80988"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T21:20:20-07:00",
-      "type": "edit",
-      "tier": "npcs",
-      "slug": "leon-janice-lj",
-      "name": "Leon Janice \"LJ\"",
-      "href": "/npcs/leon-janice-lj",
-      "commit": "e9e8b90"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T21:20:20-07:00",
-      "type": "new-article",
-      "tier": "npcs",
-      "slug": "leon-steadyfoot",
-      "name": "Leon Steadyfoot",
-      "href": "/npcs/leon-steadyfoot",
-      "commit": "e9e8b90"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T18:26:05-07:00",
-      "type": "maintenance",
-      "summary": "Rename DM \"John\" -> \"Jon\" across authored content",
-      "fileCount": 39,
-      "commit": "58e2f14"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T18:09:36-07:00",
-      "type": "maintenance",
-      "summary": "Incorporate Jon's (DM) review answers + finalize spoiler triage",
-      "fileCount": 85,
-      "commit": "3b7e049"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T18:06:45-07:00",
-      "type": "new-article",
-      "tier": "locations",
-      "slug": "kierkenwall",
-      "name": "Kierkenwall",
-      "href": "/locations/kierkenwall",
-      "commit": "e338107"
-    },
-    {
-      "date": "2026-06-15",
-      "iso": "2026-06-15T18:06:45-07:00",
-      "type": "new-article",
-      "tier": "locations",
-      "slug": "tarlif",
-      "name": "Tarlif",
-      "href": "/locations/tarlif",
-      "commit": "e338107"
-    },
-    {
-      "date": "2026-06-14",
-      "iso": "2026-06-14T13:56:59-07:00",
-      "type": "maintenance",
-      "summary": "Dm-docs: Phase B2 — DM-prep spoiler triage (quarantine + gated backfill)",
-      "fileCount": 10,
-      "commit": "f9b39b3"
-    },
-    {
-      "date": "2026-06-14",
-      "iso": "2026-06-14T13:02:29-07:00",
-      "type": "maintenance",
-      "summary": "Dm-docs: Phase B1 — enrich canon from John's player-safe worldbuilding",
-      "fileCount": 32,
-      "commit": "2885292"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:07:35-07:00",
-      "type": "edit",
-      "tier": "episodes",
-      "slug": "e058",
-      "name": "E58 — The Great Escape",
-      "href": "/episodes/e058",
-      "commit": "517c83e"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:04:53-07:00",
-      "type": "new-article",
-      "tier": "characters",
-      "slug": "benjamin-benny",
-      "name": "Benjamin",
-      "href": "/characters/benjamin-benny",
-      "commit": "1360107"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:04:53-07:00",
-      "type": "edit",
-      "tier": "characters",
-      "slug": "berrian",
-      "name": "Berrian",
-      "href": "/characters/berrian",
-      "commit": "1360107"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:04:53-07:00",
-      "type": "edit",
-      "tier": "npcs",
-      "slug": "mally-grisham",
-      "name": "Mallie \"Molly\" Grisham, the Sparrow",
-      "href": "/npcs/mally-grisham",
-      "commit": "1360107"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:04:53-07:00",
-      "type": "edit",
-      "tier": "npcs",
-      "slug": "pierre-beaubois",
-      "name": "Pierre Beaubois",
-      "href": "/npcs/pierre-beaubois",
-      "commit": "1360107"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T12:04:53-07:00",
-      "type": "edit",
-      "tier": "npcs",
-      "slug": "viola",
-      "name": "Viola, \"the Mother\"",
-      "href": "/npcs/viola",
-      "commit": "1360107"
-    },
-    {
-      "date": "2026-06-12",
-      "iso": "2026-06-12T10:05:23-07:00",
-      "type": "maintenance",
-      "summary": "Dnd second brain: adventure-log canon (163 episodes, glossary, dossiers, arcs) + lvl15 sheets",
-      "fileCount": 264,
-      "commit": "03af547"
+      "summary": "Initial public snapshot: Alambor Codex D&D campaign wiki",
+      "fileCount": 392,
+      "commit": "ad93698"
     }
   ]
 }
