@@ -1,6 +1,66 @@
 {
-  "generatedAt": "2026-08-05T17:47:15.689Z",
+  "generatedAt": "2026-08-07T00:01:35.977Z",
   "events": [
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "berrian",
+      "name": "Berrian",
+      "href": "/characters/berrian",
+      "commit": "b1406ff"
+    },
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "quinton",
+      "name": "Quinton Shackleford",
+      "href": "/characters/quinton",
+      "commit": "b1406ff"
+    },
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "vane",
+      "name": "Vane",
+      "href": "/characters/vane",
+      "commit": "b1406ff"
+    },
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "edit",
+      "tier": "episodes",
+      "slug": "e165",
+      "name": "E165 — Gate to the Astral Sea",
+      "href": "/episodes/e165",
+      "commit": "b1406ff"
+    },
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "new-article",
+      "tier": "episodes",
+      "slug": "e166",
+      "name": "E166 — The Silver Promise",
+      "href": "/episodes/e166",
+      "commit": "b1406ff"
+    },
+    {
+      "date": "2026-08-06",
+      "iso": "2026-08-06T17:01:30-07:00",
+      "type": "new-article",
+      "tier": "locations",
+      "slug": "astral-sea",
+      "name": "Astral Sea",
+      "href": "/locations/astral-sea",
+      "commit": "b1406ff"
+    },
     {
       "date": "2026-08-05",
       "iso": "2026-08-05T10:47:09-07:00",
