@@ -35,7 +35,7 @@ E19 | 2022-07-20 | THE WALKING DEAD | Pierre declares his zombie plague nearly r
 E20 | 2022-07-27 | VAMOS A DONDE? | Return to a battered Sultray; Knights of Gidia lore; three hooded assassins surround the party.
 E21 | 2022-08-03 | ASSASSIN BLASTIN' | Assassins fought; chalet cemetery undead killed; catacombs steps discovered.
 E22 | 2022-08-24 | CATACOMBIN' | Into the catacombs; worms and a "noodle monster" killed; Gidian knights en route.
-E23 | 2022-08-31 | Pierre Cornered | Zeeven lore and the Shadowed Moon symbol; corrupted texair poured into the sewers; Pierre fought.
+E23 | 2022-08-31 | Pierre Cornered | Ziven lore and the Shadowed Moon symbol; corrupted texair poured into the sewers; Pierre fought.
 E24 | 2022-09-07 | The Chalet Granted | Beaubois loot and letters sorted; Avesia grants the chalet's 170 acres; night at Madam Alex's brothel.
 E25 | 2022-09-14 | Grelliers | Journey to Grellier planned; Evac names the drow relics; regional politics reviewed.
 E26 | 2022-09-21 | Shopping Spree | Grellier prep and the nervous Duke; teleportation to Kierkenwall ahead of the royal audience.
@@ -150,10 +150,10 @@ E132 | 2025-08-19 | The Reunion | Ford, Leon, Max, and Jameti reunite with the p
 E133 | 2025-08-26 | Cruucar's Trial | The tower's trial chambers passed — Cruucar gives up his brothers' axes; the man at the top revealed.
 E134 | 2025-09-04 | The King is Dead | Nardif Darksi is the Nightmare King and Arch Dragon; Sir Trent Hightower named the Shadowed Moon; to Kierkenwall.
 E135 | 2025-09-10 | The War-Council Trap | The war-council infiltration becomes a trap: King Felix killed, the party framed, the Taldross family burned.
-E136 | 2025-10-09 | "Max-imum Betrayal: The Fall of the Five" | Adune revealed as the Shadowed Moon — the Zeeven lich Morgenrath Gafar; Max, Leon, and Shaahim die; two-month skip.
+E136 | 2025-10-09 | "Max-imum Betrayal: The Fall of the Five" | Adune revealed as the Shadowed Moon — the Ziven lich Morgenrath Gafar; Max, Leon, and Shaahim die; two-month skip.
 E137 | 2025-10-15 | Two Months Later | The war-torn map surveyed; audience with Beatrice and Rupert; airship toward Feldbrook with Reinhard.
 E138 | 2025-11-12 | Teleport to Callum Heights | Monsters crush the night tower; Vane's 7th-level Teleport lands the party at Callum Heights; the Arcicept.
-E139 | 2025-11-19 | Return of the Berrian the Raker | The Archivists confirm Adune is a 1,200-year-old Zeeven lich with four relics; find the Cloak of Displacement.
+E139 | 2025-11-19 | Return of the Berrian the Raker | The Archivists confirm Adune is a 1,200-year-old Ziven lich with four relics; find the Cloak of Displacement.
 E140 | 2025-11-25 | Potentially Potent Potentium | Melora speaks to Berrian; Quinton's crescent-moon coin from a vanishing stranger; Mag Stormeach reached.
 E141 | 2025-12-03 | Flight to Mag Stormeach | Into the cliff city of Mag Stormeach; Rasheed Soltar's location pinned from the air.
 E142 | 2025-12-10 | Sneaky Bois | The coming Aum Shai meeting's attendees listed; objectives set: Kieran, the intel, the slaves.
@@ -179,4 +179,5 @@ E161 | 2026-06-10 | Descent Through the Pyramid | Disguised descent through the 
 E162 | 2026-06-17 | The Molting Chamber | Floor 3's alchemical molting chamber cleared; Quinton dominates the eight-headed Anathema; Berrian's Divine Smite finisher; long rest with floors 4–5 ahead.
 E163 | 2026-06-24 | The Pit of Aeralora | Floor 4's abyssal pit chamber; a Marilith-led Yuan-Ti host; Mallie calls in his favor, Mass-Suggests the host into the pit, and dives in after them toward Aeralora — binding Vane to rescue him.
 E164 | 2026-07-01 | Gaze of the Black Sun | Floor 5 heist: Vane's blind Dispel Magic and the Bag of Holding steal the artifact of Felnriel from under the Avatar of the Coiled Eclipse; the Teleport escape lands the party mid-sea-battle, 4v3, aboard the Wrecked at the Reef.
-E165 | 2026-07-16 | Gate to the Astral Sea | The Siren's Call boards; Quinton and Tor drop; Vane ruptures the Bag of Holding in the cauldron — the party is sucked to the Astral Plane, the orb of Felnriel left on the deck; the Zevan Dynasty's floating city approaches.
+E165 | 2026-07-16 | Gate to the Astral Sea | The Siren's Call boards; Quinton and Tor drop; Vane ruptures the Bag of Holding in the cauldron — the party is sucked to the Astral Plane, the orb of Felnriel left on the deck; the Ziven Dynasty's floating city approaches.
+E166 | 2026-07-22 | The Silver Promise | Netted by a Githyanki ship; Captain Kael'vorr lays out the Astral Sea's three ages, the God Isles, the Slaad and the color pools; Melora whispers to Berrian; the party is released at Ilharess, the Gate of Worlds, and met by armed guards.

@@ -3113,5 +3113,26 @@
     ],
     "collection": "episodes",
     "ref_images": []
+  },
+  {
+    "slug": "e166",
+    "episode": 166,
+    "title": "The Silver Promise",
+    "has_candidate": true,
+    "confidence": "high",
+    "art_type": "scene",
+    "scene_title": "Descent into Ilhares, the Gate of Worlds",
+    "rationale": "Ingest-authored scene brief for e166.",
+    "visual": "The six adventurers drift down out of a starlit violet void toward a colossal floating city\non a disc of continent — Ilhares, seven miles across. Vane leads, the tall slim high elf in\ndark teal and silver, arms loose and posture deliberately nonchalant, a rope leash trailing\nfrom his hand; at the end of it Noctis, the lithe charcoal-furred tabaxi rogue in his tattered\nhooded shadow-cloak, drifts along behind like a walked dog. Behind them Berrian, the half-elf\npaladin in living leaf-and-vine armor, and Torgoth, the eight-foot grey goliath in\nasymmetrical plate. Rising from the city's centre and dwarfing everything, a dormant ring-gate\nspire climbs over a mile into the void — the World Gate, dark and empty. Below spread the\ncity's districts: a port, a green garden quarter of trees and rivers, a grand marketplace,\nslender towers of dark violet stone. Purple-blue banners bearing a crescent moon ringed by\nseven stars hang from the spires. On the street beneath the drifting party, a contingent of\nthirty-odd guards in angular purple-black plate mail, fully helmeted, forms up around a\ncommander on horseback, faces turned upward.",
+    "key_entities": [
+      "Vane",
+      "Noctis",
+      "Berrian",
+      "Torgoth",
+      "Ilhares",
+      "Zevan Dynasty"
+    ],
+    "collection": "episodes",
+    "ref_images": []
   }
 ]

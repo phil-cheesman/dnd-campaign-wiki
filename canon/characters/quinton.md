@@ -48,6 +48,7 @@ sheet:
     - { name: "Disintegrate", level: 6 }
     - { name: "Eyebite", level: 6 }
     - { name: "Heal", level: 6 }
+    - { name: "Etherealness", level: 7 }
     - { name: "Teleport", level: 7 }
   feats: ["Inspiring Leader", "Actor", "Healer", "Lucky"]
   signatures:
