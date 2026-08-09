@@ -1,0 +1,1020 @@
+---
+/**
+ * /tldr — the pre-session catch-up page. See `docs/specs/wiki-tldr.md`.
+ *
+ * One rule governs every content decision here: this page describes the
+ * campaign's *state*, not its *events*. Not "what happened" — "what is true
+ * right now". Recaps live in /episodes, history in /arcs, diffs in /changelog.
+ *
+ * Phases A–C: static render, the build-time staleness guard, and the two
+ * progressive-enhancement toggles (Skim mode + the "Playing as" lens). Both
+ * toggles are pure CSS state driven by data-attributes on `.tldr` — no
+ * re-render, and the page is complete and readable with JS off.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getTldr } from '../lib/tldr';
+
+const t = await getTldr();
+
+/** Rows a lens can dim: those declaring `pcs`. An empty list = always relevant. */
+const lensAttr = (pcs: string[] | undefined) =>
+  pcs && pcs.length ? pcs.join(' ') : undefined;
+
+const OBJECTIVE_MARK: Record<string, string> = {
+  active: '◉',
+  new: '✦',
+  blocked: '⊘',
+  done: '✓',
+};
+const OBJECTIVE_LABEL: Record<string, string> = {
+  active: 'In progress',
+  new: 'New',
+  blocked: 'Blocked',
+  done: 'Done',
+};
+---
+
+<BaseLayout
+  title="TL;DR"
+  description="Everything you need to know about the Alambor campaign right now, in about three minutes. Where the party is, who's with them, who's hunting them, and what happens next."
+  variant="full"
+>
+  <div class="tldr">
+    {/* ===== Header ===== */}
+    <header class="tl-head">
+      <div class="tl-head-main">
+        <h1>TL;DR</h1>
+        <p class="tl-sub">Everything you need, in about three minutes.</p>
+      </div>
+      <a class="tl-stamp" href={t.latestEpisode.href}>
+        <span class="tl-stamp-dot" aria-hidden="true"></span>
+        Updated after E{t.latestEpisode.num}
+      </a>
+    </header>
+
+    {/* ===== Toolbar (Phase C) =====
+        Rendered `hidden` and revealed by the enhancement script, so a JS-off
+        reader never sees controls that would do nothing. */}
+    <div class="tl-tools" hidden id="tl-tools">
+      <button type="button" class="tl-skim" id="tl-skim" aria-pressed="false">
+        <span class="tl-skim-icon" aria-hidden="true">⚡</span>
+        <span class="tl-skim-label">Skim mode</span>
+      </button>
+
+      <div class="tl-lens" role="group" aria-label="Show what matters to one character">
+        <span class="tl-lens-label">Playing as</span>
+        <div class="tl-lens-chips">
+          <button type="button" class="tl-chip is-on" data-pc="" aria-pressed="true">Everyone</button>
+          {t.party.map((p) => (
+            <button type="button" class="tl-chip" data-pc={p.slug} aria-pressed="false">{p.name}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* ===== Where we left off — the frozen frame =====
+        The plate is a real <img>, not a background: a negative-z pseudo-element
+        gets painted behind the section's own background and never shows. Layers
+        are all positive z-index (plate 0 → scrim 1 → text 2) so there's no
+        stacking-context fragility to reason about. */}
+    <section class="tl-cliff">
+      {t.cliffhangerArt && (
+        <img class="tl-cliff-plate" src={t.cliffhangerArt} alt="" loading="eager" decoding="async" />
+      )}
+      <div class="tl-cliff-body">
+        <p class="tl-kicker">Where we left off</p>
+        <p class="tl-cliff-text">{t.cliffhanger}</p>
+        <p class="tl-cliff-meta">
+          <a href={t.latestEpisode.href}>E{t.latestEpisode.num} — {t.latestEpisode.title}</a>
+          {t.arcInfo && (<><span class="dot">·</span><a href={t.arcInfo.href}>{t.arcInfo.title}</a></>)}
+        </p>
+      </div>
+    </section>
+
+    {/* ===== You are here ===== */}
+    <section class="tl-where" aria-label="Current situation">
+      <div class="tl-where-cell">
+        <span class="tl-where-k">Where</span>
+        <span class="tl-where-v">
+          {t.placeHref ? <a class="wikilink" href={t.placeHref}>{t.where.place}</a> : t.where.place}
+        </span>
+      </div>
+      {t.where.region && (
+        <div class="tl-where-cell">
+          <span class="tl-where-k">Plane</span>
+          <span class="tl-where-v">{t.where.region}</span>
+        </div>
+      )}
+      {t.where.level && (
+        <div class="tl-where-cell">
+          <span class="tl-where-k">Level</span>
+          <span class="tl-where-v">{t.where.level}</span>
+        </div>
+      )}
+      {t.where.in_world && (
+        <div class="tl-where-cell">
+          <span class="tl-where-k">When</span>
+          <span class="tl-where-v">{t.where.in_world}</span>
+        </div>
+      )}
+    </section>
+
+    {/* ===== "You, specifically" — revealed by the lens (Phase C) =====
+        All six blocks ship in the HTML and CSS reveals the selected one. Six
+        short blocks is cheaper than any client-side templating, and it keeps
+        the whole page static. */}
+    {t.party.map((p) => (
+      <section class="tl-me" data-me={p.slug} hidden>
+        <p class="tl-kicker">You, specifically</p>
+        <div class="tl-me-body">
+          <img class="tl-me-img" src={p.art} alt="" loading="lazy" />
+          <div>
+            <p class="tl-me-name">{p.name}</p>
+            {p.thread && <p class="tl-me-thread">{p.thread}</p>}
+            <p class="tl-me-hint">Anything below marked <span class="tl-yours">yours</span> is tied to you.</p>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    {/* ===== The story right now ===== */}
+    <section class="tl-section tl-skimhide">
+      <h2>The story right now</h2>
+      <p class="tl-lede">{t.story_now}</p>
+    </section>
+
+    {/* ===== The party ===== */}
+    <section class="tl-section tl-skimhide">
+      <h2>The party</h2>
+      <ul class="tl-party">
+        {t.party.map((p) => (
+          <li class="tl-pc" data-pc={p.slug}>
+            <a class="tl-pc-img" href={p.href} aria-hidden="true" tabindex="-1">
+              <img src={p.art} alt="" loading="lazy" />
+            </a>
+            <div class="tl-pc-body">
+              <p class="tl-pc-top">
+                <a class="wikilink tl-pc-name" href={p.href}>{p.name}</a>
+                <span class:list={['tl-pill', `s-${p.state}`]}>{p.stateLabel}</span>
+              </p>
+              {p.classLine && <p class="tl-pc-class">{p.classLine}</p>}
+              <p class="tl-pc-line">{p.line}</p>
+              {p.thread && <p class="tl-pc-thread"><span class="tl-thread-mark" aria-hidden="true">↳</span>{p.thread}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ===== Rosters ===== */}
+    <section class="tl-section tl-skimhide">
+      <div class="tl-rosters">
+        <div class="tl-roster">
+          <h2>Who's with you</h2>
+          <ul class="tl-people">
+            {t.rosters.withUs.map((r) => (
+              <li data-lens={lensAttr(r.pcs)}>
+                {r.art && <span class="tl-avatar"><img src={r.art} alt="" loading="lazy" /></span>}
+                <span class="tl-person-body">
+                  <span class="tl-person-name">
+                    {r.href ? <a class="wikilink" href={r.href}>{r.name}</a> : r.name}
+                  </span>
+                  <span class="tl-person-line">{r.line}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="tl-roster is-hostile">
+          <h2>Who wants you dead</h2>
+          <ul class="tl-people">
+            {t.rosters.afterUs.map((r) => (
+              <li data-lens={lensAttr(r.pcs)}>
+                {r.art && <span class="tl-avatar"><img src={r.art} alt="" loading="lazy" /></span>}
+                <span class="tl-person-body">
+                  <span class="tl-person-name">
+                    {r.href ? <a class="wikilink" href={r.href}>{r.name}</a> : r.name}
+                  </span>
+                  <span class="tl-person-line">{r.line}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {t.rosters.elsewhere.length > 0 && (
+        <details class="tl-details">
+          <summary>Everyone else, somewhere out there ({t.rosters.elsewhere.length})</summary>
+          <ul class="tl-people">
+            {t.rosters.elsewhere.map((r) => (
+              <li data-lens={lensAttr(r.pcs)}>
+                {r.art && <span class="tl-avatar"><img src={r.art} alt="" loading="lazy" /></span>}
+                <span class="tl-person-body">
+                  <span class="tl-person-name">
+                    {r.href ? <a class="wikilink" href={r.href}>{r.name}</a> : r.name}
+                  </span>
+                  <span class="tl-person-line">{r.line}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </section>
+
+    {/* ===== Objectives ===== */}
+    <section class="tl-section">
+      <h2>What you're trying to do</h2>
+      <ol class="tl-objectives">
+        {t.objectives.map((o) => (
+          <li class:list={[`o-${o.status}`]} data-lens={lensAttr(o.pcs)}>
+            <span class="tl-obj-mark" aria-hidden="true">{OBJECTIVE_MARK[o.status] ?? '◯'}</span>
+            <span class="tl-obj-body">
+              <span class="tl-obj-text">
+                {o.text}
+                <span class="tl-obj-status">{OBJECTIVE_LABEL[o.status] ?? o.status}</span>
+              </span>
+              {o.why && <span class="tl-obj-why">{o.why}</span>}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    {/* ===== What changed ===== */}
+    <section class="tl-section">
+      <h2>What changed since you last paid attention</h2>
+      <ul class="tl-changed">
+        {t.changed.map((c) => (
+          <li class:list={[`c-${c.kind}`]}>
+            <span class="tl-change-mark" aria-hidden="true">{c.kind === 'loss' ? '✗' : '✓'}</span>
+            <span>{c.text}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ===== The clock ===== */}
+    {t.clock.length > 0 && (
+      <section class="tl-section">
+        <h2><span class="tl-h2-icon" aria-hidden="true">⏱</span> The clock</h2>
+        <p class="tl-section-sub">What gets worse while you stand around.</p>
+        <ul class="tl-clock">
+          {t.clock.map((c) => <li>{c}</li>)}
+        </ul>
+      </section>
+    )}
+
+    {/* ===== Theories — explicitly NOT canon ===== */}
+    {t.theories.length > 0 && (
+      <section class="tl-section tl-skimhide">
+        <div class="tl-theories">
+          <h2>Things you think but don't know</h2>
+          <p class="tl-section-sub">Table speculation. None of this is confirmed.</p>
+          <ul>
+            {t.theories.map((th) => <li>{th}</li>)}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    {/* ===== Jargon ===== */}
+    {t.jargon.length > 0 && (
+      <section class="tl-section tl-skimhide">
+        <h2>Wait, what's a…?</h2>
+        <dl class="tl-jargon">
+          {t.jargon.map((j) => (
+            <div class="tl-jargon-row">
+              <dt>{j.term}</dt>
+              <dd>{j.def}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="tl-more"><a href="/glossary">Full glossary →</a></p>
+      </section>
+    )}
+
+    {/* ===== The three ===== */}
+    {t.remember.length > 0 && (
+      <section class="tl-remember">
+        <h2>If you remember nothing else</h2>
+        <ol>
+          {t.remember.map((r) => <li>{r}</li>)}
+        </ol>
+      </section>
+    )}
+
+    {/* ===== Onward ===== */}
+    <nav class="tl-onward" aria-label="Read more">
+      <a href={t.latestEpisode.href}>Last episode in full →</a>
+      {t.arcInfo && <a href={t.arcInfo.href}>The story so far →</a>}
+      <a href="/episodes">Every episode →</a>
+      <a href="/">The wiki →</a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===================================================================
+     /tldr — a self-contained reading page. Deliberately narrower than the
+     wiki article measure: this is a three-minute skim on a phone in a car,
+     not a reference document.
+     =================================================================== */
+  .tldr {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* ---- Header ---- */
+  .tl-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .tl-head h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.6rem, 7vw, 4rem);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .tl-sub {
+    margin: 0.45rem 0 0;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  /* The freshness stamp is a trust signal, not decoration — it tells the reader
+     the page is current without them having to check anything. */
+  .tl-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    margin-top: 0.6rem;
+    transition: border-color var(--dur-instant) var(--ease-out), color var(--dur-instant) var(--ease-out);
+  }
+  .tl-stamp:hover { border-color: var(--gold-soft); color: var(--text); }
+  .tl-stamp-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #4f9a52;
+    box-shadow: 0 0 0 3px rgba(79, 154, 82, 0.16);
+  }
+
+  /* ---- Toolbar (Phase C) ---- */
+  .tl-tools {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    flex-wrap: wrap;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .tl-tools[hidden] { display: none; }
+
+  .tl-skim {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.42rem 0.85rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--muted);
+    font: 600 0.82rem 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all var(--dur-instant) var(--ease-out);
+  }
+  .tl-skim:hover { border-color: var(--gold-soft); color: var(--text); }
+  .tl-skim[aria-pressed='true'] {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  .tl-skim-icon { font-size: 0.9rem; }
+
+  .tl-lens { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+  .tl-lens-label {
+    font: 600 0.68rem 'Inter', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .tl-lens-chips { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .tl-chip {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--muted);
+    font: 500 0.8rem 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all var(--dur-instant) var(--ease-out);
+  }
+  .tl-chip:hover { border-color: var(--gold-soft); color: var(--text); }
+  .tl-chip.is-on {
+    background: var(--link);
+    border-color: var(--link);
+    color: #fff;
+  }
+
+  /* ---- Skim mode: collapse to the 30-second read ---- */
+  .tldr[data-skim] .tl-skimhide { display: none; }
+  .tldr[data-skim] .tl-obj-why { display: none; }
+  .tldr[data-skim] .tl-cliff { min-height: 11rem; }
+  /* A quiet marker so it's obvious material is intentionally hidden, not missing. */
+  .tldr[data-skim] .tl-onward::before {
+    content: 'Skim mode is on — the party, the rosters, the theories and the jargon are hidden.';
+    flex: 1 0 100%;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.35rem;
+  }
+
+  /* ---- "You, specifically" ---- */
+  .tl-me {
+    display: none;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 2.75rem;
+    border: 1px solid var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--gold-soft) 9%, var(--bg));
+  }
+  .tl-me[hidden] { display: none; }
+  /* The lens reveals exactly one; [hidden] is cleared by the script. */
+  .tl-me:not([hidden]) { display: block; }
+  .tl-me-body { display: flex; gap: 0.9rem; align-items: flex-start; margin-top: 0.7rem; }
+  .tl-me-img {
+    width: 3.2rem; height: 3.2rem;
+    border-radius: 10px;
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+  .tl-me-name { margin: 0; font-weight: 600; font-size: 1.05rem; }
+  .tl-me-thread {
+    margin: 0.3rem 0 0;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .tl-me-hint { margin: 0.5rem 0 0; font-size: 0.78rem; color: var(--muted); }
+  .tl-yours {
+    display: inline-block;
+    font: 600 0.62rem 'Inter', sans-serif;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+    border-radius: 999px;
+    padding: 0.05rem 0.4rem;
+  }
+
+  /* ---- Lens: highlight mine, dim other people's ---- */
+  .tldr[data-pc] .tl-pc { opacity: 0.55; }
+  .tldr[data-pc] .tl-pc.is-me {
+    opacity: 1;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px var(--gold-soft);
+  }
+  /* Only rows that DECLARE a pcs list can dim — untagged rows concern everyone. */
+  .tldr[data-pc] li[data-lens]:not(.is-mine) { opacity: 0.42; }
+  .tldr[data-pc] li[data-lens].is-mine { position: relative; }
+  .tldr[data-pc] li[data-lens].is-mine::after {
+    content: 'yours';
+    font: 600 0.6rem 'Inter', sans-serif;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+    border-radius: 999px;
+    padding: 0.05rem 0.4rem;
+    margin-left: 0.5rem;
+    align-self: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .tl-pc, .tl-people li, .tl-objectives li { transition: opacity var(--dur-state) var(--ease-out); }
+
+  /* ---- Cliffhanger: the frozen frame ---- */
+  .tl-cliff {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #1a1520; /* fallback while the plate loads, and when there is none */
+    margin-bottom: 1.25rem;
+    /* A tall-enough frame that the plate reads as an image on a phone, where the
+       cliffhanger text is only two or three lines. */
+    min-height: 15rem;
+    display: flex;
+    align-items: flex-end;
+  }
+  .tl-cliff-plate {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    z-index: 0;
+  }
+  /* Two-stop scrim: strong at the bottom where the text sits, light at the top
+     so the plate still reads as an image rather than a texture. */
+  .tl-cliff::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(16, 12, 22, 0.15) 0%,
+      rgba(16, 12, 22, 0.55) 45%,
+      rgba(16, 12, 22, 0.88) 100%
+    );
+    z-index: 1;
+  }
+  .tl-cliff-body {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.4rem, 4vw, 2.75rem) clamp(1.5rem, 3vw, 2rem);
+  }
+  .tl-kicker {
+    margin: 0 0 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+  .tl-cliff-text {
+    margin: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.5rem, 4.2vw, 2.35rem);
+    line-height: 1.24;
+    color: #f6f2ea;
+    text-wrap: balance;
+  }
+  .tl-cliff-meta {
+    margin: 1.1rem 0 0;
+    font-size: 0.82rem;
+    color: rgba(246, 242, 234, 0.62);
+  }
+  .tl-cliff-meta a { color: rgba(246, 242, 234, 0.86); text-decoration: none; }
+  .tl-cliff-meta a:hover { color: #fff; text-decoration: underline; }
+  .tl-cliff-meta .dot { margin: 0 0.5rem; }
+
+  /* ---- You are here ---- */
+  .tl-where {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+    margin-bottom: 2.75rem;
+  }
+  .tl-where-cell {
+    flex: 1 1 8rem;
+    padding: 0.85rem 1.1rem;
+    border-right: 1px solid var(--hairline);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .tl-where-cell:last-child { border-right: none; }
+  .tl-where-k {
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--faint);
+    font-weight: 600;
+  }
+  .tl-where-v { font-size: 1rem; font-weight: 600; }
+  .tl-where-v a { text-decoration: none; }
+
+  /* ---- Sections ---- */
+  .tl-section { margin-bottom: 2.75rem; }
+  .tl-section h2,
+  .tl-remember h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.65rem;
+    margin: 0 0 0.35rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .tl-h2-icon { font-size: 1.1rem; }
+  .tl-section-sub {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .tl-section h2 + .tl-lede,
+  .tl-section h2 + ul,
+  .tl-section h2 + ol,
+  .tl-section h2 + dl,
+  .tl-section h2 + .tl-rosters { margin-top: 1rem; }
+
+  .tl-lede {
+    font-size: 1.08rem;
+    line-height: 1.72;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  /* ---- Party cards ---- */
+  .tl-party {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 0.75rem;
+  }
+  .tl-pc {
+    display: flex;
+    gap: 0.9rem;
+    padding: 0.85rem;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    background: var(--surface);
+    transition: border-color var(--dur-instant) var(--ease-out),
+                transform var(--dur-instant) var(--ease-out);
+  }
+  .tl-pc:hover { border-color: var(--gold-soft); transform: translateY(-1px); }
+  .tl-pc-img {
+    flex: 0 0 auto;
+    width: 3.6rem; height: 3.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .tl-pc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tl-pc-body { min-width: 0; }
+  .tl-pc-top {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .tl-pc-name { font-weight: 600; font-size: 1.02rem; text-decoration: none; }
+  .tl-pc-class {
+    margin: 0.1rem 0 0;
+    font-size: 0.73rem;
+    color: var(--faint);
+    letter-spacing: 0.02em;
+  }
+  .tl-pc-line {
+    margin: 0.4rem 0 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .tl-pc-thread {
+    margin: 0.45rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--muted);
+    display: flex;
+    gap: 0.4rem;
+  }
+  .tl-thread-mark { color: var(--gold); flex: 0 0 auto; }
+
+  /* Status pills — colour carries meaning, the label carries it for everyone else. */
+  .tl-pill {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.16rem 0.5rem;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--hairline);
+  }
+  .tl-pill.s-fine     { background: #e8f1e6; color: #3f7a42; border-color: #cfe3cc; }
+  .tl-pill.s-hurt     { background: #faf0d9; color: #8a6a1c; border-color: #ecdcb3; }
+  .tl-pill.s-critical { background: #f8e3dd; color: #a8462c; border-color: #eec9bd; }
+  .tl-pill.s-changed  { background: #efe6f8; color: #6a33b0; border-color: #ddcdf0; }
+  .tl-pill.s-missing  { background: #e9e9ee; color: #5f5f70; border-color: #d8d8e0; }
+
+  /* ---- Rosters ---- */
+  .tl-rosters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .tl-roster h2 { font-size: 1.35rem; }
+  .tl-people { list-style: none; margin: 0.85rem 0 0; padding: 0; }
+  .tl-people li {
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--hairline);
+    align-items: flex-start;
+  }
+  .tl-people li:first-child { border-top: none; }
+  .tl-avatar {
+    flex: 0 0 auto;
+    width: 2.1rem; height: 2.1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+    margin-top: 0.1rem;
+  }
+  .tl-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tl-person-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .tl-person-name { font-weight: 600; font-size: 0.93rem; }
+  .tl-person-name a { text-decoration: none; }
+  .tl-person-line { font-size: 0.83rem; line-height: 1.5; color: var(--muted); }
+  /* The hostile column earns one red hairline — enough to read at a glance
+     without turning the section into a warning box. */
+  .tl-roster.is-hostile .tl-people li { border-top-color: rgba(168, 70, 44, 0.22); }
+  .tl-roster.is-hostile h2 { color: #a8462c; }
+
+  .tl-details {
+    margin-top: 1.5rem;
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 0 0.9rem;
+  }
+  .tl-details summary {
+    cursor: pointer;
+    padding: 0.7rem 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .tl-details summary:hover { color: var(--text); }
+  .tl-details[open] summary { border-bottom: 1px solid var(--hairline); }
+  .tl-details .tl-people { margin-top: 0; padding-bottom: 0.6rem; }
+
+  /* ---- Objectives ---- */
+  .tl-objectives { list-style: none; margin: 0; padding: 0; }
+  .tl-objectives li {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .tl-objectives li:last-child { border-bottom: none; }
+  .tl-obj-mark { font-size: 1rem; line-height: 1.5; color: var(--gold); flex: 0 0 auto; }
+  .o-blocked .tl-obj-mark { color: var(--faint); }
+  .o-done .tl-obj-mark { color: #4f9a52; }
+  .tl-obj-body { display: flex; flex-direction: column; gap: 0.25rem; }
+  .tl-obj-text {
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+  .tl-obj-status {
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.1rem 0.45rem;
+  }
+  .o-new .tl-obj-status { color: var(--gold); border-color: var(--gold-soft); }
+  .o-blocked .tl-obj-text { color: var(--muted); }
+  .tl-obj-why { font-size: 0.86rem; line-height: 1.55; color: var(--muted); max-width: 60ch; }
+
+  /* ---- What changed ---- */
+  .tl-changed { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .tl-changed li {
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 9px;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+  }
+  .tl-change-mark { font-weight: 700; flex: 0 0 auto; }
+  .c-loss { border-left: 3px solid #c06a50; }
+  .c-loss .tl-change-mark { color: #a8462c; }
+  .c-gain { border-left: 3px solid #5f9c62; }
+  .c-gain .tl-change-mark { color: #3f7a42; }
+
+  /* ---- Clock ---- */
+  .tl-clock { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.5rem; }
+  .tl-clock li { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ---- Theories — must never be mistaken for canon ---- */
+  .tl-theories {
+    border: 1px dashed var(--gold-soft);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    background: color-mix(in srgb, var(--gold-soft) 8%, var(--bg));
+  }
+  .tl-theories h2 { margin-top: 0; }
+  .tl-theories ul { margin: 0.9rem 0 0; padding-left: 1.15rem; display: grid; gap: 0.5rem; }
+  .tl-theories li { font-size: 0.93rem; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ---- Jargon ---- */
+  .tl-jargon {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+  }
+  .tl-jargon-row { padding: 0.6rem 0; border-bottom: 1px solid var(--hairline); }
+  .tl-jargon dt { font-weight: 600; font-size: 0.92rem; }
+  .tl-jargon dd {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .tl-more { margin: 1rem 0 0; font-size: 0.87rem; }
+
+  /* ---- The three ---- */
+  .tl-remember {
+    margin: 3.5rem 0 2rem;
+    padding: 1.75rem 1.9rem;
+    border-radius: 14px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--gold);
+  }
+  .tl-remember ol {
+    margin: 1.1rem 0 0;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .tl-remember li {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+
+  /* ---- Onward ---- */
+  .tl-onward {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.9rem;
+  }
+  .tl-onward a { text-decoration: none; }
+  .tl-onward a:hover { text-decoration: underline; }
+
+  /* ===== Responsive — 1080 / 640 / 480, per the codex breakpoints ===== */
+  @media (max-width: 1080px) {
+    .tl-jargon { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .tldr { padding: 1.75rem 1.1rem 4rem; }
+    .tl-rosters { grid-template-columns: 1fr; gap: 2.25rem; }
+    .tl-party { grid-template-columns: 1fr; }
+    .tl-where-cell {
+      flex-basis: 50%;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .tl-where-cell:nth-child(2n) { border-right: none; }
+  }
+  @media (max-width: 480px) {
+    .tl-head { gap: 0.75rem; }
+    .tl-cliff-body { padding: 2.25rem 1.1rem 1.35rem; }
+    .tl-remember { padding: 1.35rem 1.2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-pc, .tl-stamp, .tl-chip, .tl-skim, .tl-people li, .tl-objectives li { transition: none; }
+    .tl-pc:hover { transform: none; }
+  }
+
+  /* The toolbar is the one place the page gets busy on a phone; give the chips
+     their own row and let them wrap rather than squeezing the skim button. */
+  @media (max-width: 640px) {
+    .tl-tools { gap: 0.9rem; }
+    .tl-lens { width: 100%; align-items: flex-start; flex-direction: column; gap: 0.45rem; }
+  }
+</style>
+
+<style is:global>
+  /* Dark-theme overrides for the tinted blocks. The page-scoped styles above use
+     the shared tokens wherever possible; these are the handful of literal tints
+     that need a dark counterpart. */
+  :root[data-theme='dark'] .tl-pill.s-fine     { background: #1f2c1f; color: #8fb585; border-color: #2e3f2c; }
+  :root[data-theme='dark'] .tl-pill.s-hurt     { background: #33290f; color: #d8b75e; border-color: #47391a; }
+  :root[data-theme='dark'] .tl-pill.s-critical { background: #341f19; color: #d28a76; border-color: #4a2c23; }
+  :root[data-theme='dark'] .tl-pill.s-changed  { background: #2a2140; color: #b89af0; border-color: #3a2f55; }
+  :root[data-theme='dark'] .tl-pill.s-missing  { background: #272b36; color: #aab0c0; border-color: #363b49; }
+  :root[data-theme='dark'] .tl-roster.is-hostile h2 { color: #d28a76; }
+  :root[data-theme='dark'] .tl-roster.is-hostile .tl-people li { border-top-color: rgba(210, 138, 118, 0.22); }
+  :root[data-theme='dark'] .c-loss { border-left-color: #a8563c; }
+  :root[data-theme='dark'] .c-loss .tl-change-mark { color: #d28a76; }
+  :root[data-theme='dark'] .c-gain { border-left-color: #4d7a4f; }
+  :root[data-theme='dark'] .c-gain .tl-change-mark { color: #8fb585; }
+  :root[data-theme='dark'] .tl-stamp-dot { background: #8fb585; box-shadow: 0 0 0 3px rgba(143, 181, 133, 0.18); }
+</style>
+
+<script>
+  /**
+   * TL;DR enhancements (spec §5). Two independent bits of state, both stored on
+   * the `.tldr` root as data-attributes and expressed entirely in CSS:
+   *   data-skim        present = skim mode on
+   *   data-pc="<slug>" present = the lens is focused on one PC
+   *
+   * Nothing here re-renders the page, and nothing is required for the page to be
+   * readable — the toolbar starts `hidden` and is only revealed once this runs.
+   */
+  const root = document.querySelector<HTMLElement>('.tldr');
+  const tools = document.getElementById('tl-tools');
+  const skimBtn = document.getElementById('tl-skim');
+
+  if (root && tools && skimBtn) {
+    const SKIM_KEY = 'tldr:skim';
+    const PC_KEY = 'tldr:pc';
+    const read = (k: string) => {
+      try { return localStorage.getItem(k); } catch { return null; }
+    };
+    const write = (k: string, v: string | null) => {
+      try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {}
+    };
+
+    // ---- Skim mode -------------------------------------------------------
+    const applySkim = (on: boolean) => {
+      root.toggleAttribute('data-skim', on);
+      skimBtn.setAttribute('aria-pressed', String(on));
+    };
+    applySkim(read(SKIM_KEY) === '1');
+    skimBtn.addEventListener('click', () => {
+      const on = skimBtn.getAttribute('aria-pressed') !== 'true';
+      applySkim(on);
+      write(SKIM_KEY, on ? '1' : null);
+    });
+
+    // ---- "Playing as" lens ----------------------------------------------
+    const chips = Array.from(tools.querySelectorAll<HTMLButtonElement>('.tl-chip'));
+    const meBlocks = Array.from(document.querySelectorAll<HTMLElement>('.tl-me'));
+    const pcCards = Array.from(document.querySelectorAll<HTMLElement>('.tl-pc'));
+    const lensRows = Array.from(document.querySelectorAll<HTMLElement>('li[data-lens]'));
+    const known = new Set(chips.map((c) => c.dataset.pc).filter(Boolean));
+
+    const applyPc = (pc: string) => {
+      // Guard against a stale localStorage value naming a PC who has since left
+      // the roster — otherwise the page would dim everything and highlight none.
+      const active = pc && known.has(pc) ? pc : '';
+      if (active) root.setAttribute('data-pc', active);
+      else root.removeAttribute('data-pc');
+
+      chips.forEach((c) => {
+        const on = (c.dataset.pc ?? '') === active;
+        c.classList.toggle('is-on', on);
+        c.setAttribute('aria-pressed', String(on));
+      });
+      meBlocks.forEach((b) => { b.hidden = b.dataset.me !== active; });
+      pcCards.forEach((c) => c.classList.toggle('is-me', c.dataset.pc === active));
+      lensRows.forEach((r) => {
+        const owners = (r.dataset.lens ?? '').split(/\s+/).filter(Boolean);
+        r.classList.toggle('is-mine', !!active && owners.includes(active));
+      });
+      return active;
+    };
+
+    const restored = applyPc(read(PC_KEY) ?? '');
+    if (!restored) write(PC_KEY, null); // drop a stale slug rather than re-reading it
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        // Clicking the active chip clears the lens — click-to-pin, click again
+        // to unpin, matching the party dashboard's interaction grammar.
+        const next = chip.classList.contains('is-on') ? '' : (chip.dataset.pc ?? '');
+        write(PC_KEY, applyPc(next) || null);
+      });
+    });
+
+    tools.hidden = false;
+  }
+</script>

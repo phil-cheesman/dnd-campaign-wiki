@@ -47,6 +47,16 @@ const baseEntity = z.object({
 const entity = (dir: string, extend: z.ZodRawShape = {}) =>
   defineCollection({ loader: tier(dir), schema: baseEntity.extend(extend) });
 
+/** One person/faction row in a TL;DR roster. `slug` links to a dossier when it
+ *  resolves; `name` is the display label (required — a row must read even with
+ *  no dossier behind it). See the `tldr` collection below. */
+const tldrPerson = z.object({
+  slug: z.string().nullish(),
+  name: z.string(),
+  line: z.string(),
+  pcs: z.array(z.string()).default([]),
+});
+
 export const collections = {
   characters: entity('characters', {
     player: z.string().nullish(),
@@ -141,5 +151,73 @@ export const collections = {
   pages: defineCollection({
     loader: glob({ pattern: '{timeline,glossary}.md', base: CANON }),
     schema: z.object({}).passthrough(),
+  }),
+
+  // ── TL;DR (docs/specs/wiki-tldr.md) ───────────────────────────────────────
+  // The pre-session catch-up page: a single always-current file describing the
+  // campaign's *state*, not its events. Typed (not folded into `pages`, which is
+  // passthrough) because /tldr renders these fields as components, and a silent
+  // shape drift would ship a broken page rather than a build error.
+  //
+  // Every `slug` is OPTIONAL and resolved leniently at render time: a slug that
+  // doesn't match a canon dossier degrades to plain text. That's deliberate —
+  // brand-new NPCs appear in the TL;DR the session they show up, well before
+  // anyone writes their dossier.
+  tldr: defineCollection({
+    loader: glob({ pattern: 'tldr.md', base: CANON }),
+    schema: z.object({
+      current_episode: z.number(), // ← the staleness guard reads this
+      updated: z.coerce.date(), // YAML parses a bare 2026-08-06 as a Date, not a string
+
+      arc: z.string().nullish(),
+
+      cliffhanger: z.string(),
+      cliffhanger_art: z.string().nullish(),
+
+      where: z.object({
+        place: z.string(),
+        place_slug: z.string().nullish(),
+        region: z.string().nullish(),
+        level: z.number().nullish(),
+        in_world: z.string().nullish(),
+      }),
+
+      story_now: z.string(),
+
+      party: z
+        .array(
+          z.object({
+            slug: z.string(),
+            state: z.enum(['fine', 'hurt', 'critical', 'changed', 'missing']),
+            line: z.string(),
+            thread: z.string().nullish(),
+          }),
+        )
+        .default([]),
+
+      with_us: z.array(tldrPerson).default([]),
+      after_us: z.array(tldrPerson).default([]),
+      elsewhere: z.array(tldrPerson).default([]),
+
+      objectives: z
+        .array(
+          z.object({
+            text: z.string(),
+            status: z.enum(['active', 'new', 'blocked', 'done']),
+            why: z.string().nullish(),
+            pcs: z.array(z.string()).default([]),
+          }),
+        )
+        .default([]),
+
+      changed: z
+        .array(z.object({ kind: z.enum(['loss', 'gain']), text: z.string() }))
+        .default([]),
+
+      clock: z.array(z.string()).default([]),
+      jargon: z.array(z.object({ term: z.string(), def: z.string() })).max(12).default([]),
+      theories: z.array(z.string()).default([]),
+      remember: z.array(z.string()).default([]),
+    }),
   }),
 };

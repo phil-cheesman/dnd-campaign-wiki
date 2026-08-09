@@ -25,25 +25,27 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
 const ogTitle = `${title} · Alambor Codex`;
 const ogDesc = description ?? 'Knowledge base for the Alambor D&D campaign — the Alambor Six.';
 
-// Modules occupy the top bar. Wiki + Graph + Map + Gallery are live.
+// Modules occupy the top bar. Wiki + TL;DR + Graph + Map + Gallery are live.
 // (Calendar was a "soon" marker — hidden until/unless it's actually built.)
+// TL;DR sits second, immediately after Wiki: it's the highest-traffic
+// destination (the pre-session catch-up) and belongs at the left edge where a
+// thumb lands on mobile. See docs/specs/wiki-tldr.md §2.
 const modules = [
   { key: 'wiki', label: 'Wiki', href: '/', soon: false },
+  { key: 'tldr', label: 'TL;DR', href: '/tldr', soon: false },
   { key: 'graph', label: 'Graph', href: '/graph', soon: false },
   { key: 'map', label: 'Map', href: '/map', soon: false },
   { key: 'gallery', label: 'Gallery', href: '/gallery', soon: false },
 ];
 
-// Exactly one module is "active" per page. Graph/Map/Gallery own their own
-// sub-trees; Wiki is the catch-all for everything else (entity/episode pages).
+// Exactly one module is "active" per page. Every module except Wiki owns its own
+// sub-tree; Wiki is the catch-all for everything else (entity/episode pages).
+const OWNED_PREFIXES = ['/tldr', '/graph', '/map', '/gallery'];
 const path = Astro.url.pathname;
 const isActiveModule = (key: string) => {
-  if (key === 'graph') return path === '/graph' || path.startsWith('/graph/');
-  if (key === 'map') return path === '/map' || path.startsWith('/map/');
-  if (key === 'gallery') return path === '/gallery' || path.startsWith('/gallery/');
-  if (key === 'wiki')
-    return !(path.startsWith('/graph') || path.startsWith('/map') || path.startsWith('/gallery'));
-  return false;
+  if (key === 'wiki') return !OWNED_PREFIXES.some((p) => path === p || path.startsWith(`${p}/`));
+  const own = `/${key}`;
+  return path === own || path.startsWith(`${own}/`);
 };
 
 // Right-rail TOC: only h2/h3, and only worth showing on longer pages (>= 3).

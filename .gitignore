@@ -40,6 +40,10 @@ canon/_review-sheets/FOR-JON--*
 # The consolidated decision log references un-revealed entities + spoiler triage — local-only.
 canon/_review-sheets/jon-decisions.md
 
+# Phil's personal player notes — private prep/cheat sheets for playing Quinton.
+# Not canon, not for the public wiki. Local-only.
+my-notes/
+
 # OS / editor cruft
 .DS_Store
 *.swp
