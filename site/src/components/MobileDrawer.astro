@@ -111,6 +111,18 @@ const hasNav = Astro.slots.has('nav');
   }
   .drawer.open { transform: translateX(0); }
 
+  /* `.drawer{display:flex}` would otherwise override the UA `[hidden]{display:none}`
+     (author beats UA), leaving the closed drawer laid out and hit-testable — it was
+     only ever "hidden" because `translateX(-100%)` parked it off-screen. That fails
+     under `prefers-reduced-motion: reduce` (below), which swaps the transform for
+     `opacity:0`: the panel then sits ON-screen over the left ~86vw, invisible but
+     still eating taps and scroll (`overflow-y:auto` + `overscroll-behavior:contain`).
+     That's the iOS "Reduce Motion" accessibility setting (and, per widespread
+     reports, Low Power Mode) — so re-assert the hide with higher specificity.
+     Same trap as `.ep-row` in EpisodesBody.astro. */
+  .drawer[hidden],
+  .drawer-backdrop[hidden] { display: none; }
+
   .drawer-head {
     display: flex;
     align-items: center;
@@ -240,6 +252,11 @@ const hasNav = Astro.slots.has('nav');
       drawer.hidden = false;
       backdrop.hidden = false;
       drawer.setAttribute('aria-hidden', 'false');
+      // The drawer is now genuinely `display:none` while hidden (see the
+      // `.drawer[hidden]` rule), so flush layout here: without it the unhide and
+      // the `.open` class can collapse into one style recalc and the panel snaps
+      // open instead of sliding.
+      void drawer.offsetWidth;
       requestAnimationFrame(function () {
         drawer.classList.add('open');
         backdrop.classList.add('open');
