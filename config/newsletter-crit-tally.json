@@ -3,12 +3,45 @@
   "season_label": "Season tally",
   "episodes": {
     "162": {
-      "nat20": { "Cruucar": 1 },
+      "nat20": {
+        "Cruucar": 1
+      },
       "nat1": {}
     },
     "163": {
-      "nat20": { "DM (Jon)": 2 },
-      "nat1": { "Berrian": 1 }
+      "nat20": {
+        "DM (Jon)": 2
+      },
+      "nat1": {
+        "Berrian": 1
+      }
+    },
+    "164": {
+      "nat20": {
+        "Vane": 1,
+        "Noctis": 1,
+        "Cruucar": 1
+      },
+      "nat1": {
+        "Berrian": 1
+      }
+    },
+    "165": {
+      "nat20": {
+        "Berrian": 1,
+        "Torgoth": 1,
+        "DM (Jon)": 3
+      },
+      "nat1": {
+        "Vane": 1,
+        "Cruucar": 1
+      }
+    },
+    "166": {
+      "nat20": {
+        "Quinton": 1
+      },
+      "nat1": {}
     }
   }
 }
