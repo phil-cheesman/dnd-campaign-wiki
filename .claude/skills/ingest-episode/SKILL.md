@@ -3,7 +3,8 @@ name: ingest-episode
 description: >-
   Ingest a new D&D session for the Alambor campaign end-to-end: Craig multi-track
   FLAC recordings → speaker-labeled transcript → scrubbed clean.md → canon episode
-  page + glossary/timeline/dossier updates → sanitization → scene-art brief
+  page + glossary/timeline/dossier updates → a rewritten canon/tldr.md (the /tldr
+  catch-up page; skipping it fails the site build) → sanitization → scene-art brief
   (status: pending) → rebuilt changelog.json → a review digest (story-spine + open
   questions) written as a CSV for Phil to import as a new e<num> tab in the single
   permanent "AI Recap Fact Review" workbook. Use when a new sources/recordings/e<num>/
@@ -167,6 +168,64 @@ Match `canon/episodes/e162.md`.
 - Affected `canon/{characters,npcs,locations,factions,items}/` dossiers: update with
   new facts.
 
+## Step 5.5 — Rewrite `canon/tldr.md` (the `/tldr` catch-up page)
+
+**This step is not optional: skipping it fails the site build.** `/tldr` asserts at
+build time that `current_episode` matches the newest episode in `canon/episodes/`,
+so an un-rewritten TL;DR blocks the Vercel deploy in Phase 3. Spec:
+`docs/specs/wiki-tldr.md`.
+
+`/tldr` is the three-minute pre-session catch-up. **It describes the campaign's
+*state*, not its *events*** — not "what happened," but "what is true right now."
+Recaps live in `canon/episodes/`, history in `canon/arcs/`. If a line you're about
+to write would fit just as well on the episode page, it doesn't belong here.
+
+**Rewrite the whole file — do not append.** Stale rows must be *deleted*. The page
+is a snapshot; an accumulating one is worse than useless because it reads as
+current. Work through every section and ask "is this still true after E<N>?":
+
+| Field | Rewrite check |
+|---|---|
+| `current_episode` / `updated` | Bump both. This is what the guard reads. |
+| `cliffhanger` | Replace entirely — where did *this* session stop? One or two sentences, present tense, second person. |
+| `cliffhanger_art` | Point at E<N>'s plate (or drop the key to auto-use the newest). Note the plate is still `status: pending` at this point in the pipeline — that's fine, the file path is stable. |
+| `where` | Did the party move? New plane, new level, new in-world date? |
+| `story_now` | 3–5 sentences. Rewrite from scratch; do not patch the old one. |
+| `party[].state` | fine / hurt / critical / changed / missing — **as of the end of the session**, after any rest. |
+| `party[].thread` | Each PC's live personal hook. Retire resolved ones. |
+| `with_us` / `after_us` / `elsewhere` | Who joined, died, betrayed, or wandered off? Move rows between rosters rather than duplicating. |
+| `objectives` | Mark completed ones `done` (or delete if stale), add what the session opened. |
+| `changed` | **Replace wholesale** — this section means "since you last paid attention," so it is always the *most recent* session's deltas, never a running ledger. |
+| `clock` | What is getting worse while the party stalls? |
+| `jargon` | **Hard cap 12.** Add terms this episode introduced; cut any that have been stable for ~5 episodes — the glossary still has them. |
+| `theories` | Promote confirmed ones into the facts above and delete; delete disproven ones; add what the table is now speculating. |
+| `remember` | Exactly 3. |
+
+Two things that keep the page honest:
+
+- **Facts-only in the body**, same standard as episode pages. Table speculation goes
+  in `theories:` and *only* there — it renders in a visually distinct block so it is
+  never mistaken for canon.
+- **`slug:` is optional and resolves leniently.** A brand-new NPC with no dossier yet
+  renders as plain text, so put them in the roster the session they appear. Only use
+  a `slug` you've actually confirmed exists in `canon/`.
+- **`pcs: [slug]`** on an objective or roster row ties it to a PC for the "Playing as"
+  lens. Tag only genuine ties — an untagged row means "concerns everyone," and
+  over-tagging makes the lens dim things it shouldn't.
+
+Verify before moving on (cheap, catches the common typo):
+```
+node -e "
+const fs=require('fs');
+const t=fs.readFileSync('canon/tldr.md','utf8').match(/^current_episode:\s*(\d+)/m)[1];
+const eps=fs.readdirSync('canon/episodes').filter(f=>/^e\d+\.md$/.test(f))
+  .map(f=>+f.slice(1,-3));
+const latest=Math.max(...eps);
+console.log(+t===latest ? '✓ tldr is current (E'+t+')'
+  : '✗ tldr says E'+t+' but latest episode is E'+latest+' — build WILL fail');
+"
+```
+
 ## Step 6 — SANITIZATION GATE (hard requirement)
 
 Per `docs/content-sanitization.md`. If any **offensive source title or name** showed
@@ -323,11 +382,16 @@ committee came back" / Phil pasting the workbook link. This is the back half of 
    Talakvor→Tu'narath). Rename across canon, keep the old forms as **aliases**, and never
    blanket-replace inside a glossary `Aliases:` clause — split each line at `Aliases:` and
    rewrite only the prose before it.
-5. Record the answers in the local mirror `docs/review/e<N>-review.md` (answer log:
+5. **Sweep `canon/tldr.md` too.** It quotes the same proper nouns, party states and
+   open threads, so a rename or a corrected fact leaves it wrong — and it's the page
+   the table actually reads before a session. Re-check the rewrite table in Step 5.5;
+   in particular, an answer that settles a `theories:` entry should promote it into
+   the facts above (or delete it). Cheap to miss, loud when wrong.
+6. Record the answers in the local mirror `docs/review/e<N>-review.md` (answer log:
    question → answer → applied-to-canon), and tell Phil which rows are still unanswered.
    You cannot write back into the Sheet's `Resolution (Phil)` column — the connector is
    read-only for cells — so the mirror **is** the audit record; say so.
-6. Report what changed. The episode is now clean enough to hand to `draft-newsletter`.
+7. Report what changed. The episode is now clean enough to hand to `draft-newsletter`.
 
 ## Done — report to Phil
 

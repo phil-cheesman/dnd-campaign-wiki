@@ -76,7 +76,10 @@ permanent workbook `AI Recap Fact Review`** — one workbook, one tab per episod
 **not** create a new Sheet file; the connector cannot add tabs, so the import is Phil's
 one manual step.
 ⏸ **GATE — proofread canon + hand off the tab:** present the proposed title, the
-summary, new/merged entities, and the **CSV path + import instruction** (AI Recap Fact
+summary, new/merged entities, **the rewritten `/tldr` state block** (Step 5.5 — show
+the new cliffhanger, any changed party `state`, and completed/new objectives, since
+this is the page the table actually reads before a session), and the **CSV path +
+import instruction** (AI Recap Fact
 Review → File ▸ Import ▸ Insert new sheet(s) → rename the tab `e<N>`). Sharing is already
 set on the workbook, so new tabs inherit it — only remind Phil to **check sharing
 and send it to the table** (Jon/Elliot/Kendall) — reconciliation (Phase 4) waits on it
@@ -89,8 +92,12 @@ alternative; confirm the (~$0.15–0.20) spend. After generating, show the plate
 
 **Phase 3 — Commit + push** (this skill does it; not a sub-skill).
 ⏸ **GATE — confirm publish:** stage **only this session's e<N> files** (explicit paths;
-diff anything pre-modified), commit content, **rebuild changelog → separate commit**,
-push. Then **poll the live plate URL until 200** before Phase 4 (Vercel deploy lag).
+diff anything pre-modified) — **`canon/tldr.md` is one of them**, from ingest Step 5.5 —
+commit content, **rebuild changelog → separate commit**, push. Then **poll the live plate
+URL until 200** before Phase 4 (Vercel deploy lag).
+> **Pre-flight:** `/tldr` fails the build when `canon/tldr.md`'s `current_episode`
+> isn't the newest episode, so a skipped Step 5.5 surfaces here as a **red Vercel
+> deploy**, not a warning. Run the Step 5.5 verify snippet before pushing.
 
 **Phase 4 — Reconcile the review sheet** (this skill does it; the reconciliation half of
 `ingest-episode`).
