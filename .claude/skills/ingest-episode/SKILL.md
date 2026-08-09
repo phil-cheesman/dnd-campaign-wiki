@@ -4,11 +4,12 @@ description: >-
   Ingest a new D&D session for the Alambor campaign end-to-end: Craig multi-track
   FLAC recordings → speaker-labeled transcript → scrubbed clean.md → canon episode
   page + glossary/timeline/dossier updates → sanitization → scene-art brief
-  (status: pending) → rebuilt changelog.json → a Google-Sheet review digest for the
-  table (story-spine + open questions). Use when a new sources/recordings/e<num>/ or
-  sources/transcripts/e<num>.txt lands, or Phil says "ingest E<num>". Also runs the
-  reconciliation half: when Phil points back at a filled review sheet, fold the
-  answers into canon. Idempotent and resumable — each step skips if its output exists.
+  (status: pending) → rebuilt changelog.json → a review digest (story-spine + open
+  questions) written as a CSV for Phil to import as a new e<num> tab in the single
+  permanent "AI Recap Fact Review" workbook. Use when a new sources/recordings/e<num>/
+  or sources/transcripts/e<num>.txt lands, or Phil says "ingest E<num>". Also runs the
+  reconciliation half: when Phil points back at a filled review tab (the table's
+  "RETCON committee"), fold the answers into canon. Idempotent and resumable — each step skips if its output exists.
 ---
 
 # Ingest a campaign episode
@@ -122,6 +123,22 @@ protocol** to every `Party`-track action before asserting who did it:
 5. **Verbatim names win.** If the DM spells a name out letter-by-letter or corrects a
    spelling, use that exact spelling (E163: Jon spelled "A-E-R-A-L-O-R-A" → Aeralora,
    not the phonetic guess).
+6. **Before inventing ANY new proper-noun spelling, grep Jon's own DM docs.** This is the
+   highest-value check in the whole step and it is cheap:
+   ```
+   grep -rin "<phonetic fragment>" canon/_dm-only/ canon/worldbuilding/ canon/glossary.md
+   ```
+   Jon's `canon/_dm-only/` files are **a higher authority than the transcript** — they are
+   his written spellings. In E166 the dynasty was ingested as "Zevan" while
+   `canon/_dm-only/hive-zivens-sundering-lore.md` had been spelling it **Ziven** 155 times
+   the whole campaign; Jon later ruled Ziven canonical, forcing a wiki-wide rename that a
+   single grep would have avoided. Search on the *sound*, not the guess (`ziv`, `zev`,
+   `kael`, `vorr`), because you don't yet know the spelling.
+7. **Mark invented spellings as provisional in the page itself**, not only in the review
+   sheet — e.g. `**Kalvor** (spelling unconfirmed)`. In E166 the DM corrected **every
+   single** invented proper noun (Kalvor→Kael'vorr, Zirin Val→Xeran Vaal,
+   Ilhares→Ilharess, Talakvor→Tu'narath). Assume yours are wrong until confirmed, so a
+   reader mid-week can see which names are load-bearing guesses.
 
 **Mark every still-uncertain `Party`-track attribution with `(?)`** in canon, and collect
 them for the Step 9 confirm-checklist. **Upstream fix to recommend to Phil:** have each
@@ -212,18 +229,48 @@ sheet, so gather it don't just print it. Two buckets:
 Also pull any **character-sheet validation flags** (an ability named in the source that
 isn't on the attributed PC's sheet) — those become questions too.
 
-## Step 10 — Generate the review sheet (weekly table feedback)
+## Step 10 — Add the episode's review tab (the "RETCON committee")
 
-Build a **Google Sheet** in the shared Alambor Drive folder so the table can validate the
-recap spine and answer the Step 9 open questions in one skim — the human-in-the-loop gate
-*before* the newsletter, so friends aren't editing dense AI prose. (Decided with Phil,
-E165 — replaces the plain-text checklist as the delivery format.)
+The table validates the recap spine and answers the Step 9 open questions in one skim —
+the human-in-the-loop gate *before* the newsletter, so friends aren't editing dense AI
+prose. Phil's table calls this the **RETCON committee**.
 
-**Where:** shared **Alambor** folder, `parentId = 1BLLTHe3EYBrjVx9sZXIxcQD0Sn602DHB`.
+### One workbook, one tab per episode (decided with Phil, E166 — do NOT create new files)
 
-**How (one MCP call — CSV converts to a native Sheet):** load the Drive tool, then
-`mcp__claude_ai_Google_Drive__create_file` with `contentMimeType: text/csv` and the CSV
-as `textContent`. Title: `E<N> Review — <Episode Title> (recap check)`.
+There is a **single permanent Google Sheet** that every episode's review lives in:
+
+| | |
+|---|---|
+| **Title** | `AI Recap Fact Review` |
+| **File ID** | `1dVg4mTa-oKk0BH1gKGEZ5_pFgTCT8eiNUCoMJSgXnhI` |
+| **Folder** | `parentId = 1fH4LeftuT2tFvobfmIOkCif0Nk9zJOCn` |
+| **Tab naming** | lowercase `e<N>` — `e165`, `e166`, `e167`… |
+
+Each episode gets **a new tab in that workbook**, never a new file. Earlier runs created
+one standalone Sheet per episode; Phil consolidated them by hand and wants the tab model
+from here on. If you can't find the workbook by ID, locate it with
+`mcp__claude_ai_Google_Drive__search_files` on the title `AI Recap Fact Review` — do not
+fall back to creating a file.
+
+### The connector cannot add a tab — so hand Phil an importable CSV
+
+**Important limitation, do not fight it:** the Google Drive connector exposes no
+cell-write or add-sheet capability (`create_file`, `read_file_content`, `search_files`,
+`copy_file`, metadata — that's all). It **cannot** append a tab to an existing
+spreadsheet, and calling `create_file` will just litter Drive with a stray file. So:
+
+1. **Write the CSV locally** to `docs/review/e<N>-review.csv` (gitignored — `docs/review/`
+   is not published).
+2. **Show Phil the CSV inline** in the chat as well, so he can paste it directly if he
+   prefers.
+3. **Tell Phil the one manual step:** open **AI Recap Fact Review** →
+   `File ▸ Import ▸ Upload` → pick `e<N>-review.csv` → **Import location: "Insert new
+   sheet(s)"** → rename the new tab `e<N>`. (Paste-into-a-blank-tab works equally well.)
+4. Also write the human-readable mirror `docs/review/e<N>-review.md` (spine + questions +
+   an empty answer log) — this is the local audit record and what you update at
+   reconciliation.
+
+### Sheet contents
 
 **Columns (exactly):** `#`, `Type`, `Fact / question`, `Jon`, `Elliot`, `Kendall`,
 `Resolution (Phil)`.
@@ -240,40 +287,56 @@ as `textContent`. Title: `E<N> Review — <Episode Title> (recap check)`.
    episode's skimmable backbone (this is also the spine a reader should be able to follow
    without the dense `## Summary` — keep them punchy and causal). One beat per row.
 4. `Q1…Qn` — **the open questions**, `Type = Question`, from Step 9. Prefix each with the
-   person best placed to answer in brackets where useful (`Jon:`, `[Steve]`, `[Table]`).
+   person best placed to answer in brackets where useful (`[Jon]`, `[Steve]`, `[Table]`).
 
-Model the layout on the E165 sheet (`docs/review/e165-review.md` mirrors its content).
-After creating, **read it back** with `read_file_content` to confirm the CSV converted
-cleanly, and give Phil the `viewUrl`.
+Model the layout on the `e166` tab (`docs/review/e166-review.md` mirrors its content).
+Validate the CSV parses to exactly 7 columns on every row before handing it over — a
+stray unquoted comma silently shifts every reviewer's answer one column left.
 
-> **Sharing is a manual step for Phil** — this connector can't set link-sharing. Tell Phil
-> to Share → give Jon/Elliot/Kendall edit (or "anyone with the link can edit") before he
-> sends it, unless they already have edit on the folder. Real tickable checkboxes aren't
-> possible via CSV import; a typed ✓/"y" is what to expect and is readable back.
+> **Sharing is Phil's manual step** — the connector can't set link-sharing. Once the
+> workbook is shared with Jon/Elliot/Kendall it stays shared, so this is a one-time cost
+> that new tabs inherit. Real tickable checkboxes aren't possible via CSV import; a typed
+> ✓/"y" is what to expect and is readable back.
 
-## Reconciliation — when Phil returns with the filled sheet
+## Reconciliation — when Phil returns with the filled tab
 
-Triggered by "the E<N> review is filled in" / "reconcile the review sheet" / Phil pasting
-the sheet link. This is the back half of the loop:
-1. `read_file_content` on the sheet (find it via `search_files` on the title if no link).
-2. For each row, read the reviewer columns. A ✓ confirms the beat/fact as written — drop
-   the `(?)`. A typed correction is **authoritative** (Jon's answers especially — see the
-   [[dm-clarification-email-loop]] rule: the DM's reply corrects canon). Conflicting
+Triggered by "the E<N> review is filled in" / "reconcile the review sheet" / "the RETCON
+committee came back" / Phil pasting the workbook link. This is the back half of the loop:
+
+1. `read_file_content` on the workbook (ID above). **It returns every tab concatenated**,
+   each under a `# <tabname>` markdown heading with the rows in a fenced block. Find the
+   `# e<N>` section and work only within it — and expect to see *other* episodes' tabs in
+   the same response.
+   - Phil may hand back **several tabs at once** (he did E165+E166 together). Reconcile
+     each episode against its own canon page; don't let one episode's answers leak into
+     another's.
+2. For each row, read the reviewer columns. A ✓/`y` confirms the beat/fact as written —
+   drop the `(?)`. A typed correction is **authoritative** (Jon's answers especially — see
+   the [[dm-clarification-email-loop]] rule: the DM's reply corrects canon). Conflicting
    reviewer answers → surface to Phil, don't pick.
 3. Flow every confirmation/correction into canon: the episode page (`(?)` → fact, or the
    fixed value), glossary aliases, affected dossiers, timeline. Watch for answers that
-   **correct existing canon**, not just this episode — flag old-episode sweeps.
-4. Write the final answer into the sheet's `Resolution (Phil)` column so the sheet stays
-   the audit record.
-5. Report what changed. The episode is now clean enough to hand to `draft-newsletter`.
+   **correct existing canon**, not just this episode — flag old-episode sweeps rather than
+   mass-rewriting (see the Ziven precedent in `docs/specs/pipeline-learnings.md`).
+4. **Expect proper-noun spellings to come back wrong.** In E166 the DM corrected *every*
+   invented spelling (Kalvor→Kael'vorr, Zirin Val→Xeran Vaal, Ilhares→Ilharess,
+   Talakvor→Tu'narath). Rename across canon, keep the old forms as **aliases**, and never
+   blanket-replace inside a glossary `Aliases:` clause — split each line at `Aliases:` and
+   rewrite only the prose before it.
+5. Record the answers in the local mirror `docs/review/e<N>-review.md` (answer log:
+   question → answer → applied-to-canon), and tell Phil which rows are still unanswered.
+   You cannot write back into the Sheet's `Resolution (Phil)` column — the connector is
+   read-only for cells — so the mirror **is** the audit record; say so.
+6. Report what changed. The episode is now clean enough to hand to `draft-newsletter`.
 
 ## Done — report to Phil
 
 Summarize what landed (transcript, episode page, recap backfills, glossary/timeline/
 dossier edits, any sanitization additions, the pending art brief) and that the
 changelog was rebuilt. Then surface, prominently:
-- the **review sheet link** (Step 10) — the table's one-skim validation + open questions,
-  and a reminder that Phil must set sharing before sending, and
+- the **review tab** (Step 10) — the path to `docs/review/e<N>-review.csv`, the one-line
+  import instruction (AI Recap Fact Review → File ▸ Import ▸ Insert new sheet(s) → rename
+  the tab `e<N>`), and the workbook link, and
 - any **character-sheet validation flags** (an ability named in the source that isn't on
   the attributed PC's sheet) — noting these are already rows in the sheet.
 

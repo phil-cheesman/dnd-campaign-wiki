@@ -17,6 +17,11 @@ hot-linking, prefilled poll links, IMAP APPEND). This skill reads canon, authors
 **per-episode content JSON**, and drives the harness. Design lives in
 `template.html.j2`; prose lives in `content/e<N>.json`.
 
+**Flow:** read canon → confirm crit tally → author content → dry-run → **⏸ committee
+spot-check via `e<N>-share.html`** → append Gmail draft → **⏸ Phil proofread** →
+`--to-all` → Phil schedules the send. Two hard stops, and Gmail isn't touched until the
+first one clears.
+
 Read alongside `docs/specs/draft-newsletter-skill.md` (the full brief — §3 delivery
 decisions, §7 voice/policy), `docs/specs/episode-pipeline.md` (§3 order, §9 hand-offs),
 and `CLAUDE.md`.
@@ -145,7 +150,35 @@ The harness fails loudly on unresolved template tokens or leftover `cid:` refs, 
 clean dry-run means the content JSON keys all matched. Fix prose/keys and re-run until it
 reads right.
 
-## Step 5 — Append the Gmail draft
+## Step 5 — ⏸ COMMITTEE SPOT-CHECK GATE (stop here; Gmail is still untouched)
+
+**This gate comes BEFORE any Gmail draft exists** (decided with Phil, E167). The dry-run
+already wrote `scripts/newsletter/e<N>-share.html` — self-contained, every image inlined
+as base64, no external requests — so it renders in an iMessage preview and offline in any
+browser. That file is the committee's read.
+
+1. **Hand Phil the path** `scripts/newsletter/e<N>-share.html` and state plainly that
+   **nothing has been drafted or sent yet**. Use `SendUserFile` so he can forward it
+   straight from the conversation.
+2. **Stop and wait.** Phil texts it to the RETCON committee (Jon/Elliot/Kendall) as the
+   final read. This is a real wait — do not proceed to Step 6 on your own initiative.
+3. **Fold their corrections back in when they land**, routing by kind:
+   - **Prose / tone / a joke that didn't land** → edit `content/e<N>.json`, re-run
+     `--dry-run`, hand back the regenerated share HTML.
+   - **A factual error** → treat it exactly like a reconcile answer. Fix
+     `canon/episodes/e<N>.md`, the glossary, and any affected dossiers **first**, then a
+     **follow-up commit** (stage only those files; rebuild `changelog.json` if a title
+     changed) — *then* fix the email to match. The wiki and the newsletter must never
+     drift apart, and the committee catching it here is the last cheap chance to fix
+     canon before friends read the polished version.
+   - Log every correction for the end-of-run "areas for improvement" summary.
+4. Re-run the dry-run and re-offer the share HTML until the committee is happy.
+
+> Why before the draft: appending first and asking second leaves a **stale Gmail draft**
+> behind every time a correction lands (the harness is append-only and never deletes).
+> Gating here means exactly one clean draft gets created, once the content is settled.
+
+## Step 6 — Append the Gmail draft
 
 Needs `.env` at repo root: `GMAIL_ADDRESS=<phil-personal-gmail>` +
 `GMAIL_APP_PASSWORD=…` (Google app password). **Default to drafting to Phil only first**
@@ -166,8 +199,10 @@ re-run leaves duplicates, it says so — Phil deletes the stale ones in Gmail by
 ## Done — report to Phil
 
 Summarize: the subject, who it's addressed to (Phil-only vs `--to-all`), the dry-run
-`.eml` path if used, the **`scripts/newsletter/e<N>-share.html` spot-check copy** (so Phil
-can text it to players), and any duplicate-draft warning. Remind Phil that:
+`.eml` path if used, the **`scripts/newsletter/e<N>-share.html` spot-check copy** (the
+committee's read — Step 5), whether the committee has signed off yet, any canon
+corrections their review forced (and the follow-up commit), and any duplicate-draft
+warning. Remind Phil that:
 - **Nothing was sent** — it's a draft; the **Monday 07:00 send is his separate,
   cancellable step** (Gmail native scheduled-send).
 - The crit-tally (`config/newsletter-crit-tally.json`) gained E<N>'s entry; **nothing is

@@ -2,8 +2,9 @@
 name: new-episode
 description: >-
   Run the full post-session pipeline for an Alambor episode end-to-end, with human
-  gates: ingest-episode (+ review sheet) → generate-art (scene) → commit+push →
-  reconcile the table's filled review sheet → draft-newsletter, stopping at each gate
+  gates: ingest-episode (+ review tab) → generate-art (scene) → commit+push →
+  reconcile the table's filled review tab (the "RETCON committee") → draft-newsletter,
+  stopping at each gate
   for Phil. Resumable on the hand-off signals; reads and appends the standing
   lessons-learned log; surfaces clarifications MID-run and an areas-for-improvement
   summary at the END for Phil's feedback/corrections. Use when Phil says "run the
@@ -59,7 +60,7 @@ on disk and skip what's done — **never redo a paid/sent step:**
 | ingest | `canon/episodes/e<N>.md` exists, `art.status: pending` (or generated) | skip to art |
 | art | `art.status: generated` **and** `site/public/art/episodes/e<N>.webp` exists | skip to push |
 | push | `e<N>.md` committed **and** the live plate URL returns 200 | skip to reconcile |
-| review sheet | a Sheet `E<N> Review — …` exists in the Alambor Drive folder | skip creation; check if filled |
+| review tab | `docs/review/e<N>-review.csv` exists **and** an `e<N>` tab is present in the **AI Recap Fact Review** workbook | skip generation; check if filled |
 | reconcile | Phil signals the sheet is filled in (no clean on-disk marker — it's Phil-gated) | fold answers into canon, then newsletter |
 | newsletter | a Gmail draft `Alambor E<N> …` already exists (count > 0) | report, don't re-append (append-only stacks) |
 
@@ -69,10 +70,15 @@ on disk and skip what's done — **never redo a paid/sent step:**
 Precondition: `sources/recordings/e<N>/` + `scripts/transcribe/tracks.e<N>.json` (the
 hand-authored mic→character map — **halt and ask Phil if missing**, incl. the room
 topology). Apply the room-mic due-diligence + character-sheet validation. Ingest's Step 10
-creates the **Google-Sheet review digest** (story-spine + open questions) in the shared
-Alambor Drive folder.
-⏸ **GATE — proofread canon + hand off the sheet:** present the proposed title, the
-summary, new/merged entities, and the **review-sheet link**. Remind Phil to **set sharing
+writes the **review digest** (story-spine + open questions) to
+`docs/review/e<N>-review.csv` for Phil to import as a **new `e<N>` tab in the single
+permanent workbook `AI Recap Fact Review`** — one workbook, one tab per episode. It does
+**not** create a new Sheet file; the connector cannot add tabs, so the import is Phil's
+one manual step.
+⏸ **GATE — proofread canon + hand off the tab:** present the proposed title, the
+summary, new/merged entities, and the **CSV path + import instruction** (AI Recap Fact
+Review → File ▸ Import ▸ Insert new sheet(s) → rename the tab `e<N>`). Sharing is already
+set on the workbook, so new tabs inherit it — only remind Phil to **check sharing
 and send it to the table** (Jon/Elliot/Kendall) — reconciliation (Phase 4) waits on it
 coming back. Get Phil's title confirm + corrections before proceeding.
 
@@ -93,9 +99,14 @@ purpose is that the table validates the recap spine + open questions *before* fr
 polished prose. It is a genuine wait: the sheet may take days.
 ⏸ **GATE — wait for Phil's signal.** Do not proceed to Phase 4 reconciliation until Phil
 says the sheet is filled in (or pastes it). When he does, follow the ingest-episode
-**Reconciliation** section: read the sheet, ✓ drops the `(?)`, typed corrections are
-authoritative (Jon's especially — [[dm-clarification-email-loop]]), conflicts → ask;
-flow into canon, write finals into the sheet's `Resolution (Phil)` column. Because Phase 3
+**Reconciliation** section: read the workbook (it returns **all tabs concatenated** under
+`# <tabname>` headings — work only inside `# e<N>`, and expect Phil to hand back several
+tabs at once), ✓ drops the `(?)`, typed corrections are authoritative (Jon's especially —
+[[dm-clarification-email-loop]]), conflicts → ask; flow into canon, and record the answer
+log in `docs/review/e<N>-review.md` (the connector cannot write the sheet's
+`Resolution (Phil)` column, so the local mirror is the audit record).
+**Expect every invented proper-noun spelling to come back corrected** — rename across
+canon and demote the old forms to aliases. Because Phase 3
 already published, canon corrections here produce a **follow-up commit** (stage only the
 reconciliation edits; rebuild changelog if a title changed) — present it at the gate.
 > If Phil wants to draft the newsletter *before* the sheet returns (he's caught up and
@@ -103,31 +114,45 @@ reconciliation edits; rebuild changelog if a title changed) — present it at th
 > and proceed only on his explicit OK.
 
 **Phase 5 — Newsletter** → `Skill(draft-newsletter, "<N>")`.
-Runs only after the episode is live **and the review sheet is reconciled** (or Phil waived
+Runs only after the episode is live **and the review tab is reconciled** (or Phil waived
 it). Confirm the crit/fumble tally (route to whoever ran the PCs if Phil was absent),
-author the content, dry-run, append the **Phil-only** draft, and hand Phil the
-`e<N>-share.html` spot-check copy.
-⏸ **GATE — proofread:** Phil reviews; on his OK, `draft-newsletter <N> --to-all`. The
-scheduled send stays Phil's separate, cancellable step. **NEVER auto-send.**
+author the content, and dry-run. **Two gates here, in this order:**
+
+⏸ **GATE 5a — COMMITTEE SPOT-CHECK (before any Gmail draft exists).** The dry-run writes
+`scripts/newsletter/e<N>-share.html` — fully self-contained, images inlined as base64, so
+it renders in an iMessage preview and offline in any browser. `SendUserFile` it to Phil,
+state that **nothing has been drafted or sent**, and **wait** while he texts it to the
+RETCON committee as their final read. Fold corrections back by kind: prose →
+`content/e<N>.json` + re-run the dry-run; **a factual error → fix canon first** (episode
+page, glossary, dossiers), take a **follow-up commit**, rebuild the changelog if a title
+changed, *then* fix the email. Re-offer the share HTML until they're happy. Gating here
+rather than after means exactly **one** clean Gmail draft ever gets created — the harness
+is append-only and never deletes, so drafting first strands a stale draft on every
+correction.
+
+⏸ **GATE 5b — Phil's proofread:** append the **Phil-only** draft; Phil reviews the real
+thing in Gmail; on his OK, `draft-newsletter <N> --to-all`. The scheduled send stays
+Phil's separate, cancellable step. **NEVER auto-send.**
 
 ## Configurable gates (carry Phase 1 → 3 autonomy without a rewrite)
 
 Default: stop at all gates. Support an **auto-approve** mode (e.g. `new-episode <N> --yolo`
 or per-gate flags) for later phases — auto-run the safe/reversible gates (proofread canon,
-confirm publish) but **keep the spend gate, the reconcile gate, and the email gates manual**
-regardless. The reconcile gate can't be auto-approved anyway — there's nothing to reconcile
+confirm publish) but **keep the spend gate, the reconcile gate, the committee spot-check gate, and the
+email gates manual** regardless. The reconcile gate can't be auto-approved anyway — there's nothing to reconcile
 until the table fills the sheet, so it always waits on Phil's signal. The email-send gate
 never fully closes (cancellable scheduled send is the most it relaxes to).
 
 ## Done — final report
 
-End with: the **live episode URL**, the **review-sheet link + its state** (sent / filled /
-reconciled), the **Gmail draft** state (+ any duplicate warning), the **scheduled-send**
-reminder, the **share-HTML path**, and — always — the **"Areas for improvement" summary +
+End with: the **live episode URL**, the **review tab + its state** (imported / filled /
+reconciled), the **share-HTML path + whether the committee has signed off**, the **Gmail
+draft** state (+ any duplicate warning), the **scheduled-send** reminder, and — always — the **"Areas for improvement" summary +
 an explicit ask for Phil's feedback/corrections.** Then append the run's durable lessons to
 `docs/specs/pipeline-learnings.md`.
 
 > **Batched weeks:** when Phil is catching up on several episodes at once (e.g. ingesting
-> E166 before E165's sheet returns), run Phases 1–3 for each so all the review sheets go
-> out together, then reconcile + newsletter each as its sheet comes back. The per-episode
+> E166 before E165's tab returns), run Phases 1–3 for each so all the review tabs land in
+> the workbook together, then reconcile + newsletter each as its tab comes back (Phil may
+> return several filled tabs in one go). The per-episode
 > gates are independent; don't block a later episode's ingest on an earlier one's reconcile.
