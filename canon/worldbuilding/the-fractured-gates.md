@@ -176,8 +176,9 @@ The paper's last line is the whole page in nine words:
   Under Orun's standard they are the *"traveler who departed, arrived, and can report."* They
   have not yet reproduced the journey.
 - **The Crimson Scar sits inside the Black Spiral's destabilized reality** — the one fracture
-  that sustains transit longest is in the worst possible place. If the party wants a way home
-  that isn't the World Gate, this is the shortlist, and it's a bad shortlist.
+  that sustains transit longest is in the worst possible place, and the Black Spiral is a
+  **[God-Isle](#)** (Jon, 14 Sep 2026). If the party wants a way home that isn't the World Gate,
+  this is the shortlist, and it's a bad shortlist.
 - **Emotional resonance steering the Sapphire Mirror** is a hook with the party's name on it.
 
 ## Open questions

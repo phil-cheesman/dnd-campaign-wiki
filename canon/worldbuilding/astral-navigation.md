@@ -205,7 +205,11 @@ so does every God-Isle; with training they can be perceived far beyond visual ra
 
 ### Named hazards and their signatures
 
-| Place | How it announces itself |
+All four are **[God-Isles](#)** — DM-confirmed (Jon, 14 Sep 2026). T'sarran's text lists them
+without saying so; it does say every God-Isle has a planar signature, and each of these four is
+given by its signature.
+
+| God-Isle | How it announces itself |
 |---|---|
 | **[The Black Spiral](#)** | *"One does not see the Black Spiral before knowing it is near. **One feels absence.**"* |
 | **[The Shattered Hoard](#)** | Disturbances resembling **heat** within magical perception. |
@@ -232,13 +236,14 @@ T'sarran closes on humility:
   currents, matching Ren Sark's E167 line that navigating the Sea *"depends on who you attach your
   sails to."*
 - **The Black Spiral feels like absence** — and the [Crimson Scar](#the-fractured-gates), the
-  longest-lasting fracture, sits inside its destabilized reality.
+  longest-lasting fracture, sits inside its destabilized reality. Since the Black Spiral is a
+  **God-Isle** (Jon, 14 Sep 2026), that fracture is inside one.
 
 ## Open questions
 
 - Is there a **Ziven chart** the party could obtain, and would the Gatewatch escort let them?
 - Does the mind-movement rate the party already measured in the Astral Sea (**3 × Intelligence
   score in feet per turn**, E165) interact with Orryn's training, or supersede it? (?)
-- **Four named hazards, none previously in canon.** Are the Shattered Hoard, the Moonveil and the
-  Endless Labyrinth God-Isles, or something else? The text lists them alongside God-Isles without
-  saying.
+- **Four named hazards, none previously in canon.** *Answered:* the Black Spiral, the Shattered
+  Hoard, the Moonveil and the Endless Labyrinth are all **God-Isles** (Jon, 14 Sep 2026). What
+  each of them *is* — and what walking on one would mean — is still unknown.

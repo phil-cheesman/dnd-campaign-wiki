@@ -64,7 +64,7 @@ with_us:
 
 after_us:
   - slug: adune
-    name: Adune (Morgenrath Gafar)
+    name: Adune (Morgenrath Tifar)
     line: The lich who was your patron for a hundred sessions. Holds five of six gate keys. Hates every god, Betrayer and Faithful alike.
   - slug: aum-shai
     name: Aum Shai

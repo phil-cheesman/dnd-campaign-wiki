@@ -60,13 +60,34 @@ brig of the Silver Promise. Dragons, celestials, dream creatures and construct m
 emerged from the isles, and the Githyanki hunt those that turn dangerous. Even the Zivens find
 the isles "somewhat untouchable."
 
+### Four more, named by the navigation texts
+
+The Ziven navigation curriculum (from the Ilharess library research) names four further places by
+their **planar signature** — how a navigator recognises one from a distance without seeing it.
+**Jon confirmed on 14 Sep 2026 that all four are God Isles.** Which god each one is has not been
+said.
+
+| God Isle | Signature |
+|---|---|
+| **The Black Spiral** | *"One does not see the Black Spiral before knowing it is near. One feels absence."* |
+| **The Shattered Hoard** | Disturbances resembling **heat** within magical perception. |
+| **The Moonveil** | Repeated **inconsistencies in memory and reflected light**. |
+| **The Endless Labyrinth** | An unusual sensation of **downward orientation**, even at enormous distance. |
+
+None of the four appeared in canon before the handout. The **Crimson Scar** — the longest-lasting
+of the three named [fractured gates](#the-fractured-gates) — sits inside the destabilized reality
+around the **Black Spiral**, consistent with color pools clustering near the God Isles.
+
 ## Physical laws
 
 - **No hunger, no thirst, no bodily needs.** Exhaustion still applies, and long rests work.
 - **No time.** "There is no dawn, afternoon, night. It just is." Time passes, but nobody knows
   how it maps to the material plane. Jon confirmed in play that Alambor is in **the 500th year
   of this age**, against 3,000 astral cycles since the Zivens arrived; the party's resulting
-  6:1 ratio is their own arithmetic, **not a DM ruling (?)**.
+  6:1 ratio is their own arithmetic, **not a DM ruling**. Jon's 14 Sep 2026 ruling pushes against
+  it: *"time in the astral sea is measured differently than alambor… the timelines just may not
+  line up completely."* The Ziven **Year of Exile** count and the **AS** count used in the
+  Ilharess books are **linked but not the same count**, though both run after the Sundering.
 - **Movement is by mind** — 3 × Intelligence score in feet per turn. No propulsion, no swimming.
   "No map will serve you here, but your mind is everything."
 - **Mass creates gravity.** Ships and cities exert a pull that strengthens with density, "like a
@@ -153,18 +174,11 @@ texts**, which turn the plane from scenery into something the party can operate 
 This also explains the Githyanki's famous emotional control aboard the *Silver Promise*: in a realm
 where thought is movement, **calm is a practical skill.**
 
-### Named hazards and their signatures
+### Named places and their signatures
 
-| Place | Signature |
-|---|---|
-| **The Black Spiral** | *"One does not see the Black Spiral before knowing it is near. One feels absence."* |
-| **The Shattered Hoard** | Disturbances resembling **heat** within magical perception. |
-| **The Moonveil** | Repeated **inconsistencies in memory and reflected light**. |
-| **The Endless Labyrinth** | An unusual sensation of **downward orientation**, even at enormous distance. |
-
-None of the four appeared in canon before the handout. The **Crimson Scar** — the longest-lasting
-of the three named [fractured gates](#the-fractured-gates) — sits inside the destabilized reality
-around the **Black Spiral**.
+The same texts teach four places by signature — **the Black Spiral**, **the Shattered Hoard**, **the
+Moonveil** and **the Endless Labyrinth**. All four are **God Isles** (DM-confirmed, 14 Sep 2026);
+their signatures are tabulated under **The God Isles** above.
 
 ## Relationships / whereabouts
 - Contains **Ilharess** (and six other unvisited Ziven cities), **Tu'narath**, and the **God Isles**.
@@ -180,4 +194,6 @@ around the **Black Spiral**.
 - What the **World Gate** at the centre of Ilharess is, why it is dormant, and whether it is the
   Zivens' failed route home.
 - Whether the party's 6:1 time ratio between the Astral Sea and Alambor is real.
+- Which gods **the Black Spiral**, **the Shattered Hoard**, **the Moonveil** and **the Endless
+  Labyrinth** are. All four are confirmed God Isles; none has been matched to a name.
 - Whether the Zivens who vanished into fractured gates died or arrived somewhere.

@@ -34,16 +34,13 @@ husband and father who argued against the war and lost everything.**
 > references to Morgenrath?"* Three works: his own legal treatise, the family's private
 > correspondence, and a historical reconstruction of his last years.
 
-> ⚠️ **Naming conflict — unresolved, do not sweep.** This handout consistently says **Morgenrath
-> Tifar / House Tifar**. Committed canon heads him **[Adune (Morgenrath Gafar)](#)**, with
-> *Morgan Wrath Tifar* only as an alias. Jon has now used **Tifar** in writing, to the players.
-> **This page uses Tifar because that is what the source says**; the Adune dossier and the
-> glossary have **not** been renamed. A wiki-wide rename needs a DM ruling first — it is on the
-> clarification list.
+> **Naming — settled.** This handout consistently says **Morgenrath Tifar / House Tifar**, and Jon
+> confirmed it on **14 Sep 2026**: ***"Tifar is correct."*** The wiki-wide rename has been run:
+> **[Adune (Morgenrath Tifar)](#)** is the canonical heading, and *Gafar* — a transcription error
+> that appears only in material transcribed off the recording — is retained as an alias only.
 >
-> **The evidence leans to Tifar.** Jon also wrote it to the table on **9 Oct 2025**: *"the Reveal
-> of the Shadowed Moon aka **Morgenraith Tifar** aka **Adun**."* **Gafar appears only in material
-> transcribed off the recording.**
+> Jon had already written **Tifar** to the table once before, on **9 Oct 2025**: *"the Reveal of
+> the Shadowed Moon aka **Morgenraith Tifar** aka **Adun**."*
 
 ## The man before
 
@@ -220,7 +217,6 @@ him one line:
 
 ## Open questions
 
-- **Tifar or Gafar?** Needs a DM ruling before any rename. *(See the warning at the top.)*
 - **What happened at Phemathis?** The chapter is *"frustratingly incomplete."* The family died in
   violence there; Morgenrath was logged absent for a *"Phemathis Emergency"* and then vanished.
 - **Who killed them?** The handout does not say, and neither does any committed canon.

@@ -1,5 +1,5 @@
 ---
-name: Adune (Morgenrath Gafar)
+name: Adune (Morgenrath Tifar)
 aliases: [Aldune, Hadoon, High Counsilor Adune, High chancellor Hadoon, Morgan Wrath Tifar, Morgan Rath Gafar, Morgenrath, Moregnrath, Morgenrath Gafar, Morgenrath Tifar, Councilor Morgenrath Tifar, Morgenraith, Morgenraith Tifar]
 episodes: [E27, E28, E33, E34, E35, E36, E37, E43, E45, E47, E50, E52, E67, E69, E71, E84, E90, E91, E92, E93, E94, E99, E100, E101, E102, E114, E115, E116, E131, E132, E135, E136, E139, E144, E167]
 role: High Chancellor of Gidia
@@ -23,9 +23,9 @@ art:
   generated_at: "2026-06-15"
   image: /art/npcs/adune.webp
 ---
-# Adune (Morgenrath Gafar)
+# Adune (Morgenrath Tifar)
 
-High Chancellor of Gidia and long-time party patron — a charismatic, handsome young man on King Felix's inner council who briefed the party on Aum Shai, explained Potentium (texair pushed to volatile full potential), revived Zanim's dead body at the royal wedding (E50), gave the party his coin-pin symbol of office, teleported them across the realm, and once sent them to hell. He admitted past work with the Nightmare King and ran his own agents (White Lantern, passphrase "The Sparrow Sent You"). Revealed as the true Big Bad, planned for years: Adune is Morgenrath Gafar, a 1,200-year-old drow lich and surviving Zeeven whose wife and sons died in the Sundering. He hates the gods and the mortal races and aims to bring the Zeeven back by opening a gate to another dimension. He leads Aum Shai / the Remenant (the "puppet master" behind the veil), murdered King Felix at the war council with a devastating spell — framing the party — and cracked open and absorbed the artifact stolen from Hell, his eyes glowing blue: a fragment of Omago, chief architect of the Hive, now lives within and energizes him. He holds four (later five) of the six Zeben relics and was sly, changing his appearance many times.
+High Chancellor of Gidia and long-time party patron — a charismatic, handsome young man on King Felix's inner council who briefed the party on Aum Shai, explained Potentium (texair pushed to volatile full potential), revived Zanim's dead body at the royal wedding (E50), gave the party his coin-pin symbol of office, teleported them across the realm, and once sent them to hell. He admitted past work with the Nightmare King and ran his own agents (White Lantern, passphrase "The Sparrow Sent You"). Revealed as the true Big Bad, planned for years: Adune is Morgenrath Tifar, a 1,200-year-old drow lich and surviving Zeeven whose wife and sons died in the Sundering. He hates the gods and the mortal races and aims to bring the Zeeven back by opening a gate to another dimension. He leads Aum Shai / the Remenant (the "puppet master" behind the veil), murdered King Felix at the war council with a devastating spell — framing the party — and cracked open and absorbed the artifact stolen from Hell, his eyes glowing blue: a fragment of Omago, chief architect of the Hive, now lives within and energizes him. He holds four (later five) of the six Zeben relics and was sly, changing his appearance many times.
 
 ## Before the Sundering — the record in Ilharess
 
@@ -55,16 +55,17 @@ Jon's E167 confirmation that **Morgenrath blames and hates all the gods, Betraye
 Full detail and quotations on [House Tifar](#). *(Source: Jon's library-research handout,
 17 Aug 2026.)*
 
-> ⚠️ **Surname unresolved — but the evidence now leans hard to Tifar.** The handout says **Tifar**
-> throughout, and it is **not** the first time: Jon wrote to the whole table on **9 Oct 2025**
+> **Surname settled: Tifar.** Jon ruled on **14 Sep 2026**: ***"Tifar is correct."*** Canon now
+> reads **Morgenrath Tifar**; **Gafar was a transcription error** and survives only as an alias.
+>
+> The supporting record, for provenance: the library-research handout (17 Aug 2026) says **Tifar**
+> throughout, and it was **not** the first time — Jon wrote to the whole table on **9 Oct 2025**
 > (*"Follow up to D&D Episode 'The Crimson Knight'"*) that the arc ended with *"the Reveal of the
 > Shadowed Moon aka **Morgenraith Tifar** aka **Adun**."* That is **Tifar twice in Jon's own
-> writing, eleven months apart** — while **Gafar appears only in material transcribed off the
-> recording**, which is exactly the shape of a mishearing. Note Jon also spells the given name two
-> ways: *Morgenrath* (handout) and *Morgenraith* (email).
->
-> **Still not renamed.** It needs a DM ruling first and it is a wiki-wide sweep — the Ziven→Zeeven
-> precedent says scope it, don't just run it. Queued on the clarification list.
+> writing, eleven months apart**, while **Gafar appears only in material transcribed off the
+> recording** — exactly the shape of a mishearing. Jon spells the given name two ways, *Morgenrath*
+> (handout) and *Morgenraith* (email); canon uses **Morgenrath**, and both spellings are kept as
+> aliases.
 
 ## Relationships / whereabouts
 - Leader of Aum Shai; Sir Trent Hightower is his second-in-command.

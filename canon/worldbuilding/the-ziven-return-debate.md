@@ -181,9 +181,23 @@ But reconciliation is **not** acceptance of permanent exile:
 ## Dating note
 
 The handout dates works to the **"3,011th Year of Exile"** and **"3,008th Year of Exile,"** and
-the Ilharess architectural history to **"2,847 AS."** This lines up with Kael'vorr's **3,000
-astral cycles** since the Zivens arrived (E166) and suggests **AS** and *Year of Exile* are the
-same era count **(?)** — the handout never says so. The party's 6:1 astral-to-Alambor time ratio
+the Ilharess architectural history to **"2,847 AS."**
+
+**These are two different counts** — Jon ruled on it, 14 Sep 2026, verbatim:
+
+> *Ante-Sundering is linked to but not the same timeline as the year of exile since time in the
+> astral sea is measured differently than alambor, but in both cases they are post the sundering
+> incident. the timelines just may not line up completely.*
+
+So: **AS** (Jon's label: *Ante-Sundering*) and the **Year of Exile** are **linked but distinct**
+era counts, **both reckoned after the Sundering**, and they do **not** necessarily align, because
+astral time is measured differently from Alambor time. A date in one **cannot be assumed
+convertible** into the other. (Jon's label *Ante-Sundering* sits oddly with his own statement that both counts are
+post-Sundering; the tension is unexplained **(?)**.)
+
+The **Year of Exile** count still sits comfortably beside Kael'vorr's **3,000 astral cycles**
+since the Zivens arrived (E166) — both look to be reckoned astral-side **(?)**. What the ruling
+forbids is treating **2,847 AS** as a point on that same line. The party's 6:1 astral-to-Alambor time ratio
 remains player speculation, not a ruling.
 
 ## Open questions
@@ -191,8 +205,9 @@ remains player speculation, not a ruling.
 - **Which faction does the [Hive](#) belong to** — or does it sit above the argument? Every public
   text here is civil. The [Vessels](#vessels-of-the-seven) catalogue has a Hive classification
   authority sealing records.
-- The other **three Ziven cities** are never named in the handout. Four are: **Ilharess,
-  Ninathar, Felyn'riel, Omagor** — all archmage names, strongly implying the remaining three are
-  **Izzdar, Zarryne and Valonim** cities **(?)**.
+- The other **three Ziven cities** are never named — in the handout or anywhere else. Four are:
+  **Ilharess, Ninathar, Felyn'riel, Omagor**, all archmage names. Asked whether the remaining
+  three were therefore *Izzdar*, *Zarryne* and *Valonim*, Jon ruled the idea **"too neat"**
+  (14 Sep 2026). **The three are simply unnamed.**
 - Where does **[Adune](#)** fit? He wants the Zivens back and hates *all* the gods. None of these
   three positions is his.

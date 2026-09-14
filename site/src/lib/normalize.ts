@@ -39,11 +39,11 @@ export function matchKey(term: string): string {
 
 /**
  * Strip a trailing parenthetical clause from an entity's canonical name, e.g.
- * `Adune (Morgenrath Gafar)` → `Adune`, `Ford (Fjord)` → `Ford`.
+ * `Adune (Morgenrath Tifar)` → `Adune`, `Ford (Fjord)` → `Ford`.
  *
  * Shared by the glossary parser and the alias index so both sides reduce a name
  * to the SAME form before matching — otherwise a dossier named
- * `Adune (Morgenrath Gafar)` never matches its glossary entry `Adune`, and the
+ * `Adune (Morgenrath Tifar)` never matches its glossary entry `Adune`, and the
  * entry's glossary-only aliases silently fail to attach (see ISSUES.md #1).
  */
 export function stripNameDecoration(name: string): string {

@@ -70,11 +70,11 @@ reads *Unknown*** — except the last.
 | Archmage | Discipline | Recorded Vessel | Catalogue notes |
 |---|---|---|---|
 | **[Ninath](#)** | Evocation | ***Helm of Brilliance*** | Tied to Ninath's attempts to concentrate multiple destructive elemental energies in a single controllable matrix. Claims it could *"burn the heavens"* are called **poetic rather than technical**. |
-| **[Felyn'riel](#)** | Illusion | ***Cloak of Displacement*** | Did **not** render the wearer invisible; caused *"persistent disagreement between the wearer's physical location and perceived location."* Felyn'riel reportedly thought ordinary invisibility *"an inelegant solution to a simple problem."* |
+| **[Felyn'riel](#)** | Illusion | ***Cloak of Displacement*** | Did **not** render the wearer invisible; caused *"persistent disagreement between the wearer's physical location and perceived location."* Felyn'riel reportedly thought ordinary invisibility *"an inelegant solution to a simple problem."* **This is what the Ilharess catalogue says; the campaign's sixth gate key is the *orb of Felnriel*, not this cloak** — see below. |
 | **[Izzdar](#)** | Necromancy | ***Nine Lives Stealer*** | Made during Izzdar's study of *"the boundary between living essence and physical form."* Could sever that connection under particular conditions. Claims about **storage or reuse of severed essence remain disputed**. |
 | **[Zarryne](#)** | Enchantment | ***Crystal Ball of Telepathy*** | Not a conventional scrying device — built around **transmission and reception of thought**, reportedly across extraordinary distances. |
 | **[Valonim](#)** | Abjuration | ***Robe of the Archmagi*** | Simultaneously personal ward, magical amplifier, and stabilizing matrix against hostile arcane effects. |
-| **[Ilharess](#)** | Conjuration | ***Robe of Stars*** | Built on **the reduction of planar distance through Conjuration**. Astral movement and projected arcane force were *"merely consequences"* of that deeper principle. Surviving descriptions explicitly record **limited independent passage into the Astral Plane**. |
+| **[Ilharess](#)** | Conjuration | ***Robe of Stars*** | Built on **the reduction of planar distance through Conjuration**. Astral movement and projected arcane force were *"merely consequences"* of that deeper principle. Surviving descriptions explicitly record **limited independent passage into the Astral Plane**. **DM-confirmed canon** (Jon, 14 Sep 2026). |
 | **[Omago](#)** | Transmutation | **`[CATALOGUE REFERENCE SEALED]`** | Description, last association and disposition all **`[RESTRICTED]`**. *"Authorization required: **Hive Continuity Classification**."* |
 
 Orr's own note on the sealed entry:
@@ -163,22 +163,28 @@ now in a position to do.
   - ***Crystal Ball of Telepathy*** vs the **Zarryne** orb — *"orange-sized cloudy glass orb on a
     silver stand, drow word carved"* — identified in **E24/E25**.
   - ***Cloak of Displacement*** — named in **E139** as the sixth and final relic, and traced
-    through Mallie Grisham to the Yuan-Ti.
+    through Mallie Grisham to the Yuan-Ti. **That identification is retired** (Jon, 14 Sep 2026):
+    the sixth key is the **orb of Felnriel**.
   - Noctis's **Izzdar cloak** is of Ziven make (E167) and shares the archmage's name — Jon's
     reaction in E167 was *"I couldn't believe you guys didn't connect that at the time."*
   - The **Ninath chainmail** and **Felynriel ring** identified by Drow reading in E25 are named for
     archmages but are **not** the catalogued Vessels (a helm and a cloak).
 
-## ⚠️ Canon conflict to put to Jon
+## Felyn'riel's Vessel — resolved (Jon, 14 Sep 2026)
 
-Jon's catalogue assigns **Felyn'riel → Cloak of Displacement**. But played canon has moved on:
+Jon's catalogue assigns **Felyn'riel → Cloak of Displacement**, while played canon had moved on:
 **E164/E165 identified the sixth Zeben artifact as the *orb of Felnriel*** — a clear crystal orb
 with a black centre, recovered from the Coiled Ascendry and lost on the deck of the *Resurrect at
-the Reef* — and `canon/items/zeben-artifacts.md` already flags the E139 "Cloak of Displacement"
-identification as *mistaken or superseded* **(?)**.
+the Reef*.
 
-Both cannot be Felyn'riel's Vessel. **This needs a DM ruling**, and it is on the clarification
-list — see [the Ilharess library](#).
+**Jon's ruling: *"Cloak has been retired. Go with the orb."*** The sixth [Zeben gate
+key](#zeben-artifacts) is the **orb of Felnriel**. The E139 identification of a *Cloak of
+Displacement* as the sixth and final relic is **retired**.
+
+The nuance worth keeping: **the in-world catalogue entry stands.** Saelith Orr's *Catalogue of
+Lost Works of the Seven* still records the *Cloak of Displacement* as Felyn'riel's Arcane Vessel,
+and that is what the books in Ilharess say. What the ruling retires is the Cloak's role as the
+sixth key — not the library entry. See [the Ilharess library](#) for the full ruling list.
 
 ## Open questions
 

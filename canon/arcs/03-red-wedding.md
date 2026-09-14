@@ -24,7 +24,7 @@ art:
   status: generated
   generated_at: "2026-06-17"
   scene_title: "The Best Man's Blade"
-  key_entities: ["Noctis", "Berrian", "Cruucar", "Quinton Shackleford", "Evac", "Adune (Morgenrath Gafar)"]
+  key_entities: ["Noctis", "Berrian", "Cruucar", "Quinton Shackleford", "Evac", "Adune (Morgenrath Tifar)"]
   image: /art/arcs/03-red-wedding.webp
 ---
 

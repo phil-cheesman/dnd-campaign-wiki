@@ -132,24 +132,37 @@ Every in-world work named in the handout, with its author and what it is.
    loudly about what return means, dissent is freely published, and their best argument does not
    require them to deny anything their ancestors did.
 
-## ⚠️ Clarifications to put to Jon
+## DM rulings on the handout (Jon, 14 Sep 2026)
 
-These come out of the handout and are queued for the next DM clarification email — see
-[[dm-clarification-email-loop]].
+Eight clarifications were put to Jon by email after this handout landed — see
+[[dm-clarification-email-loop]]. **Seven are answered.** His answers are authoritative and have
+been folded into the pages above; the question and the ruling are both kept here as the audit
+record.
 
-1. **Tifar or Gafar?** The handout says *Morgenrath Tifar / House Tifar* throughout; canon heads
-   him **Adune (Morgenrath Gafar)**. A rename is a wiki-wide sweep, so nothing has been changed.
-2. **Felyn'riel's Vessel.** The catalogue says **Cloak of Displacement**; play-canon (E164/E165)
-   identified the sixth Zeben artifact as **the orb of Felnriel**, and already flags the E139
-   "Cloak" identification as possibly superseded. Both can't be right.
-3. **Seven Vessels vs six gate keys.** Is the sealed Omago entry the reason the keys number six?
-4. **Ilharess's Vessel is the *Robe of Stars*** in the handout — first time it is named anywhere
-   player-facing. Confirming it locks the conjuration slot.
-5. **Maena.** The glossary currently files *Maena* as an **out-of-world cartography note**, but
-   the handout (and E166) use it as the in-world pre-Sundering name of the world. The glossary
-   entry looks stale.
-6. **AS vs "Year of Exile"** — same era count? 2,847 AS and 3,011 Year of Exile appear in the same
-   handout.
-7. **The three unnamed Ziven cities.** Four are named (Ilharess, Ninathar, Felyn'riel, Omagor).
-   Are the other three Izzdar, Zarryne and Valonim?
-8. **The Shattered Hoard, the Moonveil, the Endless Labyrinth** — God-Isles, or something else?
+1. **Tifar or Gafar?** *Asked:* the handout says *Morgenrath Tifar / House Tifar* throughout,
+   while canon headed him Adune (Morgenrath **Gafar**). → **Ruled: "Tifar is correct."** Canon now
+   reads **Morgenrath Tifar** wiki-wide; *Gafar* survives only as an alias.
+2. **Felyn'riel's Vessel.** *Asked:* the catalogue says **Cloak of Displacement**, but play-canon
+   (E164/E165) identified the sixth Zeben artifact as **the orb of Felnriel**. → **Ruled: "Cloak
+   has been retired. Go with the orb."** The sixth gate key is the **orb of Felnriel**. The
+   in-world catalogue entry naming the Cloak as Felyn'riel's Arcane Vessel still stands as what
+   the Ilharess books say — what is retired is the Cloak *as the sixth key*. See
+   [Vessels of the Seven](#vessels-of-the-seven).
+3. **Seven Vessels vs six gate keys.** *Asked:* is the sealed Omago entry the reason the keys
+   number six? → **Not answered. Still open (?).**
+4. **Ilharess's Vessel is the *Robe of Stars*.** → **Ruled: "Good to record now since they have
+   done the research."** Recorded as canon; the conjuration slot is locked.
+5. **Maena.** *Asked:* is *Maena* in-world, or an out-of-world cartography note as the glossary
+   files it? → **Ruled: "Correct - Maena is the old name for pre-sundering Alambor."** In-world.
+6. **AS vs "Year of Exile."** *Asked:* same era count? 2,847 AS and 3,011 Year of Exile appear in
+   the same handout. → **Ruled: two linked but distinct counts.** Verbatim: *"Ante-Sundering is
+   linked to but not the same timeline as the year of exile since time in the astral sea is
+   measured differently than alambor, but in both cases they are post the sundering incident. the
+   timelines just may not line up completely."* (Jon glosses AS as *Ante-Sundering* while also
+   placing both counts after the Sundering — that ante/post tension is unexplained **(?)**.)
+7. **The three unnamed Ziven cities.** *Asked:* four are named (Ilharess, Ninathar, Felyn'riel,
+   Omagor) — are the other three Izzdar, Zarryne and Valonim? → **Ruled: "too neat."** The guess
+   is wrong; the remaining three cities are simply unnamed.
+8. **The Black Spiral, the Shattered Hoard, the Moonveil, the Endless Labyrinth** — God-Isles, or
+   something else? → **Ruled: "God Isles."** All four. See
+   [Astral Navigation](#astral-navigation).

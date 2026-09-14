@@ -150,10 +150,10 @@ E132 | 2025-08-19 | The Reunion | Ford, Leon, Max, and Jameti reunite with the p
 E133 | 2025-08-26 | Cruucar's Trial | The tower's trial chambers passed — Cruucar gives up his brothers' axes; the man at the top revealed.
 E134 | 2025-09-04 | The King is Dead | Nardif Darksi is the Nightmare King and Arch Dragon; Sir Trent Hightower named the Shadowed Moon; to Kierkenwall.
 E135 | 2025-09-10 | The War-Council Trap | The war-council infiltration becomes a trap: King Felix killed, the party framed, the Taldross family burned.
-E136 | 2025-10-09 | "Max-imum Betrayal: The Fall of the Five" | Adune revealed as the Shadowed Moon — the Ziven lich Morgenrath Gafar; Max, Leon, and Shaahim die; two-month skip.
+E136 | 2025-10-09 | "Max-imum Betrayal: The Fall of the Five" | Adune revealed as the Shadowed Moon — the Ziven lich Morgenrath Tifar; Max, Leon, and Shaahim die; two-month skip.
 E137 | 2025-10-15 | Two Months Later | The war-torn map surveyed; audience with Beatrice and Rupert; airship toward Feldbrook with Reinhard.
 E138 | 2025-11-12 | Teleport to Callum Heights | Monsters crush the night tower; Vane's 7th-level Teleport lands the party at Callum Heights; the Arcicept.
-E139 | 2025-11-19 | Return of the Berrian the Raker | The Archivists confirm Adune is a 1,200-year-old Ziven lich with four relics; find the Cloak of Displacement.
+E139 | 2025-11-19 | Return of the Berrian the Raker | The Archivists confirm Adune is a 1,200-year-old Ziven lich with four relics; the party is tasked to locate the sixth and final one — then named as the Cloak of Displacement, later superseded by the orb of Felnriel.
 E140 | 2025-11-25 | Potentially Potent Potentium | Melora speaks to Berrian; Quinton's crescent-moon coin from a vanishing stranger; Mag Stormeach reached.
 E141 | 2025-12-03 | Flight to Mag Stormeach | Into the cliff city of Mag Stormeach; Rasheed Soltar's location pinned from the air.
 E142 | 2025-12-10 | Sneaky Bois | The coming Aum Shai meeting's attendees listed; objectives set: Kieran, the intel, the slaves.

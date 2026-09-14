@@ -75,6 +75,14 @@ player-facing appearance of **Valonim**. It also confirms the seven-member count
 Jon's E166 review ruling. Full quotations, the resonance research, and the party-level inferences
 live on [Vessels of the Seven](#vessels-of-the-seven).
 
+Two rows are DM-confirmed beyond the catalogue (Jon, **14 Sep 2026**):
+
+- **Ilharess → *Robe of Stars*** is settled canon — *"Good to record now since they have done the
+  research."* The conjuration slot is locked.
+- **Felyn'riel → *Cloak of Displacement*** stands **as the catalogue entry**, but the Cloak is
+  **not** the sixth Zeben gate key: *"Cloak has been retired. Go with the orb."* The sixth key is
+  the orb of Felnriel. See [Zeben artifacts](#zeben-artifacts).
+
 The catalogue also records that **none of the Vessels accompanied their creators into exile** —
 *"The Hive survived. Their greatest instruments did not."* They stayed on the material side, in
 Alambor, which is where the party and Adune have been finding them.

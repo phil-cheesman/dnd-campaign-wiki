@@ -218,8 +218,9 @@ between sessions.
 ## The other six cities
 
 The handout names **three more** alongside Ilharess — **Ninathar**, **Felyn'riel** and
-**Omagor** — all archmage names, which implies the remaining three are **Izzdar**, **Zarryne** and
-**Valonim** cities **(?)**. The handout never names them.
+**Omagor** — all archmage names. It never names the remaining three, and the obvious guess — that
+they take the three leftover archmage names, **Izzdar**, **Zarryne** and **Valonim** — was **put to
+Jon and rejected: "too neat"** (14 Sep 2026). Three of the seven cities remain unnamed.
 
 ## Open questions
 
