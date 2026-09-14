@@ -1,13 +1,21 @@
 {
-  "generatedAt": "2026-09-14T19:29:33.576Z",
+  "generatedAt": "2026-09-14T19:56:31.005Z",
   "events": [
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T12:56:26-07:00",
+      "type": "maintenance",
+      "summary": "Reconcile canon with Jon's 14 Sep rulings",
+      "fileCount": 39,
+      "commit": "083605c"
+    },
     {
       "date": "2026-09-14",
       "iso": "2026-09-14T12:29:32-07:00",
       "type": "edit",
       "tier": "npcs",
       "slug": "adune",
-      "name": "Adune (Morgenrath Gafar)",
+      "name": "Adune (Morgenrath Tifar)",
       "href": "/npcs/adune",
       "commit": "04b64f5"
     },
@@ -77,7 +85,7 @@
       "type": "edit",
       "tier": "npcs",
       "slug": "adune",
-      "name": "Adune (Morgenrath Gafar)",
+      "name": "Adune (Morgenrath Tifar)",
       "href": "/npcs/adune",
       "commit": "ef35e7d"
     },
