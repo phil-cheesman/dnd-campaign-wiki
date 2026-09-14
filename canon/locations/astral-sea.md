@@ -1,7 +1,7 @@
 ---
 name: Astral Sea
 aliases: [Astral Plane, Astral Ocean, astral space, the expanse]
-episodes: [E114, E165, E166]
+episodes: [E114, E165, E166, E167]
 status: active
 role: Plane
 art:
@@ -97,6 +97,37 @@ They lead to Alambor, other worlds, the worlds of the gods, the celestial realms
 realms. **Several known pools lead to Alambor** — Kael'vorr knows where some are — but they sit in
 hard-to-reach places and are unreliable. Passage is a **"violent transition"**: no Githyanki has
 ever attempted it, and the Zivens who tried were never seen again.
+
+## E167 — "the god is the isle"
+
+The Githyanki navigator **Ren Sark**, a fellow prisoner in the Quiet Vaults, corrected the party's
+assumption that the God Isles are places where gods live:
+
+> **The god is the isle.** … The gods, when they were sundered and sent here, **slept — and in
+> sleeping, they created an entire ecosystem of themselves.** These are the God Isles. Creatures,
+> beings dwell upon these isles, all manifestations of the gods that dwelt there. **So the god isle
+> *is* the god.**
+
+Further detail from the same conversation and from Jon's E167 recap of Kael'vorr's lecture:
+
+- **The isles drift** and are spread right across the Astral Sea. Whether that is a barrier depends
+  entirely on your captain: *"it depends on who you attach your sails to."*
+- **Astral storms and astral winds** are a named hazard — new in E167 (Jon's recap lists "astral
+  storms" among Kael'vorr's E166 syllabus). The winds around **Bahamut's** isle are *"brutal"*, and
+  only certain ship captains can navigate them *"without getting taken for a pretty rough ride."*
+- **Bahamut's isle** holds mountains, trees, and — by legend — **treasure**. Ren Sark was arrested
+  trying to steal maps that would get him there.
+- **Melora is known and present.** Asked directly: *"Yes, we know Melora."* **Tiamat** was confirmed
+  present again in the same scene.
+- **Astral navigation is psychic, not cartographic.** *"You don't travel the seas with physical maps
+  — these are mental maps. This is the psychic waves that travel through the seas. You have to
+  understand them and traverse them."* The party's charcoal map of the Rift is worthless here.
+- **Observatory posts are scattered throughout the plane**, Ziven-run and restricted; one near
+  Ilharess is called **Talmaq** *(spelling unconfirmed)*.
+- **Divine gates** — structures "that separated the planes" — were part of Kael'vorr's E166 lecture
+  per Jon's E167 recap, though the party has not investigated them.
+- **Time remains unmeasurable.** Leaving the Quiet Vaults: *"the sky, the city, everything seems the
+  same. You have no idea if a day has passed."*
 
 ## Relationships / whereabouts
 - Contains **Ilharess** (and six other unvisited Ziven cities), **Tu'narath**, and the **God Isles**.

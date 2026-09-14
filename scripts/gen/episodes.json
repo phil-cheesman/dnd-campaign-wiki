@@ -3134,5 +3134,27 @@
     ],
     "collection": "episodes",
     "ref_images": []
+  },
+  {
+    "slug": "e167",
+    "episode": 167,
+    "title": "The Greatest Prison",
+    "has_candidate": true,
+    "confidence": "high",
+    "art_type": "scene",
+    "scene_title": "The Hall of Verity",
+    "rationale": "Ingest-authored scene brief for e167.",
+    "visual": "A vast black-stone amphitheatre, tier upon empty tier climbing into shadow, lit cold from\nabove. Alternating black and white columns ring the chamber; the walls carry nothing but\nsevere geometric patterning. In the exact centre of all that emptiness stands a single\nsmall table. On the far side of it sits a tall, very thin drow in layered midnight-blue and\nblack silk robes embroidered with fine shifting geometric patterns — obsidian skin, flawless,\nlong silver-white hair to his shoulders, violet eyes that do not blink, no weapon, an elegant\nslender crystal rod resting against the chair behind him. Facing him with their backs\nthree-quarters to us sit the adventurers in six chairs that have just been conjured beneath\nthem: Berrian the half-elf paladin in living leaf-and-vine armour, Quinton the half-elf bard,\nNoctis the lithe charcoal-furred tabaxi in his tattered hooded shadow-cloak, and Vane the\ntall slim high elf in dark teal and silver, sitting apart with no cup. Small steaming cups of\ntea sit on the table before the others, conjured mid-air. Behind the inquisitor's shoulder a\nthin free-floating slate tablet writes on itself, unattended. Six helmeted guards in obsidian\nplate with violet filigree and motionless sapphire cloaks stand far back in wall alcoves,\ntiny against the scale of the room.",
+    "key_entities": [
+      "Caleth Forel",
+      "Berrian",
+      "Quinton",
+      "Noctis",
+      "Vane",
+      "Hall of Verity",
+      "Ilharess"
+    ],
+    "collection": "episodes",
+    "ref_images": []
   }
 ]

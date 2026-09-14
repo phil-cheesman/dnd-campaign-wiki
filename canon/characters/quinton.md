@@ -102,6 +102,7 @@ art:
 - Charmed Jeremiah the 2nd to hand Cruucar a captured ship, Hold Person'd Jeremiah and the bosun out of a cannon hole, and "played a hell of a song" (E151).
 - Helped pry open the Kraken's jaws with the Rod of Lordly Might (E155); heavily injured in the Kraken capture (E156); fended off Thurston Carrick's advances (E155).
 - Polymorphed into an octopus into a piranha pool, then nearly killed by Torgoth's lightning strike into the water (E158).
+- **E167 — they took the lute.** The Gatewatch counted **Quinton's lute** as a weapon. He surrendered every blade he had and then spent a long, funny, entirely losing negotiation insisting he had nothing left (*"my unarmed strike is minus three damage"*), until a guard simply removed it from his hands with an **impossibly unyielding force** — someone's attempt to physically block the guard failed against a 22. His reaction, in character: *"we didn't know you hated music here."* Later, walking the grander halls of the civic complex, Jon singled him out as *"a little bit smarter than others"* to recognise that the **floating spheres near the ceilings are constellations of Alambor — or Maena before**. **High Examiner Aethon Valise** promised the lute back: *"Of course. In time, in time."*
 
 ## Relationships
 - **Viola ("the Mother")** — the witch who threatened and apparently killed his family (E29, E31–E33, E105); possibly tied to his mother's past and his sudden musical magic (E31). Viola was killed by the party while Quinton was away on his quest (E87).

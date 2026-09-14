@@ -1,7 +1,7 @@
 ---
 name: The Hive
 aliases: [the hive, Hives, HIVE]
-episodes: [E104, E105, E108, E109, E134, E139]
+episodes: [E104, E105, E108, E109, E134, E139, E167]
 status: active
 role: Drow Archmage Conclave
 relation: enemy
@@ -26,6 +26,32 @@ art:
 # The Hive
 
 The group of nine drow leaders of the Zeevens dwelling below the Vault of Izdar, led by chief architect Omago, arch mage of transmutation (E108, E139). Withers's moldy journal in the Vault yielded lore on the Order of Torag, the Hive, the bad gods, and Potentium — a self-sustaining arcane energy harnessing all seven arcane arts (E108). The Vault's water room held six paintings of Hive archmages paired with six weapons: Ninath (evocation, the bejeweled spearwoman), Faldryal (illusion), Zarryien (enchantment), Ilharius (conjuration), Velonim (abjuration), and a tall bald drow casting transmutation (E109). Izzdar the Undying, a lich-like figure whom Withers serves, dwells below the Vault — the party left "Izzdar's Hive" when they departed for Tarlif (E105, E111). A plinth figure in the Vault resembled Izzdar (E108). The Hive's creed, per the glossary recap: it "shall rule over all, restoring the ancient ones." Crucially, the "power source" the great powers fought over is not a power source at all — it is the sentience of Omago himself, a fragment of whom now lives within and energizes Adune/Morgenrath (E139). At the Shadowmoon Tower, the Hive was said to murmur of "contingency" (E134).
+
+## E167 — a Hive member is alive, and wants to meet the party
+
+The single largest development for this faction since the Vault of Izdar. In **E167**, High
+Examiner **Aethon Valise** — the Voice of the Second Circle, the ranking Ziven the party has met —
+was asked whether **Ilharess** was "the king of the World Gate city." His answer:
+
+> **"Ilharess is one of the great members of the Hive"** — who has much wisdom to impart upon you
+> and the people of Alambor, if given the opportunity.
+
+He had already said that *"the great Ilharess himself will be made aware of your arrival, and would
+love to meet with you"*, and added that **"perhaps one or two other members might be interested in
+speaking to you as well."** The party placed him instantly from their own notes as the Hive's
+**archmage of conjuration** — the fifth name on the list they recovered from the murals.
+
+Consequences:
+
+- **The Hive is not a historical relic.** Its members survived the banishment along with the cities,
+  and at least one governs a city of a quarter of a million drow.
+- **The Ziven cities and the Hive line up.** Seven Hive members, seven Ziven cities, seven stars on
+  the crest — and the city of Ilharess is named for, and belongs to, the archmage Ilharess.
+- **The party's E166 cover story has become literal.** They claimed to be *aspiring members of the
+  Hive*; they are now being socially introduced to the actual Hive, having told two inquisitors a
+  largely honest account of looting Izzdar's vault.
+- Valise framed the party's value in Hive terms: what they can report about Alambor is
+  *"something that leaders of the Ziven people, the Hive, would I'm sure find very significant."*
 
 ## Relationships / whereabouts
 - Below the Vault of Izdar in the Great Rift; tied to the Zeeven Dynasty and to Adune via the Omago fragment.
