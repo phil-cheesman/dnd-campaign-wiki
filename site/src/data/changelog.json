@@ -1,6 +1,26 @@
 {
-  "generatedAt": "2026-09-14T19:27:06.070Z",
+  "generatedAt": "2026-09-14T19:29:33.576Z",
   "events": [
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T12:29:32-07:00",
+      "type": "edit",
+      "tier": "npcs",
+      "slug": "adune",
+      "name": "Adune (Morgenrath Gafar)",
+      "href": "/npcs/adune",
+      "commit": "04b64f5"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T12:29:32-07:00",
+      "type": "edit",
+      "tier": "npcs",
+      "slug": "house-tifar",
+      "name": "House Tifar",
+      "href": "/npcs/house-tifar",
+      "commit": "04b64f5"
+    },
     {
       "date": "2026-09-14",
       "iso": "2026-09-14T12:27:02-07:00",
