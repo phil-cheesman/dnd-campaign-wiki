@@ -129,6 +129,43 @@ Further detail from the same conversation and from Jon's E167 recap of Kael'vorr
 - **Time remains unmeasurable.** Leaving the Quiet Vaults: *"the sky, the city, everything seems the
   same. You have no idea if a day has passed."*
 
+## Navigating it — the Ziven curriculum
+
+The library research the party did in Ilharess after E167 includes the **standard Ziven navigation
+texts**, which turn the plane from scenery into something the party can operate in. Full detail on
+[Astral Navigation](#astral-navigation); the short version:
+
+- **Thought precedes motion.** Don't imagine travelling toward a thing; imagine *the state of
+  having become nearer to it*. Stopping means ceasing to intend, not imagining resistance — *"walls
+  remain capable of injuring you simply because the universe has become strange."*
+- **Orientation is chosen.** Groups must agree a **Shared Plane** before moving. *"The vessel has
+  not created gravity. The crew has accepted orientation."*
+- **Distance cannot be eyeballed.** No haze, no horizon, no reliable scale.
+- **Know yourself — carry an Anchor**, a thought known absolutely to be your own. *"When something
+  in the darkness speaks using your own voice, return to the Anchor."*
+- **Currents** are directional tendencies, not substances — ask *"which destination is most
+  connected to where I am?"* **Winds** are events; treat them as temporary geography.
+  **Psychic Storms** are contamination of perception, producing false currents and **apparent
+  color pools**; assume nothing inside one is real.
+- **Charts record relationships, not positions.** Everything drifts; what persists is a place's
+  **planar signature**.
+
+This also explains the Githyanki's famous emotional control aboard the *Silver Promise*: in a realm
+where thought is movement, **calm is a practical skill.**
+
+### Named hazards and their signatures
+
+| Place | Signature |
+|---|---|
+| **The Black Spiral** | *"One does not see the Black Spiral before knowing it is near. One feels absence."* |
+| **The Shattered Hoard** | Disturbances resembling **heat** within magical perception. |
+| **The Moonveil** | Repeated **inconsistencies in memory and reflected light**. |
+| **The Endless Labyrinth** | An unusual sensation of **downward orientation**, even at enormous distance. |
+
+None of the four appeared in canon before the handout. The **Crimson Scar** — the longest-lasting
+of the three named [fractured gates](#the-fractured-gates) — sits inside the destabilized reality
+around the **Black Spiral**.
+
 ## Relationships / whereabouts
 - Contains **Ilharess** (and six other unvisited Ziven cities), **Tu'narath**, and the **God Isles**.
 - Reached from Alambor by rupturing a Bag of Holding inside an extradimensional space (E165) —

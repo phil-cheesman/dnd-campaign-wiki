@@ -1,6 +1,6 @@
 ---
 name: The Hive
-aliases: [the hive, Hives, HIVE]
+aliases: [the hive, Hives, HIVE, the seven]
 episodes: [E104, E105, E108, E109, E134, E139, E167]
 status: active
 role: Drow Archmage Conclave
@@ -53,6 +53,32 @@ Consequences:
 - Valise framed the party's value in Hive terms: what they can report about Alambor is
   *"something that leaders of the Ziven people, the Hive, would I'm sure find very significant."*
 
+## The seven, by discipline — from the Ilharess catalogue
+
+Jon's library-research handout (17 Aug 2026) gives the party the **full roster of the seven**, each
+with a school and a personal **Arcane Vessel**. Six entries are on open shelves. The seventh is
+sealed under *"Hive Continuity Classification"* — meaning **a living Hive authority is still
+classifying records.**
+
+| Archmage | Discipline | Recorded Vessel |
+|---|---|---|
+| **Ninath** | Evocation | *Helm of Brilliance* |
+| **Felyn'riel** | Illusion | *Cloak of Displacement* |
+| **Izzdar** | Necromancy | *Nine Lives Stealer* |
+| **Zarryne** | Enchantment | *Crystal Ball of Telepathy* |
+| **Valonim** | Abjuration | *Robe of the Archmagi* |
+| **Ilharess** | Conjuration | *Robe of Stars* |
+| **Omago** | Transmutation | **`[SEALED]`** |
+
+This is the first time the Hive's membership has been enumerated in canon, and the first
+player-facing appearance of **Valonim**. It also confirms the seven-member count independently of
+Jon's E166 review ruling. Full quotations, the resonance research, and the party-level inferences
+live on [Vessels of the Seven](#vessels-of-the-seven).
+
+The catalogue also records that **none of the Vessels accompanied their creators into exile** —
+*"The Hive survived. Their greatest instruments did not."* They stayed on the material side, in
+Alambor, which is where the party and Adune have been finding them.
+
 ## Relationships / whereabouts
 - Below the Vault of Izdar in the Great Rift; tied to the Zeeven Dynasty and to Adune via the Omago fragment.
 - Izzdar may be the "Undying" of the Nine White Knights (uncertain, per glossary).
@@ -60,3 +86,5 @@ Consequences:
 ## Open questions
 - What is the Hive's murmured "contingency" (E134)?
 - Is Izzdar the Undying among the Knights of Theydune?
+- Who holds **Hive Continuity Classification** authority in Ilharess, and why is only Omago's Vessel sealed?
+- Is Valonim alive? Only Ilharess is confirmed living (E167).

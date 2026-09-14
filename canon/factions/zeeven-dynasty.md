@@ -1,6 +1,6 @@
 ---
 name: Zeeven Dynasty
-aliases: [Zeven Dynasty, Xivian Dynasty, Xevin Dynasty, Zyvan Dynasty, Ziven, Zeevens, Zeben, Zevans, Zivens, Zivians, Zivans, the Dynasty]
+aliases: [Zeven Dynasty, Xivian Dynasty, Xevin Dynasty, Zyvan Dynasty, Ziven, Zeevens, Zeben, Zevans, Zivens, Zivians, Zivans, the Dynasty, Ninathar, "Felyn'riel", Felynriel, Omagor]
 episodes: [E00, E01, E23, E89, E102, E108, E134, E136, E139, E144, E167]
 status: destroyed
 role: Ancient Drow Dynasty
@@ -65,6 +65,32 @@ first real portrait of Ziven civilization rather than of its ruins.
 - **Their leadership survived.** See [[the-hive]]: **Ilharess**, the archmage of conjuration, is
   alive and rules the city that bears his name.
 
+## The seven cities, and the argument inside them
+
+From Jon's library-research handout (17 Aug 2026). **Four of the seven cities are named:**
+**Ilharess**, **Ninathar**, **Felyn'riel** and **Omagor** — all archmage names, which implies the
+remaining three are Izzdar, Zarryne and Valonim cities **(?)**. The handout never names them.
+
+A survey across **all seven cities** (Prof. Sylvara Nethryn, *3,011th Year of Exile*) asked: *"If
+safe passage to Alambor were established tomorrow, would you go?"* — **68% yes, 19% eventually,
+9% no, 4% declined.** But when asked what *return* should mean, consensus collapsed. Three
+positions circulate openly, all with published rebuttals and none suppressed:
+
+- **Restorationist** — return openly, together, and seek restitution. *"If they refuse even our
+  right to return… then the moral character of the dispute will have changed."*
+- **Astralist** — *"What if I am already home?"* Ilharess is not a prison camp; return should mean
+  meeting what both worlds have become.
+- **Reconciliationist** — the smallest faction and the party's likeliest ally. *"The first Ziven to
+  return should not carry a spear. Nor should they carry a claim. They should carry a question."*
+
+Detail on [The Ziven Return Debate](#the-ziven-return-debate). Their theology is on
+[Ziven Theology After the Silence](#ziven-theology-after-the-silence) — where the recurring word
+for the gods is **"absent,"** not evil, and the recurring name is **"Our First Teachers."**
+
+**They are not leaving by fracture, and they know exactly why.** 712 documented interplanar
+fractures, three stable enough to name, and a settled institutional position that a fracture *"may
+save a traveler; it cannot restore a people."* See [The Fractured Gates](#the-fractured-gates).
+
 ## Relationships / whereabouts
 - Not extinct: banished — their floating city survives in the Astral Sea, now approaching the stranded party (E165).
 - Adune (and the Hive figures below the Vault) remain their agents/remnants in the material world.
@@ -73,3 +99,5 @@ first real portrait of Ziven civilization rather than of its ruins.
 ## Open questions
 - Can the gate be opened without all six artifacts — and what exactly comes through if it is?
 - Who rules the floating city, and what do the living Zeeven want with the material world? (The party's stated plan: infiltrate posing as acolytes of the Hive.)
+- Which of the three return factions does the Hive actually back — or does it sit above the argument?
+- What are the other three Ziven cities called?
