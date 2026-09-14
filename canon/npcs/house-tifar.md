@@ -40,6 +40,10 @@ husband and father who argued against the war and lost everything.**
 > **This page uses Tifar because that is what the source says**; the Adune dossier and the
 > glossary have **not** been renamed. A wiki-wide rename needs a DM ruling first — it is on the
 > clarification list.
+>
+> **The evidence leans to Tifar.** Jon also wrote it to the table on **9 Oct 2025**: *"the Reveal
+> of the Shadowed Moon aka **Morgenraith Tifar** aka **Adun**."* **Gafar appears only in material
+> transcribed off the recording.**
 
 ## The man before
 
