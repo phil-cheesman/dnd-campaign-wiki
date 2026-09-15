@@ -380,7 +380,7 @@
 - **Kingswatch** — northern Guidian town; Max recalled there; battles fought nearby. Aliases: Kings Watch, kingswatch. Episodes: E61, E67, E69, E71.
 - **Banderhop / Bandersnatch Mountains** — largest mountain nearby Evershire; gem mines raided; the dragon's lair with the hidden mural room. Aliases: Banderhop Mountain, bandersnatch, Bandersnatch mountains, The Bandersnatch mountains. Episodes: E69, E72, E87, E88, E89.
 - **Tower of Illmore** — 1000-ft black spiked spire, HQ of the Knights of Theydune; "Grandmother's House"; people don't come out. Aliases: Tower of Ilmore. Episodes: E121, E124, E125, E126.
-- **Tamworth** — town south of Corwell Keep; Betty found there at the Hairy Pussy bar. Episodes: E73, E74, E81, E83.
+- **Tamworth** — town south of Corwell Keep; Betty found there at the Hairy Tabby bar. Episodes: E73, E74, E81, E83.
 - **The Crag** — Blackwood mountain fortress above ravine and river; 20 names logged; taken and burned by the party. Aliases: crague, The Craig, the craig. Episodes: E73, E77, E80, E83.
 - **Shimmering Grotto** — family mine taken by Blackwood after the Canick tribe destroyed it; tax cash funneled there; sabotaged by the party. Aliases: Shimmering Gratoe, shimmering mine, Grotto. Episodes: E73, E74, E77, E80.
 - **Beaubois Chalet (Bubo Chalet / Beaubo Chato)** — ruined 170-acre Beaubois mansion-fortress on bluffs outside Sultray; arcane fountain, cemetery, catacombs; infiltrated during the party performance; lands later granted to the party. Aliases: Bubo chalet, Beauboi chalet, Challey, Bubbo Chato, beaboi chalet, beaubois mansion, Bubbo place, burned down Bubbo grounds. Episodes: E08, E09, E10, E15, E21, E22, E24.
@@ -511,7 +511,7 @@
 - **New Langdale** — Evershire town where the Baron gave the party free reign. Episodes: E73.
 - **Latwind Myre** — rumored witch location southeast of Blackwood's manor. Episodes: E73.
 - **Midnight Promises** — unknown dot on the captured map; maybe the Mother's location. Episodes: E80.
-- **The Hairy Pussy** — Tamworth bar where the party finds Betty. Episodes: E83.
+- **The Hairy Tabby** — Tamworth bar where the party finds Betty. Episodes: E83.
 - **Mount Carhead** — two of the Spire towers go up to it. Episodes: E84.
 - **The Depths** — mine in the mountains; the Lusinovians flipped a leading chemist there. Episodes: E84.
 - **Moran Mountain Range** — range the party heads into from Iron Forge. Aliases: Morane. Episodes: E84.
