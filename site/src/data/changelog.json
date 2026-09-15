@@ -1,6 +1,136 @@
 {
-  "generatedAt": "2026-09-14T19:56:31.005Z",
+  "generatedAt": "2026-09-15T01:54:09.566Z",
   "events": [
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "berrian",
+      "name": "Berrian",
+      "href": "/characters/berrian",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "noctis",
+      "name": "Noctis",
+      "href": "/characters/noctis",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "quinton",
+      "name": "Quinton Shackleford",
+      "href": "/characters/quinton",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "torgoth",
+      "name": "Torgoth",
+      "href": "/characters/torgoth",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "characters",
+      "slug": "vane",
+      "name": "Vane",
+      "href": "/characters/vane",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "episodes",
+      "slug": "e167",
+      "name": "E167 — The Greatest Prison",
+      "href": "/episodes/e167",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "factions",
+      "slug": "the-hive",
+      "name": "The Hive",
+      "href": "/factions/the-hive",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "factions",
+      "slug": "zeeven-dynasty",
+      "name": "Zeeven Dynasty",
+      "href": "/factions/zeeven-dynasty",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "locations",
+      "slug": "astral-sea",
+      "name": "Astral Sea",
+      "href": "/locations/astral-sea",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "locations",
+      "slug": "ilharess",
+      "name": "Ilharess",
+      "href": "/locations/ilharess",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "worldbuilding",
+      "slug": "astral-navigation",
+      "name": "Astral Navigation",
+      "href": "/worldbuilding/astral-navigation",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "worldbuilding",
+      "slug": "the-fractured-gates",
+      "name": "The Fractured Gates",
+      "href": "/worldbuilding/the-fractured-gates",
+      "commit": "958034c"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T18:54:04-07:00",
+      "type": "edit",
+      "tier": "worldbuilding",
+      "slug": "the-ziven-return-debate",
+      "name": "The Ziven Return Debate",
+      "href": "/worldbuilding/the-ziven-return-debate",
+      "commit": "958034c"
+    },
     {
       "date": "2026-09-14",
       "iso": "2026-09-14T12:56:26-07:00",
@@ -158,6 +288,16 @@
       "name": "Ziven Theology After the Silence",
       "href": "/worldbuilding/ziven-theology-after-the-silence",
       "commit": "ef35e7d"
+    },
+    {
+      "date": "2026-09-14",
+      "iso": "2026-09-14T10:53:03-07:00",
+      "type": "edit",
+      "tier": "episodes",
+      "slug": "e167",
+      "name": "E167 — The Greatest Prison",
+      "href": "/episodes/e167",
+      "commit": "b74edbe"
     },
     {
       "date": "2026-09-14",
