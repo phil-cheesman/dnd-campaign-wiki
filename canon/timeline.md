@@ -82,7 +82,7 @@ E66 | 2023-11-29 | MINES OF MORIA | Message canister recovered from the monster'
 E67 | 2023-12-06 | A Sad Goodbye | Quinton departs to save his mother; Berrian's story told; carpet crossing of the Grasping Moore begins.
 E68 | 2023-12-12 | Its All Ogre Now | Grey Renders killed in the Moore; a multi-headed mud serpent rises from the bog.
 E69 | 2024-01-02 | Enter The Sandman | The mud hydra slain; "hunters" kill Gregory and Luna; a burning village sighted in Evershire.
-E70 | 2024-01-10 | Burn Burn Burn | Canick raiders and their ogre killed; Zanim falls from eagle form and dies.
+E70 | 2024-01-10 | Burn Burn Burn | Canick raiders and their ogre killed; Zanim falls from eagle form — his last session with the party.
 E71 | 2024-01-17 | The Puppet Baron | Evershire's woes laid out: the Black Dread, Lord Blackwood, and dark auras at Corwell Keep.
 E72 | 2024-01-24 | Boring Breakfast Club | Information gathering at Corwell Keep; a secret rebellion meeting arranged via chalk mark.
 E73 | 2024-01-31 | Bear, Beets, and Secret Organizations | The rebellion's plans and Able the Bear; Mallory spied on; Zanim departs the party.

@@ -6,6 +6,7 @@ import { remarkStripTitle } from './src/plugins/remark-strip-title.ts';
 import { remarkAutolink } from './src/plugins/remark-autolink.ts';
 import { remarkSrd } from './src/plugins/remark-srd.ts';
 import { remarkStripArcsTable } from './src/plugins/remark-strip-arcs-table.ts';
+import { remarkSectionWrap } from './src/plugins/remark-section-wrap.ts';
 import { getAliasIndex, aliasIndexToJSON } from './src/lib/alias-index.ts';
 import { buildAliasRedirects } from './src/lib/links.ts';
 
@@ -39,7 +40,7 @@ export default defineConfig({
   // obstructs the bottom of the page; we don't use it, so turn it off.
   devToolbar: { enabled: false },
   markdown: {
-    remarkPlugins: [remarkStripTitle, remarkAutolink, remarkSrd, remarkStripArcsTable],
+    remarkPlugins: [remarkStripTitle, remarkAutolink, remarkSrd, remarkStripArcsTable, remarkSectionWrap],
   },
   // Kingdoms are folded into the Locations gazetteer (clickable kingdom headings →
   // the kingdom article), so the bare Kingdoms index points at Locations. Kingdom

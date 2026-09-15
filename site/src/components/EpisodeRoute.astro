@@ -1,0 +1,268 @@
+---
+/**
+ * The Route — a session's 3–6 place-anchored "stations", rendered as a vertical
+ * timeline directly under the hero art (spec: docs/specs/episode-route.md).
+ *
+ * The point is glanceability, not detail: where the party went, what they did
+ * there, and why it mattered — enough to recognise a session you half-remember
+ * without reading the dense `## Summary`. A battle-only episode is legitimately
+ * one station; that's the format working, not failing.
+ *
+ * One layout at every width: top-to-bottom down a spine, each stop marked by a
+ * large kind-coloured icon badge. (An earlier pass used a wrapping card grid on
+ * desktop; Phil found left-to-right-then-next-line harder to scan than a single
+ * column, so the phone layout won everywhere.)
+ */
+import Icon from './Icon.astro';
+import { resolveTerm } from '../lib/match-terms';
+import { hrefFor } from '../lib/links';
+
+export interface Station {
+  place: string;
+  kind: 'travel' | 'explore' | 'social' | 'combat' | 'commerce' | 'rest';
+  beat: string;
+  why?: string | null;
+  when?: string | null;
+}
+interface Props {
+  route: Station[];
+  combat?: boolean;
+}
+const { route, combat } = Astro.props as Props;
+
+// Icon per station kind. `message`/`swords` already exist for episode badges.
+const KIND_ICON: Record<Station['kind'], string> = {
+  travel: 'footprints',
+  explore: 'compass',
+  social: 'message',
+  combat: 'swords',
+  commerce: 'coins',
+  rest: 'moon',
+};
+const KIND_LABEL: Record<Station['kind'], string> = {
+  travel: 'Travel',
+  explore: 'Explore',
+  social: 'Social',
+  combat: 'Combat',
+  commerce: 'Trade',
+  rest: 'Downtime',
+};
+
+const stops = route.map((s, i) => ({
+  ...s,
+  n: i + 1,
+  icon: KIND_ICON[s.kind],
+  label: KIND_LABEL[s.kind],
+  target: resolveTerm(s.place),
+}));
+
+// Summary chip: stop count, plus whether the session ever came to blows. `combat`
+// is the episode's own frontmatter flag — only trust it when it's actually set.
+const fought = combat === true || stops.some((s) => s.kind === 'combat');
+const tally = combat === undefined && !fought ? null : fought ? 'combat' : 'no combat';
+---
+
+{
+  stops.length > 0 && (
+    <nav class="route" aria-label="Where the party went this session" data-pagefind-ignore>
+      <div class="route-head">
+        <span class="route-kicker">The Route</span>
+        <span class="route-rule" aria-hidden="true" />
+        <span class="route-meta">
+          {stops.length} stop{stops.length === 1 ? '' : 's'}
+          {tally && <> &middot; {tally}</>}
+        </span>
+      </div>
+
+      <ol class="route-rail">
+        {stops.map((s) => (
+          <li class={`route-stop k-${s.kind}`}>
+            <span class="route-marker" aria-hidden="true">
+              <Icon name={s.icon} size={21} />
+            </span>
+            <div class="route-body">
+              <p class="route-tag">
+                <span class="route-n">{s.n}</span>
+                <span class="route-kind">{s.label}</span>
+              </p>
+              <p class="route-place">
+                {s.target ? (
+                  <a href={hrefFor(s.target.collection, s.target.slug)}>{s.place}</a>
+                ) : (
+                  s.place
+                )}
+                {s.when && <span class="route-when"> &middot; {s.when}</span>}
+              </p>
+              <p class="route-beat">{s.beat}</p>
+              {s.why && <p class="route-why">{s.why}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .route {
+    margin: 1.6rem 0 2.4rem;
+  }
+
+  /* ── Header: kicker · hairline · tally ─────────────────────────────────── */
+  .route-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.1rem;
+  }
+  .route-kicker {
+    flex: none;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .route-rule {
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .route-meta {
+    flex: none;
+    font-size: 0.7rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Rail: one column, top to bottom, at every width ───────────────────── */
+  .route-rail {
+    --marker: 2.5rem; /* badge diameter — also sets the spine's x-position */
+    --gutter: 1rem; /* badge → text */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .route-stop {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--marker) 1fr;
+    gap: var(--gutter);
+    padding-bottom: 1.35rem;
+  }
+  /* The spine, drawn behind the badges. Stops short on the last stop so the
+     line terminates at the final marker instead of trailing into whitespace. */
+  .route-stop::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--marker) / 2 - 1px);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--hairline);
+  }
+  .route-stop:last-child {
+    padding-bottom: 0;
+  }
+  .route-stop:last-child::before {
+    bottom: auto;
+    height: calc(var(--marker) / 2);
+  }
+
+  /* ── The badge: the loudest thing in the row ───────────────────────────── */
+  .route-marker {
+    position: relative; /* lift above the spine */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--marker);
+    height: var(--marker);
+    border-radius: 50%;
+    background: var(--k, var(--gold));
+    color: var(--bg);
+    /* Ring in the page colour so the spine reads as entering and leaving it. */
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+
+  .route-body {
+    min-width: 0;
+    padding-top: 0.1rem;
+  }
+
+  .route-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.15rem;
+  }
+  .route-n {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--k, var(--gold));
+    font-variant-numeric: tabular-nums;
+  }
+  .route-kind {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .route-place {
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  .route-place a {
+    color: inherit;
+    text-decoration-color: var(--hairline);
+  }
+  .route-place a:hover {
+    color: var(--link);
+  }
+  .route-when {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--faint);
+  }
+  .route-beat {
+    margin: 0.1rem 0 0;
+    font-size: 1.02rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+  }
+  .route-why {
+    margin: 0.25rem 0 0;
+    max-width: 58ch;
+    font-size: 0.83rem;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  /* ── Kind hues — one accent per station type, legible in both themes ───── */
+  .k-travel { --k: #75705f; }
+  .k-explore { --k: #2f7d6f; }
+  .k-social { --k: #6a33b0; }
+  .k-combat { --k: #b05a42; }
+  .k-commerce { --k: #a8842c; }
+  .k-rest { --k: #5b6bb0; }
+
+  :global(:root[data-theme='dark']) .k-travel { --k: #8e93a6; }
+  :global(:root[data-theme='dark']) .k-explore { --k: #6fc0ae; }
+  :global(:root[data-theme='dark']) .k-social { --k: #b89af0; }
+  :global(:root[data-theme='dark']) .k-combat { --k: #d28a76; }
+  :global(:root[data-theme='dark']) .k-commerce { --k: #d2ad55; }
+  :global(:root[data-theme='dark']) .k-rest { --k: #9aa8e8; }
+
+  @media (max-width: 480px) {
+    .route-rail {
+      --marker: 2.2rem;
+      --gutter: 0.8rem;
+    }
+    .route-beat { font-size: 0.97rem; }
+  }
+</style>

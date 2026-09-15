@@ -4,6 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Backlinks from '../../components/Backlinks.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import EpisodePager, { type PagerLink } from '../../components/EpisodePager.astro';
+import EpisodeRoute from '../../components/EpisodeRoute.astro';
+import EpisodeGlance from '../../components/EpisodeGlance.astro';
 import GraphView from '../../components/graph/GraphView.tsx';
 import EpisodePhotos from '../../components/EpisodePhotos.tsx';
 import { getEpisodePhotos } from '../../lib/session-photos';
@@ -113,9 +115,36 @@ const pagerWindow = all
     </dl>
   </aside>
 
-  <article class="prose">
-    <Content />
-  </article>
+  <EpisodeRoute route={d.route ?? []} combat={d.combat} />
+
+  <EpisodeGlance
+    date={d.date}
+    combat={d.combat}
+    deaths={d.deaths}
+    characters={d.characters}
+    npcs={d.npcs}
+    locations={d.locations}
+    milestone={d.milestone}
+    stops={d.route?.length}
+  />
+
+  {/* Authored order (Summary first) is the opposite of reading order, so the
+      body is a flex column and `order` promotes the skimmable sections. The
+      `.prose` wrapper is display:contents so the markdown sections become flex
+      items of this container and can interleave with the recap. */}
+  <div class="ep-flow">
+    <article class="prose ep-prose">
+      <Content />
+    </article>
+    {
+      d.recap && (
+        <section class="epsec ep-recap" data-sec="recap">
+          <h2>The recap</h2>
+          <p>{d.recap}</p>
+        </section>
+      )
+    }
+  </div>
 
   {
     photos.length > 0 && (
@@ -166,4 +195,102 @@ const pagerWindow = all
     text-align: center;
     color: var(--muted, #6b6256);
   }
+</style>
+
+<style is:global>
+  /* ── Episode body flow (docs/specs/episode-route.md) ──────────────────────
+     Sections are wrapped by remark-section-wrap and reordered here. Markdown-
+     generated HTML can't be reached by Astro's scoped styles, hence is:global;
+     every selector is nested under .ep-flow so nothing leaks to other pages. */
+  .ep-flow {
+    display: flex;
+    flex-direction: column;
+  }
+  /* Children of .prose become flex items of .ep-flow so the authored `## `
+     sections can interleave with the template-rendered recap. */
+  .ep-flow .ep-prose { display: contents; }
+
+  /* Default bucket. Attribute selectors below out-specify this, so a section
+     type nobody anticipated still lands somewhere sensible. */
+  .ep-flow .epsec { order: 7; }
+  .ep-flow .epsec[data-sec='key-events'] { order: 1; }
+  .ep-flow .epsec[data-sec='loot'] { order: 2; }
+  .ep-flow .epsec[data-sec='combat'] { order: 3; }
+  .ep-flow .epsec[data-sec='open-threads'] { order: 4; }
+  .ep-flow .epsec[data-sec='recap'] { order: 5; }
+  .ep-flow .epsec[data-sec='summary'] { order: 6; }
+  .ep-flow .epsec[data-sec='notes'] { order: 8; }
+
+  /* ── Collapsible sections ─────────────────────────────────────────────── */
+  .ep-flow details.epsec {
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    background: var(--surface);
+    margin: 0 0 0.6rem;
+    overflow: hidden;
+  }
+  .ep-flow details.epsec > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--text);
+    transition: background-color var(--dur-instant) ease;
+  }
+  .ep-flow details.epsec > summary::-webkit-details-marker { display: none; }
+  /* Custom disclosure caret — rotates on open. */
+  .ep-flow details.epsec > summary::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
+    transform: rotate(-45deg);
+    transition: transform var(--dur-state) var(--ease-out);
+  }
+  .ep-flow details.epsec[open] > summary::before { transform: rotate(45deg); }
+  .ep-flow details.epsec > summary:hover { background: var(--bg); }
+  .ep-flow .epsec-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ep-flow .epsec-body {
+    padding: 0.2rem 0.95rem 0.9rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .ep-flow .epsec-body > :first-child { margin-top: 0.7rem; }
+  .ep-flow .epsec-body > :last-child { margin-bottom: 0; }
+
+  /* ── The recap — the one section anyone actually reads ─────────────────── */
+  .ep-flow .ep-recap {
+    margin: 1.2rem 0 0.4rem;
+    padding: 1rem 1.15rem;
+    border-left: 3px solid var(--gold);
+    background: var(--surface);
+    border-radius: 0 10px 10px 0;
+  }
+  .ep-flow .ep-recap h2 {
+    margin: 0 0 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0;
+  }
+  .ep-flow .ep-recap p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* The dense Summary is a search target, not a read — de-emphasise it. */
+  .ep-flow .epsec[data-sec='summary'] { margin-top: 1.6rem; }
 </style>

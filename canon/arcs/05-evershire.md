@@ -41,7 +41,7 @@ Dinner at Blackwood Manor (E86–E87) dropped all masks: Blackwood served wine w
 
 ## Key outcomes
 
-- Zanim died (E70) and Evac died (E74); Vane and Benjamin joined the party.
+- Zanim left the party (E70 was his last session) and Evac died (E74); Vane and Benjamin joined the party.
 - Viola killed; LJ revealed as Leon Janis and restored to rule Evershire.
 - Lord Blackwood unmasked as the dragon Valadon the Black Dread, Arch Dragon of Aum Shai — slain by Leon's lance.
 - The party received Blackwood's Manor and the title Saviors of Evershire; lore surfaced of the Potentium, a veiled "puppet master" leading Aum Shai, and the return of the Zeeven.

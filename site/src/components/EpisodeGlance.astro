@@ -1,0 +1,143 @@
+---
+/**
+ * At-a-glance chip row for an episode — everything derivable from frontmatter
+ * the pages already carry, so it costs no per-episode authoring.
+ *
+ * Sits between the Route and the collapsible detail sections. Deliberately
+ * facts-only and quiet: a chip only appears when the underlying field is
+ * actually set, because absent ≠ zero in this corpus (an episode with no
+ * `combat:` key is unknown, not peaceful).
+ */
+import Icon from './Icon.astro';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  date: Date | string;
+  combat?: boolean;
+  deaths?: { pc: string; kind: 'permanent' | 'revived' }[];
+  characters?: string[];
+  npcs?: string[];
+  locations?: string[];
+  milestone?: string;
+  stops?: number;
+}
+const { date, combat, deaths = [], characters = [], npcs = [], locations = [], milestone, stops } =
+  Astro.props as Props;
+
+const name = (slug: string) =>
+  slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+const permanent = deaths.filter((d) => d.kind === 'permanent');
+const revived = deaths.filter((d) => d.kind === 'revived');
+
+type Chip = { icon: string; label: string; value: string; tone?: string; title?: string };
+const chips: Chip[] = [];
+
+chips.push({ icon: 'feather', label: 'Played', value: formatDate(date) });
+if (stops) chips.push({ icon: 'map-pin', label: 'Stops', value: String(stops) });
+if (locations.length)
+  chips.push({
+    icon: 'compass',
+    label: locations.length === 1 ? 'Place' : 'Places',
+    value: String(locations.length),
+    title: locations.join(', '),
+  });
+if (combat !== undefined)
+  chips.push({
+    icon: 'swords',
+    label: 'Combat',
+    value: combat ? 'Yes' : 'None',
+    tone: combat ? 'hot' : 'cool',
+  });
+if (permanent.length)
+  chips.push({
+    icon: 'skull',
+    label: permanent.length === 1 ? 'Death' : 'Deaths',
+    value: permanent.map((d) => name(d.pc)).join(', '),
+    tone: 'hot',
+  });
+if (revived.length)
+  chips.push({
+    icon: 'heart',
+    label: 'Revived',
+    value: revived.map((d) => name(d.pc)).join(', '),
+    tone: 'cool',
+  });
+if (characters.length)
+  chips.push({ icon: 'shield', label: 'Party', value: String(characters.length),
+    title: characters.map(name).join(', ') });
+if (npcs.length)
+  chips.push({ icon: 'message', label: 'NPCs', value: String(npcs.length), title: npcs.join(', ') });
+if (milestone) chips.push({ icon: 'trophy', label: 'Milestone', value: milestone, tone: 'gold' });
+---
+
+<div class="glance" data-pagefind-ignore>
+  {
+    chips.map((c) => (
+      <div class={`glance-chip${c.tone ? ` t-${c.tone}` : ''}`} title={c.title ?? undefined}>
+        <span class="glance-icon"><Icon name={c.icon} size={14} /></span>
+        <span class="glance-text">
+          <span class="glance-label">{c.label}</span>
+          <span class="glance-value">{c.value}</span>
+        </span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .glance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0 0 1.4rem;
+  }
+  .glance-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--surface);
+    min-width: 0;
+  }
+  .glance-icon {
+    display: inline-flex;
+    flex: none;
+    color: var(--tone, var(--gold));
+  }
+  .glance-text {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+  .glance-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  .glance-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .t-hot { --tone: #b05a42; }
+  .t-cool { --tone: #2f7d6f; }
+  .t-gold { --tone: var(--gold); }
+  :global(:root[data-theme='dark']) .t-hot { --tone: #d28a76; }
+  :global(:root[data-theme='dark']) .t-cool { --tone: #6fc0ae; }
+
+  @media (max-width: 480px) {
+    .glance-chip { padding: 0.3rem 0.6rem; }
+    .glance-value { font-size: 0.76rem; }
+  }
+</style>

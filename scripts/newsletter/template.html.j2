@@ -56,6 +56,26 @@
     <tr><td style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;line-height:1.5;color:#36322b;padding:0 36px;">
       <span style="float:left;font-family:'Cormorant Garamond',Georgia,serif;font-weight:bold;font-size:62px;line-height:46px;color:#a8842c;padding:6px 10px 0 0;">{{ previously_dropcap }}</span>{{ previously_html|safe }}
     </td></tr>
+
+    <!-- the route: this session's stations, straight from canon frontmatter -->
+    {% if route %}
+    <tr><td align="center" style="color:#a8842c;font-size:16px;letter-spacing:6px;padding:22px 0 14px;">&#10087;</td></tr>
+    <tr><td style="padding:0 36px;">
+      <div align="center" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:bold;font-size:19px;text-transform:uppercase;letter-spacing:2px;color:#23211c;text-align:center;margin-bottom:4px;"><span style="color:#a8842c;font-size:11px;">&#11045;</span>&nbsp;&nbsp;The Route&nbsp;&nbsp;<span style="color:#a8842c;font-size:11px;">&#11045;</span></div>
+      <div align="center" style="text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:14px;color:#75705f;margin-bottom:12px;">Where you went, and why &middot; {{ route|length }} stop{{ 's' if route|length != 1 }}</div>
+      <table width="100%" cellpadding="0" cellspacing="0" style="font-family:'Cormorant Garamond',Georgia,serif;">
+        {% for s in route %}<tr>
+          <td width="34" valign="top" style="padding:9px 0;{% if not loop.last %}border-bottom:1px solid #efeadf;{% endif %}"><table cellpadding="0" cellspacing="0"><tr><td width="26" height="26" align="center" valign="middle" style="background:#a8842c;color:#fcfbf8;border-radius:13px;font-size:14px;font-weight:bold;line-height:26px;">{{ loop.index }}</td></tr></table></td>
+          <td valign="top" style="padding:9px 0 9px 12px;{% if not loop.last %}border-bottom:1px solid #efeadf;{% endif %}">
+            <div style="font-size:13px;letter-spacing:1.6px;text-transform:uppercase;color:#a8842c;">{{ s.place }}{% if s.when %} &middot; {{ s.when }}{% endif %}</div>
+            <div style="font-size:19px;font-weight:bold;color:#23211c;line-height:1.25;">{{ s.beat }}</div>
+            {% if s.why %}<div style="font-size:15px;font-style:italic;color:#75705f;line-height:1.4;">{{ s.why }}</div>{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </td></tr>
+    {% endif %}
     <tr><td align="center" style="padding:24px 36px 4px;">
       <a href="{{ recap_url }}" style="display:inline-block;background:#23211c;color:#fcfbf8;font-family:'Cormorant Garamond',Georgia,serif;font-weight:bold;font-size:17px;padding:11px 30px;border:1px solid #a8842c;text-decoration:none;">Read the full recap &rarr;</a>
     </td></tr>

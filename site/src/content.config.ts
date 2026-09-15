@@ -129,6 +129,26 @@ export const collections = {
         .default([]),
       // Phase-2 episode scene plate (reference/header art) — same block as entities.
       art: baseEntity.shape.art,
+      // A plain-language catch-up for this one episode — what you'd tell someone
+      // who missed the session. 3–5 sentences, rendered high on the page, above
+      // the dense `## Summary`. Optional: absent = the section doesn't render.
+      recap: z.string().nullish(),
+      // ── The Route (docs/specs/episode-route.md) ───────────────────────────
+      // 3–6 place-anchored "stations" — the at-a-glance where/what/why spine of
+      // the session, rendered as a stepper above the Summary. Optional: an
+      // episode with no `route:` simply doesn't render the section, so the 170
+      // pages backfill incrementally without breaking the build.
+      route: z
+        .array(
+          z.object({
+            place: z.string(), // WHERE — resolved leniently; plain text if no dossier
+            kind: z.enum(['travel', 'explore', 'social', 'combat', 'commerce', 'rest']),
+            beat: z.string(), // WHAT — ≤6 words, the headline of the stop
+            why: z.string().nullish(), // WHY — one sentence, why the stop mattered
+            when: z.string().nullish(), // only when a source states it ("that night")
+          }),
+        )
+        .default([]),
     }),
   }),
 

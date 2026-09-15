@@ -160,6 +160,29 @@ def season_bars(tally: dict, upto: int) -> list:
     return bars
 
 
+def canon_route(episode: int) -> list:
+    """The episode's Route stations, read straight from canon frontmatter.
+
+    The Route (docs/specs/episode-route.md) is authored once in
+    canon/episodes/e<N>.md and rendered by both the wiki and this newsletter, so
+    the email never carries its own copy to drift out of sync. A content JSON may
+    still override with its own `route` key; absent/unparseable canon is not an
+    error — the section simply doesn't render.
+    """
+    path = ROOT / "canon" / "episodes" / f"e{episode:03d}.md"
+    if not path.exists():
+        return []
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---"):
+        return []
+    try:
+        import yaml
+        fm = yaml.safe_load(text.split("---", 2)[1]) or {}
+    except Exception:
+        return []
+    return fm.get("route") or []
+
+
 def build_context(content: dict, episode: int, poll_cfg: dict, tally: dict,
                   inline_images: bool = False) -> dict:
     # token -> image src for every image referenced in the content JSON.
@@ -182,6 +205,7 @@ def build_context(content: dict, episode: int, poll_cfg: dict, tally: dict,
     ctx["poll"] = poll_links(content["poll"], episode, poll_cfg)
     ctx["last_results"] = last_week_results(poll_cfg, episode)
     ctx["season_bars"] = season_bars(tally, episode)
+    ctx.setdefault("route", canon_route(episode))
     ctx.setdefault("preview_text", content.get("dek_html", ""))
     ctx.setdefault("tagline", "Last Time in Alambor &middot; a true accounting of recent deeds")
     return ctx
