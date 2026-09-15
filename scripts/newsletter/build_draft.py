@@ -177,10 +177,21 @@ def canon_route(episode: int) -> list:
         return []
     try:
         import yaml
-        fm = yaml.safe_load(text.split("---", 2)[1]) or {}
-    except Exception:
+    except ImportError:
+        print("  ! Route section SKIPPED: PyYAML is not installed in this venv."
+              "  Fix: ./.venv/bin/pip install pyyaml")
         return []
-    return fm.get("route") or []
+    try:
+        fm = yaml.safe_load(text.split("---", 2)[1]) or {}
+    except Exception as exc:
+        print(f"  ! Route section SKIPPED: could not parse {path.name} frontmatter ({exc.__class__.__name__}).")
+        return []
+    stations = fm.get("route") or []
+    # A route: block in the file that yields no stations means the block is
+    # malformed — that is a bug, not an episode that simply isn't routed.
+    if not stations and re.search(r"^route:", text, re.M):
+        print(f"  ! {path.name} has a route: block but no stations parsed.")
+    return stations
 
 
 def build_context(content: dict, episode: int, poll_cfg: dict, tally: dict,
