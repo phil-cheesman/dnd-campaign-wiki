@@ -12,9 +12,41 @@
  * re-render, and the page is complete and readable with JS off.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpisodeRoute, { type Station } from '../components/EpisodeRoute.astro';
 import { getTldr } from '../lib/tldr';
+import { getPublic } from '../lib/collections';
 
 const t = await getTldr();
+
+/** "The road here" — the last few sessions' route stations, stitched into one rail.
+ *
+ *  This page's rule is state-not-events, and a journey is events — so this is
+ *  deliberately short. Three sessions is the immediate approach to where the party
+ *  is standing, which is context for the present state rather than history. The
+ *  full history lives in /arcs and /episodes; each station links back to its episode.
+ *  Costs no authoring: it reads the `route:` blocks that already exist. */
+const ROAD_EPISODES = 3;
+const ROAD_MAX_STOPS = 10;
+
+const recent = (await getPublic('episodes'))
+  .filter((e: any) => (e.data.episode ?? 0) <= t.current_episode && e.data.route?.length)
+  .sort((a: any, b: any) => (a.data.episode ?? 0) - (b.data.episode ?? 0) || a.id.localeCompare(b.id))
+  .slice(-ROAD_EPISODES);
+
+const road: Station[] = recent
+  .flatMap((e: any) =>
+    e.data.route.map((st: any) => ({
+      ...st,
+      ep: `E${String(e.data.episode).padStart(2, '0')}${e.id.endsWith('-dup2') ? '\u00b72' : ''}`,
+      epHref: `/episodes/${e.id}`,
+    })),
+  )
+  .slice(-ROAD_MAX_STOPS);
+
+// Derive the range from the stops that survive the cap — otherwise the label
+// advertises an episode whose stations were trimmed off the front.
+const roadEps = [...new Set(road.map((s) => s.ep))];
+const roadRange = roadEps.length ? `${roadEps[0]} \u2192 ${roadEps[roadEps.length - 1]}` : null;
 
 /** Rows a lens can dim: those declaring `pcs`. An empty list = always relevant. */
 const lensAttr = (pcs: string[] | undefined) =>
@@ -142,6 +174,15 @@ const OBJECTIVE_LABEL: Record<string, string> = {
       <h2>The story right now</h2>
       <p class="tl-lede">{t.story_now}</p>
     </section>
+
+    {/* ===== The road here — recent route stations, stitched across episodes ===== */}
+    {road.length > 0 && (
+      <section class="tl-section tl-skimhide tl-road">
+        <h2>The road here</h2>
+        <p class="tl-road-sub">{roadRange} · stop by stop. Tap an episode for the full recap.</p>
+        <EpisodeRoute route={road} title={null} />
+      </section>
+    )}
 
     {/* ===== The party ===== */}
     <section class="tl-section tl-skimhide">

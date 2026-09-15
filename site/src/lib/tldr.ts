@@ -198,6 +198,9 @@ export async function getTldr() {
   // typed `any` at this boundary, and a spread would erase every type below it
   // (which is exactly what /tldr consumes).
   return {
+    // Exposed so callers can scope "recent episodes" to the TL;DR's own cursor
+    // rather than to whatever happens to be newest on disk.
+    current_episode: d.current_episode as number,
     cliffhanger: d.cliffhanger as string,
     where: d.where as {
       place: string;

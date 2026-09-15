@@ -18,6 +18,10 @@ import { resolveTerm } from '../lib/match-terms';
 import { hrefFor } from '../lib/links';
 
 export interface Station {
+  /** Optional episode label ("E165"). Set only when the rail spans episodes —
+   *  an episode page's own route doesn't need to repeat its number. */
+  ep?: string;
+  epHref?: string;
   place: string;
   kind: 'travel' | 'explore' | 'social' | 'combat' | 'commerce' | 'rest';
   beat: string;
@@ -27,8 +31,13 @@ export interface Station {
 interface Props {
   route: Station[];
   combat?: boolean;
+  /** Section kicker. Defaults to "The Route". Pass null to suppress the whole
+   *  head row when the caller already renders its own heading. */
+  title?: string | null;
+  /** Overrides the right-hand tally. Pass null to hide it entirely. */
+  meta?: string | null;
 }
-const { route, combat } = Astro.props as Props;
+const { route, combat, title = 'The Route', meta } = Astro.props as Props;
 
 // Icon per station kind. `message`/`swords` already exist for episode badges.
 const KIND_ICON: Record<Station['kind'], string> = {
@@ -60,19 +69,29 @@ const stops = route.map((s, i) => ({
 // is the episode's own frontmatter flag — only trust it when it's actually set.
 const fought = combat === true || stops.some((s) => s.kind === 'combat');
 const tally = combat === undefined && !fought ? null : fought ? 'combat' : 'no combat';
+const showMeta = meta !== null;
+const metaText = typeof meta === 'string' ? meta : null;
 ---
 
 {
   stops.length > 0 && (
     <nav class="route" aria-label="Where the party went this session" data-pagefind-ignore>
+      {title !== null && (
       <div class="route-head">
-        <span class="route-kicker">The Route</span>
+        <span class="route-kicker">{title}</span>
         <span class="route-rule" aria-hidden="true" />
-        <span class="route-meta">
-          {stops.length} stop{stops.length === 1 ? '' : 's'}
-          {tally && <> &middot; {tally}</>}
-        </span>
+        {showMeta && (
+          <span class="route-meta">
+            {metaText ?? (
+              <>
+                {stops.length} stop{stops.length === 1 ? '' : 's'}
+                {tally && <> &middot; {tally}</>}
+              </>
+            )}
+          </span>
+        )}
       </div>
+      )}
 
       <ol class="route-rail">
         {stops.map((s) => (
@@ -82,7 +101,15 @@ const tally = combat === undefined && !fought ? null : fought ? 'combat' : 'no c
             </span>
             <div class="route-body">
               <p class="route-tag">
-                <span class="route-n">{s.n}</span>
+                {s.ep ? (
+                  s.epHref ? (
+                    <a class="route-ep" href={s.epHref}>{s.ep}</a>
+                  ) : (
+                    <span class="route-ep">{s.ep}</span>
+                  )
+                ) : (
+                  <span class="route-n">{s.n}</span>
+                )}
                 <span class="route-kind">{s.label}</span>
               </p>
               <p class="route-place">
@@ -202,6 +229,14 @@ const tally = combat === undefined && !fought ? null : fought ? 'combat' : 'no c
     color: var(--k, var(--gold));
     font-variant-numeric: tabular-nums;
   }
+  .route-ep {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--k, var(--gold));
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+  }
+  a.route-ep:hover { text-decoration: underline; }
   .route-kind {
     font-size: 0.6rem;
     font-weight: 600;
