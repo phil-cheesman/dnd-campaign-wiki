@@ -119,9 +119,31 @@ realms. **Several known pools lead to Alambor** — Kael'vorr knows where some a
 hard-to-reach places and are unreliable. Passage is a **"violent transition"**: no Githyanki has
 ever attempted it, and the Zivens who tried were never seen again.
 
+## Three kinds of gate — DM-confirmed (Jon, E167 review)
+
+Canon had been blurring three separate things under the word "gate." Jon separated them in the
+E167 review, verbatim:
+
+> *"the world gate was part of illharess in Maena, it is no more, the color pools are rifts between
+> planes here in the Astral sea and the divine gates are where the god isles are"*
+
+| | |
+|---|---|
+| **The [World Gate](#)** | Belonged to the city of **[Ilharess](#)** back on **[Maena](#)** — a thing of the material world, before the Sundering. **"It is no more."** |
+| **Color pools** (Ziven: *fractured gates*) | **Rifts between planes, here in the Astral Sea.** The section above. |
+| **Divine gates** | **Where the [God Isles](#) are.** First real definition in canon — the term surfaced only in Jon's E167 opening recap of Kael'vorr's E166 lecture and was never explained at the table. |
+
+> ⚠️ **Tension with played canon, unresolved (?).** The party *saw* a gate: E166 and E167 both
+> describe a dormant structure rising **over a mile** out of the centre of Ilharess, with the
+> **history of the World Gate's construction** painted on the walls of the civic complex, and
+> Kael'vorr called the city *"the Gate of Worlds."* Jon's *"it is no more"* may mean the **working**
+> gate is gone and what stands in the city is a dead monument rather than a sleeping machine — but
+> he did not say that, and it is **not** asserted here. Both records are kept as written, pending a
+> follow-up question.
+
 ## E167 — "the god is the isle"
 
-The Githyanki navigator **Ren Sark**, a fellow prisoner in the Quiet Vaults, corrected the party's
+The Githyanki navigator **Rhen Sarik**, a fellow prisoner in the Quiet Vaults, corrected the party's
 assumption that the God Isles are places where gods live:
 
 > **The god is the isle.** … The gods, when they were sundered and sent here, **slept — and in
@@ -136,7 +158,7 @@ Further detail from the same conversation and from Jon's E167 recap of Kael'vorr
 - **Astral storms and astral winds** are a named hazard — new in E167 (Jon's recap lists "astral
   storms" among Kael'vorr's E166 syllabus). The winds around **Bahamut's** isle are *"brutal"*, and
   only certain ship captains can navigate them *"without getting taken for a pretty rough ride."*
-- **Bahamut's isle** holds mountains, trees, and — by legend — **treasure**. Ren Sark was arrested
+- **Bahamut's isle** holds mountains, trees, and — by legend — **treasure**. Rhen Sarik was arrested
   trying to steal maps that would get him there.
 - **Melora is known and present.** Asked directly: *"Yes, we know Melora."* **Tiamat** was confirmed
   present again in the same scene.

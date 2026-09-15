@@ -165,7 +165,7 @@ But reconciliation is **not** acceptance of permanent exile:
 
 ## Why this matters at the table
 
-- **The party is already having the first conversation.** High Examiner Aethon Valise spent E167
+- **The party is already having the first conversation.** High Examiner Aethon Valis spent E167
   interviewing them about Alambor's kingdoms, monarchs and religion — *"What do you remember of
   us?"* in all but name, and he called the world they described **"Alambor the godless."**
 - **Every position ends at the same door.** Restorationist, Astralist and Reconciliationist all

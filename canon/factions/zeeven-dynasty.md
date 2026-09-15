@@ -50,7 +50,7 @@ first real portrait of Ziven civilization rather than of its ruins.
 - **Outsiders are rare and non-drow are not welcome to stay.** *"Those that come here either are to
   trade at the ports or to deliver goods. Other than that, it is all Zivens."* Ilharess is
   nonetheless rated **"a more welcoming Ziven city than others"** by Githyanki, who dock there.
-- **They are starving for news of home.** Valise interviewed the party not about the relic or the
+- **They are starving for news of home.** Valis interviewed the party not about the relic or the
   gate but about **Alambor** — its kingdoms, its monarchs, whether the faithful churches still hold
   political sway. He knew the old names and mapped them himself: *"Gilda, now Gidia. Lusinnovia,
   which was the Lux. And the Carasians, which was Kassa."* Told of forty-five-year lifespans, toil,

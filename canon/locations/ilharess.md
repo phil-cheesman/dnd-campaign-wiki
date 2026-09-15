@@ -30,7 +30,9 @@ art:
 
 The Ziven city the party reached at the end of **E166** and has been inside since — a disc of
 floating continent **seven miles across**, adrift in the [Astral Sea](#), carrying **over a
-quarter of a million drow** and, at its centre, the dormant mile-high **[World Gate](#)**.
+quarter of a million drow** and, at its centre, the dormant mile-high **[World Gate](#)** —
+though see the caveat under [Open questions](#open-questions): Jon has since said the World Gate
+*"was part of Ilharess in Maena, it is no more"* **(?)**.
 
 One of **seven** Ziven cities, all of similar size and each far larger than the Githyanki capital
 Tu'narath. **Named for — and belonging to — [Ilharess](#) the archmage**, a living member of
@@ -63,7 +65,7 @@ whose walls are painted with the **history of the World Gate's construction** �
 Ziven script the party cannot read.
 
 Non-drow are not normally admitted: *"those that come here either are to trade at the ports or to
-deliver goods — other than that, it is all Zivens."* Even so, **Ren Sark** rates it *"a more
+deliver goods — other than that, it is all Zivens."* Even so, **Rhen Sarik** rates it *"a more
 welcoming Ziven city than others,"* which is why Githyanki vessels dock here from time to time.
 
 ## How a terrestrial city survives with no earth under it
@@ -188,10 +190,10 @@ Veyr's closing:
 
 ## The party's situation here
 
-Disarmed, logged by name, and **permanently escorted** by Balor's Gatewatch as *"unofficially,
+Disarmed, logged by name, and **permanently escorted** by Vaelor's Gatewatch as *"unofficially,
 observers."* They have the run of the city and its libraries. Names were recorded at a reception
 desk, origins declared to two inquisitors, and a self-writing slate holds a transcript of
-everything said in the Hall of Verity. Examiner **Caleth Forel** stated on the record that they
+everything said in the Hall of Verity. Examiner **Caelith Vorell** stated on the record that they
 are hiding something.
 
 **[Ilharess](#) the archmage has been told they are here and wants to meet them**, possibly with
@@ -205,7 +207,7 @@ between sessions.
 
 - An **Inquisitorial hierarchy**: an Examiner / Senior Inquisitor, a **High Examiner** styled
   *Voice of the Second Circle*, and a High Inquisitor above that.
-- A **Gatewatch** policing arrivals, under Captain **Balor Scythran**.
+- A **Gatewatch** policing arrivals, under Captain **Vaelor Sythran**.
 - A **Civic Directorate** owning the maintenance infrastructure (triangular sigil), a
   **Directorate of Civil Continuity**, a **Third Architectural Directorate**, and academic bodies:
   the **Collegium of Spatial Mechanics**, the **Collegium of Astral Transit**, the **Observatory
@@ -230,6 +232,12 @@ Jon and rejected: "too neat"** (14 Sep 2026). Three of the seven cities remain u
   the modern configuration — but the party reads no Ziven script.
 - Which **maintenance door** serves the library, the Hall of Verity, or the Quiet Vaults? Every
   major institution has one, by law.
-- **Where does the World Gate sit in the Lower Works?** The city's centre is a mile-high gate;
+- ⚠️ **Is the World Gate actually gone?** In the E167 review Jon defined three separate things:
+  *"the world gate was part of illharess in Maena, **it is no more**, the color pools are rifts
+  between planes here in the Astral sea and the divine gates are where the god isles are."* But
+  the party saw a dormant mile-high gate structure at the city's centre in E166 and E167, and the
+  civic complex carries the **history of the World Gate's construction** on its walls. Possibly the
+  *working* gate is no more and what stands is a dead monument — **not asserted**, needs a ruling **(?)**.
+- **Where does the World Gate structure sit in the Lower Works?** The city's centre is a mile-high gate;
   the architectural history quoted here never mentions it.
 - The **burial chambers** among the old subterranean systems are listed once and never explained.

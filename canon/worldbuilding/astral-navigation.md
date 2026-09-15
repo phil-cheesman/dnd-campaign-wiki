@@ -233,7 +233,7 @@ T'sarran closes on humility:
 - **The Anchor is a defensive tool** against the thing that speaks in your own voice — relevant
   anywhere the party's minds are a target.
 - **"Which destination is most connected to where I am?"** reframes route planning around
-  currents, matching Ren Sark's E167 line that navigating the Sea *"depends on who you attach your
+  currents, matching Rhen Sarik's E167 line that navigating the Sea *"depends on who you attach your
   sails to."*
 - **The Black Spiral feels like absence** — and the [Crimson Scar](#the-fractured-gates), the
   longest-lasting fracture, sits inside its destabilized reality. Since the Black Spiral is a

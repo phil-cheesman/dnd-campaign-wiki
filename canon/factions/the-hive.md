@@ -30,7 +30,7 @@ The group of nine drow leaders of the Zeevens dwelling below the Vault of Izdar,
 ## E167 — a Hive member is alive, and wants to meet the party
 
 The single largest development for this faction since the Vault of Izdar. In **E167**, High
-Examiner **Aethon Valise** — the Voice of the Second Circle, the ranking Ziven the party has met —
+Examiner **Aethon Valis** — the Voice of the Second Circle, the ranking Ziven the party has met —
 was asked whether **Ilharess** was "the king of the World Gate city." His answer:
 
 > **"Ilharess is one of the great members of the Hive"** — who has much wisdom to impart upon you
@@ -50,7 +50,7 @@ Consequences:
 - **The party's E166 cover story has become literal.** They claimed to be *aspiring members of the
   Hive*; they are now being socially introduced to the actual Hive, having told two inquisitors a
   largely honest account of looting Izzdar's vault.
-- Valise framed the party's value in Hive terms: what they can report about Alambor is
+- Valis framed the party's value in Hive terms: what they can report about Alambor is
   *"something that leaders of the Ziven people, the Hive, would I'm sure find very significant."*
 
 ## The seven, by discipline — from the Ilharess catalogue

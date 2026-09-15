@@ -26,7 +26,10 @@ art:
 # The Fractured Gates
 
 The Ziven name for what the party has been calling **color pools** — the exits from the
-[Astral Sea](#). This page is the Ziven **scholarly** account of them, and it is the direct
+[Astral Sea](#). **DM-confirmed (Jon, E167 review):** color pools are *"rifts between planes here
+in the Astral sea"* — distinct from **divine gates** (which are *"where the god isles are"*) and
+from the **World Gate** (which *"was part of Ilharess in Maena"*). See
+[the gate taxonomy](#astral-sea). This page is the Ziven **scholarly** account of them, and it is the direct
 answer to the party's sharpest open question out of E167: *why can't the Zivens just leave?*
 
 > **Source.** Jon's between-sessions research handout (delivered to the table 17 Aug 2026),

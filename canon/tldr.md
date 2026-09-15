@@ -1,6 +1,6 @@
 ---
 current_episode: 167
-updated: 2026-08-09
+updated: 2026-09-14
 arc: 09-relic-hunt
 
 cliffhanger: >
@@ -54,10 +54,10 @@ party:
   - slug: vane
     state: fine
     line: Sorcerer and shapeshifter. The one who thinks two moves ahead.
-    thread: Engineered the escape that stranded everyone. Refused the inquisitor's tea. Cannot, despite rumour at the table, cast Plane Shift.
+    thread: Engineered the escape that stranded everyone. Refused the inquisitor's tea. Whether he can cast Plane Shift is still unsettled — Jon is working it out with Alec at the top of E168.
 
 with_us:
-  - name: Captain Balor Scythran and the Gatewatch
+  - name: Gate Watch Commander Vaelor Sythran and the Gate Watch
     line: >
       Your assigned escort, guide and protector — "unofficially, observers." He
       answers no questions and watches every move. You are never alone in this city.
@@ -82,12 +82,14 @@ after_us:
 elsewhere:
   - name: Ilharess
     line: Archmage of conjuration, one of the seven of the Hive, master of this city — alive, and asking to meet you. You have not met a Hive member before.
-  - name: High Examiner Aethon Valise
+  - name: High Examiner Aethon Valis
     line: Voice of the Second Circle. Ageless, warm, unguarded, far too interested in you. Set you free and set a watch on you in the same breath.
-  - name: Examiner Caleth Forel
+  - name: Examiner Caelith Vorell
     line: Senior Inquisitor. Violet eyes that don't blink. Told you to your face that you're hiding something, then passed you up the chain.
-  - name: Ren Sark
-    line: Githyanki navigator in the next cell. Wants a berth on a ship; you can introduce him to Kael'vorr. He explained the God Isles to you.
+  - name: Rhen Sarik
+    line: Githyanki cartographer in the next cell. Wants a berth on a ship; you can introduce him to Kael'vorr. He explained the God Isles to you.
+  - name: Taarik Vosh
+    line: The other Githyanki prisoner — a merchant, jailed for unloading cargo before customs inspection, entirely unbothered. Expects a fine and a shrug.
   - name: Captain Kael'vorr
     line: The Curse of the Slaad — far more famous than he let on. Broke the Slaad uprising at Tu'narath. His ship docks here sometimes.
   - slug: mally-grisham
@@ -145,7 +147,7 @@ changed:
 
 clock:
   - Adune needs one more relic. It was last seen on a deck surrounded by his people. He may already have it.
-  - You are logged, named, escorted and on the record. Caleth Forel already said out loud that you are hiding something.
+  - You are logged, named, escorted and on the record. Caelith Vorell already said out loud that you are hiding something.
   - Nobody has confirmed how fast time runs at home. Leaving the cells, you couldn't tell whether a day had passed.
   - Colour pools last minutes to hours and move constantly. The way home is not a fixed door.
 
@@ -162,8 +164,8 @@ jargon:
     def: A small unstable tear between worlds — twenty feet across, lasts minutes to hours, moves constantly. Your ride home. The Ziven call them fractured gates.
   - term: The God Isles
     def: Not islands where gods live — the gods themselves, asleep, grown into whole drifting ecosystems. Melora is one of them.
-  - term: The Gatewatch
-    def: Ilharess's city guard. Obsidian plate, sapphire cloaks, no faces, no answers. Captain Balor Scythran now follows you everywhere.
+  - term: The Gate Watch
+    def: Ilharess's city guard. Obsidian plate, sapphire cloaks, no faces, no answers. Gate Watch Commander Vaelor Sythran now follows you everywhere.
   - term: The Quiet Vaults
     def: The cells you were held in, cut deep into the floating mountain the city rides on. Clean beds, a library, and magical barriers.
   - term: Hall of Verity
@@ -177,9 +179,9 @@ jargon:
 
 theories:
   - The Zivens may not be villains at all. A week of evidence says grieving scholars. Then again, they executed four prisoners while you were upstairs and nobody blinked.
-  - Aethon Valise was much too warm. The table thinks the friendliest man in the city is the most dangerous one in it.
+  - Aethon Valis was much too warm. The table thinks the friendliest man in the city is the most dangerous one in it.
   - They want to go home to deliver justice — but everyone who wronged them died five hundred years ago. Nobody has worked out who they intend to punish.
-  - The dead mile-high World Gate at the centre of this city is probably missing exactly what Adune is assembling.
+  - The dead mile-high gate at the centre of this city is probably missing exactly what Adune is assembling.
   - Quinton's crescent-moon coin and the Ziven crescent-moon crest are unlikely to be a coincidence.
 
 remember:
